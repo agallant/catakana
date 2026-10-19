@@ -15,3 +15,19 @@ describe('prefectures', () => {
     expect(visitedPrefectures(['tokyo', 'asakusa', 'kyoto', 'nowhere']).size).toBe(2);
   });
 });
+
+import { DAY_TRIPS } from '../src/data/daytrips';
+import { STOP_BY_ID } from '../src/data/journey';
+describe('day trips', () => {
+  it('make every prefecture reachable', () => {
+    const reachable = new Set([...Object.values(STOP_PREFECTURE), ...DAY_TRIPS.map((t) => t.pref)]);
+    expect(reachable.size).toBe(47);
+    for (const t of DAY_TRIPS) {
+      expect(STOP_BY_ID.has(t.from), t.id).toBe(true);
+      expect(PREF_BY_ID.has(t.pref), t.id).toBe(true);
+    }
+  });
+  it('count toward visited prefectures', () => {
+    expect(visitedPrefectures([], ['mito']).has('ibaraki')).toBe(true);
+  });
+});

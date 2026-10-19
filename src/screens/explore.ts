@@ -4,7 +4,8 @@ import { STOP_BY_ID, STOPS } from '../data/journey';
 import { CULTURE } from '../data/culture';
 import { sfx, speak } from '../core/audio';
 import { triviaFor } from './trivia';
-import { track } from '../core/progress';
+import { checkAchievements, track } from '../core/progress';
+import { DAY_TRIPS, DAY_TRIP_FISH } from '../data/daytrips';
 
 /** Strip {kanji|kana} markup down to kana for speech. */
 export function readingOf(markup: string): string {
@@ -35,6 +36,38 @@ export function exploreScreen(app: App, params: string[]): Screen {
   };
   const msg = h('p', { class: 'hint', 'aria-live': 'polite' });
   const best = d.trivia[stop.id];
+  const trips = DAY_TRIPS.filter((t) => t.from === stop.id).map((t) => {
+    const done = d.daytrips.includes(t.id);
+    return h(
+      'section',
+      { class: 'callout daytrip' },
+      h('h3', null, `🚃 Day trip: ${t.emoji} ${t.name}`),
+      h('div', { class: 'spot-jp' }, ruby(t.jp, d.settings.furigana), h('button', { class: 'btn small ghost', onClick: () => void speak(readingOf(t.jp)), 'aria-label': `Hear ${t.name}` }, '🔊')),
+      done ? h('ul', null, t.facts.map((f) => h('li', null, f))) : h('p', { class: 'small' }, `A side trip from ${stop.name} — and a new prefecture for your passport.`),
+      done ? h('p', { class: 'jp' }, t.phrase[0], ' ', h('button', { class: 'btn small ghost', onClick: () => void speak(t.phrase[0]), 'aria-label': 'Hear phrase' }, '🔊'), h('br'), h('small', null, t.phrase[1])) : null,
+      h(
+        'button',
+        {
+          class: `btn ${done ? 'ghost' : 'primary'}`,
+          disabled: done,
+          onClick: () => {
+            app.store.update((s) => {
+              if (!s.daytrips.includes(t.id)) {
+                s.daytrips.push(t.id);
+                s.fish += DAY_TRIP_FISH;
+              }
+            });
+            sfx.coin();
+            void speak(t.phrase[0]);
+            // a new prefecture can unlock Prefecture Hopper / Nationwide Cat
+            checkAchievements(app.store);
+            app.render();
+          },
+        },
+        done ? 'Visited ✓' : `Go! (+🐟${DAY_TRIP_FISH})`,
+      ),
+    );
+  });
   const el = h(
     'div',
     { class: 'screen explore' },
@@ -81,6 +114,7 @@ export function exploreScreen(app: App, params: string[]): Screen {
         );
       }),
     ),
+    ...trips,
     h(
       'section',
       { class: 'shop' },

@@ -45,6 +45,8 @@ export interface SaveData {
   owned: string[];
   /** sights photographed in Explore ("<stop>:<spot name>") */
   photos: string[];
+  /** day trips taken (ids from daytrips.ts) */
+  daytrips: string[];
   /** today's quest progress */
   daily: { day: string; progress: Record<string, number>; claimed: string[] };
   /** unlocked achievement ids */
@@ -75,6 +77,7 @@ export function defaultSave(): SaveData {
     trivia: {},
     owned: [],
     photos: [],
+    daytrips: [],
     daily: { day: '', progress: {}, claimed: [] },
     achievements: [],
     settings: { furigana: 'always', romaji: true, sound: true, speech: true, speechRate: 0.85, reduceMotion: false },
@@ -268,7 +271,7 @@ function sanitize(p: Record<string, unknown>): SaveData {
   assign('srs', isRecord);
   assign('stops', (v) => isRecord(v) && Object.values(v).every((n) => typeof n === 'number'));
   assign('trivia', isRecord);
-  for (const k of ['cats', 'introduced', 'unlockedHats', 'stamps', 'souvenirs', 'owned', 'photos', 'achievements'] as const) assign(k, isStringArray);
+  for (const k of ['cats', 'introduced', 'unlockedHats', 'stamps', 'souvenirs', 'owned', 'photos', 'daytrips', 'achievements'] as const) assign(k, isStringArray);
   if (isRecord(p.daily) && str(p.daily.day) && isRecord(p.daily.progress) && isStringArray(p.daily.claimed)) out.daily = p.daily as SaveData['daily'];
   if (isRecord(p.look)) out.look = { ...base.look, ...p.look };
   if (isRecord(p.settings)) out.settings = { ...base.settings, ...p.settings };
