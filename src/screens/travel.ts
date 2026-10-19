@@ -18,7 +18,8 @@ export function travelScreen(app: App, params: string[]): Screen {
       if (d.stops[stop.id] === undefined) d.stops[stop.id] = 0;
       if (!d.stamps.includes(stop.id)) d.stamps.push(stop.id);
     });
-    sfx.meow();
+    sfx.stamp();
+    window.setTimeout(() => sfx.meow(), 180);
     app.go(`stop/${stop.id}`);
   };
   const el = h(
@@ -39,7 +40,7 @@ export function travelScreen(app: App, params: string[]): Screen {
       h('div', { class: 'row' }, h('button', { class: 'btn ghost', onClick: () => void speak(`まもなく、${stop.reading}です。`) }, '🔊 Announcement'), h('button', { class: 'btn primary big', onClick: arrive }, `Arrive in ${stop.name} 🐾`)),
     ),
   );
-  sfx.purr();
-  const t = window.setTimeout(() => void speak(`まもなく、${stop.reading}です。`), 1800);
+  sfx.depart(stop.transport);
+  const t = window.setTimeout(() => void speak(`まもなく、${stop.reading}です。`), 2200);
   return { el, dispose: () => window.clearTimeout(t) };
 }

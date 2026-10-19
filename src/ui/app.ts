@@ -46,7 +46,7 @@ export class App {
   toast(u: Unlock): void {
     const t = h('div', { class: `toast toast-${u.kind}` }, h('span', { class: 'toast-emoji' }, u.emoji), h('span', null, u.label));
     this.toasts.appendChild(t);
-    sfx.win();
+    sfx.fanfare();
     window.setTimeout(() => t.classList.add('out'), 3200);
     window.setTimeout(() => t.remove(), 3700);
   }

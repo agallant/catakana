@@ -32,7 +32,7 @@ Tiers: Kana → N5 → N4 → N3 → N2 → N1. Everything runs client-side, off
 | M10 | **N1 season** – 12 destinations (Ogasawara → Gōtoku-ji) incl. Ogasawara & Amami (UNESCO natural), Jōmon Sannai-Maruyama, Mozu kofun, Okinoshima, Hidden Christian sites, Nirayama furnace, Maruoka Castle; folklore (Tōno), Zen (Eihei-ji), Sekigahara and literary onsen towns; 12 formal grammar points, ~180 words, N1 kanji with strokes, 60 sentences, 7 conversations; finale with Maneki at the maneki-neko temple | in progress |
 | M10.5 | **N1 depth** – literary and news-style reading, more N1 kanji (to ~2000) | planned |
 | M10.6 | **Seasonal events** – real-calendar Japanese festivals (New Year, Setsubun, Hinamatsuri, hanami, Tanabata, Obon, tsukimi, momiji, Ōmisoka…) on the journey screen with limited-time market treats, a passport shelf and achievement | in progress |
-| M11 | **Polish & depth** – 47-prefecture collection in the passport (44 on the route, plus day trips to Ibaraki, Chiba and Yamanashi), seasonal events, achievements, cloud-free progress export/import, more cats and outfits, sound/music pass, i18n of UI | ongoing |
+| M11 | **Polish & depth** – 47-prefecture collection in the passport (44 on the route, plus day trips to Ibaraki, Chiba and Yamanashi), seasonal events, achievements, cloud-free progress export/import, more cats and outfits, sound pass (station-style departure jingles, eki-stamp thump, achievement fanfare, streak chimes), i18n of UI | ongoing |
 
 ## Design principles
 - Offline-first; no accounts, no tracking; progress lives in localStorage with export/import.

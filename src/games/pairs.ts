@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
 import { sfx, speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { meaning, shell, sessionItems } from './common';
+import { chime, meaning, shell, sessionItems } from './common';
 import { shuffle } from '../core/srs';
 
 interface Card {
@@ -68,7 +68,7 @@ export const pairsGame: GameDef = {
         const item = items.find((i) => i.id === card.pairId)!;
         if (ok) {
           ctx.store.recordAnswer(item.id, true);
-          sfx.correct();
+          chime(true);
           sh.say('A match!', 'happy');
           a.el.classList.add('done');
           el.classList.add('done');
@@ -79,7 +79,7 @@ export const pairsGame: GameDef = {
           const wrongItem = items.find((i) => i.id === a.card.pairId)!;
           ctx.store.recordAnswer(wrongItem.id, false);
           ctx.store.recordAnswer(item.id, false);
-          sfx.wrong();
+          chime(false);
           sh.say('Remember where those are!', 'think');
           await sleep(900);
           a.el.classList.remove('open');
