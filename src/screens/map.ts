@@ -7,7 +7,7 @@ import { catSvg } from '../ui/cat';
 import { questsFor } from '../core/progress';
 import { dayKey } from '../core/store';
 import { setPref } from '../core/prefs';
-import { eventDates, eventFor, seasonFor } from '../data/seasons';
+import { eventEnd, eventFor, seasonFor } from '../data/seasons';
 
 const W = 520;
 const H = 590;
@@ -116,7 +116,7 @@ export function mapScreen(app: App): Screen {
       null,
       h('h3', null, event ? event.name : `${season.name} in Japan`, ' ', h('span', { class: 'jp small' }, ruby(event?.jp ?? season.jp, d.settings.furigana))),
       h('p', null, event?.about ?? season.about),
-      event ? h('button', { class: 'btn small', onClick: () => { setPref('shop', 'seasonal'); app.go('shop'); } }, `${event.treat.emoji} Seasonal treat at the market · until ${eventDates(event).split(' – ')[1]}`) : null,
+      event ? h('button', { class: 'btn small', onClick: () => { setPref('shop', 'seasonal'); app.go('shop'); } }, `${event.treat.emoji} Seasonal treat at the market · until ${eventEnd(event)}`) : null,
     ),
   );
 

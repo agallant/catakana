@@ -102,6 +102,39 @@ export function catSvg(look: CatLook, mood: Mood = 'happy', size = 120): SVGElem
       g.push(s('rect', { x: 50, y: 52, width: 100, height: 11, rx: 4, fill: '#fff', stroke: '#d12', 'stroke-width': 1 }));
       g.push(s('circle', { cx: 100, cy: 57.5, r: 5, fill: '#d12' }));
       break;
+    case 'sakura':
+      // a crown of cherry blossoms following the curve of the head
+      for (const x of [62, 80, 100, 120, 138]) {
+        const y = 48 + ((x - 100) * (x - 100)) / 160;
+        for (let k = 0; k < 5; k++) {
+          const a = (k / 5) * Math.PI * 2 - Math.PI / 2;
+          g.push(s('circle', { cx: x + Math.cos(a) * 5, cy: y + Math.sin(a) * 5, r: 4.2, fill: '#ffb7c5' }));
+        }
+        g.push(s('circle', { cx: x, cy: y, r: 2.6, fill: '#ffe066' }));
+      }
+      break;
+    case 'kitsune':
+      // a festival fox mask pushed to the side of the head
+      g.push(
+        s(
+          'g',
+          { transform: 'rotate(24 134 50)' },
+          s('path', { d: 'M120 44 L122 26 L132 38 Z M148 44 L146 26 L136 38 Z', fill: '#fff', stroke: '#d12', 'stroke-width': 1.5 }),
+          s('ellipse', { cx: 134, cy: 52, rx: 17, ry: 14, fill: '#fff', stroke: '#ddd', 'stroke-width': 1 }),
+          s('path', { d: 'M124 50 q4 -4 8 0 M136 50 q4 -4 8 0', fill: 'none', stroke: '#d12', 'stroke-width': 2.5, 'stroke-linecap': 'round' }),
+          s('circle', { cx: 134, cy: 60, r: 2.5, fill: '#2b2b2b' }),
+          s('path', { d: 'M128 42 l2 4 M140 42 l-2 4', stroke: '#d12', 'stroke-width': 2, 'stroke-linecap': 'round' }),
+        ),
+      );
+      break;
+    case 'kabuto':
+      g.push(s('path', { d: 'M50 62 Q52 18 100 16 Q148 18 150 62 Z', fill: '#3b3b58' }));
+      g.push(s('path', { d: 'M38 64 Q100 50 162 64 L154 74 Q100 62 46 74 Z', fill: '#2c2c44' }));
+      // fukigaeshi: the turned-back side flaps of a samurai helmet
+      g.push(s('path', { d: 'M48 58 L28 40 L30 70 Z M152 58 L172 40 L170 70 Z', fill: '#3b3b58', stroke: '#ffd24a', 'stroke-width': 2, 'stroke-linejoin': 'round' }));
+      g.push(s('path', { d: 'M100 34 Q86 18 76 0 M100 34 Q114 18 124 0', fill: 'none', stroke: '#ffd24a', 'stroke-width': 5, 'stroke-linecap': 'round' }));
+      g.push(s('circle', { cx: 100, cy: 38, r: 6, fill: '#ffd24a', stroke: '#e0a800', 'stroke-width': 1.5 }));
+      break;
     default:
   }
   return s('svg', { viewBox: '0 0 200 200', width: size, height: size, class: `cat cat-${mood}`, role: 'img', 'aria-label': `cat feeling ${mood}` }, ...g);

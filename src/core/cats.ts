@@ -29,5 +29,8 @@ export const HATS: { id: CatLook['hat']; name: string; cost: number }[] = [
   { id: 'headband', name: 'Headband', cost: 40 },
   { id: 'beret', name: 'Beret', cost: 50 },
   { id: 'straw', name: 'Straw hat', cost: 60 },
+  { id: 'sakura', name: 'Sakura crown', cost: 80 },
+  { id: 'kitsune', name: 'Fox mask', cost: 120 },
   { id: 'crown', name: 'Crown', cost: 150 },
+  { id: 'kabuto', name: 'Samurai kabuto', cost: 200 },
 ];

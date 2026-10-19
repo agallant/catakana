@@ -130,7 +130,13 @@ export function eventOfTreat(id: string): SeasonEvent | undefined {
 }
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const fmt = (x: [number, number]): string => `${MONTHS[x[0] - 1]} ${x[1]}`;
+
 export function eventDates(e: SeasonEvent): string {
-  const f = (x: [number, number]) => `${MONTHS[x[0] - 1]} ${x[1]}`;
-  return `${f(e.from)} – ${f(e.to)}`;
+  return `${fmt(e.from)} – ${fmt(e.to)}`;
+}
+
+/** Last day of the event, e.g. "Nov 30". */
+export function eventEnd(e: SeasonEvent): string {
+  return fmt(e.to);
 }

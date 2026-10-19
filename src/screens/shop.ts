@@ -7,7 +7,7 @@ import { sfx, speak } from '../core/audio';
 import { getPref, setPref } from '../core/prefs';
 import { readingOf } from './explore';
 import { track } from '../core/progress';
-import { SEASONAL_TREATS, eventDates, eventFor, eventOfTreat } from '../data/seasons';
+import { SEASONAL_TREATS, eventDates, eventEnd, eventFor, eventOfTreat } from '../data/seasons';
 
 type Tab = ShopKind | 'seasonal';
 
@@ -80,7 +80,7 @@ export function shopScreen(app: App): Screen {
     h('h2', null, '🏮 Neko Market'),
     h('p', { class: 'hint' }, 'Spend the fish you earn in games. Every food you taste and treasure you buy becomes a trophy in your passport!'),
     h('div', { class: 'chips' }, chip('food', '🍙 Food'), chip('treasure', '🎎 Treasures'), chip('seasonal', `${now?.emoji ?? '🎐'} Seasonal`)),
-    tab === 'seasonal' ? h('p', { class: 'hint' }, now ? `${now.emoji} ${now.name} is on now — its treat is for sale until ${eventDates(now).split(' – ')[1]}!` : 'No festival right now. Seasonal treats appear during Japanese holidays and festivals — check back!') : null,
+    tab === 'seasonal' ? h('p', { class: 'hint' }, now ? `${now.emoji} ${now.name} is on now — its treat is for sale until ${eventEnd(now)}!` : 'No festival right now. Seasonal treats appear during Japanese holidays and festivals — check back!') : null,
     reaction,
     h('div', { class: 'spots' }, cards),
   );
