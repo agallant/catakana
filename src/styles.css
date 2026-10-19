@@ -275,3 +275,13 @@ ruby rt { font-size: 0.55em; }
 .spot.snapped { border-color: var(--teal); }
 .hud-gear { background: none; border: 0; font-size: 1.3rem; padding: 4px; min-width: 36px; }
 button.hud-stat { cursor: pointer; }
+
+/* Café chat & shadowing */
+.convo { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.convo-line { display: flex; gap: 6px; align-items: flex-end; animation: fade 0.3s; }
+.convo-line.me { flex-direction: row-reverse; }
+.convo-bubble { background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 8px 12px; max-width: 78%; font-size: 1.15rem; }
+.convo-line.me .convo-bubble { background: #ffe3ea; color: #3b2a20; border-color: var(--pink); }
+.convo-bubble small { display: block; color: var(--muted); font-size: 0.8rem; }
+.phrase-jp { font-size: clamp(1.4rem, 7vw, 2rem); font-weight: 700; }
+.big-mic { font-size: 1.8rem; border-radius: 50%; width: 72px; height: 72px; padding: 0; }

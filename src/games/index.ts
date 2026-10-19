@@ -7,6 +7,8 @@ import { yarnGame } from './yarn';
 import { typingGame } from './typing';
 import { stationGame } from './station';
 import { trainGame } from './train';
+import { cafeGame } from './cafe';
+import { shadowGame } from './shadow';
 
-export const GAMES: GameDef[] = [sushiGame, pairsGame, traceGame, listenGame, yarnGame, typingGame, stationGame, trainGame];
+export const GAMES: GameDef[] = [sushiGame, pairsGame, traceGame, listenGame, yarnGame, typingGame, stationGame, trainGame, cafeGame, shadowGame];
 export const GAME_BY_ID = new Map(GAMES.map((g) => [g.id, g]));

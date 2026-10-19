@@ -15,7 +15,8 @@ export const typingGame: GameDef = {
   skill: 'writing',
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Keyboard Cat ⌨️');
-    const items = sessionItems(ctx);
+    // dictation skips kanji (homophones)
+    const items = sessionItems(ctx, undefined, ctx.level === 3 ? ['kana', 'word'] : undefined);
     let idx = 0;
     let correct = 0;
     let lives = 3;
@@ -38,7 +39,8 @@ export const typingGame: GameDef = {
       sh.setProgress(idx, items.length);
       const item = items[idx]!;
       // level 1: read kana → type romaji; level 2+: see picture/English → type romaji of the word
-      const production = ctx.level >= 2 && item.kind === 'word';
+      const production = ctx.level === 2 && item.kind === 'word';
+      const dictation = ctx.level === 3;
       const input = h('input', { class: 'type-input', type: 'text', autocapitalize: 'off', autocomplete: 'off', autocorrect: 'off', spellcheck: 'false', inputmode: 'text', 'aria-label': 'Type romaji' });
       const preview = h('div', { class: 'type-preview jp' }, ' ');
       input.addEventListener('input', () => {
@@ -68,7 +70,9 @@ export const typingGame: GameDef = {
         if ((e as KeyboardEvent).key === 'Enter') void submit();
       });
       sh.body.replaceChildren(
-        production
+        dictation
+          ? h('div', { class: 'prompt' }, h('button', { class: 'btn primary', onClick: () => void speak(item.reading) }, '🔊 Listen'), h('div', { class: 'prompt-romaji' }, 'Type what you hear'))
+          : production
           ? h('div', { class: 'prompt' }, h('div', { class: 'prompt-emoji' }, item.emoji ?? ''), h('div', { class: 'prompt-romaji' }, item.en ?? ''))
           : h('div', { class: 'prompt prompt-kana' }, h('div', { class: 'prompt-jp jp' }, item.text), item.en ? h('div', { class: 'prompt-romaji' }, `${item.emoji ?? ''} ${item.en}`) : null),
         preview,
@@ -76,8 +80,9 @@ export const typingGame: GameDef = {
         h('button', { class: 'btn primary', onClick: () => void submit() }, 'Enter ⏎'),
       );
       input.focus();
+      if (dictation) void speak(item.reading);
     };
-    sh.say(ctx.level >= 2 ? 'Type the romaji for each word!' : 'Type the romaji!', 'think');
+    sh.say(ctx.level === 3 ? 'Dictation: type what you hear!' : ctx.level === 2 ? 'Type the word for each picture!' : 'Type the romaji!', 'think');
     void next();
   },
 };
