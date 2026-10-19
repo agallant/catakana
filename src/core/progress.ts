@@ -2,6 +2,7 @@ import { dayKey, type SaveData, type Store } from './store';
 import { STOPS } from '../data/journey';
 import { CULTURE } from '../data/culture';
 import { SHOP } from '../data/shop';
+import { SEASONAL_TREATS } from '../data/seasons';
 import { KANJI } from '../data/kanji';
 import { ALL_KANA } from '../data/kana';
 import { mastery } from './srs';
@@ -90,6 +91,7 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'correct100', name: 'Sharp Ears', emoji: '💯', desc: 'Answer 100 questions correctly', test: (d) => d.stats.correct >= 100 },
   { id: 'correct1000', name: 'Sensei Cat', emoji: '🧑‍🏫', desc: 'Answer 1,000 questions correctly', test: (d) => d.stats.correct >= 1000 },
   { id: 'foodie5', name: 'Foodie', emoji: '🍙', desc: 'Taste 5 foods', test: (d) => d.owned.filter((o) => o.startsWith('food:')).length >= 5 },
+  { id: 'seasons4', name: 'Cat for All Seasons', emoji: '🎐', desc: 'Taste 4 seasonal festival treats', test: (d) => SEASONAL_TREATS.filter((t) => d.owned.includes(t.id)).length >= 4 },
   { id: 'gourmet', name: 'Gourmet Cat', emoji: '🍱', desc: 'Taste every food at the market', test: (d) => SHOP.filter((i) => i.kind === 'food').every((i) => d.owned.includes(i.id)) },
   { id: 'castles5', name: 'Castle Hopper', emoji: '🏰', desc: 'Photograph 5 castles', test: (d) => castles().filter((c) => d.photos.includes(c)).length >= 5 },
   { id: 'heritage10', name: 'Heritage Hunter', emoji: '🌏', desc: 'Photograph 10 World Heritage sites', test: (d) => heritage().filter((c) => d.photos.includes(c)).length >= 10 },
