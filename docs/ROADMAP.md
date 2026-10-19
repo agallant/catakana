@@ -23,7 +23,8 @@ Tiers: Kana → N5 → N4 → N3 → N2 → N1. Everything runs client-side, off
 | M5.5 | **Audio depth** – pre-generated audio packs for devices lacking a Japanese voice, pitch-accent hints, role-play scenes | planned |
 | M6 | **Engagement** – daily quests, 24 achievements with toasts, placement test to skip known kana, better map | in progress |
 | M7 | **N4 season** – 12 destinations (Hikone → Kawagoe) incl. National Treasure castles and UNESCO sites; 12 grammar points (ている, てもいい, たことがある, comparisons, たり, と思う, potential, なければ, から/ので, とき, たら, つもり); ~180 words, 118 N4 kanji with stroke data, 60 sentences, 9 conversations | in progress |
-| M7.5 | **N4 depth** – verb conjugation drills (te/ta/nai/potential forms), more N4 vocabulary to ~650 words | planned |
+| M7.5 | **Verb Kitchen** – conjugation engine (godan/ichidan/irregular; ます/て/た/ない/potential/volitional) and drill game; progress export/import backup | in progress |
+| M7.6 | **N4 depth** – more N4 vocabulary (to ~650 words), adjective conjugation, keigo basics | planned |
 | M8 | **N3** – ~650 kanji, reading passages, grammar patterns, kanji compounds game | planned |
 | M9 | **N2** – ~1000 kanji, longer texts, keigo introduction | planned |
 | M10 | **N1** – ~2000 kanji, advanced vocab/grammar, literary and news-style reading | planned |
