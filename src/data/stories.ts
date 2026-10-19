@@ -171,4 +171,86 @@ export const STORIES: Story[] = [
       { q: 'How did the writer feel at Nachi Falls?', options: ['Glad to have come, and still energetic', 'Exhausted and cold', 'Disappointed'], answer: 0 },
     ],
   },
+{
+    id: 'sado-gold', title: 'The gold island', emoji: '🪙', from: 'sado',
+    text: [
+      'さどがしまでは、{江戸|えど}{時代|じだい}の はじめに {金山|きんざん}が {見|み}つかりました。そのため、{島|しま}には {全国|ぜんこく}から {人|ひと}が {集|あつ}まるように なりました。',
+      '{金|きん}を とるために、{人々|ひとびと}は {山|やま}の {中|なか}に {長|なが}い トンネルを {掘|ほ}りました。{中|なか}は くらくて、とても あつかったそうです。',
+      'いまは {金山|きんざん}は {閉|と}じられて しまいましたが、トンネルの {中|なか}を {見学|けんがく}する ことが できます。{帰|かえ}りに たらいぶねに {乗|の}って みましたが、まっすぐ {進|すす}むのは むずかしかったです。',
+    ],
+    questions: [
+      { q: 'Why did people gather on Sado from all over Japan?', options: ['Gold was found there', 'For a festival', 'For the fishing'], answer: 0 },
+      { q: 'What was it like inside the tunnels?', options: ['Dark and very hot', 'Cold and wet', 'Bright and quiet'], answer: 0 },
+      { q: 'What was hard about the tub boat?', options: ['Going straight', 'Getting in', 'Finding one'], answer: 0 },
+    ],
+  },
+  {
+    id: 'otaru-glass', title: 'Glass floats of Otaru', emoji: '🫧', from: 'otaru',
+    text: [
+      'むかし、おたるは にしん{漁|りょう}で とても にぎやかな {町|まち}でした。{町|まち}の ガラス{工場|こうじょう}では、ランプの ほかに、{漁|りょう}に {使|つか}う ガラスの うきも {作|つく}って いました。',
+      'にしんが とれなく なってからも、ガラスを {作|つく}る {技術|ぎじゅつ}は {残|のこ}りました。いまでは コップや ランプなど、きれいな {作品|さくひん}が {作|つく}られて います。',
+      'わたしは {体験|たいけん}{工房|こうぼう}で、{自分|じぶん}で ガラスを ふいて みました。{思|おも}ったより {息|いき}が {必要|ひつよう}で、ねこの {形|かたち}に するのは {無理|むり}でした。',
+    ],
+    questions: [
+      { q: 'Besides lamps, what did Otaru’s glassworks make?', options: ['Glass floats for fishing', 'Windows for the canal warehouses', 'Music boxes'], answer: 0 },
+      { q: 'What happened after the herring disappeared?', options: ['The glass-making skills remained', 'All the factories closed', 'The town moved'], answer: 0 },
+      { q: 'How did the writer’s glass-blowing go?', options: ['It needed more breath than expected', 'It came out as a perfect cat', 'The writer did not try'], answer: 0 },
+    ],
+  },
+  {
+    id: 'tono-kappa', title: 'From the Tales of Tōno', emoji: '🥒', from: 'tono',
+    text: [
+      '{遠野|とおの}の {里|さと}には、{今|いま}もなお {不思議|ふしぎ}な {話|はなし}が {数多|かずおお}く {語|かた}り{継|つ}がれている。{明治|めいじ}の {末|すえ}、{柳田國男|やなぎたくにお}は {土地|とち}の {若者|わかもの}から {聞|き}いた {話|はなし}を {書|か}き{留|と}め、『{遠野物語|とおのものがたり}』として {世|よ}に {出|だ}した。',
+      'なかでも {名高|なだか}いのは {河童|かっぱ}の {話|はなし}である。{遠野|とおの}の {河童|かっぱ}は {顔|かお}が {赤|あか}いと いわれ、{川辺|かわべ}に {馬|うま}を {引|ひ}きずり{込|こ}もうとしては、{逆|ぎゃく}に {村人|むらびと}に {捕|と}らえられたという。',
+      '{寺|てら}の {裏|うら}を {流|なが}れる {淵|ふち}は、{今|いま}では「カッパ{淵|ぶち}」と {呼|よ}ばれ、きゅうりを {餌|えさ}にした {竿|さお}を {垂|た}らす {旅人|たびびと}の {姿|すがた}が {絶|た}えない。{河童|かっぱ}に {出会|であ}えた {者|もの}は いまだ {一人|ひとり}も いないのだが。',
+    ],
+    questions: [
+      { q: 'Where did Yanagita get the stories?', options: ['From a young man of the area', 'From old temple scrolls', 'From his own dreams'], answer: 0 },
+      { q: 'What is said to be special about Tōno’s kappa?', options: ['Their faces are red', 'They can fly', 'They are friendly to horses'], answer: 0 },
+      { q: 'What do travellers do at the Kappa Pool today?', options: ['Dangle rods baited with cucumber', 'Swim in it', 'Throw coins for luck'], answer: 0 },
+      { q: 'What does the final sentence suggest?', options: ['Nobody has actually met a kappa yet', 'Many visitors have caught one', 'The pool is now closed'], answer: 0 },
+    ],
+  },
+  {
+    id: 'shiga-kinosaki', title: 'At Kinosaki', emoji: '♨️', from: 'kinosaki',
+    text: [
+      '{大正|たいしょう}{二年|にねん}、{作家|さっか}の {志賀直哉|しがなおや}は {東京|とうきょう}で {電車|でんしゃ}に はねられ、{一命|いちめい}を {取|と}り{留|と}めたのち、{養生|ようじょう}のため {城崎|きのさき}{温泉|おんせん}に {滞在|たいざい}した。',
+      '{宿|やど}の {二階|にかい}から {彼|かれ}が {眺|なが}めていたのは、{屋根|やね}の {上|うえ}で {死|し}んでいる {一匹|いっぴき}の {蜂|はち}であった。{仲間|なかま}の {蜂|はち}たちは {忙|いそが}しく {働|はたら}き、{死骸|しがい}には {見向|みむ}きも しない。その {静|しず}かさに、{彼|かれ}は {不思議|ふしぎ}な {親|した}しみを {覚|おぼ}えたという。',
+      'こうした {体験|たいけん}を {基|もと}に {書|か}かれた {短編|たんぺん}『{城|き}の{崎|さき}にて』は、{生|せい}と {死|し}を {見|み}つめた {名作|めいさく}として {今|いま}も {読|よ}み{継|つ}がれている。{作家|さっか}が {泊|と}まった {宿|やど}は、{現在|げんざい}も {営業|えいぎょう}を {続|つづ}けている。',
+    ],
+    questions: [
+      { q: 'Why did Shiga go to Kinosaki?', options: ['To recover after being hit by a train', 'To write a travel guide', 'To open an inn'], answer: 0 },
+      { q: 'What did he watch from the inn’s upper floor?', options: ['A dead bee on a roof', 'Children playing in the river', 'A festival parade'], answer: 0 },
+      { q: 'How did the other bees treat the dead one?', options: ['They paid it no attention', 'They carried it away', 'They gathered around it'], answer: 0 },
+      { q: 'What is the short story mainly about?', options: ['Life and death', 'Hot-spring cuisine', 'Train travel'], answer: 0 },
+    ],
+  },
+  {
+    id: 'okinoshima-news', title: 'News: the island of the gods', emoji: '📰', from: 'munakata',
+    text: [
+      '【{福岡|ふくおか}】ユネスコの {世界遺産|せかいいさん}{委員会|いいんかい}は 2017{年|ねん}、「『{神宿|かみやど}る{島|しま}』{宗像|むなかた}・{沖ノ島|おきのしま}と{関連|かんれん}{遺産群|いさんぐん}」を {世界|せかい}{文化|ぶんか}{遺産|いさん}に {登録|とうろく}することを {決定|けってい}した。',
+      '{玄界灘|げんかいなだ}に {浮|う}かぶ {沖ノ島|おきのしま}は、{島|しま}{全体|ぜんたい}が {宗像大社|むなかたたいしゃ}の {御神体|ごしんたい}とされ、{古代|こだい}の {祭祀|さいし}{跡|あと}からは {約|やく}{八万点|はちまんてん}もの {奉献品|ほうけんひん}が {出土|しゅつど}している。そのすべてが {国宝|こくほう}に {指定|してい}されており、「{海|うみ}の{正倉院|しょうそういん}」とも {称|しょう}される。',
+      '{島|しま}では {古来|こらい}の {禁忌|きんき}が {守|まも}られてきた。{上陸|じょうりく}を {許|ゆる}された {者|もの}も、{海|うみ}で {身|み}を {清|きよ}めてからでなければ {島|しま}に {入|はい}れない。{登録|とうろく}{後|ご}、{神社|じんじゃ}は {保全|ほぜん}を {理由|りゆう}に {一般|いっぱん}の {上陸|じょうりく}を {全面|ぜんめん}的に {中止|ちゅうし}すると {発表|はっぴょう}した。',
+    ],
+    questions: [
+      { q: 'What is the whole island regarded as?', options: ['The sacred body of a shrine’s deity', 'A national park', 'A fishing port'], answer: 0 },
+      { q: 'Why is it called the “Shōsōin of the sea”?', options: ['About 80,000 ancient offerings were found, all National Treasures', 'It is shaped like a storehouse', 'It stores fish for the region'], answer: 0 },
+      { q: 'What must permitted visitors do before landing?', options: ['Purify themselves in the sea', 'Pay an entrance fee', 'Bring an offering of rice'], answer: 0 },
+      { q: 'What did the shrine announce after the listing?', options: ['A complete halt to general landings', 'More ferries for tourists', 'A new museum on the island'], answer: 0 },
+    ],
+  },
+  {
+    id: 'amami-cats', title: 'News: cats and the Amami rabbit', emoji: '🐇', from: 'amami',
+    text: [
+      '【{鹿児島|かごしま}】{世界|せかい}{自然|しぜん}{遺産|いさん}に {登録|とうろく}された {奄美大島|あまみおおしま}で、{野生化|やせいか}した {猫|ねこ}による {希少|きしょう}{動物|どうぶつ}への {被害|ひがい}が {問題|もんだい}となっている。',
+      '{特別|とくべつ}{天然|てんねん}{記念物|きねんぶつ}の アマミノクロウサギは、{島|しま}に {天敵|てんてき}が {少|すく}なかったため、{逃|に}げる {能力|のうりょく}が {高|たか}くない。{森|もり}に {入|はい}り{込|こ}んだ {猫|ねこ}が これを {襲|おそ}う {様子|ようす}が、{自動|じどう}カメラに {記録|きろく}されている。',
+      'これを {受|う}け、{環境省|かんきょうしょう}と {地元|じもと}の {自治体|じちたい}は {森|もり}の {猫|ねこ}を {捕獲|ほかく}し、{新|あたら}しい {飼|か}い{主|ぬし}を {探|さが}す {取|と}り{組|く}みを {進|すす}めている。{関係者|かんけいしゃ}は「{問題|もんだい}は {猫|ねこ}ではなく、{人間|にんげん}の {飼|か}い{方|かた}にある。{室内|しつない}{飼|が}いと {不妊|ふにん}{手術|しゅじゅつ}を {徹底|てってい}してほしい」と {呼|よ}びかけている。',
+    ],
+    questions: [
+      { q: 'Why is the Amami rabbit vulnerable?', options: ['It evolved with few predators, so it is not good at escaping', 'It is too big to hide', 'It only lives on beaches'], answer: 0 },
+      { q: 'How was the problem recorded?', options: ['By automatic cameras', 'By tourists’ phones', 'By satellite'], answer: 0 },
+      { q: 'What happens to the cats that are caught?', options: ['New owners are sought for them', 'They are released on another island', 'They are kept in a zoo'], answer: 0 },
+      { q: 'According to the officials, where does the problem really lie?', options: ['In how people keep their cats', 'In the cats themselves', 'In the rabbits’ diet'], answer: 0 },
+    ],
+  },
 ];

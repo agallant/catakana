@@ -24,13 +24,13 @@ Tiers: Kana → N5 → N4 → N3 → N2 → N1. Everything runs client-side, off
 | M6 | **Engagement** – daily quests, 24 achievements with toasts, placement test to skip known kana, better map | in progress |
 | M7 | **N4 season** – 12 destinations (Hikone → Kawagoe) incl. National Treasure castles and UNESCO sites; 12 grammar points (ている, てもいい, たことがある, comparisons, たり, と思う, potential, なければ, から/ので, とき, たら, つもり); ~180 words, 118 N4 kanji with stroke data, 60 sentences, 9 conversations | in progress |
 | M7.5 | **Verb Kitchen** – conjugation engine (godan/ichidan/irregular; ます/て/た/ない/potential/volitional) and drill game; progress export/import backup | in progress |
-| M7.6 | **N4 depth** – more N4 vocabulary (to ~650 words), adjective conjugation, keigo basics | planned |
+| M7.6 | **N4 depth** – Ryokan Manners keigo game (respectful vs humble verbs, unlocks at Kawagoe); more N4 vocabulary (to ~650 words), adjective conjugation | in progress |
 | M8 | **N3 season** – 12 destinations (Inuyama → Iriomote) incl. the fifth National Treasure castle, Sado gold mines & Shiretoko (UNESCO), and the Iriomote wildcat; 12 grammar points (ようになる, ために, ように, そうだ, らしい, てしまう, ながら, はずだ, ても, passive, causative, ばかり); ~180 words, 119 N3 kanji with strokes, 60 sentences, 7 conversations | in progress |
-| M8.5 | **N3 depth** – reading passages, kanji compounds game, more N3 kanji (to ~370) | planned |
+| M8.5 | **N3 depth** – reading passages (Sado gold mine, Otaru glass), kanji compounds game, more N3 kanji (to ~370) | in progress |
 | M9 | **N2 season** – 12 destinations (Hirosaki → Asakusa) incl. Hirosaki Castle, Gunkanjima & Hagi (Meiji Industrial heritage), Yoshino & Kumano Kodō (Kii UNESCO); 12 grammar points (わけだ, にとって, によって, に対して, ものの, ばかりか, に違いない, ことになる/ことにする, おかげで/せいで, かわりに, ようとする/ずに, ながらも/にもかかわらず); ~180 words, 132 more kanji with strokes, 60 sentences, 7 conversations | in progress |
-| M9.5 | **N2 depth** – keigo, longer texts, more N2 kanji (to ~1000) | planned |
+| M9.5 | **N2 depth** – keigo set grows to 17 verbs (ご覧になる, 拝見する, 存じる, お目にかかる, 伺う, 差し上げる…), longer texts, more N2 kanji (to ~1000) | in progress |
 | M10 | **N1 season** – 12 destinations (Ogasawara → Gōtoku-ji) incl. Ogasawara & Amami (UNESCO natural), Jōmon Sannai-Maruyama, Mozu kofun, Okinoshima, Hidden Christian sites, Nirayama furnace, Maruoka Castle; folklore (Tōno), Zen (Eihei-ji), Sekigahara and literary onsen towns; 12 formal grammar points, ~180 words, N1 kanji with strokes, 60 sentences, 7 conversations; finale with Maneki at the maneki-neko temple | in progress |
-| M10.5 | **N1 depth** – literary and news-style reading, more N1 kanji (to ~2000) | planned |
+| M10.5 | **N1 depth** – literary and news-style reading (Tales of Tōno, Shiga Naoya at Kinosaki, Okinoshima and Amami news articles), more N1 kanji (to ~2000) | in progress |
 | M10.6 | **Seasonal events** – real-calendar Japanese festivals (New Year, Setsubun, Hinamatsuri, hanami, Tanabata, Obon, tsukimi, momiji, Ōmisoka…) on the journey screen with limited-time market treats, a passport shelf and achievement | in progress |
 | M11 | **Polish & depth** – 47-prefecture collection in the passport (44 on the route, plus day trips to Ibaraki, Chiba and Yamanashi), seasonal events, achievements, cloud-free progress export/import, more cats and outfits, sound pass (station-style departure jingles, eki-stamp thump, achievement fanfare, streak chimes), i18n of UI | ongoing |
 

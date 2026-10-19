@@ -12,6 +12,7 @@ import { shadowGame } from './shadow';
 import { kitchenGame } from './kitchen';
 import { storyGame } from './story';
 import { bentoGame } from './bento';
+import { keigoGame } from './keigo';
 
-export const GAMES: GameDef[] = [sushiGame, pairsGame, traceGame, listenGame, yarnGame, typingGame, stationGame, trainGame, cafeGame, shadowGame, kitchenGame, storyGame, bentoGame];
+export const GAMES: GameDef[] = [sushiGame, pairsGame, traceGame, listenGame, yarnGame, typingGame, stationGame, trainGame, cafeGame, shadowGame, kitchenGame, storyGame, bentoGame, keigoGame];
 export const GAME_BY_ID = new Map(GAMES.map((g) => [g.id, g]));
