@@ -40,6 +40,11 @@ describe('adjective conjugation', () => {
     for (const id of Object.values(ADJ_FORM_UNLOCK)) expect(STOP_BY_ID.has(id)).toBe(true);
     const akita = STOPS.findIndex((s) => s.id === 'akita');
     expect(adjFormsAt(akita)).toHaveLength(0);
+    const at = (id: string) => STOPS.findIndex((s) => s.id === id);
+    expect(adjFormsAt(at('kobe'))).toEqual(['neg', 'past']);
+    expect(adjFormsAt(at('beppu'))).toEqual(['neg', 'past', 'pastneg']);
+    expect(adjFormsAt(at('yakushima'))).toEqual(['neg', 'past', 'pastneg', 'te']);
+    expect(adjFormsAt(at('hikone'))).toEqual(['neg', 'past', 'pastneg', 'te', 'adv']);
     expect(adjFormsAt(STOPS.length - 1)).toHaveLength(5);
   });
 });

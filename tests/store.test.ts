@@ -77,3 +77,26 @@ describe('backup validation', () => {
     expect(s.data.fish).toBe(3);
   });
 });
+
+import { COUNTERS } from '../src/data/counters';
+describe('skill-game achievements', () => {
+  const rec = (correct: number) => ({ box: 1, due: 0, seen: 1, correct, wrong: 0, last: 0 });
+  const has = (s: Store, id: string) => ACHIEVEMENTS.find((a) => a.id === id)!.test(s.data);
+  it('count distinct items answered correctly', () => {
+    const s = new Store(mem());
+    s.update((d) => {
+      for (let i = 0; i < 11; i++) d.srs[`keigo:v${i}:sonkei`] = rec(1);
+      d.srs['keigo:wrong:kenjo'] = rec(0);
+    });
+    expect(has(s, 'okami')).toBe(false);
+    s.update((d) => (d.srs['keigo:v11:kenjo'] = rec(2)));
+    expect(has(s, 'okami')).toBe(true);
+  });
+  it('Counting Cat needs every counter', () => {
+    const s = new Store(mem());
+    s.update((d) => COUNTERS.slice(1).forEach((c) => (d.srs[`count:${c.id}:3`] = rec(1))));
+    expect(has(s, 'counter-cat')).toBe(false);
+    s.update((d) => (d.srs[`count:${COUNTERS[0]!.id}:1`] = rec(1)));
+    expect(has(s, 'counter-cat')).toBe(true);
+  });
+});
