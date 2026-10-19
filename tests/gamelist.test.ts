@@ -31,5 +31,8 @@ describe('game list skill tabs', () => {
     writing.click();
     expect(el.querySelectorAll('.game-list button')).toHaveLength(filterBySkill(GAMES, 'writing').length);
     expect(currentSkill(GAMES)).toBe('writing');
+    const panel = el.querySelector('[role="tabpanel"]')!;
+    expect(panel.getAttribute('aria-labelledby')).toBe('game-list-tab-writing');
+    expect(writing.getAttribute('aria-controls')).toBe(panel.id);
   });
 });
