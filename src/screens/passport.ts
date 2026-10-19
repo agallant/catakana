@@ -54,6 +54,10 @@ export function passportScreen(app: App): Screen {
 
   const visited = visitedPrefectures(d.stamps, d.daytrips);
   const onRoute = new Set([...Object.values(STOP_PREFECTURE), ...DAY_TRIPS.map((t) => t.pref)]);
+  const tripFrom = (pref: string): string | undefined => {
+    const t = DAY_TRIPS.find((x) => x.pref === pref);
+    return t ? STOPS.find((st) => st.id === t.from)?.name : undefined;
+  };
   const prefGrid = h(
     'div',
     { class: 'trophy-grid' },
@@ -65,7 +69,7 @@ export function passportScreen(app: App): Screen {
         h('span', { class: 'trophy-emoji' }, got ? p.emoji : '🗾'),
         h('strong', null, p.name),
         h('small', { class: 'jp' }, ruby(p.jp, d.settings.furigana)),
-        got ? h('small', null, p.meibutsu) : onRoute.has(p.id) ? null : h('small', null, 'Not on the route yet'),
+        got ? h('small', null, p.meibutsu) : tripFrom(p.id) ? h('small', null, `Day trip from ${tripFrom(p.id)}`) : onRoute.has(p.id) ? null : h('small', null, 'Not on the route yet'),
       );
     }),
   );
