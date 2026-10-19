@@ -3,6 +3,7 @@ import { N5_CONTENT } from '../src/data/n5';
 import { STOPS } from '../src/data/journey';
 import { N5_WORDS, ALL_WORDS, TOUR_WORDS } from '../src/data/vocab';
 import { N4_CONTENT } from '../src/data/n4';
+import { N3_CONTENT } from '../src/data/n3';
 import { TOUR_CONTENT } from '../src/data/tour';
 import { kanaTokens, wordsThrough, firstStopOfTier, newWordsAt } from '../src/core/curriculum';
 import { decoyChunk, sentencesThrough } from '../src/core/sentences';
@@ -66,5 +67,13 @@ describe('tour dedup', () => {
     const tomaru = TOUR_WORDS.filter((w) => w.reading === 'とまる').map((w) => w.kanji);
     expect(tomaru).toContain('止まる');
     expect(tomaru).toContain('泊まる');
+  });
+});
+
+describe('N3 content', () => {
+  it('every N3 stop has grammar, words and sentences', () => {
+    const n3Stops = STOPS.filter((s) => s.tier === 'N3');
+    expect(Object.keys(N3_CONTENT).sort()).toEqual(n3Stops.map((s) => s.id).sort());
+    for (const s of n3Stops) expect(TOUR_WORDS.filter((w) => w.stop === s.id).length, s.id).toBeGreaterThanOrEqual(8);
   });
 });

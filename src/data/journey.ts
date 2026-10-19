@@ -473,6 +473,127 @@ export const STOPS: Stop[] = [
     ],
     npc: { name: 'Edo', jp: 'えど', look: L('#9e9e9e', '#616161', 'tuxedo', '#ffd24a', 'straw'), hello: ['らいねんも にほんに くる つもりですか。', 'Are you planning to come to Japan next year too?'] },
   },
+  // ---- N3 season: intermediate grammar, remote corners of Japan ----
+  {
+    id: 'inuyama', name: 'Inuyama', jp: '犬山', reading: 'いぬやま', region: 'Chubu', lonlat: [136.94, 35.39], emoji: '🏯', transport: 'train', tier: 'N3',
+    teaches: [],
+    facts: [
+      'Inuyama Castle is a National Treasure and has one of the oldest surviving castle keeps in Japan.',
+      'From its top floor you can walk around an open balcony high above the Kiso River.',
+      'In summer, fishermen on the river use trained cormorant birds to catch sweetfish (ukai).',
+    ],
+    npc: { name: 'Inu-chan', jp: 'いぬちゃん', look: L('#e8c39e', '#c68e5b', 'tabby', '#3d2b1f', 'crown'), hello: ['にほんごが わかるように なりましたね！', 'You’ve become able to understand Japanese!'] },
+  },
+  {
+    id: 'gujo', name: 'Gujo Hachiman', jp: '郡上八幡', reading: 'ぐじょうはちまん', region: 'Chubu', lonlat: [136.96, 35.75], emoji: '💃', transport: 'bus', tier: 'N3',
+    teaches: [],
+    facts: [
+      'Gujo Odori is a summer dance festival where some nights the dancing lasts until dawn.',
+      'Much of Japan’s realistic plastic food (shokuhin sample) is made in this town — you can try making it yourself.',
+      'Clear mountain water runs through little canals along the streets.',
+    ],
+    npc: { name: 'Odori', jp: 'おどり', look: L('#fff3e0', '#f4b183', 'calico', '#3d85c6', 'headband'), hello: ['おどる ために きたんですか？', 'Did you come here to dance?'] },
+  },
+  {
+    id: 'tsumago', name: 'Tsumago', jp: '妻籠', reading: 'つまご', region: 'Chubu', lonlat: [137.6, 35.58], emoji: '🛤️', transport: 'bus', tier: 'N3',
+    teaches: [],
+    facts: [
+      'Tsumago is a preserved post town on the old Nakasendo road between Edo (Tokyo) and Kyoto.',
+      'Power lines are hidden so the street looks much as it did centuries ago.',
+      'Hikers walk the forest trail to Magome — ringing bear bells as they go!',
+    ],
+    npc: { name: 'Tabibito', jp: 'たびびと', look: L('#9e9e9e', '#616161', 'tabby', '#6aa84f', 'straw'), hello: ['まよわないように ちずを どうぞ。', 'Here’s a map so you don’t get lost.'] },
+  },
+  {
+    id: 'toyama', name: 'Toyama', jp: '富山', reading: 'とやま', region: 'Chubu', lonlat: [137.21, 36.7], emoji: '🏔️', transport: 'train', tier: 'N3',
+    teaches: [],
+    facts: [
+      'On the Tateyama Kurobe Alpine Route, spring visitors walk between snow walls that can be over 15 meters tall.',
+      'Toyama Bay is famous for tiny “white shrimp” and glowing firefly squid.',
+      'For centuries, Toyama medicine peddlers traveled all over Japan selling home remedies.',
+    ],
+    npc: { name: 'Yukikabe', jp: 'ゆきかべ', look: L('#fafafa', '#e0e0e0', 'plain', '#3d85c6', 'scarf'), hello: ['ゆきが ふりそうですね。', 'Looks like it’s going to snow.'] },
+  },
+  {
+    id: 'sado', name: 'Sado Island', jp: '佐渡', reading: 'さど', region: 'Chubu', lonlat: [138.37, 38.02], emoji: '🥁', transport: 'ferry', tier: 'N3',
+    teaches: [],
+    facts: [
+      'The Sado Island Gold Mines became a UNESCO World Heritage site in 2024.',
+      'In the past, emperors and nobles were exiled to Sado.',
+      'The famous taiko drum group Kodo lives on the island, and you can ride round tub boats (tarai-bune).',
+    ],
+    npc: { name: 'Toki', jp: 'とき', look: L('#ffb3c1', '#fafafa', 'plain', '#cc0000', 'beret'), hello: ['むかし ここで きんが とれたらしいよ。', 'Apparently gold was mined here long ago.'] },
+  },
+  {
+    id: 'aizu', name: 'Aizu-Wakamatsu', jp: '会津若松', reading: 'あいづわかまつ', region: 'Tohoku', lonlat: [139.93, 37.49], emoji: '🐂', transport: 'train', tier: 'N3',
+    teaches: [],
+    facts: [
+      'Tsuruga Castle is famous for its red roof tiles and its siege in the Boshin War of 1868.',
+      'Akabeko, a red cow toy with a wobbling head, is a lucky charm from Aizu.',
+      'Aizu is known for lacquerware and sake brewing.',
+    ],
+    npc: { name: 'Beko', jp: 'べこ', look: L('#cc0000', '#2b2b2b', 'spots', '#ffd24a', 'none'), hello: ['あっ、さいふを おとして しまった！', 'Oh no, I dropped my wallet!'] },
+  },
+  {
+    id: 'otaru', name: 'Otaru', jp: '小樽', reading: 'おたる', region: 'Hokkaido', lonlat: [141.0, 43.19], emoji: '🏮', transport: 'plane', tier: 'N3',
+    teaches: [],
+    facts: [
+      'Otaru’s canal is lined with old stone warehouses and gas lamps.',
+      'The town is famous for glassblowing and has a big music-box museum.',
+      'In February, the Snow Light Path festival fills the town with candles in the snow.',
+    ],
+    npc: { name: 'Garasu', jp: 'ガラス', look: L('#b0bec5', '#78909c', 'plain', '#3d85c6', 'beret'), hello: ['うんがを みながら あるきましょう。', 'Let’s walk while looking at the canal.'] },
+  },
+  {
+    id: 'shiretoko', name: 'Shiretoko', jp: '知床', reading: 'しれとこ', region: 'Hokkaido', lonlat: [145.0, 44.07], emoji: '🧊', transport: 'bus', tier: 'N3',
+    teaches: [],
+    facts: [
+      'Shiretoko Peninsula is a UNESCO natural World Heritage site with brown bears, deer and huge sea eagles.',
+      'In winter, drift ice from the Sea of Okhotsk fills the sea — you can walk on it in a dry suit.',
+      'Its name comes from the Ainu language and means roughly “the end of the earth”.',
+    ],
+    npc: { name: 'Ryuhyo', jp: 'りゅうひょう', look: L('#fafafa', '#b0bec5', 'plain', '#3d85c6', 'scarf'), hello: ['くまは もう ねている はずです。', 'The bears should be asleep by now.'] },
+  },
+  {
+    id: 'naoshima', name: 'Naoshima', jp: '直島', reading: 'なおしま', region: 'Shikoku', lonlat: [133.99, 34.46], emoji: '🎃', transport: 'plane', tier: 'N3',
+    teaches: [],
+    facts: [
+      'Naoshima is an “art island” with museums designed by architect Tadao Ando.',
+      'Yayoi Kusama’s yellow polka-dot pumpkin sits on a pier by the sea.',
+      'It belongs to Kagawa, the “udon prefecture”, famous for chewy Sanuki udon.',
+    ],
+    npc: { name: 'Kabocha', jp: 'かぼちゃ', look: L('#ffd24a', '#2b2b2b', 'spots', '#2b2b2b', 'bow'), hello: ['あめが ふっても たのしいですよ！', 'It’s fun even if it rains!'] },
+  },
+  {
+    id: 'tokushima', name: 'Tokushima', jp: '徳島', reading: 'とくしま', region: 'Shikoku', lonlat: [134.55, 34.07], emoji: '🌀', transport: 'ferry', tier: 'N3',
+    teaches: [],
+    facts: [
+      'The Awa Odori dance festival brings about a million visitors every August.',
+      'Its song says: “Dancing fools and watching fools — if we’re all fools, we might as well dance!”',
+      'Giant whirlpools spin in the Naruto Strait when the tides change.',
+    ],
+    npc: { name: 'Awa', jp: 'あわ', look: L('#3f51b5', '#1a237e', 'plain', '#ffd24a', 'headband'), hello: ['ねこに さかなを たべられた！', 'My fish got eaten by a cat!'] },
+  },
+  {
+    id: 'takachiho', name: 'Takachiho', jp: '高千穂', reading: 'たかちほ', region: 'Kyushu', lonlat: [131.31, 32.71], emoji: '🛶', transport: 'bus', tier: 'N3',
+    teaches: [],
+    facts: [
+      'Takachiho Gorge has steep basalt cliffs and a waterfall you can row a boat beneath.',
+      'In myth, the sun goddess Amaterasu hid in a cave here, plunging the world into darkness.',
+      'Night kagura dances retell the myth, sometimes all through winter nights.',
+    ],
+    npc: { name: 'Kagura', jp: 'かぐら', look: L('#fff3e0', '#cc0000', 'calico', '#ffd24a', 'crown'), hello: ['すこし やすませて ください…', 'Please let me rest a little…'] },
+  },
+  {
+    id: 'iriomote', name: 'Iriomote Island', jp: '西表島', reading: 'いりおもてじま', region: 'Okinawa', lonlat: [123.8, 24.33], emoji: '🐆', transport: 'plane', tier: 'N3',
+    teaches: [],
+    facts: [
+      'Iriomote is home to the Iriomote wildcat — only about 100 live in the wild, and nowhere else on Earth.',
+      'Road signs warn drivers to watch out for wildcats crossing!',
+      'Most of the island is jungle and mangrove forest, explored by canoe.',
+    ],
+    npc: { name: 'Yamaneko', jp: 'やまねこ', look: L('#a1887f', '#4e342e', 'spots', '#ffd24a', 'none'), hello: ['しまに ついた ばかりですか？', 'Did you just arrive on the island?'] },
+  },
 ];
 
 export const STOP_BY_ID = new Map(STOPS.map((s) => [s.id, s]));

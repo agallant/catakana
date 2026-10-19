@@ -561,4 +561,147 @@ export const CULTURE: Record<string, StopCulture> = {
     ],
     souvenir: { name: 'Sweet potato chips', jp: 'いもチップス', emoji: '🍠', cost: 20 },
   },
+  inuyama: {
+    spots: [
+      { name: 'Inuyama Castle', tags: ['castle'], jp: '{犬山城|いぬやまじょう}', emoji: '🏯', about: 'A National Treasure keep above the Kiso River — walk the balcony around its top floor.' },
+      { name: 'Ukai on the Kiso River', jp: '{鵜飼|うか}い', emoji: '🐦', about: 'Fishermen with torches guide trained cormorants to catch sweetfish at night.' },
+      { name: 'Uraku-en', jp: '{有楽苑|うらくえん}', emoji: '🍵', about: 'A garden with Jo-an, a National Treasure tea house.' },
+    ],
+    trivia: [
+      { q: 'In ukai fishing, what catches the fish?', options: ['Trained cormorant birds', 'Cats', 'Nets only'], answer: 0 },
+      { q: '〜ようになる describes…', options: ['A gradual change', 'A command', 'The past'], answer: 0 },
+    ],
+    souvenir: { name: 'Dengaku tofu skewer', jp: 'でんがく', emoji: '🍢', cost: 20 },
+  },
+  gujo: {
+    spots: [
+      { name: 'Gujo Odori', jp: '{郡上|ぐじょう}おどり', emoji: '💃', about: 'Anyone can join the summer street dances — some nights they go until sunrise.' },
+      { name: 'Food sample workshop', jp: '{食品|しょくひん}サンプル', emoji: '🍤', about: 'Make your own super-realistic plastic tempura and lettuce.' },
+      { name: 'Gujo Hachiman Castle', tags: ['castle'], jp: '{郡上八幡城|ぐじょうはちまんじょう}', emoji: '🏯', about: 'A wooden hilltop castle that seems to float above the morning mist.' },
+    ],
+    trivia: [
+      { q: 'What does Gujo Hachiman make a lot of?', options: ['Plastic food samples', 'Cars', 'Pianos'], answer: 0 },
+      { q: 'けんこうの ために means…', options: ['for one’s health', 'because of the rain', 'by bus'], answer: 0 },
+    ],
+    souvenir: { name: 'Mini food sample', jp: 'しょくひんサンプル', emoji: '🍣', cost: 40 },
+  },
+  tsumago: {
+    spots: [
+      { name: 'Tsumago-juku', jp: '{妻籠宿|つまごじゅく}', emoji: '🏚️', about: 'A preserved Edo-period post town with wooden inns and latticed shops.' },
+      { name: 'Nakasendo trail', jp: '{中山道|なかせんどう}', emoji: '🥾', about: 'An old highway through cedar forest and past waterfalls to Magome.' },
+    ],
+    trivia: [
+      { q: 'The Nakasendo once connected Edo with…', options: ['Kyoto', 'Sapporo', 'Okinawa'], answer: 0 },
+      { q: 'Why do hikers carry bells on the trail?', options: ['To warn bears away', 'To call taxis', 'For fun only'], answer: 0 },
+    ],
+    souvenir: { name: 'Gohei mochi', jp: 'ごへいもち', emoji: '🍡', cost: 20 },
+  },
+  toyama: {
+    spots: [
+      { name: 'Snow Corridor', jp: '{雪|ゆき}の{大谷|おおたに}', emoji: '🧱', about: 'Walk between towering walls of snow on the Alpine Route in spring.' },
+      { name: 'Kurobe Gorge Railway', jp: '{黒部峡谷|くろべきょうこく}', emoji: '🚃', about: 'A little open-air train rattles through Japan’s deepest V-shaped gorge.' },
+      { name: 'Gokayama villages', tags: ['heritage'], jp: '{五箇山|ごかやま}', emoji: '🛖', about: 'Thatched gassho-zukuri farmhouses — part of the same World Heritage site as Shirakawa-go.' },
+    ],
+    trivia: [
+      { q: 'What lines the road on the Alpine Route in spring?', options: ['Walls of snow', 'Cherry trees', 'Volcanoes'], answer: 0 },
+      { q: 'おいしそう means…', options: ['looks delicious', 'was delicious', 'not delicious'], answer: 0 },
+    ],
+    souvenir: { name: 'Masu-zushi (trout sushi)', jp: 'ますずし', emoji: '🍣', cost: 30 },
+  },
+  sado: {
+    spots: [
+      { name: 'Sado Gold Mines', tags: ['heritage'], jp: '{佐渡金山|さどきんざん}', emoji: '⛏️', about: 'Tunnels dug by hand for centuries — a World Heritage site since 2024.' },
+      { name: 'Tarai-bune', jp: 'たらい{舟|ぶね}', emoji: '🛶', about: 'Round wooden tub boats once used to gather seaweed and shellfish.' },
+      { name: 'Toki Forest Park', jp: 'トキの{森公園|もりこうえん}', emoji: '🦩', about: 'See the rare crested ibis, brought back from the edge of extinction in Japan.' },
+    ],
+    trivia: [
+      { q: 'Sado is famous for an old…', options: ['Gold mine', 'Rocket base', 'Desert'], answer: 0 },
+      { q: 'Tarai-bune boats are shaped like…', options: ['Round tubs', 'Swans', 'Bananas'], answer: 0 },
+    ],
+    souvenir: { name: 'Gold-leaf chopsticks', jp: 'きんぱくのはし', emoji: '🥢', cost: 45 },
+  },
+  aizu: {
+    spots: [
+      { name: 'Tsuruga Castle', tags: ['castle'], jp: '{鶴ヶ城|つるがじょう}', emoji: '🏯', about: 'The only castle in Japan with red-glazed roof tiles.' },
+      { name: 'Iimoriyama', jp: '{飯盛山|いいもりやま}', emoji: '⛩️', about: 'A hill with memorials to the young Byakkotai samurai, and a unique spiral wooden pagoda.' },
+      { name: 'Ouchi-juku', jp: '{大内宿|おおうちじゅく}', emoji: '🛖', about: 'A thatched-roof post town where soba is eaten with a long green onion instead of chopsticks.' },
+    ],
+    trivia: [
+      { q: 'What is an akabeko?', options: ['A red cow toy with a nodding head', 'A red fish', 'A red castle'], answer: 0 },
+      { q: 'At Ouchi-juku, people eat soba using…', options: ['A long green onion', 'Their paws', 'A spoon'], answer: 0 },
+    ],
+    souvenir: { name: 'Akabeko', jp: 'あかべこ', emoji: '🐂', cost: 35 },
+  },
+  otaru: {
+    spots: [
+      { name: 'Otaru Canal', jp: '{小樽運河|おたるうんが}', emoji: '🛶', about: 'Stone warehouses and gas lamps reflected in the canal at dusk.' },
+      { name: 'Music Box Museum', jp: 'オルゴール{堂|どう}', emoji: '🎶', about: 'Thousands of music boxes, with a steam clock ticking outside.' },
+      { name: 'Glass street', jp: 'ガラス{工房|こうぼう}', emoji: '🍷', about: 'Watch artisans blow glass and pick a glass bead to take home.' },
+    ],
+    trivia: [
+      { q: 'Otaru is famous for…', options: ['Glass and music boxes', 'Deserts', 'Pyramids'], answer: 0 },
+      { q: '〜ながら means…', options: ['while doing', 'after doing', 'before doing'], answer: 0 },
+    ],
+    souvenir: { name: 'Glass wind chime', jp: 'ガラスのふうりん', emoji: '🎐', cost: 35 },
+  },
+  shiretoko: {
+    spots: [
+      { name: 'Shiretoko Five Lakes', tags: ['heritage'], jp: '{知床五湖|しれとこごこ}', emoji: '🏞️', about: 'Boardwalks over wild lakes with mountains behind — watch for bears!' },
+      { name: 'Drift ice walk', tags: ['heritage'], jp: '{流氷|りゅうひょう}ウォーク', emoji: '🧊', about: 'Float in the icy sea among drift ice wearing a dry suit.' },
+      { name: 'Furepe Falls', jp: 'フレペの{滝|たき}', emoji: '💦', about: 'Spring water pours straight from a sea cliff — the “Maiden’s Tears”.' },
+    ],
+    trivia: [
+      { q: 'What floats into Shiretoko’s sea in winter?', options: ['Drift ice', 'Coconuts', 'Lanterns'], answer: 0 },
+      { q: '〜はずです means…', options: ['should be (expected)', 'want to', 'must not'], answer: 0 },
+    ],
+    souvenir: { name: 'Salmon jerky', jp: 'さけとば', emoji: '🐟', cost: 30 },
+  },
+  naoshima: {
+    spots: [
+      { name: 'Yellow Pumpkin', jp: '{黄|き}かぼちゃ', emoji: '🎃', about: 'Yayoi Kusama’s polka-dot pumpkin on a pier — an island icon.' },
+      { name: 'Chichu Art Museum', jp: '{地中美術館|ちちゅうびじゅつかん}', emoji: '🖼️', about: 'A museum built mostly underground, lit by natural sunlight.' },
+      { name: 'I♥湯 bathhouse', jp: 'アイラブユー', emoji: '♨️', about: 'A colorful public bath that is also a work of art.' },
+    ],
+    trivia: [
+      { q: 'What famous artwork sits on Naoshima’s pier?', options: ['A polka-dot pumpkin', 'A giant cat', 'A golden fish'], answer: 0 },
+      { q: 'Kagawa is famous for which noodle?', options: ['Sanuki udon', 'Hakata ramen', 'Soba only'], answer: 0 },
+    ],
+    souvenir: { name: 'Pumpkin figure', jp: 'かぼちゃ', emoji: '🎃', cost: 40 },
+  },
+  tokushima: {
+    spots: [
+      { name: 'Awa Odori', jp: '{阿波|あわ}おどり', emoji: '💃', about: 'Dance troupes fill the streets with shamisen, flutes and drums every August.' },
+      { name: 'Naruto Whirlpools', jp: '{鳴門|なると}の{渦潮|うずしお}', emoji: '🌀', about: 'Some of the world’s largest tidal whirlpools — watch from a glass-floor walkway.' },
+      { name: 'Iya Vine Bridge', jp: 'かずら{橋|ばし}', emoji: '🌉', about: 'A wobbly bridge woven from mountain vines over a deep valley.' },
+    ],
+    trivia: [
+      { q: 'What spins in the Naruto Strait?', options: ['Whirlpools', 'Windmills', 'Dancers'], answer: 0 },
+      { q: 'Tokushima is famous for which dye?', options: ['Indigo', 'Gold', 'Purple'], answer: 0 },
+    ],
+    souvenir: { name: 'Indigo tenugui', jp: 'あいぞめ', emoji: '🟦', cost: 30 },
+  },
+  takachiho: {
+    spots: [
+      { name: 'Takachiho Gorge', jp: '{高千穂峡|たかちほきょう}', emoji: '🏞️', about: 'Row a boat beneath a waterfall between towering basalt cliffs.' },
+      { name: 'Amano Iwato Shrine', jp: '{天岩戸|あまのいわと}', emoji: '⛩️', about: 'Linked to the cave where the sun goddess Amaterasu hid.' },
+      { name: 'Night kagura', jp: '{夜神楽|よかぐら}', emoji: '🎭', about: 'Masked sacred dances retelling Japan’s myths.' },
+    ],
+    trivia: [
+      { q: 'Who hid in a cave in the myth?', options: ['The sun goddess Amaterasu', 'A tanuki', 'A samurai'], answer: 0 },
+      { q: 'やすませて ください means…', options: ['Please let me rest', 'Please rest', 'I rested'], answer: 0 },
+    ],
+    souvenir: { name: 'Kagura mask charm', jp: 'かぐらめん', emoji: '🎭', cost: 35 },
+  },
+  iriomote: {
+    spots: [
+      { name: 'Wildcat habitat', jp: 'イリオモテヤマネコ', emoji: '🐆', about: 'The island’s rare wildcat lives only here — drivers slow down at cat-crossing signs.' },
+      { name: 'Mangrove canoeing', jp: 'マングローブ', emoji: '🛶', about: 'Paddle through Japan’s largest mangrove forests.' },
+      { name: 'Star Sand Beach', jp: '{星砂|ほしずな}の{浜|はま}', emoji: '⭐', about: 'The “sand” here is made of tiny star-shaped shells.' },
+    ],
+    trivia: [
+      { q: 'About how many Iriomote wildcats live in the wild?', options: ['About 100', 'About 10,000', 'Over a million'], answer: 0 },
+      { q: 'ついた ばかり means…', options: ['just arrived', 'will arrive', 'never arrived'], answer: 0 },
+    ],
+    souvenir: { name: 'Star sand bottle', jp: 'ほしずな', emoji: '⭐', cost: 30 },
+  },
 };
