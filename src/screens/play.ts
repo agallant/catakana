@@ -37,7 +37,8 @@ export function playScreen(app: App, params: string[]): Screen {
     const k = items.filter((i) => i.kind === 'kana' || known.has(i.id));
     return k.length >= 4 ? k : items;
   };
-  const pool = onlyKnown(poolForStop(stopIndex));
+  const wide = poolForStop(stopIndex);
+  const pool = onlyKnown(wide);
   const started = Date.now();
 
   const ctx: GameContext = {
@@ -48,6 +49,7 @@ export function playScreen(app: App, params: string[]): Screen {
     level,
     hints: romajiHints(app.store.data, stopIndex),
     pool,
+    wide,
     focus: review ? pool : onlyKnown(focusForStop(stopIndex)),
     quit: () => app.go(home),
     finish(summary) {

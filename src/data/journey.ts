@@ -231,6 +231,127 @@ export const STOPS: Stop[] = [
     ],
     npc: { name: 'Yuki', jp: 'ゆき', look: L('#fafafa', '#e0e0e0', 'plain', '#3d85c6', 'scarf'), hello: ['さむい！ でも たのしい！', 'Cold! But fun!'] },
   },
+  // ---- N5 Grand Tour: vocabulary and grammar (content in n5.ts) ----
+  {
+    id: 'hakodate', name: 'Hakodate', jp: '函館', reading: 'はこだて', region: 'Hokkaido', lonlat: [140.73, 41.77], emoji: '🦑', transport: 'train', tier: 'N5',
+    teaches: [],
+    facts: [
+      'Hakodate’s night view from Mount Hakodate is one of the most famous in Japan.',
+      'Goryokaku is a star-shaped fort — from above it looks like a giant five-pointed star.',
+      'At the morning market you can catch a squid and eat it fresh!',
+    ],
+    npc: { name: 'Ika', jp: 'イカ', look: L('#fafafa', '#e0e0e0', 'spots', '#3d85c6', 'beret'), hello: ['はじめまして！ わたしは イカです。', 'Nice to meet you! I am Ika.'] },
+  },
+  {
+    id: 'aomori', name: 'Aomori', jp: '青森', reading: 'あおもり', region: 'Tohoku', lonlat: [140.74, 40.82], emoji: '🍎', transport: 'train', tier: 'N5',
+    teaches: [],
+    facts: [
+      'You can reach Aomori from Hokkaido through the Seikan Tunnel, which runs under the sea for about 54 km.',
+      'Aomori grows more apples than any other prefecture in Japan.',
+      'In the Nebuta Festival, giant glowing paper floats of warriors parade through the streets.',
+    ],
+    npc: { name: 'Ringo', jp: 'りんご', look: L('#c0392b', '#922b21', 'plain', '#6aa84f', 'none'), hello: ['これは わたしの りんごです！', 'This is my apple!'] },
+  },
+  {
+    id: 'akita', name: 'Akita', jp: '秋田', reading: 'あきた', region: 'Tohoku', lonlat: [140.1, 39.72], emoji: '🐕', transport: 'train', tier: 'N5',
+    teaches: [],
+    facts: [
+      'Akita is home of the Akita dog breed — loyal Hachiko was an Akita.',
+      'On New Year’s Eve, Namahage “demons” visit homes to scold lazy children.',
+      'Kakunodate has a preserved samurai district lined with weeping cherry trees.',
+    ],
+    npc: { name: 'Hachi', jp: 'ハチ', look: L('#e8c39e', '#c68e5b', 'plain', '#3d2b1f', 'scarf'), hello: ['あきたは さむいです！', 'Akita is cold!'] },
+  },
+  {
+    id: 'nikko', name: 'Nikko', jp: '日光', reading: 'にっこう', region: 'Kanto', lonlat: [139.6, 36.75], emoji: '🐒', transport: 'shinkansen', tier: 'N5',
+    teaches: [],
+    facts: [
+      'Nikko Toshogu shrine has a famous carving of a sleeping cat — the Nemuri-neko!',
+      'It also has the original “see no evil, hear no evil, speak no evil” monkeys.',
+      'Kegon Falls drops about 97 meters from Lake Chuzenji.',
+    ],
+    npc: { name: 'Nemuri', jp: 'ねむり', look: L('#fafafa', '#f4b183', 'calico', '#3d85c6', 'none'), hello: ['ねこは よく ねます…', 'Cats sleep a lot…'] },
+  },
+  {
+    id: 'kanazawa', name: 'Kanazawa', jp: '金沢', reading: 'かなざわ', region: 'Chubu', lonlat: [136.65, 36.56], emoji: '🪙', transport: 'shinkansen', tier: 'N5',
+    teaches: [],
+    facts: [
+      'Kenroku-en is counted among Japan’s three great gardens.',
+      'Almost all of Japan’s gold leaf is made in Kanazawa — you can even eat gold-leaf ice cream!',
+      'Omicho Market has fed the city for about 300 years.',
+    ],
+    npc: { name: 'Kin', jp: 'きん', look: L('#ffd24a', '#e0a800', 'tabby', '#6aa84f', 'crown'), hello: ['すしを たべますか？', 'Will you eat sushi?'] },
+  },
+  {
+    id: 'shirakawa', name: 'Shirakawa-go', jp: '白川郷', reading: 'しらかわごう', region: 'Chubu', lonlat: [136.91, 36.26], emoji: '🛖', transport: 'bus', tier: 'N5',
+    teaches: [],
+    facts: [
+      'Its gassho-zukuri farmhouses have steep thatched roofs shaped like hands pressed together in prayer.',
+      'The steep roofs let heavy mountain snow slide off.',
+      'The village is a UNESCO World Heritage site, magical when lit up on winter nights.',
+    ],
+    npc: { name: 'Kaya', jp: 'かや', look: L('#c9a27a', '#8b5a2b', 'tabby', '#38761d', 'straw'), hello: ['いえへ ようこそ！', 'Welcome to my house!'] },
+  },
+  {
+    id: 'takayama', name: 'Takayama', jp: '高山', reading: 'たかやま', region: 'Chubu', lonlat: [137.25, 36.14], emoji: '🏮', transport: 'bus', tier: 'N5',
+    teaches: [],
+    facts: [
+      'Takayama’s old town has wooden merchant houses and sake breweries with cedar balls hanging outside.',
+      'Two morning markets open every day by the river.',
+      'Sarubobo — faceless red “baby monkey” dolls — are a local good-luck charm.',
+    ],
+    npc: { name: 'Bobo', jp: 'ぼぼ', look: L('#e74c3c', '#b03a2e', 'plain', '#2b2b2b', 'headband'), hello: ['これは いくらですか？', 'How much is this?'] },
+  },
+  {
+    id: 'ise', name: 'Ise', jp: '伊勢', reading: 'いせ', region: 'Kansai', lonlat: [136.73, 34.46], emoji: '⛩️', transport: 'train', tier: 'N5',
+    teaches: [],
+    facts: [
+      'Ise Jingu is the most sacred Shinto shrine in Japan.',
+      'Its main buildings are rebuilt every 20 years, a tradition kept for over a thousand years.',
+      'Ama divers in this region have gathered shellfish from the sea for generations.',
+    ],
+    npc: { name: 'Miko', jp: 'みこ', look: L('#fafafa', '#e0e0e0', 'plain', '#c2185b', 'bow'), hello: ['でんしゃで きましたか？', 'Did you come by train?'] },
+  },
+  {
+    id: 'kobe', name: 'Kobe', jp: '神戸', reading: 'こうべ', region: 'Kansai', lonlat: [135.19, 34.69], emoji: '⚓', transport: 'train', tier: 'N5',
+    teaches: [],
+    facts: [
+      'Kobe is a port city between the mountains and the sea.',
+      'Kobe beef is world famous for its marbled, melt-in-your-mouth texture.',
+      'The Kitano district has old Western-style houses built by foreign merchants.',
+    ],
+    npc: { name: 'Minato', jp: 'みなと', look: L('#2b2b2b', '#111', 'tuxedo', '#ffd24a', 'beret'), hello: ['みなとに ねこが います！', 'There’s a cat at the port!'] },
+  },
+  {
+    id: 'kochi', name: 'Kochi', jp: '高知', reading: 'こうち', region: 'Shikoku', lonlat: [133.53, 33.56], emoji: '🐟', transport: 'train', tier: 'N5',
+    teaches: [],
+    facts: [
+      'Kochi’s specialty is katsuo no tataki — bonito seared over a straw fire.',
+      'The energetic Yosakoi dance festival started here in 1954.',
+      'The Shimanto River is called “the last clear stream” of Japan.',
+    ],
+    npc: { name: 'Katsuo', jp: 'かつお', look: L('#9e9e9e', '#616161', 'tabby', '#3d85c6', 'headband'), hello: ['きのう カツオを たべました！', 'I ate bonito yesterday!'] },
+  },
+  {
+    id: 'beppu', name: 'Beppu', jp: '別府', reading: 'べっぷ', region: 'Kyushu', lonlat: [131.49, 33.28], emoji: '♨️', transport: 'ferry', tier: 'N5',
+    teaches: [],
+    facts: [
+      'Beppu has more hot spring vents than almost anywhere on Earth — steam rises all over town.',
+      'The “Hells of Beppu” are colorful boiling pools — blue, red, and bubbling mud — for looking, not bathing!',
+      'You can eat food steamed in the hot spring vapor (jigoku-mushi).',
+    ],
+    npc: { name: 'Yukemuri', jp: 'ゆけむり', look: L('#b0bec5', '#78909c', 'plain', '#c2185b', 'headband'), hello: ['おんせんに はいりたいですか？', 'Do you want to get in a hot spring?'] },
+  },
+  {
+    id: 'yakushima', name: 'Yakushima', jp: '屋久島', reading: 'やくしま', region: 'Kyushu', lonlat: [130.53, 30.35], emoji: '🌲', transport: 'ferry', tier: 'N5',
+    teaches: [],
+    facts: [
+      'Yakushima’s mossy forest is a UNESCO World Heritage site.',
+      'Jomon Sugi, an ancient cedar, is thought to be thousands of years old.',
+      'It rains so much that locals joke it rains “35 days a month”!',
+    ],
+    npc: { name: 'Koke', jp: 'こけ', look: L('#7cb86a', '#4e7d43', 'spots', '#ffd24a', 'none'), hello: ['もりを みて ください！', 'Please look at the forest!'] },
+  },
 ];
 
 export const STOP_BY_ID = new Map(STOPS.map((s) => [s.id, s]));

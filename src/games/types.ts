@@ -11,6 +11,8 @@ export interface Item {
   en?: string;
   emoji?: string;
   script?: Script;
+  /** written form with kanji, if any */
+  kanji?: string;
 }
 
 export type Level = 1 | 2 | 3;
@@ -25,6 +27,8 @@ export interface GameContext {
   hints: boolean;
   /** Items eligible for this session (already includes review of earlier stops). */
   pool: Item[];
+  /** Everything learnable so far, used only to pad answer choices. */
+  wide: Item[];
   /** Items first taught at this stop (preferred for drills). */
   focus: Item[];
   /** Ends the session and shows results. */

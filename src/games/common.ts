@@ -37,7 +37,8 @@ export function distractors(ctx: GameContext, answer: Item, n: number, keyOf: (i
   if (cands.length < n) {
     // pad with look-alikes from any item of the same kind
     const seen = new Set([keyOf(answer), ...cands.map(keyOf)]);
-    for (const p of ctx.pool) {
+    for (const p of [...ctx.pool, ...shuffle(ctx.wide)]) {
+      if (cands.length >= n * 3) break;
       if (p.kind !== answer.kind || seen.has(keyOf(p))) continue;
       seen.add(keyOf(p));
       cands.push(p);

@@ -267,4 +267,147 @@ export const CULTURE: Record<string, StopCulture> = {
     ],
     souvenir: { name: 'White chocolate cookies', jp: 'しろいこいびと', emoji: '🍪', cost: 30 },
   },
+  hakodate: {
+    spots: [
+      { name: 'Goryokaku', jp: '{五稜郭|ごりょうかく}', emoji: '⭐', about: 'A star-shaped Western-style fort from the 1860s, pink with cherry blossoms in spring.' },
+      { name: 'Morning Market', jp: '{朝市|あさいち}', emoji: '🦑', about: 'Stalls of crab, sea urchin and squid you can fish for yourself.' },
+      { name: 'Mount Hakodate', jp: '{函館山|はこだてやま}', emoji: '🌃', about: 'Take the ropeway up for a sparkling night view of the city between two bays.' },
+    ],
+    trivia: [
+      { q: 'What shape is Goryokaku fort?', options: ['A star', 'A circle', 'A cat'], answer: 0 },
+      { q: 'Hakodate is on which island?', options: ['Hokkaido', 'Kyushu', 'Okinawa'], answer: 0 },
+    ],
+    souvenir: { name: 'Squid snack', jp: 'いかめし', emoji: '🦑', cost: 25 },
+  },
+  aomori: {
+    spots: [
+      { name: 'Nebuta Museum', jp: 'ねぶたの{家|いえ}', emoji: '🏮', about: 'See the giant glowing paper floats from the Nebuta Festival up close.' },
+      { name: 'Apple orchards', jp: 'りんご{園|えん}', emoji: '🍎', about: 'Aomori grows about half of Japan’s apples.' },
+      { name: 'Hirosaki Castle', jp: '{弘前城|ひろさきじょう}', emoji: '🌸', about: 'One of Japan’s most famous cherry blossom spots, with petals carpeting the moat.' },
+    ],
+    trivia: [
+      { q: 'Aomori is famous for growing…', options: ['Apples', 'Bananas', 'Coffee'], answer: 0 },
+      { q: 'The Seikan Tunnel goes…', options: ['Under the sea', 'Through a volcano', 'Over a lake'], answer: 0 },
+    ],
+    souvenir: { name: 'Apple juice', jp: 'りんごジュース', emoji: '🧃', cost: 20 },
+  },
+  akita: {
+    spots: [
+      { name: 'Kakunodate', jp: '{角館|かくのだて}', emoji: '🏯', about: 'A samurai street with black wooden walls and weeping cherry trees.' },
+      { name: 'Namahage Museum', jp: 'なまはげ{館|かん}', emoji: '👹', about: 'Meet the straw-cloaked “demons” who visit homes on New Year’s Eve.' },
+      { name: 'Akita dog village', jp: '{秋田犬|あきたいぬ}', emoji: '🐕', about: 'Fluffy, loyal Akita dogs — Hachiko is the most famous of all.' },
+    ],
+    trivia: [
+      { q: 'Hachiko was what kind of dog?', options: ['Akita', 'Shiba', 'Poodle'], answer: 0 },
+      { q: 'Namahage visit homes on…', options: ['New Year’s Eve', 'Halloween', 'Birthdays'], answer: 0 },
+    ],
+    souvenir: { name: 'Kiritanpo rice sticks', jp: 'きりたんぽ', emoji: '🍢', cost: 25 },
+  },
+  nikko: {
+    spots: [
+      { name: 'Sleeping Cat carving', jp: '{眠|ねむ}り{猫|ねこ}', emoji: '😴', about: 'A tiny carved cat asleep above a gate at Toshogu — a National Treasure!' },
+      { name: 'Three Wise Monkeys', jp: '{三猿|さんざる}', emoji: '🙈', about: 'See no evil, hear no evil, speak no evil — carved on the sacred stable.' },
+      { name: 'Kegon Falls', jp: '{華厳滝|けごんのたき}', emoji: '💦', about: 'A roaring waterfall nearly 100 m tall.' },
+    ],
+    trivia: [
+      { q: 'What animal is the famous Nemuri carving?', options: ['A sleeping cat', 'A dragon', 'A fox'], answer: 0 },
+      { q: 'The three wise monkeys cover their eyes, ears and…', options: ['Mouth', 'Tail', 'Feet'], answer: 0 },
+    ],
+    souvenir: { name: 'Sleeping-cat charm', jp: 'ねむりねこ', emoji: '😺', cost: 35 },
+  },
+  kanazawa: {
+    spots: [
+      { name: 'Kenroku-en', jp: '{兼六園|けんろくえん}', emoji: '🌲', about: 'A grand garden where ropes hold up tree branches against winter snow (yukitsuri).' },
+      { name: 'Higashi Chaya', jp: 'ひがし{茶屋街|ちゃやがい}', emoji: '🍵', about: 'An old teahouse district with wooden lattice fronts.' },
+      { name: 'Omicho Market', jp: '{近江町市場|おうみちょういちば}', emoji: '🦀', about: 'Fresh seafood, crab, and sushi rice bowls piled high.' },
+    ],
+    trivia: [
+      { q: 'Kanazawa makes almost all of Japan’s…', options: ['Gold leaf', 'Chopsticks', 'Robots'], answer: 0 },
+      { q: 'Kenroku-en is one of Japan’s three great…', options: ['Gardens', 'Bridges', 'Mountains'], answer: 0 },
+    ],
+    souvenir: { name: 'Gold-leaf ice cream', jp: 'きんぱくアイス', emoji: '🍦', cost: 30 },
+  },
+  shirakawa: {
+    spots: [
+      { name: 'Gassho farmhouses', jp: '{合掌造|がっしょうづく}り', emoji: '🛖', about: 'Huge thatched roofs built without nails, steep like hands in prayer.' },
+      { name: 'Ogimachi viewpoint', jp: '{展望台|てんぼうだい}', emoji: '🔭', about: 'Look down on the whole village nestled in the valley.' },
+    ],
+    trivia: [
+      { q: 'Why are the roofs so steep?', options: ['So snow slides off', 'For decoration', 'To catch rain for drinking'], answer: 0 },
+      { q: 'Gassho-zukuri means roofs shaped like…', options: ['Hands in prayer', 'Cat ears', 'Boats'], answer: 0 },
+    ],
+    souvenir: { name: 'Mini thatched house', jp: 'がっしょうづくり', emoji: '🏡', cost: 30 },
+  },
+  takayama: {
+    spots: [
+      { name: 'Sanmachi old town', jp: '{古|ふる}い{町並|まちな}み', emoji: '🏘️', about: 'Dark wooden houses, sake breweries and little craft shops.' },
+      { name: 'Morning markets', jp: '{朝市|あさいち}', emoji: '🧺', about: 'Farmers sell pickles, vegetables and flowers by the river.' },
+      { name: 'Festival floats', jp: '{屋台|やたい}', emoji: '🎎', about: 'Ornate festival floats with mechanical puppets come out in spring and autumn.' },
+    ],
+    trivia: [
+      { q: 'Sarubobo dolls are…', options: ['Lucky red “baby monkeys”', 'Scary masks', 'Kites'], answer: 0 },
+      { q: 'How do you ask “How much is it?”', options: ['いくらですか', 'なんじですか', 'だれですか'], answer: 0 },
+    ],
+    souvenir: { name: 'Sarubobo doll', jp: 'さるぼぼ', emoji: '🧸', cost: 25 },
+  },
+  ise: {
+    spots: [
+      { name: 'Ise Jingu', jp: '{伊勢神宮|いせじんぐう}', emoji: '⛩️', about: 'Japan’s holiest shrine, built of plain cypress wood and rebuilt every 20 years.' },
+      { name: 'Okage Yokocho', jp: 'おかげ{横丁|よこちょう}', emoji: '🏮', about: 'An old-style street for snacks like akafuku mochi and Ise udon.' },
+      { name: 'Meoto Iwa', jp: '{夫婦岩|めおといわ}', emoji: '🪨', about: 'Two “married rocks” in the sea, joined by a thick rope.' },
+    ],
+    trivia: [
+      { q: 'Ise Jingu’s main buildings are rebuilt every…', options: ['20 years', '2 years', '200 years'], answer: 0 },
+      { q: 'The particle で can mean…', options: ['By means of (でんしゃで)', 'Who', 'Yesterday'], answer: 0 },
+    ],
+    souvenir: { name: 'Akafuku mochi', jp: 'あかふく', emoji: '🍡', cost: 25 },
+  },
+  kobe: {
+    spots: [
+      { name: 'Harborland', jp: 'ハーバーランド', emoji: '🎡', about: 'A waterfront with a Ferris wheel and the red Kobe Port Tower.' },
+      { name: 'Kitano Ijinkan', jp: '{北野異人館|きたのいじんかん}', emoji: '🏡', about: 'Western-style homes built by foreign traders in the 1800s.' },
+      { name: 'Nankinmachi', jp: '{南京町|なんきんまち}', emoji: '🥟', about: 'Kobe’s lively Chinatown.' },
+    ],
+    trivia: [
+      { q: 'Kobe is famous for which beef?', options: ['Kobe beef', 'Texas beef', 'No beef'], answer: 0 },
+      { q: 'For living things you say…', options: ['います', 'あります', 'です'], answer: 0 },
+    ],
+    souvenir: { name: 'Kobe pudding', jp: 'プリン', emoji: '🍮', cost: 25 },
+  },
+  kochi: {
+    spots: [
+      { name: 'Hirome Market', jp: 'ひろめ{市場|いちば}', emoji: '🔥', about: 'A food hall where bonito is seared over roaring straw flames.' },
+      { name: 'Katsurahama', jp: '{桂浜|かつらはま}', emoji: '🏖️', about: 'A beach with a statue of the samurai Sakamoto Ryoma gazing out to sea.' },
+      { name: 'Shimanto River', jp: '{四万十川|しまんとがわ}', emoji: '🏞️', about: 'Crossed by low “sinking bridges” with no railings that let floods pass over.' },
+    ],
+    trivia: [
+      { q: 'Katsuo no tataki is bonito that is…', options: ['Seared over straw fire', 'Frozen', 'Fried in chocolate'], answer: 0 },
+      { q: 'たべました means…', options: ['ate', 'will eat', 'don’t eat'], answer: 0 },
+    ],
+    souvenir: { name: 'Yuzu drink', jp: 'ゆずジュース', emoji: '🍋', cost: 20 },
+  },
+  beppu: {
+    spots: [
+      { name: 'Hells of Beppu', jp: '{地獄|じごく}めぐり', emoji: '🌋', about: 'Tour boiling pools of cobalt blue, blood red and bubbling mud.' },
+      { name: 'Steam cooking', jp: '{地獄蒸|じごくむ}し', emoji: '🥟', about: 'Cook eggs and vegetables in baskets over natural hot spring steam.' },
+      { name: 'Sand bath', jp: '{砂湯|すなゆ}', emoji: '🏖️', about: 'Be buried in naturally heated sand by the sea.' },
+    ],
+    trivia: [
+      { q: 'The “Hells” of Beppu are…', options: ['Colorful hot pools', 'Haunted houses', 'Spicy foods'], answer: 0 },
+      { q: 'はいりたい means…', options: ['want to enter', 'entered', 'won’t enter'], answer: 0 },
+    ],
+    souvenir: { name: 'Hot-spring pudding', jp: 'じごくプリン', emoji: '🍮', cost: 25 },
+  },
+  yakushima: {
+    spots: [
+      { name: 'Jomon Sugi', jp: '{縄文杉|じょうもんすぎ}', emoji: '🌲', about: 'A giant ancient cedar, reached by a long day hike through the forest.' },
+      { name: 'Shiratani Unsuikyo', jp: '{白谷雲水峡|しらたにうんすいきょう}', emoji: '🍃', about: 'A mossy ravine said to have inspired the forest in Princess Mononoke.' },
+      { name: 'Turtle beach', jp: 'ウミガメ', emoji: '🐢', about: 'Sea turtles come ashore to lay eggs on Yakushima’s beaches in summer.' },
+    ],
+    trivia: [
+      { q: 'Yakushima is famous for its very old…', options: ['Cedar trees', 'Skyscrapers', 'Cats only'], answer: 0 },
+      { q: 'まって ください means…', options: ['Please wait', 'Please eat', 'Thank you'], answer: 0 },
+    ],
+    souvenir: { name: 'Cedar coaster', jp: 'やくすぎ', emoji: '🪵', cost: 30 },
+  },
 };

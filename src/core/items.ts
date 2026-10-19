@@ -9,7 +9,7 @@ export function kanaItem(k: KanaChar): Item {
 }
 
 export function wordItem(w: Word): Item {
-  return { id: w.id, kind: 'word', text: w.jp, reading: w.reading, romaji: w.romaji, en: w.en, emoji: w.emoji, script: w.katakana ? 'katakana' : 'hiragana' };
+  return { id: w.id, kind: 'word', text: w.jp, reading: w.reading, romaji: w.romaji, en: w.en, emoji: w.emoji, script: w.katakana ? 'katakana' : 'hiragana', kanji: w.kanji };
 }
 
 export function poolForStop(index: number): Item[] {

@@ -67,7 +67,7 @@ export function mapScreen(app: App): Screen {
       'button',
       { class: `stop-row ${unlocked ? '' : 'locked'} ${i === cur ? 'current' : ''}`, disabled: !unlocked, onClick: () => app.go(`stop/${st.id}`) },
       h('span', { class: 'stop-row-emoji' }, unlocked ? st.emoji : '🔒'),
-      h('span', { class: 'stop-row-main' }, h('strong', null, st.name), h('span', { class: 'jp small' }, ` ${st.jp}`), h('small', null, `${TRANSPORT_EMOJI[st.transport]} ${st.region}`)),
+      h('span', { class: 'stop-row-main' }, h('strong', null, st.name), h('span', { class: 'jp small' }, ` ${st.jp}`), h('small', null, `${TRANSPORT_EMOJI[st.transport]} ${st.region}`, h('span', { class: 'tier-chip' }, st.tier))),
       h('span', { class: 'stars' }, '★'.repeat(stars) + '☆'.repeat(3 - stars)),
     );
     return b;
