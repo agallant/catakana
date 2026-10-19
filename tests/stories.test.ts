@@ -18,3 +18,14 @@ describe('stories', () => {
     expect(storiesThrough(999)).toHaveLength(STORIES.length);
   });
 });
+
+import { compoundsThrough } from '../src/games/bento';
+import { STOPS } from '../src/data/journey';
+describe('kanji bento', () => {
+  it('finds compounds once their kanji are taught', () => {
+    expect(compoundsThrough(0)).toHaveLength(0);
+    const all = compoundsThrough(STOPS.length - 1);
+    expect(all.length).toBeGreaterThan(10);
+    expect(all.map((w) => w.kanji)).toContain('電車');
+  });
+});
