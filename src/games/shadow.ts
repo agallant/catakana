@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
-import { sfx, speak } from '../core/audio';
+import { speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { shell } from './common';
+import { chime, shell } from './common';
 import { pickItems, shuffle } from '../core/srs';
 import { PHRASES, type Phrase } from '../data/phrases';
 import { recognitionSupported, recognizeOnce, recordClip, speechScore } from '../core/speech';
@@ -46,7 +46,7 @@ export const shadowGame: GameDef = {
         decided = true;
         ctx.store.recordAnswer(p.id, ok);
         if (ok) correct++;
-        (ok ? sfx.correct : sfx.wrong)();
+        chime(ok);
         sh.flash(ok);
         sh.say(ok ? 'じょうず！ (Great!)' : 'Keep practicing — you’ll get it!', ok ? 'happy' : 'sad');
         if (myClip) URL.revokeObjectURL(myClip);

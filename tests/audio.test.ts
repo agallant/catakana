@@ -12,3 +12,22 @@ describe('sound effects', () => {
     }).not.toThrow();
   });
 });
+
+import { vi } from 'vitest';
+import { chime } from '../src/games/common';
+describe('answer chime', () => {
+  it('climbs with a streak and resets on a miss', () => {
+    const correct = vi.spyOn(sfx, 'correct').mockImplementation(() => {});
+    const wrong = vi.spyOn(sfx, 'wrong').mockImplementation(() => {});
+    chime(false);
+    chime(true);
+    chime(true);
+    chime(true);
+    chime(false);
+    chime(true);
+    expect(correct.mock.calls.map((c) => c[0])).toEqual([0, 1, 2, 0]);
+    expect(wrong).toHaveBeenCalledTimes(2);
+    correct.mockRestore();
+    wrong.mockRestore();
+  });
+});

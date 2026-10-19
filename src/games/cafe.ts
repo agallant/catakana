@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
-import { sfx, speak } from '../core/audio';
+import { speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { shell } from './common';
+import { chime, shell } from './common';
 import { pickItems, shuffle } from '../core/srs';
 import { CONVERSATIONS, type Conversation } from '../data/conversations';
 import { catSvg } from '../ui/cat';
@@ -79,7 +79,7 @@ export const cafeGame: GameDef = {
           if (!ok) buttons[order.findIndex((x) => x.k === conv.answer)]!.classList.add('right');
           ctx.store.recordAnswer(conv.id, ok);
           if (ok) correct++;
-          (ok ? sfx.correct : sfx.wrong)();
+          chime(ok);
           sh.flash(ok);
           sh.say(ok ? 'You understood!' : 'Listen again next time!', ok ? 'happy' : 'sad');
           // reveal the transcript after answering

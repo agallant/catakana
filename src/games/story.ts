@@ -1,7 +1,7 @@
 import { h, ruby, sleep } from '../ui/dom';
-import { sfx, speak } from '../core/audio';
+import { speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { shell } from './common';
+import { chime, shell } from './common';
 import { shuffle } from '../core/srs';
 import { STORIES, type Story } from '../data/stories';
 import { STOPS } from '../data/journey';
@@ -60,7 +60,7 @@ export const storyGame: GameDef = {
           if (ok) correct++;
           b.classList.add(ok ? 'right' : 'wrong');
           if (!ok) buttons[order.findIndex((x) => x.k === q.answer)]!.classList.add('right');
-          (ok ? sfx.correct : sfx.wrong)();
+          chime(ok);
           sh.say(ok ? 'Good reading!' : 'Check the story again!', ok ? 'happy' : 'think');
           await sleep(ok ? 700 : 1500);
           ask(i + 1);

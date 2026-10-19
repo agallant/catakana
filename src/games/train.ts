@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
 import { sfx, speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { shell } from './common';
+import { chime, shell } from './common';
 import { pickItems, shuffle } from '../core/srs';
 import { decoyChunk, sentencesThrough } from '../core/sentences';
 import { firstStopOfTier } from '../core/curriculum';
@@ -76,7 +76,7 @@ export const trainGame: GameDef = {
         const ok = placed.map((p) => p.t).join('') === full;
         ctx.store.recordAnswer(sen.id, ok);
         if (ok) correct++;
-        (ok ? sfx.correct : sfx.wrong)();
+        chime(ok);
         sh.flash(ok);
         sh.say(ok ? 'All aboard! 🚃' : 'The cars got mixed up!', ok ? 'happy' : 'sad');
         track.classList.add(ok ? 'right' : 'wrong', 'go');
