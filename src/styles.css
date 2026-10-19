@@ -329,3 +329,6 @@ button.hud-stat { cursor: pointer; }
 .calendar-card { display: inline-block; min-width: 140px; border-radius: 12px; overflow: hidden; margin-bottom: 10px; background: #fff; color: #3b2a20; box-shadow: 0 3px 0 var(--line, #e9d8c4); border: 2px solid var(--line, #e9d8c4); }
 .cal-month { background: #d64545; color: #fff; font-weight: 800; padding: 4px 12px; font-size: 1.2rem; }
 .cal-day { font-size: 2.8rem; font-weight: 800; padding: 6px 12px 10px; }
+.rp-head { font-weight: 800; text-align: center; margin-bottom: 6px; }
+.rp-head small { color: var(--muted); font-weight: 600; }
+.rp-why { min-height: 2.6em; margin-top: 10px; text-align: center; }
