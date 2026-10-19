@@ -60,8 +60,17 @@ export const shadowGame: GameDef = {
         h('button', { class: 'btn primary', onClick: () => void decide(true) }, '😺 Sounded right'),
         h('button', { class: 'btn ghost', onClick: () => void decide(false) }, '😿 Not yet'),
       );
+      let busy = false;
       const record = async (): Promise<void> => {
-        if (decided) return;
+        if (decided || busy) return;
+        busy = true;
+        try {
+          await listenOnce();
+        } finally {
+          busy = false;
+        }
+      };
+      const listenOnce = async (): Promise<void> => {
         status.textContent = '🔴 Listening… speak now!';
         if (canRecognize) {
           const heard = await recognizeOnce();
@@ -76,7 +85,13 @@ export const shadowGame: GameDef = {
           mine.replaceChildren(selfRate);
           return;
         }
-        myClip = await recordClip(Math.max(2500, p.kana.length * 350));
+        const clip = await recordClip(Math.max(2500, p.kana.length * 350));
+        if (decided) {
+          if (clip) URL.revokeObjectURL(clip);
+          return;
+        }
+        if (myClip) URL.revokeObjectURL(myClip);
+        myClip = clip;
         if (!myClip) {
           status.textContent = 'Microphone unavailable — say it out loud, then rate yourself.';
           mine.replaceChildren(selfRate);

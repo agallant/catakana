@@ -43,11 +43,14 @@ export const cafeGame: GameDef = {
       const chat = h('div', { class: 'convo' });
       const qBox = h('div', { class: 'choices one-col' });
       let playing = false;
+      // set once the round is answered so an in-flight playback loop stops speaking
+      let ended = false;
       const play = async (): Promise<void> => {
-        if (playing) return;
+        if (playing || ended) return;
         playing = true;
         chat.replaceChildren();
         for (const line of conv.lines) {
+          if (ended) break;
           const bubble = h(
             'div',
             { class: `convo-line ${line.who}` },
@@ -55,7 +58,10 @@ export const cafeGame: GameDef = {
             h('div', { class: 'convo-bubble' }, showJa ? h('div', { class: 'jp' }, line.jp) : h('div', null, '🔊 …'), showEn ? h('small', null, line.en) : null),
           );
           chat.appendChild(bubble);
-          await speak(line.jp, { pitch: line.who === 'npc' ? 1.35 : 0.95, rate: ctx.level === 3 ? 0.95 : 0.8 });
+          const spoke = await speak(line.jp, { pitch: line.who === 'npc' ? 1.35 : 0.95, rate: ctx.level === 3 ? 0.95 : 0.8 });
+          // no voice available: show the line so the round is still answerable
+          if (!spoke && !showJa) bubble.querySelector('.convo-bubble')?.replaceChildren(h('div', { class: 'jp' }, line.jp));
+          if (ended) break;
           await sleep(250);
         }
         playing = false;
@@ -67,6 +73,7 @@ export const cafeGame: GameDef = {
         b.addEventListener('click', async () => {
           if (locked) return;
           locked = true;
+          ended = true;
           const ok = o.k === conv.answer;
           b.classList.add(ok ? 'right' : 'wrong');
           if (!ok) buttons[order.findIndex((x) => x.k === conv.answer)]!.classList.add('right');

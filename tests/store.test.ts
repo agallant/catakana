@@ -61,3 +61,19 @@ describe('backup', () => {
     expect(b.data.fish).toBe(42);
   });
 });
+
+describe('backup validation', () => {
+  it('rejects malformed saves without touching progress', () => {
+    const s = new Store(mem());
+    s.update((d) => (d.fish = 7));
+    expect(s.importJson('{"app":"catakana","save":[]}')).toBe(false);
+    expect(s.importJson('{"app":"catakana","save":{"stops":"x","srs":{},"fish":1,"xp":1}}')).toBe(false);
+    expect(s.data.fish).toBe(7);
+  });
+  it('repairs bad nested fields when loading', () => {
+    const s = new Store(mem({ 'catakana.save.v1': JSON.stringify({ v: 1, stops: {}, srs: {}, fish: 3, xp: 0, daily: null, stamps: 'nope' }) }));
+    expect(s.data.daily).toEqual({ day: '', progress: {}, claimed: [] });
+    expect(s.data.stamps).toEqual([]);
+    expect(s.data.fish).toBe(3);
+  });
+});

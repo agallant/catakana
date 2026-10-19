@@ -218,6 +218,8 @@ export function wordsByTopic(topic: Topic): Word[] {
 
 
 /** Tour words (N5, N4, …), taught stop by stop; duplicates of kana-stage words are skipped. */
+/** Meaning without notes in parentheses, e.g. "cold (weather)" → "cold". */
+const normMeaning = (en: string): string => en.replace(/\(.*?\)/g, '').trim().toLowerCase();
 const kanaStageReadings = new Set(WORDS.map((w) => w.reading));
 const seenTour = new Set<string>();
 export const TOUR_WORDS: Word[] = TOUR.flatMap(({ tier, content }) =>
@@ -225,7 +227,7 @@ export const TOUR_WORDS: Word[] = TOUR.flatMap(({ tier, content }) =>
     c.words
       .filter(([, reading, en]) => {
         // skip words taught earlier: any kana-stage reading, or the same reading + meaning in the tour
-        const key = `${reading}|${en.split(/[ /(]/)[0]!.toLowerCase()}`;
+        const key = `${reading}|${normMeaning(en)}`;
         if (kanaStageReadings.has(reading) || seenTour.has(key)) return false;
         seenTour.add(key);
         return true;
@@ -249,7 +251,8 @@ export const N5_WORDS: Word[] = TOUR_WORDS.filter((w) => w.tier === 'N5');
 
 // Kana-stage words that the tour also teaches keep their kanji form, matched on reading + meaning
 // (homophones such as はな flower / nose differ in meaning).
-const headword = (en: string): string => en.split(/[ /(]/)[0]!.toLowerCase();
+// first content word, ignoring a leading "to" on verbs ("to stop" → "stop")
+const headword = (en: string): string => normMeaning(en).replace(/^to /, '').split(/[ /]/)[0]!;
 const kanjiFor = new Map<string, string>();
 for (const { content } of TOUR)
   for (const c of Object.values(content))

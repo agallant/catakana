@@ -31,7 +31,7 @@ export function settingsScreen(app: App): Screen {
         'div',
         { class: 'row' },
         h('button', { class: 'btn ghost', onClick: () => exportSave(app) }, '💾 Export progress'),
-        h('label', { class: 'btn ghost' }, '📂 Import', h('input', { type: 'file', accept: 'application/json,.json', hidden: true, onChange: (e: Event) => void importSave(app, e) })),
+        importButton(app),
       ),
     ),
     h('button', { class: 'btn danger', onClick: () => { if (confirm('Erase all progress on this device?')) { app.store.reset(); app.go('welcome'); } } }, 'Erase progress'),
@@ -60,4 +60,10 @@ async function importSave(app: App, e: Event): Promise<void> {
   if (!confirm('Replace the progress on this device with this backup?')) return;
   if (app.store.importJson(text)) app.go('map');
   else alert('That file is not a Catakana backup.');
+}
+
+/** A real (keyboard-focusable) button that opens a hidden file picker. */
+function importButton(app: App): HTMLElement {
+  const input = h('input', { type: 'file', accept: 'application/json,.json', hidden: true, onChange: (e: Event) => void importSave(app, e) });
+  return h('span', null, h('button', { class: 'btn ghost', onClick: () => input.click() }, '📂 Import'), input);
 }

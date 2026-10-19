@@ -60,3 +60,11 @@ describe('N4 content', () => {
     expect(STOPS.findIndex((s) => s.tier === 'N4')).toBeGreaterThan(STOPS.findLastIndex((s) => s.tier === 'N5'));
   });
 });
+
+describe('tour dedup', () => {
+  it('keeps homophones with different meanings', () => {
+    const tomaru = TOUR_WORDS.filter((w) => w.reading === 'とまる').map((w) => w.kanji);
+    expect(tomaru).toContain('止まる');
+    expect(tomaru).toContain('泊まる');
+  });
+});
