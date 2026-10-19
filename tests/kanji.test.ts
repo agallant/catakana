@@ -6,9 +6,10 @@ import { STOPS } from '../src/data/journey';
 import { firstStopOfTier } from '../src/core/curriculum';
 
 describe('kanji', () => {
-  it('every kanji belongs to an N5 stop', () => {
-    const n5 = new Set(STOPS.filter((s) => s.tier === 'N5').map((s) => s.id));
-    for (const k of KANJI) expect(n5.has(k.stop), k.char).toBe(true);
+  it('every kanji belongs to a tour stop of a JLPT tier', () => {
+    const tour = new Set(STOPS.filter((s) => s.tier !== 'Kana').map((s) => s.id));
+    for (const k of KANJI) expect(tour.has(k.stop), k.char).toBe(true);
+    expect(new Set(KANJI.map((k) => k.char)).size).toBe(KANJI.length);
   });
   it('primary readings are hiragana', () => {
     expect(primaryReading(KANJI_BY_CHAR.get('食')!)).toBe('た');

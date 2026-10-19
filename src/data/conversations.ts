@@ -165,4 +165,85 @@ export const CONVERSATIONS: Conversation[] = [
     ],
     q: 'What does the local cat want you to look at?', options: ['An old tree', 'A deer', 'The sea'], answer: 0,
   },
+  {
+    id: 'hikonyan', from: 32, title: 'Meeting Hikonyan',
+    lines: [
+      { who: 'me', jp: 'なにを していますか。', en: 'What are you doing?' },
+      { who: 'npc', jp: 'おしろの まえで、みんなを まっています。', en: 'I’m waiting for everyone in front of the castle.' },
+      { who: 'me', jp: 'かぶとが かわいいですね！', en: 'Your helmet is cute!' },
+    ],
+    q: 'Where is the local cat waiting?', options: ['In front of the castle', 'At the station', 'By the lake'], answer: 0,
+  },
+  {
+    id: 'temple-rules', from: 33, title: 'Temple rules',
+    lines: [
+      { who: 'me', jp: 'すみません、ここで しゃしんを とっても いいですか。', en: 'Excuse me, may I take photos here?' },
+      { who: 'npc', jp: 'そとは いいですが、なかで とっては いけません。', en: 'Outside is fine, but you must not take them inside.' },
+      { who: 'me', jp: 'わかりました。', en: 'Understood.' },
+    ],
+    q: 'Where are photos NOT allowed?', options: ['Inside', 'Outside', 'Anywhere — all fine'], answer: 0,
+  },
+  {
+    id: 'experience', from: 34, title: 'Have you ever…?',
+    lines: [
+      { who: 'npc', jp: 'おてらに とまったことが ありますか。', en: 'Have you ever stayed at a temple?' },
+      { who: 'me', jp: 'いいえ、ありません。でも おんせんには なんども とまりました。', en: 'No, never. But I’ve stayed at hot-spring inns many times.' },
+      { who: 'npc', jp: 'じゃあ、こんやは ここに とまりましょう。', en: 'Then let’s stay here tonight.' },
+    ],
+    q: 'Has your cat stayed at a temple before?', options: ['No, never', 'Yes, many times', 'Once'], answer: 0,
+  },
+  {
+    id: 'compare', from: 35, title: 'Which is better?',
+    lines: [
+      { who: 'me', jp: 'ももと ぶどうと、どちらが すきですか。', en: 'Which do you like better, peaches or grapes?' },
+      { who: 'npc', jp: 'ぶどうより ももの ほうが すきです。', en: 'I like peaches more than grapes.' },
+      { who: 'npc', jp: 'くだものの なかで ももが いちばん おいしいです！', en: 'Of all fruits, peaches are the most delicious!' },
+    ],
+    q: 'Which fruit does the local cat like best?', options: ['Peaches', 'Grapes', 'Apples'], answer: 0,
+  },
+  {
+    id: 'weekend', from: 36, title: 'Weekend at the dunes',
+    lines: [
+      { who: 'npc', jp: 'しゅうまつ、なにを しましたか。', en: 'What did you do on the weekend?' },
+      { who: 'me', jp: 'さきゅうで はしったり、らくだに のったり しました。', en: 'I ran on the dunes, rode a camel, and so on.' },
+      { who: 'npc', jp: 'たのしそうですね！', en: 'Sounds fun!' },
+    ],
+    q: 'What did your cat ride?', options: ['A camel', 'A horse', 'A bus'], answer: 0,
+  },
+  {
+    id: 'opinion', from: 37, title: 'What do you think?',
+    lines: [
+      { who: 'npc', jp: 'あしたの てんきは どうだと おもいますか。', en: 'What do you think tomorrow’s weather will be?' },
+      { who: 'me', jp: 'あめだと おもいます。そらが くらいですから。', en: 'I think it’ll rain, because the sky is dark.' },
+      { who: 'npc', jp: 'じゃあ、かさを もっていきましょう。', en: 'Then let’s take umbrellas.' },
+    ],
+    q: 'Why does your cat think it will rain?', options: ['The sky is dark', 'The TV said so', 'Its tail hurts'], answer: 0,
+  },
+  {
+    id: 'can', from: 38, title: 'Climbing the keep',
+    lines: [
+      { who: 'me', jp: 'てんしゅに のぼる ことが できますか。', en: 'Can we climb the castle keep?' },
+      { who: 'npc', jp: 'はい、できます。でも かいだんが とても きゅうですよ。', en: 'Yes, you can. But the stairs are very steep.' },
+      { who: 'me', jp: 'ねこだから だいじょうぶです！', en: 'I’m a cat, so I’m fine!' },
+    ],
+    q: 'What warning does the local cat give?', options: ['The stairs are steep', 'It is closed', 'It costs a lot'], answer: 0,
+  },
+  {
+    id: 'must', from: 39, title: 'Early start',
+    lines: [
+      { who: 'npc', jp: 'あしたは ごじに おきなければ なりません。', en: 'Tomorrow we must get up at five.' },
+      { who: 'me', jp: 'えっ、どうしてですか。', en: 'What? Why?' },
+      { who: 'npc', jp: 'あさの さるを みに いくからです。', en: 'Because we’re going to see the monkeys in the morning.' },
+    ],
+    q: 'Why must they get up early?', options: ['To see the monkeys', 'To catch a plane', 'To do homework'], answer: 0,
+  },
+  {
+    id: 'plans', from: 43, title: 'Next year',
+    lines: [
+      { who: 'npc', jp: 'らいねんは なにを する つもりですか。', en: 'What do you plan to do next year?' },
+      { who: 'me', jp: 'もっと かんじを べんきょうする つもりです。N3を めざします！', en: 'I plan to study more kanji. I’m aiming for N3!' },
+      { who: 'npc', jp: 'がんばってください！', en: 'Good luck!' },
+    ],
+    q: 'What is your cat aiming for next?', options: ['N3', 'A new house', 'A nap'], answer: 0,
+  },
 ];

@@ -419,4 +419,146 @@ export const CULTURE: Record<string, StopCulture> = {
     ],
     souvenir: { name: 'Cedar coaster', jp: 'やくすぎ', emoji: '🪵', cost: 30 },
   },
+  hikone: {
+    spots: [
+      { name: 'Hikone Castle', tags: ['castle'], jp: '{彦根城|ひこねじょう}', emoji: '🏯', about: 'An original 1600s castle keep — one of five National Treasure castles.' },
+      { name: 'Genkyu-en Garden', jp: '{玄宮園|げんきゅうえん}', emoji: '🌿', about: 'A lord’s strolling garden with a pond, tea house and castle view.' },
+      { name: 'Lake Biwa', jp: '{琵琶湖|びわこ}', emoji: '🏞️', about: 'Japan’s largest lake, right next to the castle.' },
+    ],
+    trivia: [
+      { q: 'What does Hikonyan wear on its head?', options: ['A red samurai helmet', 'A crown', 'A straw hat'], answer: 0 },
+      { q: 'Lake Biwa is Japan’s…', options: ['Largest lake', 'Deepest sea', 'Longest river'], answer: 0 },
+    ],
+    souvenir: { name: 'Hikonyan plush', jp: 'ひこにゃん', emoji: '🐱', cost: 40 },
+  },
+  uji: {
+    spots: [
+      { name: 'Byodo-in', tags: ['heritage'], jp: '{平等院|びょうどういん}', emoji: '🪙', about: 'The Phoenix Hall seems to float on its pond — look for it on a 10-yen coin.' },
+      { name: 'Tea street', jp: 'お{茶|ちゃ}の{道|みち}', emoji: '🍵', about: 'Shops roast tea leaves on the street — the air smells sweet and toasty.' },
+      { name: 'Uji Bridge', jp: '{宇治橋|うじばし}', emoji: '🌉', about: 'One of Japan’s oldest bridges, first built over 1,300 years ago.' },
+    ],
+    trivia: [
+      { q: 'Which coin shows Byodo-in’s Phoenix Hall?', options: ['10 yen', '100 yen', '500 yen'], answer: 0 },
+      { q: 'Uji is especially famous for…', options: ['Green tea', 'Beef', 'Snow'], answer: 0 },
+    ],
+    souvenir: { name: 'Matcha sweets', jp: 'まっちゃスイーツ', emoji: '🍵', cost: 30 },
+  },
+  koyasan: {
+    spots: [
+      { name: 'Okunoin', tags: ['heritage'], jp: '{奥之院|おくのいん}', emoji: '🏮', about: 'A two-kilometer path of mossy graves and lanterns under giant cedars.' },
+      { name: 'Danjo Garan', tags: ['heritage'], jp: '{壇上伽藍|だんじょうがらん}', emoji: '🛕', about: 'A bright vermilion pagoda at the heart of Kukai’s temple complex.' },
+      { name: 'Temple lodging', jp: '{宿坊|しゅくぼう}', emoji: '🛏️', about: 'Sleep at a temple, eat shojin ryori and join the monks’ morning prayers.' },
+    ],
+    trivia: [
+      { q: 'Who founded Koyasan?', options: ['The monk Kukai', 'A shogun', 'A cat'], answer: 0 },
+      { q: 'Shojin ryori is…', options: ['Buddhist vegetarian food', 'Grilled eel', 'Fried chicken'], answer: 0 },
+    ],
+    souvenir: { name: 'Sesame tofu', jp: 'ごまどうふ', emoji: '⬜', cost: 25 },
+  },
+  okayama: {
+    spots: [
+      { name: 'Okayama Castle', tags: ['castle'], jp: '{岡山城|おかやまじょう}', emoji: '🏯', about: 'Black-walled “Crow Castle” standing over the Asahi River.' },
+      { name: 'Korakuen', jp: '{後楽園|こうらくえん}', emoji: '🌳', about: 'One of Japan’s three great gardens, with lawns, ponds and a tea field.' },
+      { name: 'Kurashiki canal', jp: '{倉敷|くらしき}', emoji: '🛶', about: 'Willows and white storehouses line a calm canal in the merchant quarter.' },
+    ],
+    trivia: [
+      { q: 'Momotaro was born from a…', options: ['Peach', 'Melon', 'Bamboo stalk'], answer: 0 },
+      { q: 'Which animals helped Momotaro?', options: ['Dog, monkey, pheasant', 'Cat, owl, fox', 'Bear, deer, crane'], answer: 0 },
+    ],
+    souvenir: { name: 'Kibi dango', jp: 'きびだんご', emoji: '🍡', cost: 20 },
+  },
+  tottori: {
+    spots: [
+      { name: 'Tottori Sand Dunes', jp: '{鳥取砂丘|とっとりさきゅう}', emoji: '🏜️', about: 'Huge rolling dunes by the sea — ride a camel or try sandboarding.' },
+      { name: 'Mizuki Shigeru Road', jp: '{水木|みずき}しげるロード', emoji: '👻', about: 'Over 170 bronze yokai statues line this street in Sakaiminato.' },
+      { name: 'Sand Museum', jp: '{砂|すな}の{美術館|びじゅつかん}', emoji: '🗿', about: 'Giant sculptures made entirely of sand, rebuilt each year with a new theme.' },
+    ],
+    trivia: [
+      { q: 'What can you ride at the Tottori dunes?', options: ['A camel', 'An elephant', 'A train'], answer: 0 },
+      { q: 'Tottori is Japan’s prefecture with the fewest…', options: ['People', 'Trees', 'Cats'], answer: 0 },
+    ],
+    souvenir: { name: 'Nijisseiki pear', jp: 'なし', emoji: '🍐', cost: 25 },
+  },
+  matsue: {
+    spots: [
+      { name: 'Matsue Castle', tags: ['castle'], jp: '{松江城|まつえじょう}', emoji: '🏯', about: 'One of the five National Treasure castles, ringed by a moat you can tour by boat.' },
+      { name: 'Izumo Taisha', jp: '{出雲大社|いずもたいしゃ}', emoji: '⛩️', about: 'A grand shrine with an enormous straw rope; people pray here for good relationships.' },
+      { name: 'Iwami Ginzan', tags: ['heritage'], jp: '{石見銀山|いわみぎんざん}', emoji: '⛏️', about: 'An old silver mine that once produced a large share of the world’s silver.' },
+    ],
+    trivia: [
+      { q: 'In October, who is said to gather at Izumo?', options: ['Japan’s gods', 'All the cats', 'The emperors'], answer: 0 },
+      { q: 'Iwami Ginzan was a mine for…', options: ['Silver', 'Coal', 'Diamonds'], answer: 0 },
+    ],
+    souvenir: { name: 'Wagashi tea sweet', jp: 'わがし', emoji: '🍡', cost: 25 },
+  },
+  matsumoto: {
+    spots: [
+      { name: 'Matsumoto Castle', tags: ['castle'], jp: '{松本城|まつもとじょう}', emoji: '🏯', about: 'A black National Treasure castle reflected in its moat, with the Alps behind.' },
+      { name: 'Nawate Street', jp: 'ナワテ{通|どお}り', emoji: '🐸', about: 'A riverside street full of frog statues and little shops.' },
+      { name: 'Kamikochi', jp: '{上高地|かみこうち}', emoji: '🏔️', about: 'A clear river valley in the Northern Alps, crossed by the Kappa Bridge.' },
+    ],
+    trivia: [
+      { q: 'Matsumoto Castle’s nickname is…', options: ['Crow Castle', 'Swan Castle', 'Cat Castle'], answer: 0 },
+      { q: 'できます means…', options: ['can do', 'must do', 'did'], answer: 0 },
+    ],
+    souvenir: { name: 'Shinshu apple', jp: 'りんご', emoji: '🍎', cost: 20 },
+  },
+  nagano: {
+    spots: [
+      { name: 'Jigokudani Monkey Park', jp: '{地獄谷|じごくだに}', emoji: '🐒', about: 'Snow monkeys relax in a steaming hot spring surrounded by snow.' },
+      { name: 'Zenko-ji', jp: '{善光寺|ぜんこうじ}', emoji: '🛕', about: 'Walk through a pitch-dark tunnel under the main hall to touch the “key to paradise”.' },
+    ],
+    trivia: [
+      { q: 'What do the Jigokudani monkeys do in winter?', options: ['Bathe in hot springs', 'Go skiing', 'Fly south'], answer: 0 },
+      { q: 'Nagano hosted the Winter Olympics in…', options: ['1998', '1964', '2020'], answer: 0 },
+    ],
+    souvenir: { name: 'Oyaki dumpling', jp: 'おやき', emoji: '🥟', cost: 20 },
+  },
+  kusatsu: {
+    spots: [
+      { name: 'Yubatake', jp: '{湯畑|ゆばたけ}', emoji: '🌫️', about: 'A steaming “hot water field” where spring water cools in wooden channels.' },
+      { name: 'Yumomi show', jp: '{湯|ゆ}もみ', emoji: '🪵', about: 'Performers sing and stir the hot water with long boards to cool it.' },
+      { name: 'Tomioka Silk Mill', tags: ['heritage'], jp: '{富岡製糸場|とみおかせいしじょう}', emoji: '🧵', about: 'A brick silk factory from 1872 that helped modernize Japan (also in Gunma).' },
+    ],
+    trivia: [
+      { q: 'Why do people stir Kusatsu’s water with boards?', options: ['To cool it down', 'To catch fish', 'To make soup'], answer: 0 },
+      { q: 'ので is used to give…', options: ['A reason', 'A question', 'A wish'], answer: 0 },
+    ],
+    souvenir: { name: 'Onsen manju', jp: 'おんせんまんじゅう', emoji: '🍥', cost: 20 },
+  },
+  hiraizumi: {
+    spots: [
+      { name: 'Chuson-ji Golden Hall', tags: ['heritage'], jp: '{金色堂|こんじきどう}', emoji: '✨', about: 'A small hall covered in gold leaf, protected inside a larger building.' },
+      { name: 'Motsu-ji Garden', tags: ['heritage'], jp: '{毛越寺|もうつうじ}', emoji: '🌊', about: 'A Pure Land garden with a large pond meant to look like paradise.' },
+    ],
+    trivia: [
+      { q: 'The Konjikido is covered in…', options: ['Gold leaf', 'Seashells', 'Snow'], answer: 0 },
+      { q: 'Which poet wrote a haiku in Hiraizumi?', options: ['Basho', 'Shakespeare', 'Kukai'], answer: 0 },
+    ],
+    souvenir: { name: 'Wanko soba bowl', jp: 'わんこそば', emoji: '🍜', cost: 30 },
+  },
+  yamagata: {
+    spots: [
+      { name: 'Yamadera', jp: '{山寺|やまでら}', emoji: '⛰️', about: 'Climb about 1,000 steps through cedars to temples clinging to the cliffs.' },
+      { name: 'Zao snow monsters', jp: '{樹氷|じゅひょう}', emoji: '🌲', about: 'Trees coated in thick ice and snow look like giant monsters in winter.' },
+      { name: 'Ginzan Onsen', jp: '{銀山温泉|ぎんざんおんせん}', emoji: '🏮', about: 'Old wooden inns line a river, glowing with gas lamps at night.' },
+    ],
+    trivia: [
+      { q: 'Yamagata grows most of Japan’s…', options: ['Cherries', 'Bananas', 'Coffee'], answer: 0 },
+      { q: 'Zao’s “snow monsters” are…', options: ['Frozen trees', 'Big snowmen', 'Polar bears'], answer: 0 },
+    ],
+    souvenir: { name: 'Sakuranbo cherries', jp: 'さくらんぼ', emoji: '🍒', cost: 30 },
+  },
+  kawagoe: {
+    spots: [
+      { name: 'Toki no Kane bell tower', jp: '{時|とき}の{鐘|かね}', emoji: '🔔', about: 'A wooden bell tower that still rings out the time four times a day.' },
+      { name: 'Kurazukuri Street', jp: '{蔵造|くらづく}り', emoji: '🏚️', about: 'Black clay-walled storehouses built to resist fire.' },
+      { name: 'Candy Alley', jp: '{菓子屋横丁|かしやよこちょう}', emoji: '🍬', about: 'A lane of shops selling old-style dagashi sweets.' },
+    ],
+    trivia: [
+      { q: 'Kawagoe is nicknamed…', options: ['Little Edo', 'Little Kyoto', 'Little Paris'], answer: 0 },
+      { q: 'つもりです expresses…', options: ['An intention / plan', 'A memory', 'A comparison'], answer: 0 },
+    ],
+    souvenir: { name: 'Sweet potato chips', jp: 'いもチップス', emoji: '🍠', cost: 20 },
+  },
 };

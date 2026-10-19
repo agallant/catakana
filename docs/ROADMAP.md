@@ -21,7 +21,9 @@ Tiers: Kana → N5 → N4 → N3 → N2 → N1. Everything runs client-side, off
 | M4 | **Kanji & stroke order** – KanjiVG stroke data for all kana + 109 N5 kanji; Paw Painting checks stroke order and direction (hints → from memory); kanji cards with animated stroke order, on/kun readings and example words; words switch to kanji with furigana once their kanji are learned; kanji chart | in progress |
 | M5 | **Listening & speaking** – Café Chat dialogue comprehension (16 conversations, read-along → audio-only), dictation in Keyboard Cat hard mode, Shadow Cat speaking practice (speech recognition scoring where available, record & compare / self-rating otherwise), 29-phrase survival phrasebook | in progress |
 | M5.5 | **Audio depth** – pre-generated audio packs for devices lacking a Japanese voice, pitch-accent hints, role-play scenes | planned |
-| M7 | **N4** – ~300 more words, ~170 kanji, te-form/conjugation drills, new regions and stories | planned |
+| M6 | **Engagement** – daily quests, 24 achievements with toasts, placement test to skip known kana, better map | in progress |
+| M7 | **N4 season** – 12 destinations (Hikone → Kawagoe) incl. National Treasure castles and UNESCO sites; 12 grammar points (ている, てもいい, たことがある, comparisons, たり, と思う, potential, なければ, から/ので, とき, たら, つもり); ~180 words, 118 N4 kanji with stroke data, 60 sentences, 9 conversations | in progress |
+| M7.5 | **N4 depth** – verb conjugation drills (te/ta/nai/potential forms), more N4 vocabulary to ~650 words | planned |
 | M8 | **N3** – ~650 kanji, reading passages, grammar patterns, kanji compounds game | planned |
 | M9 | **N2** – ~1000 kanji, longer texts, keigo introduction | planned |
 | M10 | **N1** – ~2000 kanji, advanced vocab/grammar, literary and news-style reading | planned |

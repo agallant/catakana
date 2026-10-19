@@ -77,6 +77,8 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'kanji10', name: 'Kanji Kitten', emoji: '🈁', desc: 'Learn 10 kanji', test: (d) => d.introduced.filter((i) => i.startsWith('kj:')).length >= 10 },
   { id: 'kanji50', name: 'Kanji Cat', emoji: '🏯', desc: 'Learn 50 kanji', test: (d) => d.introduced.filter((i) => i.startsWith('kj:')).length >= 50 },
   { id: 'n5', name: 'N5 Explorer', emoji: '🌲', desc: 'Finish the N5 Grand Tour', test: (d) => (d.stops.yakushima ?? 0) >= 1 },
+  { id: 'n4', name: 'N4 Adventurer', emoji: '🔔', desc: 'Finish the N4 season in Kawagoe', test: (d) => (d.stops.kawagoe ?? 0) >= 1 },
+  { id: 'treasure-castles', name: 'Treasure Castles', emoji: '🏯', desc: 'Photograph the National Treasure castles of Himeji, Hikone, Matsue and Matsumoto', test: (d) => ['himeji:Himeji Castle', 'hikone:Hikone Castle', 'matsue:Matsue Castle', 'matsumoto:Matsumoto Castle'].every((p) => d.photos.includes(p)) },
   { id: 'streak3', name: 'Three-day Purr', emoji: '🔥', desc: 'Play 3 days in a row', test: (d) => d.streak >= 3 },
   { id: 'streak7', name: 'Week of Whiskers', emoji: '📅', desc: 'Play 7 days in a row', test: (d) => d.streak >= 7 },
   { id: 'streak30', name: 'Lucky Cat Habit', emoji: '🐈', desc: 'Play 30 days in a row', test: (d) => d.streak >= 30 },
@@ -88,7 +90,7 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'heritage10', name: 'Heritage Hunter', emoji: '🌏', desc: 'Photograph 10 World Heritage sites', test: (d) => heritage().filter((c) => d.photos.includes(c)).length >= 10 },
   { id: 'cats10', name: 'Cat Collector', emoji: '😺', desc: 'Befriend 10 local cats', test: (d) => d.cats.length >= 10 },
   { id: 'rich', name: 'Fat Cat', emoji: '💰', desc: 'Hold 500 fish at once', test: (d) => d.fish >= 500 },
-  { id: 'kanji-all', name: 'Kanji Master', emoji: '👑', desc: `Learn all ${KANJI.length} N5 kanji`, test: (d) => KANJI.every((k) => d.introduced.includes(`kj:${k.char}`)) },
+  { id: 'kanji-all', name: 'Kanji Master', emoji: '👑', desc: `Learn all ${KANJI.length} kanji`, test: (d) => KANJI.every((k) => d.introduced.includes(`kj:${k.char}`)) },
 ];
 
 export interface Unlock {
