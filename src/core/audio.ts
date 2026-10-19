@@ -90,7 +90,7 @@ export function hasJapaneseVoice(): boolean {
 }
 
 /** Speak Japanese text. Resolves when finished (or immediately if unsupported). */
-export function speak(text: string, opts: { rate?: number } = {}): Promise<boolean> {
+export function speak(text: string, opts: { rate?: number; pitch?: number } = {}): Promise<boolean> {
   return new Promise((resolve) => {
     if (!speechOn || !speechSupported()) return resolve(false);
     try {
@@ -99,13 +99,14 @@ export function speak(text: string, opts: { rate?: number } = {}): Promise<boole
       const u = new SpeechSynthesisUtterance(text);
       u.lang = 'ja-JP';
       u.rate = opts.rate ?? rate;
+      if (opts.pitch !== undefined) u.pitch = opts.pitch;
       const v = pickVoice();
       if (v) u.voice = v;
       u.onend = () => resolve(true);
       u.onerror = () => resolve(false);
       synth.speak(u);
-      // Some browsers never fire end; don't hang the UI.
-      setTimeout(() => resolve(true), 6000);
+      // Some browsers never fire end; don't hang the UI (allow ~0.25s per character).
+      setTimeout(() => resolve(true), Math.max(4000, text.length * 250));
     } catch {
       resolve(false);
     }

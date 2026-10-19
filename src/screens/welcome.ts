@@ -55,6 +55,20 @@ export function welcomeScreen(app: App): Screen {
     h('div', { class: 'field' }, h('div', { class: 'label' }, 'Eyes'), h('div', { class: 'swatches' }, eyes)),
     h('button', { class: 'btn ghost small', onClick: () => { name = NAMES[Math.floor(Math.random() * NAMES.length)]!; input.value = name; sfx.tap(); } }, '🎲 Random name'),
     h('button', { class: 'btn primary big', onClick: start }, 'Start the journey ✈️'),
+    h(
+      'button',
+      {
+        class: 'btn ghost',
+        onClick: () => {
+          app.store.update((d) => {
+            d.name = (name.trim() || 'Mochi').slice(0, 14);
+            d.look = look;
+          });
+          app.go('placement');
+        },
+      },
+      'Already know some kana? Take a placement test',
+    ),
   );
   return { el };
 }

@@ -45,6 +45,10 @@ export interface SaveData {
   owned: string[];
   /** sights photographed in Explore ("<stop>:<spot name>") */
   photos: string[];
+  /** today's quest progress */
+  daily: { day: string; progress: Record<string, number>; claimed: string[] };
+  /** unlocked achievement ids */
+  achievements: string[];
   settings: Settings;
   stats: { rounds: number; correct: number; wrong: number; playMs: number };
   started: boolean;
@@ -71,6 +75,8 @@ export function defaultSave(): SaveData {
     trivia: {},
     owned: [],
     photos: [],
+    daily: { day: '', progress: {}, claimed: [] },
+    achievements: [],
     settings: { furigana: 'always', romaji: true, sound: true, speech: true, speechRate: 0.85, reduceMotion: false },
     stats: { rounds: 0, correct: 0, wrong: 0, playMs: 0 },
     started: false,
@@ -108,19 +114,13 @@ export class Store {
     this.touchStreak();
   }
 
-  private load(): SaveData {
+  private load(rawOverride?: string): SaveData {
     try {
-      const raw = this.storage?.getItem(KEY);
+      const raw = rawOverride ?? this.storage?.getItem(KEY);
       if (raw) {
-        const parsed = JSON.parse(raw) as Partial<SaveData>;
-        const base = defaultSave();
-        const data: SaveData = {
-          ...base,
-          ...parsed,
-          look: { ...base.look, ...(parsed.look ?? {}) },
-          settings: { ...base.settings, ...(parsed.settings ?? {}) },
-          stats: { ...base.stats, ...(parsed.stats ?? {}) },
-        };
+        const parsed: unknown = JSON.parse(raw);
+        if (!isRecord(parsed)) return defaultSave();
+        const data = sanitize(parsed);
         // saves from before eki stamps existed: every visited stop earns its stamp
         for (const id of Object.keys(data.stops)) if (!data.stamps.includes(id)) data.stamps.push(id);
         return data;
@@ -199,6 +199,25 @@ export class Store {
     });
   }
 
+  /** Serialise progress for a backup file. */
+  exportJson(): string {
+    return JSON.stringify({ app: 'catakana', exported: new Date().toISOString(), save: this.data });
+  }
+
+  /** Restore from a backup; returns false (and changes nothing) if the file isn't a Catakana save. */
+  importJson(text: string): boolean {
+    try {
+      const parsed: unknown = JSON.parse(text);
+      if (!isRecord(parsed) || parsed.app !== 'catakana' || !isValidSave(parsed.save)) return false;
+      this.data = this.load(JSON.stringify(parsed.save));
+      this.save();
+      this.listeners.forEach((l) => l(this.data));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   reset(): void {
     this.data = defaultSave();
     this.save();
@@ -214,4 +233,47 @@ function safeLocalStorage(): Storage | null {
   } catch {
     return null;
   }
+}
+
+function isRecord(x: unknown): x is Record<string, unknown> {
+  return typeof x === 'object' && x !== null && !Array.isArray(x);
+}
+
+const isStringArray = (x: unknown): x is string[] => Array.isArray(x) && x.every((v) => typeof v === 'string');
+
+/** A backup must look like a real save: an object whose core fields have the right shapes. */
+export function isValidSave(x: unknown): x is Partial<SaveData> {
+  if (!isRecord(x)) return false;
+  if (!isRecord(x.stops) || !Object.values(x.stops).every((v) => typeof v === 'number')) return false;
+  if (!isRecord(x.srs)) return false;
+  if (typeof x.fish !== 'number' || typeof x.xp !== 'number') return false;
+  return ['introduced', 'cats'].every((k) => x[k] === undefined || isStringArray(x[k]));
+}
+
+/** Merge a parsed save over the defaults, keeping only fields of the expected type. */
+function sanitize(p: Record<string, unknown>): SaveData {
+  const base = defaultSave();
+  const out: SaveData = { ...base };
+  const assign = <K extends keyof SaveData>(k: K, ok: (v: unknown) => boolean): void => {
+    if (ok(p[k])) out[k] = p[k] as SaveData[K];
+  };
+  const num = (v: unknown) => typeof v === 'number' && Number.isFinite(v);
+  const str = (v: unknown) => typeof v === 'string';
+  assign('name', str);
+  assign('fish', num);
+  assign('xp', num);
+  assign('streak', num);
+  assign('lastPlayDay', str);
+  assign('started', (v) => typeof v === 'boolean');
+  assign('srs', isRecord);
+  assign('stops', (v) => isRecord(v) && Object.values(v).every((n) => typeof n === 'number'));
+  assign('trivia', isRecord);
+  for (const k of ['cats', 'introduced', 'unlockedHats', 'stamps', 'souvenirs', 'owned', 'photos', 'achievements'] as const) assign(k, isStringArray);
+  if (isRecord(p.daily) && str(p.daily.day) && isRecord(p.daily.progress) && isStringArray(p.daily.claimed)) out.daily = p.daily as SaveData['daily'];
+  if (isRecord(p.look)) out.look = { ...base.look, ...p.look };
+  if (isRecord(p.settings)) out.settings = { ...base.settings, ...p.settings };
+  if (isRecord(p.stats)) out.stats = { ...base.stats, ...p.stats };
+  // copy arrays so later pushes don't alias the parsed object
+  out.stamps = [...out.stamps];
+  return out;
 }

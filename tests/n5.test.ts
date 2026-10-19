@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { N5_CONTENT } from '../src/data/n5';
 import { STOPS } from '../src/data/journey';
-import { N5_WORDS, ALL_WORDS } from '../src/data/vocab';
+import { N5_WORDS, ALL_WORDS, TOUR_WORDS } from '../src/data/vocab';
+import { N4_CONTENT } from '../src/data/n4';
+import { TOUR_CONTENT } from '../src/data/tour';
 import { kanaTokens, wordsThrough, firstStopOfTier, newWordsAt } from '../src/core/curriculum';
 import { decoyChunk, sentencesThrough } from '../src/core/sentences';
 
@@ -37,5 +39,32 @@ describe('N5 content', () => {
     const d = decoyChunk(['ねこは', 'さかなを', 'たべます。'], () => 0);
     expect(d).not.toBeNull();
     expect(['ねこは', 'さかなを']).not.toContain(d);
+  });
+});
+
+describe('N4 content', () => {
+  const n4Stops = STOPS.filter((s) => s.tier === 'N4');
+  it('every N4 stop has grammar, words and sentences', () => {
+    expect(Object.keys(N4_CONTENT).sort()).toEqual(n4Stops.map((s) => s.id).sort());
+    for (const s of n4Stops) {
+      expect(N4_CONTENT[s.id]!.sentences.length).toBeGreaterThanOrEqual(4);
+      expect(TOUR_WORDS.filter((w) => w.stop === s.id).length, s.id).toBeGreaterThanOrEqual(8);
+    }
+  });
+  it('tour readings and sentence chunks are pure kana', () => {
+    for (const w of TOUR_WORDS) expect(kanaTokens(w.reading), w.reading).not.toBeNull();
+    for (const c of Object.values(TOUR_CONTENT))
+      for (const sen of c.sentences) for (const ch of sen.chunks) expect(kanaTokens(ch.replace(/[。、？！]/g, '')), ch).not.toBeNull();
+  });
+  it('N4 comes after N5 in the journey', () => {
+    expect(STOPS.findIndex((s) => s.tier === 'N4')).toBeGreaterThan(STOPS.findLastIndex((s) => s.tier === 'N5'));
+  });
+});
+
+describe('tour dedup', () => {
+  it('keeps homophones with different meanings', () => {
+    const tomaru = TOUR_WORDS.filter((w) => w.reading === 'とまる').map((w) => w.kanji);
+    expect(tomaru).toContain('止まる');
+    expect(tomaru).toContain('泊まる');
   });
 });

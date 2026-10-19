@@ -1,6 +1,6 @@
 import { ALL_KANA, KANA_BY_ID, type KanaChar } from '../data/kana';
 import { STOPS, type Stop } from '../data/journey';
-import { N5_WORDS, WORDS, type Word } from '../data/vocab';
+import { TOUR_WORDS, WORDS, type Word } from '../data/vocab';
 import type { SaveData } from './store';
 
 const SMALL_Y = 'ゃゅょャュョ';
@@ -54,7 +54,7 @@ export function wordReadable(w: Word, learned: Set<string>): boolean {
 export function wordsThrough(index: number): Word[] {
   const learned = learnedKanaThrough(index);
   const stopsSoFar = new Set(STOPS.slice(0, index + 1).map((s) => s.id));
-  return [...WORDS.filter((w) => wordReadable(w, learned)), ...N5_WORDS.filter((w) => stopsSoFar.has(w.stop!))];
+  return [...WORDS.filter((w) => wordReadable(w, learned)), ...TOUR_WORDS.filter((w) => stopsSoFar.has(w.stop!))];
 }
 
 /** Words first becoming readable at this stop (not readable at the previous one). */

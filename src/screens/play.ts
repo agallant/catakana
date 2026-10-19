@@ -8,6 +8,7 @@ import { catSvg } from '../ui/cat';
 import { sfx } from '../core/audio';
 import { collectCat } from '../core/cats';
 import { romajiHints } from '../core/romaji';
+import { track } from '../core/progress';
 
 export function rewards(summary: Summary, level: Level): { stars: 0 | 1 | 2 | 3; fish: number; xp: number } {
   const pct = summary.total ? summary.correct / summary.total : 0;
@@ -64,6 +65,8 @@ export function playScreen(app: App, params: string[]): Screen {
       if (r.stars > 0) app.store.setStars(stop.id, r.stars);
       app.store.addRewards(r.fish, r.xp);
       const newCat = r.stars >= 1 ? collectCat(app.store, stop.id, r.stars === 3) : null;
+      track(app.store, { type: 'answers', correct: summary.correct });
+      track(app.store, { type: 'game', game: game.id, skill: game.skill, correct: summary.correct, total: summary.total, stars: r.stars });
       (r.stars ? sfx.win : sfx.wrong)();
       const unlocked = before < 1 && r.stars >= 1 && stopIndex < STOPS.length - 1;
       root.replaceChildren(

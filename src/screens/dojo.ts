@@ -4,6 +4,7 @@ import { h } from '../ui/dom';
 import { ALL_KANA, KANA_GROUPS, type Script } from '../data/kana';
 import { currentStopIndex, learnedKanaThrough, wordsThrough } from '../core/curriculum';
 import { kanjiThrough } from '../core/items';
+import { phrasesThrough } from '../games/shadow';
 import { GAMES } from '../games';
 import { speak } from '../core/audio';
 import { mastery, isDue } from '../core/srs';
@@ -15,7 +16,7 @@ export function dojoScreen(app: App): Screen {
   const idx = currentStopIndex(d);
   const learned = learnedKanaThrough(idx);
   // include stops visited but whose group is ahead of unlocked? Only learned kana are practicable.
-  type Tab = Script | 'words' | 'kanji';
+  type Tab = Script | 'words' | 'kanji' | 'phrases';
   let script: Tab = (getPref('script') as Tab | null) || 'hiragana';
   const chart = h('div', { class: 'chart' });
   const drawWords = (): void => {
@@ -57,7 +58,21 @@ export function dojoScreen(app: App): Screen {
         : h('p', { class: 'hint' }, 'Kanji start on the N5 Grand Tour (after Sapporo).'),
     );
   };
+  const drawPhrases = (): void => {
+    chart.replaceChildren(
+      h(
+        'div',
+        { class: 'wordbook' },
+        phrasesThrough(idx).map((p) => {
+          const row = h('button', { class: 'word-row' }, h('span', { class: 'word-emoji' }, p.emoji), h('span', { class: 'jp word-jp' }, p.jp), h('span', { class: 'word-en' }, p.en));
+          row.addEventListener('click', () => void speak(p.kana));
+          return row;
+        }),
+      ),
+    );
+  };
   const draw = (): void => {
+    if (script === 'phrases') return drawPhrases();
     if (script === 'words') return drawWords();
     if (script === 'kanji') return drawKanji();
     chart.replaceChildren(
@@ -105,7 +120,7 @@ export function dojoScreen(app: App): Screen {
       h('button', { class: 'game-card', onClick: () => app.go(`play/${stop.id}/${g.id}/${level}/review`) }, h('span', { class: 'game-emoji' }, g.emoji), h('span', { class: 'game-info' }, h('strong', null, g.name), h('small', null, g.blurb)), h('span', { class: `skill skill-${g.skill}` }, g.skill)),
     )),
     h('h3', null, 'Kana chart & word book'),
-    h('div', { class: 'chips' }, tab('hiragana', 'ひらがな'), tab('katakana', 'カタカナ'), tab('kanji', '漢字'), tab('words', '📒 Words')),
+    h('div', { class: 'chips' }, tab('hiragana', 'ひらがな'), tab('katakana', 'カタカナ'), tab('kanji', '漢字'), tab('words', '📒 Words'), tab('phrases', '💬 Phrases')),
     h('p', { class: 'hint' }, 'Tap a character to hear it. Brighter = more mastered. Dashed = ready for review.'),
     chart,
   );

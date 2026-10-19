@@ -1,4 +1,4 @@
-import { N5_CONTENT } from './n5';
+import { TOUR } from './tour';
 import { kanaToRomaji } from './kana';
 
 export type Tier = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
@@ -216,38 +216,52 @@ export function wordsByTopic(topic: Topic): Word[] {
 }
 
 
+
+/** Tour words (N5, N4, …), taught stop by stop; duplicates of kana-stage words are skipped. */
+/** Meaning without notes in parentheses, e.g. "cold (weather)" → "cold". */
+const normMeaning = (en: string): string => en.replace(/\(.*?\)/g, '').trim().toLowerCase();
 const kanaStageReadings = new Set(WORDS.map((w) => w.reading));
-
-/** N5 Grand Tour words, taught stop by stop (duplicates of kana-stage words are skipped). */
-export const N5_WORDS: Word[] = Object.entries(N5_CONTENT).flatMap(([stop, c]) =>
-  c.words
-    .filter(([, reading]) => !kanaStageReadings.has(reading))
-    .map(([kanji, reading, en, emoji]) => ({
-      id: `n5:${stop}:${reading}`,
-      jp: reading,
-      reading,
-      romaji: kanaToRomaji(reading),
-      en,
-      emoji,
-      tier: 'N5' as const,
-      topic: 'things' as const,
-      katakana: isAllKatakana(reading),
-      kanji: kanji !== reading ? kanji : undefined,
-      stop,
-    })),
+const seenTour = new Set<string>();
+export const TOUR_WORDS: Word[] = TOUR.flatMap(({ tier, content }) =>
+  Object.entries(content).flatMap(([stop, c]) =>
+    c.words
+      .filter(([, reading, en]) => {
+        // skip words taught earlier: any kana-stage reading, or the same reading + meaning in the tour
+        const key = `${reading}|${normMeaning(en)}`;
+        if (kanaStageReadings.has(reading) || seenTour.has(key)) return false;
+        seenTour.add(key);
+        return true;
+      })
+      .map(([kanji, reading, en, emoji]) => ({
+        id: `${tier === 'N5' ? 'n5' : tier.toLowerCase()}:${stop}:${reading}`,
+        jp: reading,
+        reading,
+        romaji: kanaToRomaji(reading),
+        en,
+        emoji,
+        tier,
+        topic: 'things' as const,
+        katakana: isAllKatakana(reading),
+        kanji: kanji !== reading ? kanji : undefined,
+        stop,
+      })),
+  ),
 );
+export const N5_WORDS: Word[] = TOUR_WORDS.filter((w) => w.tier === 'N5');
 
-// Kana-stage words that the N5 tour also teaches keep their kanji form, matched on reading + meaning
+// Kana-stage words that the tour also teaches keep their kanji form, matched on reading + meaning
 // (homophones such as はな flower / nose differ in meaning).
-const headword = (en: string): string => en.split(/[ /(]/)[0]!.toLowerCase();
+// first content word, ignoring a leading "to" on verbs ("to stop" → "stop")
+const headword = (en: string): string => normMeaning(en).replace(/^to /, '').split(/[ /]/)[0]!;
 const kanjiFor = new Map<string, string>();
-for (const c of Object.values(N5_CONTENT))
-  for (const [kanji, reading, en] of c.words) if (kanji !== reading) kanjiFor.set(`${reading}|${headword(en)}`, kanji);
+for (const { content } of TOUR)
+  for (const c of Object.values(content))
+    for (const [kanji, reading, en] of c.words) if (kanji !== reading && !kanjiFor.has(`${reading}|${headword(en)}`)) kanjiFor.set(`${reading}|${headword(en)}`, kanji);
 for (const w of WORDS) {
   const k = kanjiFor.get(`${w.reading}|${headword(w.en)}`);
   if (k) w.kanji = k;
 }
 
-export const ALL_WORDS: Word[] = [...WORDS, ...N5_WORDS];
+export const ALL_WORDS: Word[] = [...WORDS, ...TOUR_WORDS];
 
 export const WORD_BY_ID = new Map(ALL_WORDS.map((w) => [w.id, w]));

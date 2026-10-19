@@ -352,6 +352,127 @@ export const STOPS: Stop[] = [
     ],
     npc: { name: 'Koke', jp: 'こけ', look: L('#7cb86a', '#4e7d43', 'spots', '#ffd24a', 'none'), hello: ['もりを みて ください！', 'Please look at the forest!'] },
   },
+  // ---- N4 season: everyday grammar, castles and old towns ----
+  {
+    id: 'hikone', name: 'Hikone', jp: '彦根', reading: 'ひこね', region: 'Kansai', lonlat: [136.25, 35.28], emoji: '🏯', transport: 'plane', tier: 'N4',
+    teaches: [],
+    facts: [
+      'Hikone Castle is one of only five castle keeps that are National Treasures.',
+      'Legend says a beckoning cat saved Lord Ii Naotaka from a lightning storm — one origin story of the maneki-neko!',
+      'The city’s mascot, Hikonyan, is a white cat wearing a red samurai helmet.',
+    ],
+    npc: { name: 'Hikonyan', jp: 'ひこにゃん', look: L('#fafafa', '#e0e0e0', 'plain', '#2b2b2b', 'crown'), hello: ['ようこそ！ いま、てを ふっています！', 'Welcome! I’m waving right now!'] },
+  },
+  {
+    id: 'uji', name: 'Uji', jp: '宇治', reading: 'うじ', region: 'Kansai', lonlat: [135.8, 34.89], emoji: '🍵', transport: 'train', tier: 'N4',
+    teaches: [],
+    facts: [
+      'Uji is one of Japan’s most famous tea towns — its matcha is prized all over the country.',
+      'Byodo-in’s Phoenix Hall appears on the back of the 10-yen coin.',
+      'The last chapters of The Tale of Genji, a novel from about 1,000 years ago, are set in Uji.',
+    ],
+    npc: { name: 'Matcha', jp: 'まっちゃ', look: L('#7cb86a', '#4e7d43', 'tabby', '#ffd24a', 'bow'), hello: ['おちゃを のんでも いいですよ。', 'You may drink some tea.'] },
+  },
+  {
+    id: 'koyasan', name: 'Mount Koya', jp: '高野山', reading: 'こうやさん', region: 'Kansai', lonlat: [135.59, 34.21], emoji: '🧘', transport: 'train', tier: 'N4',
+    teaches: [],
+    facts: [
+      'Koyasan is a mountaintop town of over 100 temples, founded by the monk Kukai more than 1,200 years ago.',
+      'Visitors can stay overnight in temples (shukubo) and eat monks’ vegetarian food.',
+      'Okunoin, Japan’s largest cemetery, is lined with mossy graves and stone lanterns under giant cedars.',
+    ],
+    npc: { name: 'Kukai', jp: 'くうかい', look: L('#d7ccc8', '#8d6e63', 'plain', '#3d2b1f', 'none'), hello: ['おてらに とまったことが ありますか。', 'Have you ever stayed at a temple?'] },
+  },
+  {
+    id: 'okayama', name: 'Okayama', jp: '岡山', reading: 'おかやま', region: 'Chugoku', lonlat: [133.93, 34.66], emoji: '🍑', transport: 'shinkansen', tier: 'N4',
+    teaches: [],
+    facts: [
+      'Okayama is the home of Momotaro, the Peach Boy who fought ogres with a dog, a monkey and a pheasant.',
+      'Okayama Castle is nicknamed “Crow Castle” for its black walls.',
+      'Korakuen is one of Japan’s three great gardens, right across the river from the castle.',
+    ],
+    npc: { name: 'Momo', jp: 'もも', look: L('#ffb3c1', '#e5627f', 'plain', '#3d85c6', 'headband'), hello: ['ももは りんごより あまいです！', 'Peaches are sweeter than apples!'] },
+  },
+  {
+    id: 'tottori', name: 'Tottori', jp: '鳥取', reading: 'とっとり', region: 'Chugoku', lonlat: [134.24, 35.5], emoji: '🐫', transport: 'bus', tier: 'N4',
+    teaches: [],
+    facts: [
+      'The Tottori Sand Dunes stretch about 16 km along the Sea of Japan — you can even ride a camel!',
+      'Tottori is the least-populated prefecture in Japan.',
+      'In nearby Sakaiminato, a street is lined with bronze statues of yokai from the manga GeGeGe no Kitaro.',
+    ],
+    npc: { name: 'Suna', jp: 'すな', look: L('#e8c872', '#c9a227', 'spots', '#3d85c6', 'straw'), hello: ['すなで あそんだり、はしったり しよう！', 'Let’s play in the sand, run around and more!'] },
+  },
+  {
+    id: 'matsue', name: 'Matsue & Izumo', jp: '松江', reading: 'まつえ', region: 'Chugoku', lonlat: [133.05, 35.47], emoji: '⛩️', transport: 'train', tier: 'N4',
+    teaches: [],
+    facts: [
+      'Matsue Castle is one of the five National Treasure castle keeps — dark, wooden and original.',
+      'Izumo Taisha is said to be where Japan’s gods gather every October to discuss people’s fates and matches.',
+      'The writer Lafcadio Hearn lived here and collected Japanese ghost stories.',
+    ],
+    npc: { name: 'En', jp: 'えん', look: L('#fff3e0', '#f4b183', 'calico', '#c2185b', 'bow'), hello: ['かみさまは ここに いると おもいます。', 'I think the gods are here.'] },
+  },
+  {
+    id: 'matsumoto', name: 'Matsumoto', jp: '松本', reading: 'まつもと', region: 'Chubu', lonlat: [137.97, 36.24], emoji: '🏯', transport: 'plane', tier: 'N4',
+    teaches: [],
+    facts: [
+      'Matsumoto Castle is a National Treasure — a black “Crow Castle” with the Japan Alps behind it.',
+      'Inside the keep, the wooden stairs are so steep they feel like ladders.',
+      'Nearby Kamikochi is a beautiful mountain valley popular with hikers.',
+    ],
+    npc: { name: 'Karasu', jp: 'からす', look: L('#2b2b2b', '#111', 'plain', '#ffd24a', 'crown'), hello: ['てんしゅに のぼる ことが できますよ。', 'You can climb the castle keep!'] },
+  },
+  {
+    id: 'nagano', name: 'Nagano', jp: '長野', reading: 'ながの', region: 'Chubu', lonlat: [138.19, 36.65], emoji: '🐒', transport: 'train', tier: 'N4',
+    teaches: [],
+    facts: [
+      'Wild snow monkeys at Jigokudani soak in hot springs to keep warm in winter.',
+      'Zenko-ji temple has drawn pilgrims for about 1,400 years.',
+      'Nagano hosted the 1998 Winter Olympics and is famous for soba noodles.',
+    ],
+    npc: { name: 'Saru', jp: 'さる', look: L('#c9a27a', '#8b5a2b', 'plain', '#cc0000', 'scarf'), hello: ['しゅくだいを しなければ なりません…', 'I have to do my homework…'] },
+  },
+  {
+    id: 'kusatsu', name: 'Kusatsu Onsen', jp: '草津', reading: 'くさつ', region: 'Kanto', lonlat: [138.6, 36.62], emoji: '♨️', transport: 'bus', tier: 'N4',
+    teaches: [],
+    facts: [
+      'Kusatsu is one of Japan’s most famous hot-spring towns, with very hot, sulfur-rich water.',
+      'At its center, the Yubatake (“hot water field”) steams as spring water flows down wooden channels.',
+      'In the yumomi show, people stir the hot water with long boards while singing to cool it down.',
+    ],
+    npc: { name: 'Yumomi', jp: 'ゆもみ', look: L('#b0bec5', '#78909c', 'tabby', '#cc0000', 'headband'), hello: ['おゆが あついから、まぜます！', 'The water’s hot, so we stir it!'] },
+  },
+  {
+    id: 'hiraizumi', name: 'Hiraizumi', jp: '平泉', reading: 'ひらいずみ', region: 'Tohoku', lonlat: [141.12, 38.99], emoji: '✨', transport: 'shinkansen', tier: 'N4',
+    teaches: [],
+    facts: [
+      'Hiraizumi was once a rich northern capital that rivaled Kyoto, about 900 years ago.',
+      'Chuson-ji’s Konjikido (Golden Hall) is covered inside and out with gold leaf.',
+      'The poet Basho wrote a famous haiku here about summer grass and the dreams of old warriors.',
+    ],
+    npc: { name: 'Kin', jp: 'こがね', look: L('#ffd24a', '#e0a800', 'plain', '#2b2b2b', 'beret'), hello: ['こどもの とき、ここに きました。', 'I came here as a child.'] },
+  },
+  {
+    id: 'yamagata', name: 'Yamagata', jp: '山形', reading: 'やまがた', region: 'Tohoku', lonlat: [140.36, 38.24], emoji: '🍒', transport: 'train', tier: 'N4',
+    teaches: [],
+    facts: [
+      'Yamadera is a temple perched on a cliff, reached by about 1,000 stone steps.',
+      'In winter, the trees on Mount Zao freeze into “snow monsters” (juhyo).',
+      'Yamagata grows most of Japan’s cherries, and every autumn holds a giant taro-stew (imoni) party.',
+    ],
+    npc: { name: 'Sakuranbo', jp: 'さくらんぼ', look: L('#cc0000', '#8b0000', 'plain', '#6aa84f', 'bow'), hello: ['うえに ついたら、やすみましょう！', 'When we reach the top, let’s rest!'] },
+  },
+  {
+    id: 'kawagoe', name: 'Kawagoe', jp: '川越', reading: 'かわごえ', region: 'Kanto', lonlat: [139.49, 35.92], emoji: '🔔', transport: 'train', tier: 'N4',
+    teaches: [],
+    facts: [
+      'Kawagoe is called “Little Edo” for its streets of old clay-walled storehouses (kura).',
+      'The wooden Toki no Kane bell tower has rung the time for centuries.',
+      'Candy Alley sells old-fashioned sweets, and the town is famous for sweet potatoes.',
+    ],
+    npc: { name: 'Edo', jp: 'えど', look: L('#9e9e9e', '#616161', 'tuxedo', '#ffd24a', 'straw'), hello: ['らいねんも にほんに くる つもりですか。', 'Are you planning to come to Japan next year too?'] },
+  },
 ];
 
 export const STOP_BY_ID = new Map(STOPS.map((s) => [s.id, s]));

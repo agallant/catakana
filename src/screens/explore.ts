@@ -4,6 +4,7 @@ import { STOP_BY_ID, STOPS } from '../data/journey';
 import { CULTURE } from '../data/culture';
 import { sfx, speak } from '../core/audio';
 import { triviaFor } from './trivia';
+import { track } from '../core/progress';
 
 /** Strip {kanji|kana} markup down to kana for speech. */
 export function readingOf(markup: string): string {
@@ -29,6 +30,7 @@ export function exploreScreen(app: App, params: string[]): Screen {
       s.souvenirs.push(stop.id);
     });
     sfx.coin();
+    track(app.store, { type: 'buy', kind: 'souvenir' });
     app.render();
   };
   const msg = h('p', { class: 'hint', 'aria-live': 'polite' });
@@ -57,6 +59,7 @@ export function exploreScreen(app: App, params: string[]): Screen {
                 }
               });
               sfx.coin();
+              track(app.store, { type: 'photo' });
               app.render();
             },
           },

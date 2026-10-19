@@ -1,4 +1,5 @@
-import { N5_CONTENT, type GrammarPoint, type Sentence } from '../data/n5';
+import type { GrammarPoint, Sentence } from '../data/n5';
+import { TOUR_CONTENT } from '../data/tour';
 import { STOPS } from '../data/journey';
 
 export interface SentenceItem extends Sentence {
@@ -9,12 +10,12 @@ export interface SentenceItem extends Sentence {
 /** Sentences taught at or before stop `index`. */
 export function sentencesThrough(index: number): SentenceItem[] {
   return STOPS.slice(0, index + 1).flatMap((s) =>
-    (N5_CONTENT[s.id]?.sentences ?? []).map((sen, i) => ({ ...sen, id: `s:${s.id}:${i}`, stop: s.id })),
+    (TOUR_CONTENT[s.id]?.sentences ?? []).map((sen, i) => ({ ...sen, id: `s:${s.id}:${i}`, stop: s.id })),
   );
 }
 
 export function grammarAt(stopId: string): GrammarPoint | undefined {
-  return N5_CONTENT[stopId]?.grammar;
+  return TOUR_CONTENT[stopId]?.grammar;
 }
 
 const PARTICLES = ['は', 'を', 'に', 'へ', 'で', 'が', 'の'];
