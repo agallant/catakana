@@ -15,6 +15,7 @@ import { bentoGame } from './bento';
 import { keigoGame } from './keigo';
 import { countingGame } from './counting';
 import { timetableGame } from './timetable';
+import { roleplayGame } from './roleplay';
 
-export const GAMES: GameDef[] = [sushiGame, pairsGame, traceGame, listenGame, yarnGame, typingGame, stationGame, trainGame, cafeGame, shadowGame, kitchenGame, storyGame, bentoGame, keigoGame, countingGame, timetableGame];
+export const GAMES: GameDef[] = [sushiGame, pairsGame, traceGame, listenGame, yarnGame, typingGame, stationGame, trainGame, cafeGame, shadowGame, kitchenGame, storyGame, bentoGame, keigoGame, countingGame, timetableGame, roleplayGame];
 export const GAME_BY_ID = new Map(GAMES.map((g) => [g.id, g]));
