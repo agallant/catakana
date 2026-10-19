@@ -555,7 +555,7 @@ export const STOPS: Stop[] = [
     npc: { name: 'Ryuhyo', jp: 'りゅうひょう', look: L('#fafafa', '#b0bec5', 'plain', '#3d85c6', 'scarf'), hello: ['くまは もう ねている はずです。', 'The bears should be asleep by now.'] },
   },
   {
-    id: 'naoshima', name: 'Naoshima', jp: '直島', reading: 'なおしま', region: 'Shikoku', lonlat: [133.99, 34.46], emoji: '🎃', transport: 'plane', tier: 'N3',
+    id: 'naoshima', name: 'Naoshima', jp: '直島', reading: 'なおしま', region: 'Shikoku', lonlat: [133.99, 34.46], emoji: '🎃', transport: 'ferry', tier: 'N3',
     teaches: [],
     facts: [
       'Naoshima is an “art island” with museums designed by architect Tadao Ando.',
@@ -585,7 +585,7 @@ export const STOPS: Stop[] = [
     npc: { name: 'Kagura', jp: 'かぐら', look: L('#fff3e0', '#cc0000', 'calico', '#ffd24a', 'crown'), hello: ['すこし やすませて ください…', 'Please let me rest a little…'] },
   },
   {
-    id: 'iriomote', name: 'Iriomote Island', jp: '西表島', reading: 'いりおもてじま', region: 'Okinawa', lonlat: [123.8, 24.33], emoji: '🐆', transport: 'plane', tier: 'N3',
+    id: 'iriomote', name: 'Iriomote Island', jp: '西表島', reading: 'いりおもてじま', region: 'Okinawa', lonlat: [123.8, 24.33], emoji: '🐆', transport: 'ferry', tier: 'N3',
     teaches: [],
     facts: [
       'Iriomote is home to the Iriomote wildcat — only about 100 live in the wild, and nowhere else on Earth.',

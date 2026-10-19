@@ -31,7 +31,8 @@ export const bentoGame: GameDef = {
     const sh = shell(ctx, 'Kanji Bento 🍱');
     const all = compoundsThrough(ctx.stopIndex);
     if (all.length < 4) return ctx.quit();
-    const rounds = shuffle(pickItems(all, ctx.store.data.srs, 8));
+    // answers are saved under bento:<id>, so schedule rounds by those records
+    const rounds = shuffle(pickItems(all.map((w) => ({ id: `bento:${w.id}`, w })), ctx.store.data.srs, 8)).map((c) => c.w);
     const known = kanjiThrough(ctx.stopIndex).map((k) => k.char);
     let idx = 0;
     let correct = 0;
