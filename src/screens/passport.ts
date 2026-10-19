@@ -1,9 +1,10 @@
 import type { App, Screen } from '../ui/app';
-import { h } from '../ui/dom';
+import { h, ruby } from '../ui/dom';
 import { STOPS } from '../data/journey';
 import { CULTURE, type SpotTag } from '../data/culture';
 import { SHOP, type ShopKind } from '../data/shop';
 import { EVENTS } from '../data/seasons';
+import { PREFECTURES, STOP_PREFECTURE, visitedPrefectures } from '../data/prefectures';
 import { stampSvg } from '../ui/stamp';
 import { ACHIEVEMENTS } from '../core/progress';
 
@@ -50,6 +51,24 @@ export function passportScreen(app: App): Screen {
     return { emoji: sv.emoji, label: sv.name, sub: st.name, got: d.souvenirs.includes(st.id) };
   });
 
+  const visited = visitedPrefectures(d.stamps);
+  const onRoute = new Set(Object.values(STOP_PREFECTURE));
+  const prefGrid = h(
+    'div',
+    { class: 'trophy-grid' },
+    PREFECTURES.map((p) => {
+      const got = visited.has(p.id);
+      return h(
+        'div',
+        { class: `trophy pref ${got ? '' : 'missing'}`, title: got ? p.meibutsu : onRoute.has(p.id) ? 'Travel there to collect it' : 'Not on the route yet' },
+        h('span', { class: 'trophy-emoji' }, got ? p.emoji : '🗾'),
+        h('strong', null, p.name),
+        h('small', { class: 'jp' }, ruby(p.jp, d.settings.furigana)),
+        got ? h('small', null, p.meibutsu) : null,
+      );
+    }),
+  );
+
   const el = h(
     'div',
     { class: 'screen passport' },
@@ -57,6 +76,9 @@ export function passportScreen(app: App): Screen {
     h('p', { class: 'hint' }, 'Japanese train stations have rubber “eki stamps” for travelers to collect. Fill your book — and your trophy shelves!'),
     h('h3', null, `Eki stamps (${d.stamps.length}/${STOPS.length})`),
     h('div', { class: 'stamp-grid' }, stamps),
+    h('h3', null, `🗾 Prefectures (${visited.size}/${PREFECTURES.length})`),
+    h('p', { class: 'hint' }, 'Japan has 47 prefectures. Each one you visit shows off its famous local food or specialty (meibutsu).'),
+    prefGrid,
     ...shelf('🏯 Castles', sights('castle'), 'Photograph castles in Explore.'),
     ...shelf('🌏 World Heritage sites', sights('heritage'), 'Photograph UNESCO sites in Explore.'),
     ...shelf('🍙 Foods tasted', market('food'), 'Buy food at the Neko Market.'),
