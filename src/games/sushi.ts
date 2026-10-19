@@ -11,7 +11,7 @@ export const sushiGame: GameDef = {
   jp: 'かいてんずし',
   emoji: '🍣',
   blurb: 'Grab the right plate as it rolls by!',
-  kinds: ['kana', 'word'],
+  kinds: ['kana', 'word', 'kanji'],
   skill: 'reading',
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Sushi Belt 🍣');
@@ -39,15 +39,15 @@ export const sushiGame: GameDef = {
 
       const label = (c: Item): string => (reverse ? c.text : meaning(c));
       const prompt = reverse
-        ? h('div', { class: 'prompt prompt-kana' }, h('div', { class: item.kind === 'word' ? 'prompt-emoji' : 'prompt-jp' }, item.kind === 'word' ? item.emoji ?? '' : item.romaji), item.kind === 'word' ? h('div', { class: 'prompt-romaji' }, item.en ?? '') : null)
-        : displayPrompt(item, { romaji: ctx.hints && item.kind === 'word' });
+        ? h('div', { class: 'prompt prompt-kana' }, h('div', { class: item.kind === 'kana' ? 'prompt-jp' : 'prompt-emoji' }, item.kind === 'kana' ? item.romaji : item.emoji ?? ''), item.kind === 'kana' ? null : h('div', { class: 'prompt-romaji' }, item.en ?? ''))
+        : displayPrompt(item, { romaji: ctx.hints && item.kind === 'word', furigana: ctx.store.data.settings.furigana });
       const listen = h('button', { class: 'btn small ghost', onClick: () => void speak(item.reading), 'aria-label': 'Hear it' }, '🔊');
 
       let locked = false;
       const plates = choices.map((c) => {
         const btn = h(
           'button',
-          { class: `plate ${reverse ? 'jp' : ''} ${!reverse && item.kind === 'word' ? 'plate-wide' : ''}`, 'data-id': c.id },
+          { class: `plate ${reverse ? 'jp' : ''} ${!reverse && item.kind !== 'kana' ? 'plate-wide' : ''}`, 'data-id': c.id },
           h('span', { class: 'plate-food' }, '🍣'),
           h('span', { class: 'plate-label' }, label(c)),
         );

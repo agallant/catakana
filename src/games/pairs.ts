@@ -17,7 +17,7 @@ export const pairsGame: GameDef = {
   jp: 'ペア',
   emoji: '🃏',
   blurb: 'Flip the cards and match symbols with sounds.',
-  kinds: ['kana', 'word'],
+  kinds: ['kana', 'word', 'kanji'],
   skill: 'reading',
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Neko Pairs 🃏');

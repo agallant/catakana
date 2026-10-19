@@ -6,8 +6,7 @@ import { GAMES } from '../games';
 import { catSvg } from '../ui/cat';
 import { ruby } from '../ui/dom';
 import { speak } from '../core/audio';
-import { focusForStop, kanaItem } from '../core/items';
-import { stopKana } from '../core/curriculum';
+import { focusForStop, lessonBatch } from '../core/items';
 import { grammarAt } from '../core/sentences';
 import { grammarId } from './lesson';
 
@@ -19,7 +18,7 @@ export function stopScreen(app: App, params: string[]): Screen {
   const focus = focusForStop(idx);
   const introduced = new Set(d.introduced);
   const grammar = grammarAt(stop.id);
-  const needsLesson = (grammar !== undefined && !introduced.has(grammarId(grammar))) || stopKana(stop).map(kanaItem).some((k) => !introduced.has(k.id)) || (focus.length > 0 && !focus.some((f) => introduced.has(f.id)));
+  const needsLesson = (grammar !== undefined && !introduced.has(grammarId(grammar))) || lessonBatch(idx, introduced).items.some((k) => k.kind !== 'word' && !introduced.has(k.id)) || (focus.length > 0 && !focus.some((f) => introduced.has(f.id)));
   const wordsLeft = focus.filter((f) => f.kind === 'word' && !introduced.has(f.id)).length;
   const level = getLevel();
   const levelBtns = ([1, 2, 3] as const).map((l) =>
@@ -44,7 +43,7 @@ export function stopScreen(app: App, params: string[]): Screen {
       'section',
       { class: 'stop-hero' },
       h('div', { class: 'stop-emoji' }, stop.emoji),
-      h('h1', null, stop.name, h('span', { class: 'jp' }, ` ${stop.jp}`), h('span', { class: 'tier-chip' }, stop.tier)),
+      h('h1', null, stop.name, ' ', ruby(`{${stop.jp}|${stop.reading}}`, d.settings.furigana), h('span', { class: 'tier-chip' }, stop.tier)),
       h('div', { class: 'stars big' }, '★'.repeat(stars) + '☆'.repeat(3 - stars)),
       h('button', { class: 'btn ghost small', onClick: () => void speak(stop.reading) }, `🔊 ${stop.reading}`),
     ),

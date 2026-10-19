@@ -1,13 +1,14 @@
-import { h } from '../ui/dom';
+import { h, ruby } from '../ui/dom';
+import type { FuriganaMode } from '../core/store';
 import { sfx } from '../core/audio';
-import type { GameContext, Item } from './types';
+import type { GameContext, Item, ItemKind } from './types';
 import { pickItems, sample, shuffle } from '../core/srs';
 import { catSvg } from '../ui/cat';
 
 export const ROUNDS = 10;
 
 /** Pick the items for one session: new focus items first, then weakest of the pool. */
-export function sessionItems(ctx: GameContext, n = ROUNDS, kinds?: ('kana' | 'word')[]): Item[] {
+export function sessionItems(ctx: GameContext, n = ROUNDS, kinds?: ItemKind[]): Item[] {
   const ok = (i: Item) => !kinds || kinds.includes(i.kind);
   const pool = ctx.pool.filter(ok);
   const focus = ctx.focus.filter(ok);
@@ -132,14 +133,15 @@ export function recordAnswer(ctx: GameContext, item: Item, ok: boolean, sh: Shel
 
 /** What an item means: emoji + English for words, the sound for kana. */
 export function meaning(item: Item): string {
-  return item.kind === 'word' ? `${item.emoji ?? ''} ${item.en ?? ''}`.trim() : item.romaji;
+  return item.kind === 'kana' ? item.romaji : `${item.emoji ?? ''} ${item.en ?? ''}`.trim();
 }
 
-export function displayPrompt(item: Item, opts: { romaji?: boolean } = {}): HTMLElement {
+export function displayPrompt(item: Item, opts: { romaji?: boolean; furigana?: FuriganaMode } = {}): HTMLElement {
+  const withRuby = item.kind === 'word' && item.text !== item.reading;
   return h(
     'div',
     { class: `prompt ${item.kind === 'word' ? 'prompt-word' : 'prompt-kana'}` },
-    h('div', { class: 'prompt-jp jp' }, item.text),
+    h('div', { class: 'prompt-jp jp' }, withRuby ? ruby(`{${item.text}|${item.reading}}`, opts.furigana ?? 'always') : item.text),
     opts.romaji ? h('div', { class: 'prompt-romaji' }, item.romaji) : null,
   );
 }

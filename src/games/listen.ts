@@ -16,7 +16,8 @@ export const listenGame: GameDef = {
   available: () => speechSupported(),
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Whisker Ears 👂');
-    const items = sessionItems(ctx);
+    // kanji are skipped: many share a sound (日/火 = ひ)
+    const items = sessionItems(ctx, undefined, ['kana', 'word']);
     const options = ctx.level === 1 ? 3 : 4;
     let idx = 0;
     let correct = 0;

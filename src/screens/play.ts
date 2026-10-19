@@ -3,7 +3,7 @@ import { h } from '../ui/dom';
 import { STOP_BY_ID, STOPS } from '../data/journey';
 import { GAME_BY_ID } from '../games';
 import type { GameContext, Item, Level, Summary } from '../games/types';
-import { focusForStop, poolForStop } from '../core/items';
+import { focusForStop, poolForStop, withKnownKanji } from '../core/items';
 import { catSvg } from '../ui/cat';
 import { sfx } from '../core/audio';
 import { collectCat } from '../core/cats';
@@ -37,7 +37,8 @@ export function playScreen(app: App, params: string[]): Screen {
     const k = items.filter((i) => i.kind === 'kana' || known.has(i.id));
     return k.length >= 4 ? k : items;
   };
-  const wide = poolForStop(stopIndex);
+  const kanjify = (items: Item[]): Item[] => items.map((i) => withKnownKanji(i, known));
+  const wide = kanjify(poolForStop(stopIndex));
   const pool = onlyKnown(wide);
   const started = Date.now();
 
@@ -50,7 +51,7 @@ export function playScreen(app: App, params: string[]): Screen {
     hints: romajiHints(app.store.data, stopIndex),
     pool,
     wide,
-    focus: review ? pool : onlyKnown(focusForStop(stopIndex)),
+    focus: review ? pool : onlyKnown(kanjify(focusForStop(stopIndex))),
     quit: () => app.go(home),
     finish(summary) {
       const r = rewards(summary, level);

@@ -240,3 +240,22 @@ ruby rt { font-size: 0.55em; }
 .wordbook { display: grid; gap: 6px; }
 .word-row { display: flex; align-items: center; gap: 10px; text-align: left; background: color-mix(in srgb, var(--teal) calc(var(--m, 0) * 45%), var(--card)); border: 2px solid var(--line); border-radius: 12px; padding: 6px 10px; }
 .word-emoji { font-size: 1.4rem; } .word-jp { font-size: 1.2rem; min-width: 40%; } .word-en { color: var(--muted); flex: 1; text-align: right; }
+
+/* Stroke writer */
+.writer { background: #fffdf8; border: 3px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); max-width: 100%; height: auto; }
+.w-grid path { stroke: #eadbc6; stroke-width: 0.6; stroke-dasharray: 2 2; fill: none; }
+.w-model path, .w-ghost { stroke: #3b2a20; opacity: 0.13; stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.w-next { stroke: var(--teal); opacity: 0.45; stroke-width: 5; fill: none; stroke-linecap: round; }
+.w-start { fill: var(--pink-d); animation: pulse 1.2s infinite; transform-box: fill-box; transform-origin: center; }
+.w-done { stroke: #2b2b2b; stroke-width: 4.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.w-live { stroke: var(--pink); stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.w-anim { stroke: var(--teal); stroke-width: 5; fill: none; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 0.9s ease forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.w-shake { animation: badflash 0.4s; }
+.stroke-anim { background: #fffdf8; border-radius: 14px; border: 2px solid var(--line); }
+.w-seq { stroke: #e5627f; stroke-width: 5; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; }
+.writers { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.write-word { font-size: 2rem; letter-spacing: 4px; } .w-ok { color: var(--ok); } .w-cur { color: var(--pink-d); text-decoration: underline; } .w-todo { color: var(--muted); }
+.kanji-row { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.readings { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 6px 0; font-size: 1.1rem; }
+.prompt-sound { font-size: 2.6rem; font-weight: 800; font-family: var(--jp); }

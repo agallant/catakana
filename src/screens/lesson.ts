@@ -10,6 +10,35 @@ import { toHiragana } from '../data/kana';
 import { romajiHints } from '../core/romaji';
 import { grammarAt } from '../core/sentences';
 import type { GrammarPoint } from '../data/n5';
+import { KANJI_BY_CHAR } from '../data/kanji';
+import { ALL_WORDS } from '../data/vocab';
+import { loadStrokes } from '../core/strokes';
+import { strokeAnimation } from '../ui/writer';
+
+/** Stroke-order animation slot, filled once the stroke data has loaded. */
+function strokesFor(text: string): HTMLElement {
+  const slot = h('div', { class: 'writers' });
+  void loadStrokes().then((data) => {
+    const chars = [...text].filter((c) => data[c]);
+    slot.replaceChildren(...chars.map((c) => strokeAnimation(data[c]!, chars.length > 1 ? 96 : 130)));
+  });
+  return slot;
+}
+
+function kanjiCard(item: Item): (HTMLElement | null)[] {
+  const k = KANJI_BY_CHAR.get(item.text);
+  const examples = ALL_WORDS.filter((w) => w.kanji?.includes(item.text)).slice(0, 3);
+  return [
+    h('div', { class: 'small' }, '🈁 Kanji'),
+    h('div', { class: 'kanji-row' }, h('div', { class: 'lesson-glyph jp' }, item.text), strokesFor(item.text)),
+    h('div', { class: 'lesson-en' }, `${item.emoji ?? ''} ${item.en ?? ''}`),
+    k ? h('div', { class: 'readings' }, k.kun.length ? h('div', null, h('strong', null, 'kun: '), h('span', { class: 'jp' }, k.kun.join('、'))) : null, k.on.length ? h('div', null, h('strong', null, 'on: '), h('span', { class: 'jp' }, k.on.join('、'))) : null) : null,
+    examples.length
+      ? h('div', { class: 'example' }, examples.map((w) => h('div', null, h('ruby', { class: 'jp' }, w.kanji ?? w.jp, h('rt', null, w.reading)), ` ${w.emoji} ${w.en}`)))
+      : null,
+    h('p', { class: 'small' }, 'kun = native Japanese reading (used alone) · on = Chinese-derived reading (used in compounds)'),
+  ];
+}
 
 type Card = { kind: 'item'; item: Item } | { kind: 'grammar'; g: GrammarPoint };
 
@@ -62,11 +91,16 @@ export function lessonScreen(app: App, params: string[]): Screen {
     );
   };
   const showItem = (item: Item): void => {
+    if (item.kind === 'kanji') {
+      fill(card, ...kanjiCard(item), h('button', { class: 'btn primary', onClick: () => void speak(item.reading) }, '🔊 Hear it'));
+      void speak(item.reading);
+      return;
+    }
     const ex = exampleFor(item);
     const mn = MNEMONICS[item.text];
     fill(
       card,
-      h('div', { class: `lesson-glyph jp ${[...item.text].length > 2 ? 'long' : ''}` }, item.text),
+      item.kind === 'kana' ? h('div', { class: 'kanji-row' }, h('div', { class: 'lesson-glyph jp' }, item.text), strokesFor(item.text)) : h('div', { class: `lesson-glyph jp ${[...item.text].length > 2 ? 'long' : ''}` }, item.text),
       item.kanji ? h('div', { class: 'kanji-peek jp' }, `written: ${item.kanji}`) : null,
       item.kind === 'kana'
         ? h('div', { class: 'lesson-romaji' }, item.romaji, item.script === 'katakana' ? h('span', { class: 'twin jp' }, ` = ${toHiragana(item.text)}`) : null)

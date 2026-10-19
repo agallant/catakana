@@ -23,7 +23,8 @@ export function settingsScreen(app: App): Screen {
     h('div', { class: 'setting col' }, h('button', { class: 'btn ghost', onClick: () => { sfx.meow(); void speak('こんにちは'); } }, '🔊 Test voice'), h('small', null, hasJapaneseVoice() ? 'Japanese voice found ✔' : 'No Japanese voice found. Add one in your device’s text-to-speech settings.')),
     h('div', { class: 'setting col' }, h('strong', null, 'Your progress'), h('small', null, `${d.stats.correct} right · ${d.stats.wrong} wrong · ${d.stats.rounds} rounds played`), h('small', null, 'Saved only on this device.')),
     h('button', { class: 'btn danger', onClick: () => { if (confirm('Erase all progress on this device?')) { app.store.reset(); app.go('welcome'); } } }, 'Erase progress'),
-    h('p', { class: 'hint' }, 'Catakana v0.1 · works offline · made with 🐾'),
+    h('p', { class: 'hint' }, 'Catakana · works offline · made with 🐾'),
+    h('p', { class: 'hint' }, 'Stroke order data from KanjiVG © Ulrich Apel (CC BY-SA 3.0).'),
   );
   return { el };
 }

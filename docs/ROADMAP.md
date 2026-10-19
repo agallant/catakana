@@ -17,7 +17,7 @@ Tiers: Kana → N5 → N4 → N3 → N2 → N1. Everything runs client-side, off
 | M2.5 | **Reading depth** – dakuten/combo look-alike drills, daily review quests, streak rewards, achievements, accessibility pass | planned |
 | M3 | **N5 Grand Tour, part 1** – 12 new destinations (Hakodate → Yakushima) each with a grammar point (は/です, これ/の, adjectives, ます, を, に/へ, numbers & time, で, あります/います, past & negative, たい, てください), ~230 N5 words (kanji forms stored for M4), 60 example sentences, Word Train sentence-building game (reading → listening at hard), word book | in progress |
 | M3.5 | **N5 Grand Tour, part 2** – remaining N5 vocabulary (~400 more words), counters, adverbs, conjunctions, more grammar (から/まで, ～ましょう, ～ている), new destinations | planned |
-| M4 | **Furigana & N5 kanji** – ruby text everywhere with always/tap/off modes, ~100 N5 kanji with readings and stroke-order animation (KanjiVG-derived data), kanji recognition and writing games | planned |
+| M4 | **Kanji & stroke order** – KanjiVG stroke data for all kana + 109 N5 kanji; Paw Painting checks stroke order and direction (hints → from memory); kanji cards with animated stroke order, on/kun readings and example words; words switch to kanji with furigana once their kanji are learned; kanji chart | in progress |
 | M5 | **Listening** – dialogue comprehension scenes at each stop (train announcements, ordering food), speed control, dictation game, pre-generated audio packs for devices lacking a Japanese voice | planned |
 | M6 | **Speaking** – pronunciation shadowing with microphone recording and playback comparison, optional SpeechRecognition scoring where supported, pitch-accent hints, role-play with local cats | planned |
 | M7 | **N4** – ~300 more words, ~170 kanji, te-form/conjugation drills, new regions and stories | planned |
@@ -34,5 +34,4 @@ Tiers: Kana → N5 → N4 → N3 → N2 → N1. Everything runs client-side, off
 - Content is data (`src/data`), curriculum is derived (words become available once their kana are learned).
 
 ## Known limitations / ideas
-- Tracing scores glyph coverage/accuracy but does not yet enforce stroke order (needs stroke data, M4).
 - Japanese speech uses the device's `speechSynthesis`; devices without a Japanese voice get a notice (audio packs in M5).
