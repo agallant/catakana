@@ -22,7 +22,18 @@ export const pairsGame: GameDef = {
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Neko Pairs 🃏');
     const nPairs = ctx.level === 1 ? 4 : ctx.level === 2 ? 6 : 8;
-    const picked = sessionItems(ctx, nPairs * 2).filter((it, i, a) => a.findIndex((x) => x.id === it.id) === i).slice(0, nPairs);
+    // no two cards may look the same (e.g. the kanji 川 and the word かわ both mean "river")
+    const faces = new Set<string>();
+    const picked = sessionItems(ctx, nPairs * 2)
+      .filter((it) => {
+        const jp = `jp:${it.text}`;
+        const rom = `rom:${meaning(it)}`;
+        if (faces.has(jp) || faces.has(rom)) return false;
+        faces.add(jp);
+        faces.add(rom);
+        return true;
+      })
+      .slice(0, nPairs);
     const items = picked.length >= 2 ? picked : ctx.pool.slice(0, nPairs);
     const cards: Card[] = shuffle(
       items.flatMap((it): Card[] => [

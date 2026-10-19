@@ -114,13 +114,16 @@ export class Store {
       if (raw) {
         const parsed = JSON.parse(raw) as Partial<SaveData>;
         const base = defaultSave();
-        return {
+        const data: SaveData = {
           ...base,
           ...parsed,
           look: { ...base.look, ...(parsed.look ?? {}) },
           settings: { ...base.settings, ...(parsed.settings ?? {}) },
           stats: { ...base.stats, ...(parsed.stats ?? {}) },
         };
+        // saves from before eki stamps existed: every visited stop earns its stamp
+        for (const id of Object.keys(data.stops)) if (!data.stamps.includes(id)) data.stamps.push(id);
+        return data;
       }
     } catch {
       /* corrupted save: start fresh */

@@ -48,9 +48,12 @@ export function createWriter(o: WriterOptions): Writer {
     hintLayer.replaceChildren(s('path', { d, class: 'w-anim', pathLength: 1 }));
   };
   const reset = (): void => {
+    // mistakes are kept on purpose; a finished character can't be restarted
+    if (n >= expected.length) return;
     n = 0;
-    mistakes = 0;
     strikes = 0;
+    drawing = false;
+    live.setAttribute('points', '');
     ink.replaceChildren();
     showNextCue();
   };
@@ -113,8 +116,9 @@ export function strokeAnimation(strokes: string[], size = 140): SVGElement {
     ...strokes.map((d) => s('path', { d, class: 'w-ghost' })),
     ...seq,
   );
+  const reduce = document.documentElement.classList.contains('reduce-motion') || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   seq.forEach((p, i) => {
-    if (typeof p.animate !== 'function') return;
+    if (reduce || typeof p.animate !== 'function') return;
     const a = (i * per) / total;
     const b = ((i + 1) * per) / total;
     p.style.strokeDashoffset = '1';

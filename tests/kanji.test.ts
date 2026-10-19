@@ -31,3 +31,18 @@ describe('kanji', () => {
     expect(lessonBatch(i, new Set()).items.some((x) => x.kind === 'kanji')).toBe(true);
   });
 });
+
+import { WORDS } from '../src/data/vocab';
+describe('review fixes', () => {
+  it('counter kanji fall back to on-yomi instead of fragments', () => {
+    expect(primaryReading(KANJI_BY_CHAR.get('三')!)).toBe('さん');
+    expect(primaryReading(KANJI_BY_CHAR.get('八')!)).toBe('はち');
+  });
+  it('kana-stage words get kanji forms from the N5 tour', () => {
+    expect(WORDS.find((w) => w.reading === 'やま')?.kanji).toBe('山');
+    expect(WORDS.find((w) => w.reading === 'でんしゃ')?.kanji).toBe('電車');
+    // homophones keep distinct forms: はな (flower) gets 花, はな (nose) gets none
+    expect(WORDS.find((w) => w.reading === 'はな' && w.en === 'flower')?.kanji).toBe('花');
+    expect(WORDS.find((w) => w.reading === 'はな' && w.en === 'nose')?.kanji).toBeUndefined();
+  });
+});

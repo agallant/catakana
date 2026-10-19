@@ -3,6 +3,7 @@ import { h, ruby } from '../ui/dom';
 import { STOP_BY_ID, STOPS } from '../data/journey';
 import { CULTURE } from '../data/culture';
 import { sfx, speak } from '../core/audio';
+import { triviaFor } from './trivia';
 
 /** Strip {kanji|kana} markup down to kana for speech. */
 export function readingOf(markup: string): string {
@@ -95,7 +96,7 @@ export function exploreScreen(app: App, params: string[]): Screen {
       'section',
       { class: 'callout' },
       h('h3', null, '🎤 Tour-guide quiz'),
-      h('p', null, best !== undefined ? `Best: ${best}/${c.trivia.length + 3}` : 'Test what you learned about Japan!'),
+      h('p', null, best !== undefined ? `Best: ${best}/${triviaFor(stop.id).length}` : 'Test what you learned about Japan!'),
       h('button', { class: 'btn primary big', onClick: () => app.go(`trivia/${stop.id}`) }, 'Start quiz'),
     ),
   );

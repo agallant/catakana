@@ -237,6 +237,17 @@ export const N5_WORDS: Word[] = Object.entries(N5_CONTENT).flatMap(([stop, c]) =
     })),
 );
 
+// Kana-stage words that the N5 tour also teaches keep their kanji form, matched on reading + meaning
+// (homophones such as はな flower / nose differ in meaning).
+const headword = (en: string): string => en.split(/[ /(]/)[0]!.toLowerCase();
+const kanjiFor = new Map<string, string>();
+for (const c of Object.values(N5_CONTENT))
+  for (const [kanji, reading, en] of c.words) if (kanji !== reading) kanjiFor.set(`${reading}|${headword(en)}`, kanji);
+for (const w of WORDS) {
+  const k = kanjiFor.get(`${w.reading}|${headword(w.en)}`);
+  if (k) w.kanji = k;
+}
+
 export const ALL_WORDS: Word[] = [...WORDS, ...N5_WORDS];
 
 export const WORD_BY_ID = new Map(ALL_WORDS.map((w) => [w.id, w]));

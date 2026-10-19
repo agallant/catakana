@@ -158,8 +158,9 @@ export const KANJI_BY_CHAR = new Map(KANJI.map((k) => [k.char, k]));
 
 /** The most useful reading to quiz: first kun'yomi without okurigana, else first on'yomi in hiragana. */
 export function primaryReading(k: Kanji): string {
-  const kun = k.kun[0];
-  if (kun) return kun.replace(/\(.*\)/, '');
+  // skip fragments like みっ(つ) → みっ, which are not usable on their own
+  const kun = k.kun[0]?.replace(/\(.*\)/, '');
+  if (kun && !kun.endsWith('っ')) return kun;
   const on = k.on[0] ?? '';
   return [...on].map((c) => String.fromCodePoint(c.codePointAt(0)! - 0x60)).join('');
 }
