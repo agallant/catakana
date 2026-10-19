@@ -305,3 +305,5 @@ button.hud-stat { cursor: pointer; }
 .ach { display: flex; gap: 8px; align-items: center; background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 8px; font-size: 0.85rem; }
 .ach.locked { opacity: 0.45; filter: grayscale(1); }
 .ach-emoji { font-size: 1.6rem; font-family: var(--jp); }
+.form-chip { display: inline-block; margin-top: 6px; background: var(--gold); color: #3b2a20; font-weight: 800; border-radius: 99px; padding: 4px 12px; }
+.kitchen-verb { font-size: 3rem; }
