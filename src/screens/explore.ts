@@ -4,7 +4,7 @@ import { STOP_BY_ID, STOPS } from '../data/journey';
 import { CULTURE } from '../data/culture';
 import { sfx, speak } from '../core/audio';
 import { triviaFor } from './trivia';
-import { track } from '../core/progress';
+import { checkAchievements, track } from '../core/progress';
 import { DAY_TRIPS, DAY_TRIP_FISH } from '../data/daytrips';
 
 /** Strip {kanji|kana} markup down to kana for speech. */
@@ -59,6 +59,8 @@ export function exploreScreen(app: App, params: string[]): Screen {
             });
             sfx.coin();
             void speak(t.phrase[0]);
+            // a new prefecture can unlock Prefecture Hopper / Nationwide Cat
+            checkAchievements(app.store);
             app.render();
           },
         },
