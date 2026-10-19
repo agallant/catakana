@@ -19,6 +19,8 @@ describe('time and dates', () => {
     expect(dayReadings(14)).toEqual(['じゅうよっか']);
     expect(dayReadings(20)).toEqual(['はつか']);
     expect(dayReadings(21)).toEqual(['にじゅういちにち']);
+    expect(dayReadings(17)).toContain('じゅうななにち');
+    expect(dayReadings(27)).toContain('にじゅうななにち');
     expect(monthReading(4)).toBe('しがつ');
     expect(monthReading(9)).toBe('くがつ');
     expect(monthReading(12)).toBe('じゅうにがつ');

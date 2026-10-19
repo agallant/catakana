@@ -82,7 +82,9 @@ export const COUNTERS: Counter[] = [
 
 /** The counter written with its number, e.g. 三匹. */
 export function written(c: Counter, n: number): string {
-  return c.id === 'tsu' ? `${numKanji(n)}つ` : `${numKanji(n)}${c.kanji}`;
+  // ten is just 十 (とお), never 十つ
+  if (c.id === 'tsu') return n === 10 ? numKanji(n) : `${numKanji(n)}つ`;
+  return `${numKanji(n)}${c.kanji}`;
 }
 
 const NUMS = ['いち', 'に', 'さん', 'よん', 'ご', 'ろく', 'なな', 'はち', 'きゅう', 'じゅう'];
@@ -108,7 +110,6 @@ export function counterDistractors(c: Counter, n: number): string[] {
   if (voiced) cands.push(num + voiced);
   // つ and 人 use their own native readings, so the っ trap doesn't apply
   if (GEM[n] && c.id !== 'tsu' && c.id !== 'nin') cands.push(GEM[n] + (swapFirst(base, HALF) ?? base));
-  if (c.id === 'tsu') cands.push(num + 'こ');
   // the other readings of 4, 7 and 9 (よんにん, しちだい, くにん)
   if (c.id !== 'tsu') for (const alt of ALT_NUMS[n] ?? []) cands.push(alt + base);
   // mixing in the native とお for ten (とおにん, とおまい)

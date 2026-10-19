@@ -23,6 +23,8 @@ describe('counters', () => {
     expect(c('mai').readings[3]![0]).toBe('よんまい');
     expect(written(c('hiki'), 3)).toBe('三匹');
     expect(written(c('tsu'), 3)).toBe('三つ');
+    expect(written(c('tsu'), 10)).toBe('十');
+    expect(counterDistractors(c('tsu'), 3)).not.toContain('さんこ');
   });
   it('offer at least three teaching distractors, never a right answer', () => {
     for (const k of COUNTERS) {

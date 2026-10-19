@@ -57,7 +57,9 @@ export const countingGame: GameDef = {
       }
       sh.setProgress(idx, rounds.length);
       const { id, counter, n } = rounds[idx]!;
-      const accepted = counter.readings[n - 1]!;
+      // level 3 hides the counter, and round things like apples and rice balls take either つ or 個
+      const twin = ctx.level === 3 ? ({ tsu: 'ko', ko: 'tsu' } as Record<string, string>)[counter.id] : undefined;
+      const accepted = [...counter.readings[n - 1]!, ...(COUNTERS.find((c) => c.id === twin)?.readings[n - 1] ?? [])];
       const main = accepted[0]!;
       const [emoji, noun] = sample(counter.things);
       let locked = false;
