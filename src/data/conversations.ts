@@ -332,7 +332,7 @@ export const CONVERSATIONS: Conversation[] = [
     lines: [
       { who: 'npc', jp: 'このさらは さんかいも やいたんですよ。', en: 'This plate was fired three times, you know.' },
       { who: 'me', jp: 'こんなに うすいのに、つよいですね。', en: 'It’s so thin, yet strong.' },
-      { who: 'npc', jp: 'むかしは ヨーロッパの おうさまに たいして ゆしゅつ していました。', en: 'Long ago it was exported for the kings of Europe.' },
+      { who: 'npc', jp: 'むかしは ヨーロッパへ ゆしゅつ していました。おうさまに たいへん にんきでしたよ。', en: 'Long ago it was exported to Europe. Kings loved it.' },
     ],
     q: 'Who bought Arita porcelain long ago?', options: ['European kings', 'Chinese farmers', 'American sailors'], answer: 0,
   },

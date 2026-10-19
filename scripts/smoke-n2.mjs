@@ -24,3 +24,4 @@ for (const [r, n] of shots) {
 }
 console.log('errors:', errors);
 await browser.close();
+if (errors.length > 0) process.exitCode = 1;

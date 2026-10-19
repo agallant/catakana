@@ -118,7 +118,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       explain: 'Noun + にたいして = toward / regarding (an attitude), or in contrast to: あにが しずかなのに たいして、おとうとは にぎやかだ.',
       examples: [
         { jp: 'しょくにんは しごとに たいして とても きびしいです。', en: 'The craftsmen are very strict about their work.' },
-        { jp: 'かくの さらが しろいのに たいして、こちらは あおいです。', en: 'Whereas that plate is white, this one is blue.' },
+        { jp: 'あの さらが しろいのに たいして、こちらは あおいです。', en: 'Whereas that plate is white, this one is blue.' },
       ],
     },
     words: [

@@ -816,7 +816,7 @@ export const CULTURE: Record<string, StopCulture> = {
     spots: [
       { name: 'Hitome Senbon', tags: ['heritage'], jp: '{一目千本|ひとめせんぼん}', emoji: '🌸', about: '“A thousand trees at a glance” — cherry blossoms climbing the mountain in waves.' },
       { name: 'Kinpusen-ji', tags: ['heritage'], jp: '{金峯山寺|きんぷせんじ}', emoji: '🛕', about: 'A huge wooden hall at the heart of Shugendō mountain worship (Kii UNESCO site).' },
-      { name: 'Yoshino Mizumaki Shrine', tags: ['heritage'], jp: '{吉水神社|よしみずじんじゃ}', emoji: '⛩️', about: 'Where Emperor Go-Daigo lived in hiding during the Southern Court era.' },
+      { name: 'Yoshimizu Shrine', tags: ['heritage'], jp: '{吉水神社|よしみずじんじゃ}', emoji: '⛩️', about: 'Where Emperor Go-Daigo lived in hiding during the Southern Court era.' },
     ],
     trivia: [
       { q: 'About how many cherry trees grow on Mt. Yoshino?', options: ['30,000', '300', '3 million'], answer: 0 },
