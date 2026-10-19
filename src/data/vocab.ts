@@ -1,3 +1,6 @@
+import { N5_CONTENT } from './n5';
+import { kanaToRomaji } from './kana';
+
 export type Tier = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
 
 export interface Word {
@@ -13,6 +16,10 @@ export interface Word {
   topic: Topic;
   /** True if the usual written form is all katakana. */
   katakana?: boolean;
+  /** Usual written form with kanji (shown once kanji are introduced). */
+  kanji?: string;
+  /** For N5 Grand Tour words: the stop that teaches it. */
+  stop?: string;
 }
 
 export type Topic =
@@ -203,8 +210,44 @@ export const WORDS: Word[] = N5_ROWS.map(([jp, reading, romaji, en, emoji, topic
   katakana: isAllKatakana(jp),
 }));
 
-export const WORD_BY_ID = new Map(WORDS.map((w) => [w.id, w]));
 
 export function wordsByTopic(topic: Topic): Word[] {
   return WORDS.filter((w) => w.topic === topic);
 }
+
+
+const kanaStageReadings = new Set(WORDS.map((w) => w.reading));
+
+/** N5 Grand Tour words, taught stop by stop (duplicates of kana-stage words are skipped). */
+export const N5_WORDS: Word[] = Object.entries(N5_CONTENT).flatMap(([stop, c]) =>
+  c.words
+    .filter(([, reading]) => !kanaStageReadings.has(reading))
+    .map(([kanji, reading, en, emoji]) => ({
+      id: `n5:${stop}:${reading}`,
+      jp: reading,
+      reading,
+      romaji: kanaToRomaji(reading),
+      en,
+      emoji,
+      tier: 'N5' as const,
+      topic: 'things' as const,
+      katakana: isAllKatakana(reading),
+      kanji: kanji !== reading ? kanji : undefined,
+      stop,
+    })),
+);
+
+// Kana-stage words that the N5 tour also teaches keep their kanji form, matched on reading + meaning
+// (homophones such as はな flower / nose differ in meaning).
+const headword = (en: string): string => en.split(/[ /(]/)[0]!.toLowerCase();
+const kanjiFor = new Map<string, string>();
+for (const c of Object.values(N5_CONTENT))
+  for (const [kanji, reading, en] of c.words) if (kanji !== reading) kanjiFor.set(`${reading}|${headword(en)}`, kanji);
+for (const w of WORDS) {
+  const k = kanjiFor.get(`${w.reading}|${headword(w.en)}`);
+  if (k) w.kanji = k;
+}
+
+export const ALL_WORDS: Word[] = [...WORDS, ...N5_WORDS];
+
+export const WORD_BY_ID = new Map(ALL_WORDS.map((w) => [w.id, w]));

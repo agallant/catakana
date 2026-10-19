@@ -16,6 +16,7 @@ export function travelScreen(app: App, params: string[]): Screen {
   const arrive = (): void => {
     app.store.update((d) => {
       if (d.stops[stop.id] === undefined) d.stops[stop.id] = 0;
+      if (!d.stamps.includes(stop.id)) d.stamps.push(stop.id);
     });
     sfx.meow();
     app.go(`stop/${stop.id}`);
@@ -33,9 +34,12 @@ export function travelScreen(app: App, params: string[]): Screen {
       h('p', null, `${from} → ${stop.name} ${stop.emoji}`),
       h('p', { class: 'jp lead' }, `${stop.jp}（${stop.reading}）`),
       h('div', { class: 'fact' }, h('strong', null, 'Did you know? '), fact),
-      h('div', { class: 'row' }, h('button', { class: 'btn ghost', onClick: () => void speak(stop.reading) }, '🔊 Hear the name'), h('button', { class: 'btn primary big', onClick: arrive }, `Arrive in ${stop.name} 🐾`)),
+      h('div', { class: 'announce jp' }, `まもなく、${stop.reading}です。`),
+      h('p', { class: 'small' }, `“We will soon arrive at ${stop.name}.” — listen for “mamonaku” (soon) on real trains!`),
+      h('div', { class: 'row' }, h('button', { class: 'btn ghost', onClick: () => void speak(`まもなく、${stop.reading}です。`) }, '🔊 Announcement'), h('button', { class: 'btn primary big', onClick: arrive }, `Arrive in ${stop.name} 🐾`)),
     ),
   );
   sfx.purr();
-  return { el };
+  const t = window.setTimeout(() => void speak(`まもなく、${stop.reading}です。`), 1800);
+  return { el, dispose: () => window.clearTimeout(t) };
 }

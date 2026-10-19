@@ -1,13 +1,14 @@
-import { h } from '../ui/dom';
+import { h, ruby } from '../ui/dom';
+import type { FuriganaMode } from '../core/store';
 import { sfx } from '../core/audio';
-import type { GameContext, Item } from './types';
+import type { GameContext, Item, ItemKind } from './types';
 import { pickItems, sample, shuffle } from '../core/srs';
 import { catSvg } from '../ui/cat';
 
 export const ROUNDS = 10;
 
 /** Pick the items for one session: new focus items first, then weakest of the pool. */
-export function sessionItems(ctx: GameContext, n = ROUNDS, kinds?: ('kana' | 'word')[]): Item[] {
+export function sessionItems(ctx: GameContext, n = ROUNDS, kinds?: ItemKind[]): Item[] {
   const ok = (i: Item) => !kinds || kinds.includes(i.kind);
   const pool = ctx.pool.filter(ok);
   const focus = ctx.focus.filter(ok);
@@ -26,18 +27,23 @@ export function sessionItems(ctx: GameContext, n = ROUNDS, kinds?: ('kana' | 'wo
 }
 
 /** Distractors resembling the answer (same kind and script) from the pool. */
-export function distractors(ctx: GameContext, answer: Item, n: number, byRomaji = false): Item[] {
+export function distractors(ctx: GameContext, answer: Item, n: number, keyOf: (i: Item) => string = (i) => i.text): Item[] {
   const same = ctx.pool.filter((p) => p.id !== answer.id && p.kind === answer.kind && p.script === answer.script);
   const unique = new Map<string, Item>();
   for (const p of same) {
-    const key = byRomaji ? p.romaji : p.text;
-    if (key !== (byRomaji ? answer.romaji : answer.text) && !unique.has(key)) unique.set(key, p);
+    const key = keyOf(p);
+    if (key !== keyOf(answer) && !unique.has(key)) unique.set(key, p);
   }
-  let cands = [...unique.values()];
+  const cands = [...unique.values()];
   if (cands.length < n) {
     // pad with look-alikes from any item of the same kind
-    const extra = ctx.pool.filter((p) => p.id !== answer.id && !cands.includes(p) && p.kind === answer.kind);
-    cands = cands.concat(extra);
+    const seen = new Set([keyOf(answer), ...cands.map(keyOf)]);
+    for (const p of [...ctx.pool, ...shuffle(ctx.wide)]) {
+      if (cands.length >= n * 3) break;
+      if (p.kind !== answer.kind || seen.has(keyOf(p))) continue;
+      seen.add(keyOf(p));
+      cands.push(p);
+    }
   }
   // prefer similar length for words
   if (answer.kind === 'word') {
@@ -125,11 +131,17 @@ export function recordAnswer(ctx: GameContext, item: Item, ok: boolean, sh: Shel
   sh.flash(ok);
 }
 
-export function displayPrompt(item: Item, opts: { romaji?: boolean } = {}): HTMLElement {
+/** What an item means: emoji + English for words, the sound for kana. */
+export function meaning(item: Item): string {
+  return item.kind === 'kana' ? item.romaji : `${item.emoji ?? ''} ${item.en ?? ''}`.trim();
+}
+
+export function displayPrompt(item: Item, opts: { romaji?: boolean; furigana?: FuriganaMode } = {}): HTMLElement {
+  const withRuby = item.kind === 'word' && item.text !== item.reading;
   return h(
     'div',
     { class: `prompt ${item.kind === 'word' ? 'prompt-word' : 'prompt-kana'}` },
-    h('div', { class: 'prompt-jp jp' }, item.text),
+    h('div', { class: 'prompt-jp jp' }, withRuby ? ruby(`{${item.text}|${item.reading}}`, opts.furigana ?? 'always') : item.text),
     opts.romaji ? h('div', { class: 'prompt-romaji' }, item.romaji) : null,
   );
 }

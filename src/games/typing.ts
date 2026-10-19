@@ -1,6 +1,6 @@
 import { h, sleep } from '../ui/dom';
 import { speak } from '../core/audio';
-import type { GameDef, GameContext } from './types';
+import type { GameDef, GameContext, Item } from './types';
 import { recordAnswer, sessionItems, shell } from './common';
 import { romajiToHiragana, toKatakana } from '../data/kana';
 
@@ -11,7 +11,7 @@ export const typingGame: GameDef = {
   jp: 'タイピング',
   emoji: '⌨️',
   blurb: 'Type what you read — like a keyboard cat!',
-  kinds: ['kana', 'word'],
+  kinds: ['kana', 'word', 'kanji'],
   skill: 'writing',
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Keyboard Cat ⌨️');
@@ -24,10 +24,11 @@ export const typingGame: GameDef = {
     const matches = (input: string, reading: string, romaji: string): boolean => {
       const t = input.trim().toLowerCase().replace(/\s+/g, '');
       if (!t) return false;
-      if (t === romaji.toLowerCase()) return true;
+      if (romaji && t === romaji.toLowerCase()) return true;
       const hira = romajiToHiragana(t);
       return hira === reading || toKatakana(hira) === reading || t === reading;
     };
+    const accepts = (input: string, it: Item): boolean => [it.reading, ...(it.alts ?? [])].some((r) => matches(input, r, r === it.reading ? it.romaji : ''));
 
     const next = async (): Promise<void> => {
       if (idx >= items.length || lives <= 0) {
@@ -48,7 +49,7 @@ export const typingGame: GameDef = {
       const submit = async (): Promise<void> => {
         if (locked) return;
         locked = true;
-        const ok = matches(input.value, item.reading, item.romaji);
+        const ok = accepts(input.value, item);
         recordAnswer(ctx, item, ok, sh);
         if (ok) correct++;
         else {

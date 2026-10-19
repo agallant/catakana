@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
 import { sfx, speak } from '../core/audio';
 import type { GameDef, GameContext, Item } from './types';
-import { distractors, displayPrompt, recordAnswer, sessionItems, shell } from './common';
+import { distractors, displayPrompt, meaning, recordAnswer, sessionItems, shell } from './common';
 import { shuffle } from '../core/srs';
 
 /** Kaiten-sushi quiz: pick the right plate off the belt. */
@@ -11,7 +11,7 @@ export const sushiGame: GameDef = {
   jp: 'かいてんずし',
   emoji: '🍣',
   blurb: 'Grab the right plate as it rolls by!',
-  kinds: ['kana', 'word'],
+  kinds: ['kana', 'word', 'kanji'],
   skill: 'reading',
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Sushi Belt 🍣');
@@ -33,20 +33,21 @@ export const sushiGame: GameDef = {
       const item = items[idx]!;
       // direction: level 1 jp→romaji, 2 mixes, 3 romaji/english→jp too
       const reverse = ctx.level >= 2 && Math.random() < (ctx.level === 3 ? 0.6 : 0.35);
-      const dist = distractors(ctx, item, options - 1, !reverse);
+      // Words are matched with their meaning (not romaji); kana with their sound.
+      const dist = distractors(ctx, item, options - 1, reverse ? (i) => i.text : meaning);
       const choices = shuffle([item, ...dist]);
 
-      const label = (c: Item): string => (reverse ? c.text : c.romaji);
+      const label = (c: Item): string => (reverse ? c.text : meaning(c));
       const prompt = reverse
-        ? h('div', { class: 'prompt prompt-kana' }, h('div', { class: 'prompt-jp' }, item.romaji), item.en ? h('div', { class: 'prompt-romaji' }, `${item.emoji ?? ''} ${item.en}`) : null)
-        : displayPrompt(item);
+        ? h('div', { class: 'prompt prompt-kana' }, h('div', { class: item.kind === 'kana' ? 'prompt-jp' : 'prompt-emoji' }, item.kind === 'kana' ? item.romaji : item.emoji ?? ''), item.kind === 'kana' ? null : h('div', { class: 'prompt-romaji' }, item.en ?? ''))
+        : displayPrompt(item, { romaji: ctx.hints && item.kind === 'word', furigana: ctx.store.data.settings.furigana });
       const listen = h('button', { class: 'btn small ghost', onClick: () => void speak(item.reading), 'aria-label': 'Hear it' }, '🔊');
 
       let locked = false;
       const plates = choices.map((c) => {
         const btn = h(
           'button',
-          { class: `plate ${reverse ? 'jp' : ''}`, 'data-id': c.id },
+          { class: `plate ${reverse ? 'jp' : ''} ${!reverse && item.kind !== 'kana' ? 'plate-wide' : ''}`, 'data-id': c.id },
           h('span', { class: 'plate-food' }, '🍣'),
           h('span', { class: 'plate-label' }, label(c)),
         );

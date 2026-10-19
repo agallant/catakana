@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
 import { sfx, speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { shell, sessionItems } from './common';
+import { meaning, shell, sessionItems } from './common';
 import { shuffle } from '../core/srs';
 
 interface Card {
@@ -17,17 +17,28 @@ export const pairsGame: GameDef = {
   jp: 'ペア',
   emoji: '🃏',
   blurb: 'Flip the cards and match symbols with sounds.',
-  kinds: ['kana', 'word'],
+  kinds: ['kana', 'word', 'kanji'],
   skill: 'reading',
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Neko Pairs 🃏');
     const nPairs = ctx.level === 1 ? 4 : ctx.level === 2 ? 6 : 8;
-    const picked = sessionItems(ctx, nPairs * 2).filter((it, i, a) => a.findIndex((x) => x.id === it.id) === i).slice(0, nPairs);
+    // no two cards may look the same (e.g. the kanji 川 and the word かわ both mean "river")
+    const faces = new Set<string>();
+    const picked = sessionItems(ctx, nPairs * 2)
+      .filter((it) => {
+        const jp = `jp:${it.text}`;
+        const rom = `rom:${meaning(it)}`;
+        if (faces.has(jp) || faces.has(rom)) return false;
+        faces.add(jp);
+        faces.add(rom);
+        return true;
+      })
+      .slice(0, nPairs);
     const items = picked.length >= 2 ? picked : ctx.pool.slice(0, nPairs);
     const cards: Card[] = shuffle(
       items.flatMap((it): Card[] => [
         { pairId: it.id, face: 'jp', text: it.text },
-        { pairId: it.id, face: 'rom', text: it.kind === 'word' && it.en ? `${it.emoji ?? ''} ${it.romaji}` : it.romaji },
+        { pairId: it.id, face: 'rom', text: meaning(it) },
       ]),
     );
     let first: { el: HTMLElement; card: Card } | null = null;
@@ -85,7 +96,7 @@ export const pairsGame: GameDef = {
       });
       grid.appendChild(el);
     });
-    sh.body.replaceChildren(h('p', { class: 'hint' }, 'Match each symbol with its sound.'), grid);
+    sh.body.replaceChildren(h('p', { class: 'hint' }, 'Match each word or symbol with its meaning or sound.'), grid);
     sh.setProgress(0, items.length);
     sh.setLives(3);
   },

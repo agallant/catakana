@@ -81,7 +81,7 @@ export const yarnGame: GameDef = {
       };
 
       sh.body.replaceChildren(
-        h('div', { class: 'prompt' }, h('div', { class: 'prompt-emoji' }, item.emoji ?? '❓'), h('div', { class: 'prompt-romaji' }, item.en ?? ''), ctx.level === 1 ? h('div', { class: 'prompt-romaji' }, item.romaji) : null),
+        h('div', { class: 'prompt' }, h('div', { class: 'prompt-emoji' }, item.emoji ?? '❓'), h('div', { class: 'prompt-romaji' }, item.en ?? ''), ctx.level === 1 && ctx.hints ? h('div', { class: 'prompt-romaji' }, item.romaji) : null),
         slots,
         tray,
         h('button', { class: 'btn ghost small', onClick: () => { answer.length = 0; draw(); } }, '↺ Reset'),

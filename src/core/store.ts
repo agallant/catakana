@@ -35,6 +35,16 @@ export interface SaveData {
   /** items the learner has been introduced to */
   introduced: string[];
   unlockedHats: string[];
+  /** eki stamps collected on arrival (stop ids) */
+  stamps: string[];
+  /** souvenirs bought (stop ids) */
+  souvenirs: string[];
+  /** stop id -> best trivia score */
+  trivia: Record<string, number>;
+  /** shop items bought (food and treasures) */
+  owned: string[];
+  /** sights photographed in Explore ("<stop>:<spot name>") */
+  photos: string[];
   settings: Settings;
   stats: { rounds: number; correct: number; wrong: number; playMs: number };
   started: boolean;
@@ -56,6 +66,11 @@ export function defaultSave(): SaveData {
     cats: [],
     introduced: [],
     unlockedHats: ['none'],
+    stamps: [],
+    souvenirs: [],
+    trivia: {},
+    owned: [],
+    photos: [],
     settings: { furigana: 'always', romaji: true, sound: true, speech: true, speechRate: 0.85, reduceMotion: false },
     stats: { rounds: 0, correct: 0, wrong: 0, playMs: 0 },
     started: false,
@@ -99,13 +114,16 @@ export class Store {
       if (raw) {
         const parsed = JSON.parse(raw) as Partial<SaveData>;
         const base = defaultSave();
-        return {
+        const data: SaveData = {
           ...base,
           ...parsed,
           look: { ...base.look, ...(parsed.look ?? {}) },
           settings: { ...base.settings, ...(parsed.settings ?? {}) },
           stats: { ...base.stats, ...(parsed.stats ?? {}) },
         };
+        // saves from before eki stamps existed: every visited stop earns its stamp
+        for (const id of Object.keys(data.stops)) if (!data.stamps.includes(id)) data.stamps.push(id);
+        return data;
       }
     } catch {
       /* corrupted save: start fresh */

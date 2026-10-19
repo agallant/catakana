@@ -1,11 +1,14 @@
 import type { App, Screen } from '../ui/app';
+import { getLevel, setPref } from '../core/prefs';
 import { h } from '../ui/dom';
 import { STOP_BY_ID, STOPS } from '../data/journey';
 import { GAMES } from '../games';
 import { catSvg } from '../ui/cat';
 import { ruby } from '../ui/dom';
 import { speak } from '../core/audio';
-import { focusForStop } from '../core/items';
+import { focusForStop, lessonBatch } from '../core/items';
+import { grammarAt } from '../core/sentences';
+import { grammarId } from './lesson';
 
 export function stopScreen(app: App, params: string[]): Screen {
   const stop = STOP_BY_ID.get(params[0] ?? '') ?? STOPS[0]!;
@@ -14,13 +17,15 @@ export function stopScreen(app: App, params: string[]): Screen {
   const stars = d.stops[stop.id] ?? 0;
   const focus = focusForStop(idx);
   const introduced = new Set(d.introduced);
-  const needsLesson = focus.some((f) => !introduced.has(f.id));
-  const level = Number(sessionStorage.getItem('catakana.level') ?? '1') as 1 | 2 | 3;
+  const grammar = grammarAt(stop.id);
+  const needsLesson = (grammar !== undefined && !introduced.has(grammarId(grammar))) || lessonBatch(idx, introduced).items.some((k) => k.kind !== 'word' && !introduced.has(k.id)) || (focus.length > 0 && !focus.some((f) => introduced.has(f.id)));
+  const wordsLeft = focus.filter((f) => f.kind === 'word' && !introduced.has(f.id)).length;
+  const level = getLevel();
   const levelBtns = ([1, 2, 3] as const).map((l) =>
-    h('button', { class: `chip ${l === level ? 'on' : ''}`, onClick: () => { sessionStorage.setItem('catakana.level', String(l)); app.go(`stop/${stop.id}`); } }, ['🐱 Easy', '😼 Medium', '🦁 Hard'][l - 1]!),
+    h('button', { class: `chip ${l === level ? 'on' : ''}`, onClick: () => { setPref('level', String(l)); app.go(`stop/${stop.id}`); } }, ['🐱 Easy', '😼 Medium', '🦁 Hard'][l - 1]!),
   );
 
-  const games = GAMES.filter((g) => g.available?.() ?? true).map((g) =>
+  const games = GAMES.filter((g) => g.available?.(idx) ?? true).map((g) =>
     h(
       'button',
       { class: 'game-card', disabled: needsLesson, onClick: () => app.go(`play/${stop.id}/${g.id}/${level}`) },
@@ -38,7 +43,7 @@ export function stopScreen(app: App, params: string[]): Screen {
       'section',
       { class: 'stop-hero' },
       h('div', { class: 'stop-emoji' }, stop.emoji),
-      h('h1', null, stop.name, h('span', { class: 'jp' }, ` ${stop.jp}`)),
+      h('h1', null, stop.name, ' ', ruby(`{${stop.jp}|${stop.reading}}`, d.settings.furigana), h('span', { class: 'tier-chip' }, stop.tier)),
       h('div', { class: 'stars big' }, '★'.repeat(stars) + '☆'.repeat(3 - stars)),
       h('button', { class: 'btn ghost small', onClick: () => void speak(stop.reading) }, `🔊 ${stop.reading}`),
     ),
@@ -49,9 +54,17 @@ export function stopScreen(app: App, params: string[]): Screen {
       h('div', { class: 'speech' }, h('strong', null, `${stop.npc.name}`), h('div', { class: 'jp' }, ruby(stop.npc.hello[0], d.settings.furigana)), h('div', { class: 'small' }, stop.npc.hello[1])),
     ),
     h('section', { class: 'facts' }, h('h3', null, 'Travel notes 📒'), h('ul', null, stop.facts.map((f) => h('li', null, f)))),
+    h('button', { class: 'btn big', onClick: () => app.go(`explore/${stop.id}`) }, `🧭 Explore ${stop.name} — sights, souvenirs & quiz`),
     needsLesson
       ? h('div', { class: 'callout' }, h('p', null, 'New things to learn here!'), h('button', { class: 'btn primary big', onClick: () => app.go(`lesson/${stop.id}`) }, '📖 Start lesson'))
-      : h('div', { class: 'row' }, h('button', { class: 'btn ghost', onClick: () => app.go(`lesson/${stop.id}`) }, '📖 Review lesson')),
+      : h(
+          'div',
+          { class: 'row' },
+          wordsLeft
+            ? h('button', { class: 'btn primary', onClick: () => app.go(`lesson/${stop.id}`) }, `📖 Learn ${Math.min(wordsLeft, 8)} new words (${wordsLeft} left)`)
+            : h('button', { class: 'btn ghost', onClick: () => app.go(`lesson/${stop.id}`) }, '📖 Review lesson'),
+          grammar ? h('button', { class: 'btn ghost', onClick: () => app.go(`lesson/${stop.id}/grammar`) }, `📐 ${grammar.pattern}`) : null,
+        ),
     h('h3', null, 'Play ', h('span', { class: 'chips' }, levelBtns)),
     h('div', { class: 'game-list' }, games),
     idx < STOPS.length - 1 && stars >= 1

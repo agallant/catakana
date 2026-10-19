@@ -2,11 +2,12 @@ import type { App, Screen } from '../ui/app';
 import { h } from '../ui/dom';
 import { STOP_BY_ID, STOPS } from '../data/journey';
 import { GAME_BY_ID } from '../games';
-import type { GameContext, Level, Summary } from '../games/types';
-import { focusForStop, poolForStop } from '../core/items';
+import type { GameContext, Item, Level, Summary } from '../games/types';
+import { focusForStop, poolForStop, withKnownKanji } from '../core/items';
 import { catSvg } from '../ui/cat';
 import { sfx } from '../core/audio';
 import { collectCat } from '../core/cats';
+import { romajiHints } from '../core/romaji';
 
 export function rewards(summary: Summary, level: Level): { stars: 0 | 1 | 2 | 3; fish: number; xp: number } {
   const pct = summary.total ? summary.correct / summary.total : 0;
@@ -30,6 +31,15 @@ export function playScreen(app: App, params: string[]): Screen {
   const review = params[3] === 'review';
   const home = review ? 'dojo' : `stop/${stop.id}`;
   const root = h('div', { class: 'screen play' });
+  // Practice what has been introduced in lessons; fall back to everything if that's too little.
+  const known = new Set(app.store.data.introduced);
+  const onlyKnown = (items: Item[]): Item[] => {
+    const k = items.filter((i) => i.kind === 'kana' || known.has(i.id));
+    return k.length >= 4 ? k : items;
+  };
+  const kanjify = (items: Item[]): Item[] => items.map((i) => withKnownKanji(i, known));
+  const wide = kanjify(poolForStop(stopIndex));
+  const pool = onlyKnown(wide);
   const started = Date.now();
 
   const ctx: GameContext = {
@@ -38,8 +48,10 @@ export function playScreen(app: App, params: string[]): Screen {
     stop,
     stopIndex,
     level,
-    pool: poolForStop(stopIndex),
-    focus: review ? poolForStop(stopIndex) : focusForStop(stopIndex),
+    hints: romajiHints(app.store.data, stopIndex),
+    pool,
+    wide,
+    focus: review ? pool : onlyKnown(kanjify(focusForStop(stopIndex))),
     quit: () => app.go(home),
     finish(summary) {
       const r = rewards(summary, level);
