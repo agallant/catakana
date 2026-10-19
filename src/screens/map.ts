@@ -1,11 +1,13 @@
 import type { App, Screen } from '../ui/app';
-import { h, s } from '../ui/dom';
+import { h, ruby, s } from '../ui/dom';
 import { STOPS, TRANSPORT_EMOJI } from '../data/journey';
 import { currentStopIndex, isStopUnlocked } from '../core/curriculum';
 import { sfx } from '../core/audio';
 import { catSvg } from '../ui/cat';
 import { questsFor } from '../core/progress';
 import { dayKey } from '../core/store';
+import { setPref } from '../core/prefs';
+import { eventDates, eventFor, seasonFor } from '../data/seasons';
 
 const W = 520;
 const H = 590;
@@ -102,6 +104,22 @@ export function mapScreen(app: App): Screen {
     }),
   );
 
+  const now = new Date();
+  const event = eventFor(now);
+  const season = seasonFor(now);
+  const seasonCard = h(
+    'section',
+    { class: 'season-card' },
+    h('div', { class: 'season-emoji' }, event?.emoji ?? season.emoji),
+    h(
+      'div',
+      null,
+      h('h3', null, event ? event.name : `${season.name} in Japan`, ' ', h('span', { class: 'jp small' }, ruby(event?.jp ?? season.jp, d.settings.furigana))),
+      h('p', null, event?.about ?? season.about),
+      event ? h('button', { class: 'btn small', onClick: () => { setPref('shop', 'seasonal'); app.go('shop'); } }, `${event.treat.emoji} Seasonal treat at the market · until ${eventDates(event).split(' – ')[1]}`) : null,
+    ),
+  );
+
   const el = h(
     'div',
     { class: 'screen map-screen' },
@@ -117,6 +135,7 @@ export function mapScreen(app: App): Screen {
         h('button', { class: 'btn primary', onClick: () => app.go((d.stops[next.id] ?? -1) < 0 ? `travel/${next.id}` : `stop/${next.id}`) }, d.stops[next.id] === undefined ? `${TRANSPORT_EMOJI[next.transport]} Travel there` : '▶ Continue'),
       ),
     ),
+    seasonCard,
     quests,
     info,
     h('div', { class: 'map-wrap' }, svg),

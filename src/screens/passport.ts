@@ -3,6 +3,7 @@ import { h } from '../ui/dom';
 import { STOPS } from '../data/journey';
 import { CULTURE, type SpotTag } from '../data/culture';
 import { SHOP, type ShopKind } from '../data/shop';
+import { EVENTS } from '../data/seasons';
 import { stampSvg } from '../ui/stamp';
 import { ACHIEVEMENTS } from '../core/progress';
 
@@ -43,6 +44,7 @@ export function passportScreen(app: App): Screen {
     );
   const owned = new Set(d.owned);
   const market = (kind: ShopKind): Badge[] => SHOP.filter((it) => it.kind === kind).map((it) => ({ emoji: it.emoji, label: it.name, sub: kind === 'food' ? 'tasted' : 'treasure', got: owned.has(it.id) }));
+  const seasonal: Badge[] = EVENTS.map((e) => ({ emoji: e.treat.emoji, label: e.treat.name, sub: e.name, got: owned.has(e.treat.id) }));
   const souvenirs: Badge[] = STOPS.filter((st) => CULTURE[st.id]).map((st) => {
     const sv = CULTURE[st.id]!.souvenir;
     return { emoji: sv.emoji, label: sv.name, sub: st.name, got: d.souvenirs.includes(st.id) };
@@ -59,6 +61,7 @@ export function passportScreen(app: App): Screen {
     ...shelf('🌏 World Heritage sites', sights('heritage'), 'Photograph UNESCO sites in Explore.'),
     ...shelf('🍙 Foods tasted', market('food'), 'Buy food at the Neko Market.'),
     ...shelf('🎎 Treasures', market('treasure'), 'Buy treasures at the Neko Market.'),
+    ...shelf('🎐 Seasonal treats', seasonal, 'Buy limited treats at the Neko Market during Japanese festivals.'),
     ...shelf('🎁 Omiyage', souvenirs, 'Buy souvenirs in Explore.'),
     h('h3', null, `🏅 Achievements (${d.achievements.length}/${ACHIEVEMENTS.length})`),
     h(

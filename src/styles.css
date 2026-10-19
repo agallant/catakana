@@ -295,6 +295,10 @@ button.hud-stat { cursor: pointer; }
 @keyframes drop { from { transform: translateY(-20px); opacity: 0; } }
 .quests { background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 10px 12px; margin: 12px 0; }
 .quests h3 { margin: 0 0 6px; font-size: 1rem; }
+.season-card { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 10px 12px; margin: 12px 0; }
+.season-card h3 { margin: 0 0 4px; font-size: 1rem; }
+.season-card p { margin: 0 0 8px; font-size: .9rem; }
+.season-emoji { font-size: 2.2rem; line-height: 1; }
 .quest { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
 .quest-emoji { font-size: 1.3rem; }
 .quest-main { flex: 1; font-size: 0.9rem; }
