@@ -5,7 +5,8 @@ import { GAMES } from '../games';
 import { catSvg } from '../ui/cat';
 import { ruby } from '../ui/dom';
 import { speak } from '../core/audio';
-import { focusForStop } from '../core/items';
+import { focusForStop, kanaItem } from '../core/items';
+import { stopKana } from '../core/curriculum';
 
 export function stopScreen(app: App, params: string[]): Screen {
   const stop = STOP_BY_ID.get(params[0] ?? '') ?? STOPS[0]!;
@@ -14,13 +15,14 @@ export function stopScreen(app: App, params: string[]): Screen {
   const stars = d.stops[stop.id] ?? 0;
   const focus = focusForStop(idx);
   const introduced = new Set(d.introduced);
-  const needsLesson = focus.some((f) => !introduced.has(f.id));
+  const needsLesson = stopKana(stop).map(kanaItem).some((k) => !introduced.has(k.id)) || (focus.length > 0 && !focus.some((f) => introduced.has(f.id)));
+  const wordsLeft = focus.filter((f) => f.kind === 'word' && !introduced.has(f.id)).length;
   const level = Number(sessionStorage.getItem('catakana.level') ?? '1') as 1 | 2 | 3;
   const levelBtns = ([1, 2, 3] as const).map((l) =>
     h('button', { class: `chip ${l === level ? 'on' : ''}`, onClick: () => { sessionStorage.setItem('catakana.level', String(l)); app.go(`stop/${stop.id}`); } }, ['🐱 Easy', '😼 Medium', '🦁 Hard'][l - 1]!),
   );
 
-  const games = GAMES.filter((g) => g.available?.() ?? true).map((g) =>
+  const games = GAMES.filter((g) => g.available?.(idx) ?? true).map((g) =>
     h(
       'button',
       { class: 'game-card', disabled: needsLesson, onClick: () => app.go(`play/${stop.id}/${g.id}/${level}`) },
@@ -49,9 +51,16 @@ export function stopScreen(app: App, params: string[]): Screen {
       h('div', { class: 'speech' }, h('strong', null, `${stop.npc.name}`), h('div', { class: 'jp' }, ruby(stop.npc.hello[0], d.settings.furigana)), h('div', { class: 'small' }, stop.npc.hello[1])),
     ),
     h('section', { class: 'facts' }, h('h3', null, 'Travel notes 📒'), h('ul', null, stop.facts.map((f) => h('li', null, f)))),
+    h('button', { class: 'btn big', onClick: () => app.go(`explore/${stop.id}`) }, `🧭 Explore ${stop.name} — sights, souvenirs & quiz`),
     needsLesson
       ? h('div', { class: 'callout' }, h('p', null, 'New things to learn here!'), h('button', { class: 'btn primary big', onClick: () => app.go(`lesson/${stop.id}`) }, '📖 Start lesson'))
-      : h('div', { class: 'row' }, h('button', { class: 'btn ghost', onClick: () => app.go(`lesson/${stop.id}`) }, '📖 Review lesson')),
+      : h(
+          'div',
+          { class: 'row' },
+          wordsLeft
+            ? h('button', { class: 'btn primary', onClick: () => app.go(`lesson/${stop.id}`) }, `📖 Learn ${Math.min(wordsLeft, 8)} new words (${wordsLeft} left)`)
+            : h('button', { class: 'btn ghost', onClick: () => app.go(`lesson/${stop.id}`) }, '📖 Review lesson'),
+        ),
     h('h3', null, 'Play ', h('span', { class: 'chips' }, levelBtns)),
     h('div', { class: 'game-list' }, games),
     idx < STOPS.length - 1 && stars >= 1

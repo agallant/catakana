@@ -1,11 +1,23 @@
 import type { App, Screen } from '../ui/app';
 import { fill, h } from '../ui/dom';
 import { STOP_BY_ID, STOPS } from '../data/journey';
-import { focusForStop } from '../core/items';
+import { lessonBatch } from '../core/items';
 import { sfx, speak } from '../core/audio';
 import { MNEMONICS } from '../data/mnemonics';
 import type { Item } from '../games/types';
 import { WORDS } from '../data/vocab';
+import { toHiragana } from '../data/kana';
+import { romajiHints } from '../core/romaji';
+
+/** Romaji hidden behind a tap once the training wheels come off. */
+function revealRomaji(romaji: string): HTMLElement {
+  const b = h('button', { class: 'chip reveal' }, 'Show romaji');
+  b.addEventListener('click', () => {
+    b.textContent = romaji;
+    b.disabled = true;
+  });
+  return h('div', { class: 'lesson-romaji' }, b);
+}
 
 function exampleFor(item: Item): { jp: string; romaji: string; en: string; emoji: string } | null {
   if (item.kind !== 'kana') return null;
@@ -17,7 +29,8 @@ function exampleFor(item: Item): { jp: string; romaji: string; en: string; emoji
 export function lessonScreen(app: App, params: string[]): Screen {
   const stop = STOP_BY_ID.get(params[0] ?? '') ?? STOPS[0]!;
   const idx = STOPS.indexOf(stop);
-  const items = focusForStop(idx);
+  const { items } = lessonBatch(idx, new Set(app.store.data.introduced));
+  const hints = romajiHints(app.store.data, idx);
   let i = 0;
   const card = h('div', { class: 'lesson-card' });
   const dots = h('div', { class: 'dots' });
@@ -29,10 +42,14 @@ export function lessonScreen(app: App, params: string[]): Screen {
     fill(
       card,
       h('div', { class: 'lesson-glyph jp' }, item.text),
-      h('div', { class: 'lesson-romaji' }, item.romaji),
+      item.kind === 'kana'
+        ? h('div', { class: 'lesson-romaji' }, item.romaji, item.script === 'katakana' ? h('span', { class: 'twin jp' }, ` = ${toHiragana(item.text)}`) : null)
+        : hints
+          ? h('div', { class: 'lesson-romaji small-romaji' }, item.romaji)
+          : revealRomaji(item.romaji),
       item.en ? h('div', { class: 'lesson-en' }, `${item.emoji ?? ''} ${item.en}`) : null,
       mn ? h('div', { class: 'mnemonic' }, `🐾 ${mn}`) : null,
-      ex ? h('div', { class: 'example' }, `e.g. `, h('span', { class: 'jp' }, ex.jp), ` (${ex.romaji}) ${ex.emoji} ${ex.en}`) : null,
+      ex ? h('div', { class: 'example' }, `e.g. `, h('span', { class: 'jp' }, ex.jp), hints ? ` (${ex.romaji})` : '', ` ${ex.emoji} ${ex.en}`) : null,
       h('button', { class: 'btn primary', onClick: () => void speak(item.reading) }, '🔊 Hear it'),
     );
     dots.replaceChildren(...items.map((_, k) => h('span', { class: `dot ${k === i ? 'on' : k < i ? 'seen' : ''}` })));

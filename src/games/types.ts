@@ -21,6 +21,8 @@ export interface GameContext {
   stop: Stop;
   stopIndex: number;
   level: Level;
+  /** Show romaji training-wheel hints (only very early in the journey). */
+  hints: boolean;
   /** Items eligible for this session (already includes review of earlier stops). */
   pool: Item[];
   /** Items first taught at this stop (preferred for drills). */
@@ -46,6 +48,6 @@ export interface GameDef {
   kinds: ('kana' | 'word')[];
   skill: 'reading' | 'writing' | 'listening' | 'speaking';
   /** Return true if the game can run with this context (e.g. TTS available). */
-  available?(): boolean;
+  available?(stopIndex?: number): boolean;
   start(ctx: GameContext): void;
 }

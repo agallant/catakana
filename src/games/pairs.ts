@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
 import { sfx, speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { shell, sessionItems } from './common';
+import { meaning, shell, sessionItems } from './common';
 import { shuffle } from '../core/srs';
 
 interface Card {
@@ -27,7 +27,7 @@ export const pairsGame: GameDef = {
     const cards: Card[] = shuffle(
       items.flatMap((it): Card[] => [
         { pairId: it.id, face: 'jp', text: it.text },
-        { pairId: it.id, face: 'rom', text: it.kind === 'word' && it.en ? `${it.emoji ?? ''} ${it.romaji}` : it.romaji },
+        { pairId: it.id, face: 'rom', text: meaning(it) },
       ]),
     );
     let first: { el: HTMLElement; card: Card } | null = null;
@@ -85,7 +85,7 @@ export const pairsGame: GameDef = {
       });
       grid.appendChild(el);
     });
-    sh.body.replaceChildren(h('p', { class: 'hint' }, 'Match each symbol with its sound.'), grid);
+    sh.body.replaceChildren(h('p', { class: 'hint' }, 'Match each word or symbol with its meaning or sound.'), grid);
     sh.setProgress(0, items.length);
     sh.setLives(3);
   },

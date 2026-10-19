@@ -20,7 +20,7 @@ export class App {
   readonly nav = h('nav', { class: 'nav', 'aria-label': 'Main' });
   private current: Screen | null = null;
   private routes = new Map<string, ScreenFactory>();
-  private chrome = new Set<string>(['map', 'dojo', 'cats', 'settings', 'stop']);
+  private chrome = new Set<string>(['map', 'dojo', 'cats', 'settings', 'stop', 'explore', 'passport']);
 
   constructor(readonly root: HTMLElement) {
     this.applySettings();
@@ -91,6 +91,7 @@ export class App {
     const items: [string, string, string][] = [
       ['map', '🗾', 'Journey'],
       ['dojo', '🐾', 'Practice'],
+      ['passport', '📕', 'Passport'],
       ['cats', '😺', 'Cats'],
       ['settings', '⚙️', 'Settings'],
     ];
@@ -99,7 +100,7 @@ export class App {
         h(
           'button',
           {
-            class: `nav-btn ${active === r || (r === 'map' && active === 'stop') ? 'active' : ''}`,
+            class: `nav-btn ${active === r || (r === 'map' && (active === 'stop' || active === 'explore')) ? 'active' : ''}`,
             onClick: () => {
               sfx.tap();
               this.go(r);

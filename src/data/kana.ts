@@ -133,3 +133,25 @@ export function splitKana(reading: string): string[] {
   }
   return out;
 }
+
+/** Kana → romaji (Hepburn-ish, long vowels as written: とうきょう → toukyou). */
+export function kanaToRomaji(input: string): string {
+  const table = new Map<string, string>();
+  for (const k of ALL_KANA) table.set(toHiragana(k.char), k.romaji);
+  const units = splitKana(toHiragana(input));
+  let out = '';
+  let double = false;
+  for (const u of units) {
+    if (u === 'っ') {
+      double = true;
+      continue;
+    }
+    let r = u === 'ー' ? out.slice(-1) : table.get(u) ?? u;
+    if (double) {
+      r = (r.startsWith('ch') ? 't' : r[0]) + r;
+      double = false;
+    }
+    out += r;
+  }
+  return out;
+}

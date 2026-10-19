@@ -18,6 +18,22 @@ export function poolForStop(index: number): Item[] {
   return [...kana, ...wordsThrough(index).map(wordItem)];
 }
 
+export const WORDS_PER_LESSON = 8;
+
+/**
+ * Next lesson batch at a stop: all of the stop's kana not yet introduced, plus up to
+ * WORDS_PER_LESSON new words. Falls back to a review of the first batch.
+ */
+export function lessonBatch(index: number, introduced: ReadonlySet<string>): { items: Item[]; review: boolean } {
+  const stop = STOPS[index]!;
+  const kana = stopKana(stop).map(kanaItem);
+  const words = newWordsAt(index).map(wordItem);
+  const freshKana = kana.filter((k) => !introduced.has(k.id));
+  const freshWords = words.filter((w) => !introduced.has(w.id)).slice(0, WORDS_PER_LESSON);
+  if (freshKana.length || freshWords.length) return { items: [...freshKana, ...freshWords], review: false };
+  return { items: [...kana, ...words.slice(0, WORDS_PER_LESSON)], review: true };
+}
+
 export function focusForStop(index: number): Item[] {
   const stop = STOPS[index]!;
   const kana = stopKana(stop).map(kanaItem);

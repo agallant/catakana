@@ -3,6 +3,8 @@
 North star: a fun, addictive, cat-filled game that really teaches Japanese. You play a travelling cat; each
 stop in Japan teaches language *and* culture, and repeatable minigames provide replay value and difficulty.
 
+Romaji is training wheels only: shown as hints for the first few stops, then replaced by kana, meaning and sound.
+
 Skill priority: **reading → writing → listening → speaking**. Scripts: hiragana → katakana → furigana → kanji.
 Tiers: Kana → N5 → N4 → N3 → N2 → N1. Everything runs client-side, offline (PWA), deployed to GitHub Pages.
 
@@ -10,8 +12,9 @@ Tiers: Kana → N5 → N4 → N3 → N2 → N1. Everything runs client-side, off
 
 | # | Milestone | Status |
 |---|-----------|--------|
-| M1 | **Foundations** – PWA scaffold, CI/CodeQL/deploy, journey map (20 stops), complete hiragana + katakana curriculum, SRS, 6 minigames (Sushi Belt, Neko Pairs, Paw Painting tracing, Whisker Ears listening, Yarn Words, Keyboard Cat), cat customisation & collection, ~150 starter words | in progress |
-| M2 | **Reading depth** – kana mnemonics review, dakuten/combo drills, "Station Signs" game (read real sign text), daily review quests, streak rewards, accessibility pass | planned |
+| M1 | **Foundations** – PWA scaffold, CI/CodeQL/deploy, journey map (20 stops), complete hiragana + katakana curriculum, SRS, 6 minigames (Sushi Belt, Neko Pairs, Paw Painting tracing, Whisker Ears listening, Yarn Words, Keyboard Cat), cat customisation & collection, ~150 starter words | ✅ done (#2) |
+| M2 | **Japan & travel** – Explore screen per stop (landmarks with furigana names, omiyage souvenir shop), tour-guide trivia quiz with spaced review of earlier stops, eki-stamp passport, train arrival announcements (まもなく…), "Station Signs" reading/listening game, romaji fades out after the first stops (meanings and kana instead), batched lessons, better mnemonics, scheduled Pages deploy | in progress |
+| M2.5 | **Reading depth** – dakuten/combo look-alike drills, daily review quests, streak rewards, achievements, accessibility pass | planned |
 | M3 | **N5 vocabulary & grammar** – full N5 word list, sentence builder (particles は/が/を/に/で), phrase book with furigana, "Sentence Sushi" ordering game, number/time/counters | planned |
 | M4 | **Furigana & N5 kanji** – ruby text everywhere with always/tap/off modes, ~100 N5 kanji with readings and stroke-order animation (KanjiVG-derived data), kanji recognition and writing games | planned |
 | M5 | **Listening** – dialogue comprehension scenes at each stop (train announcements, ordering food), speed control, dictation game, pre-generated audio packs for devices lacking a Japanese voice | planned |

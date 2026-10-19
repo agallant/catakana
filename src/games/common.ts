@@ -26,18 +26,22 @@ export function sessionItems(ctx: GameContext, n = ROUNDS, kinds?: ('kana' | 'wo
 }
 
 /** Distractors resembling the answer (same kind and script) from the pool. */
-export function distractors(ctx: GameContext, answer: Item, n: number, byRomaji = false): Item[] {
+export function distractors(ctx: GameContext, answer: Item, n: number, keyOf: (i: Item) => string = (i) => i.text): Item[] {
   const same = ctx.pool.filter((p) => p.id !== answer.id && p.kind === answer.kind && p.script === answer.script);
   const unique = new Map<string, Item>();
   for (const p of same) {
-    const key = byRomaji ? p.romaji : p.text;
-    if (key !== (byRomaji ? answer.romaji : answer.text) && !unique.has(key)) unique.set(key, p);
+    const key = keyOf(p);
+    if (key !== keyOf(answer) && !unique.has(key)) unique.set(key, p);
   }
-  let cands = [...unique.values()];
+  const cands = [...unique.values()];
   if (cands.length < n) {
     // pad with look-alikes from any item of the same kind
-    const extra = ctx.pool.filter((p) => p.id !== answer.id && !cands.includes(p) && p.kind === answer.kind);
-    cands = cands.concat(extra);
+    const seen = new Set([keyOf(answer), ...cands.map(keyOf)]);
+    for (const p of ctx.pool) {
+      if (p.kind !== answer.kind || seen.has(keyOf(p))) continue;
+      seen.add(keyOf(p));
+      cands.push(p);
+    }
   }
   // prefer similar length for words
   if (answer.kind === 'word') {
@@ -123,6 +127,11 @@ export function recordAnswer(ctx: GameContext, item: Item, ok: boolean, sh: Shel
     sh.say(oops(), 'sad');
   }
   sh.flash(ok);
+}
+
+/** What an item means: emoji + English for words, the sound for kana. */
+export function meaning(item: Item): string {
+  return item.kind === 'word' ? `${item.emoji ?? ''} ${item.en ?? ''}`.trim() : item.romaji;
 }
 
 export function displayPrompt(item: Item, opts: { romaji?: boolean } = {}): HTMLElement {

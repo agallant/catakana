@@ -3,6 +3,7 @@ import { sfx, speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
 import { sessionItems, shell } from './common';
 import { scoreTrace } from './trace-score';
+import { toHiragana } from '../data/kana';
 
 const FONT = '"Hiragino Maru Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic","Meiryo",sans-serif';
 const GRID = 96; // scoring resolution per cell
@@ -193,11 +194,13 @@ export const traceGame: GameDef = {
       const prompt = h(
         'div',
         { class: 'prompt-row' },
-        h('div', { class: 'prompt' }, h('div', { class: 'prompt-jp' }, item.romaji), item.en ? h('div', { class: 'prompt-romaji' }, `${item.emoji ?? ''} ${item.en}`) : h('div', { class: 'prompt-romaji' }, 'Trace it!')),
+        item.kind === 'word'
+          ? h('div', { class: 'prompt' }, h('div', { class: 'prompt-emoji' }, item.emoji ?? ''), h('div', { class: 'prompt-romaji' }, `${item.en ?? ''}${ctx.hints ? ` · ${item.romaji}` : ''}`))
+          : h('div', { class: 'prompt' }, h('div', { class: 'prompt-jp' }, item.script === 'katakana' ? `${item.romaji} · ${toHiragana(item.text)}` : item.romaji), h('div', { class: 'prompt-romaji' }, 'Trace it!')),
         h('button', { class: 'btn small ghost', onClick: () => void speak(item.reading), 'aria-label': 'Hear it' }, '🔊'),
       );
       sh.body.replaceChildren(prompt, h('div', { class: 'trace-wrap' }, cv), feedback, h('div', { class: 'row' }, clearBtn, doneBtn));
-      if (ctx.level === 3) sh.say(`Write “${item.romaji}” from memory!`, 'think');
+      if (ctx.level === 3) sh.say('Write it from memory!', 'think');
     };
     sh.setLives(3);
     sh.say('Trace with your finger!', 'happy');

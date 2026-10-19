@@ -198,3 +198,28 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 /* Furigana */
 ruby rt { font-size: 0.55em; }
 .furi-off ruby rt { display: none; } .furi-tap ruby rt { visibility: hidden; } .furi-tap ruby.show rt { visibility: visible; } .furi-tap ruby { cursor: pointer; }
+.twin { color: var(--teal); font-size: 0.8em; }
+.small-romaji { font-size: 1.2rem; }
+.reveal { font-size: 1rem; }
+.plate-wide { min-width: 120px; font-size: 1.05rem; border-radius: 22px; }
+
+/* Explore / culture */
+.spots { display: grid; gap: 10px; }
+.spot, .souvenir { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 12px; }
+.souvenir { align-items: center; }
+.spot-emoji { font-size: 2.4rem; line-height: 1; }
+.spot-body { flex: 1; } .spot-body h3 { margin: 0 0 2px; } .spot-body p { margin: 4px 0 0; }
+.spot-jp { font-size: 1.3rem; display: flex; align-items: center; gap: 4px; }
+.choice.text { font-size: 1.05rem; text-align: left; }
+.choices.one-col { grid-template-columns: 1fr; }
+.stamp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
+.stamp-cell { background: #fffaf2; border: 2px solid var(--line); border-radius: 16px; padding: 6px; display: flex; flex-direction: column; align-items: center; color: #3b2a20; }
+.stamp-cell:disabled { opacity: 0.6; }
+.stamp:not(.blank) { transform: rotate(-8deg); }
+.souvenir-cell { background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 8px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.souvenir-cell small { color: var(--muted); }
+.sign { background: #fff; color: #222; border-radius: 12px; border: 3px solid #2a2a2a; width: min(100%, 420px); overflow: hidden; box-shadow: var(--shadow); }
+.sign-main { text-align: center; font-size: 2.6rem; font-weight: 700; padding: 10px 8px 0; }
+.sign-sub { text-align: center; font-size: 0.9rem; letter-spacing: 2px; color: #555; padding-bottom: 6px; }
+.sign-bar { display: flex; justify-content: space-between; background: #2e8b57; color: #fff; padding: 6px 10px; font-size: 0.85rem; font-weight: 700; }
+.announce { font-family: var(--jp); background: #222; color: #ffcf40; padding: 8px 12px; border-radius: 10px; font-size: 1.1rem; text-align: center; }

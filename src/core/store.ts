@@ -35,6 +35,12 @@ export interface SaveData {
   /** items the learner has been introduced to */
   introduced: string[];
   unlockedHats: string[];
+  /** eki stamps collected on arrival (stop ids) */
+  stamps: string[];
+  /** souvenirs bought (stop ids) */
+  souvenirs: string[];
+  /** stop id -> best trivia score */
+  trivia: Record<string, number>;
   settings: Settings;
   stats: { rounds: number; correct: number; wrong: number; playMs: number };
   started: boolean;
@@ -56,6 +62,9 @@ export function defaultSave(): SaveData {
     cats: [],
     introduced: [],
     unlockedHats: ['none'],
+    stamps: [],
+    souvenirs: [],
+    trivia: {},
     settings: { furigana: 'always', romaji: true, sound: true, speech: true, speechRate: 0.85, reduceMotion: false },
     stats: { rounds: 0, correct: 0, wrong: 0, playMs: 0 },
     started: false,
