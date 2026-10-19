@@ -64,7 +64,7 @@ export function passportScreen(app: App): Screen {
         h('span', { class: 'trophy-emoji' }, got ? p.emoji : '🗾'),
         h('strong', null, p.name),
         h('small', { class: 'jp' }, ruby(p.jp, d.settings.furigana)),
-        got ? h('small', null, p.meibutsu) : null,
+        got ? h('small', null, p.meibutsu) : onRoute.has(p.id) ? null : h('small', null, 'Not on the route yet'),
       );
     }),
   );
