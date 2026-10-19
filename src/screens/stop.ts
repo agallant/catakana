@@ -3,6 +3,7 @@ import { getLevel, setPref } from '../core/prefs';
 import { h } from '../ui/dom';
 import { STOP_BY_ID, STOPS } from '../data/journey';
 import { GAMES } from '../games';
+import { gameList } from '../ui/gamelist';
 import { catSvg } from '../ui/cat';
 import { ruby } from '../ui/dom';
 import { speak } from '../core/audio';
@@ -25,7 +26,7 @@ export function stopScreen(app: App, params: string[]): Screen {
     h('button', { class: `chip ${l === level ? 'on' : ''}`, onClick: () => { setPref('level', String(l)); app.go(`stop/${stop.id}`); } }, ['🐱 Easy', '😼 Medium', '🦁 Hard'][l - 1]!),
   );
 
-  const games = GAMES.filter((g) => g.available?.(idx) ?? true).map((g) =>
+  const games = gameList(GAMES.filter((g) => g.available?.(idx) ?? true), (g) =>
     h(
       'button',
       { class: 'game-card', disabled: needsLesson, onClick: () => app.go(`play/${stop.id}/${g.id}/${level}`) },
@@ -66,7 +67,7 @@ export function stopScreen(app: App, params: string[]): Screen {
           grammar ? h('button', { class: 'btn ghost', onClick: () => app.go(`lesson/${stop.id}/grammar`) }, `📐 ${grammar.pattern}`) : null,
         ),
     h('h3', null, 'Play ', h('span', { class: 'chips' }, levelBtns)),
-    h('div', { class: 'game-list' }, games),
+    games,
     idx < STOPS.length - 1 && stars >= 1
       ? h('button', { class: 'btn primary big', onClick: () => app.go(`travel/${STOPS[idx + 1]!.id}`) }, `Next: ${STOPS[idx + 1]!.name} ${STOPS[idx + 1]!.emoji} →`)
       : h('p', { class: 'hint' }, stars >= 1 ? '' : 'Earn at least one ★ to unlock the next stop.'),
