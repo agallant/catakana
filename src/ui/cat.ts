@@ -1,17 +1,29 @@
 import { s } from './dom';
 import type { CatLook } from '../core/store';
 
-export type Mood = 'happy' | 'sad' | 'think' | 'wow' | 'sleep';
+/** happy = closed ^^ eyes; smile = open eyes with the same happy mouth (shows eye colour). */
+export type Mood = 'happy' | 'smile' | 'sad' | 'think' | 'wow' | 'sleep';
+
+/** True for very dark fur, where dark face lines would disappear. */
+function isDark(hex: string): boolean {
+  const m = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(hex);
+  if (!m) return false;
+  const v = m[1]!.length === 3 ? m[1]!.replace(/./g, '$&$&') : m[1]!;
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(v.slice(i, i + 2), 16));
+  return 0.299 * r! + 0.587 * g! + 0.114 * b! < 80;
+}
 
 /** Procedurally drawn cat face/body in SVG. Cheap, offline, endlessly customisable. */
 export function catSvg(look: CatLook, mood: Mood = 'happy', size = 120): SVGElement {
   const { fur, accent, pattern, eyes, hat } = look;
   const g: SVGElement[] = [];
+  const dark = isDark(fur);
+  const ink = dark ? '#f3e9dc' : '#2b2b2b';
   // tail
   g.push(s('path', { d: 'M150 150 C190 150 195 100 170 95', fill: 'none', stroke: fur, 'stroke-width': 14, 'stroke-linecap': 'round', class: 'cat-tail' }));
   // body
   g.push(s('ellipse', { cx: 100, cy: 150, rx: 52, ry: 40, fill: fur }));
-  g.push(s('ellipse', { cx: 100, cy: 160, rx: 30, ry: 26, fill: '#fff', opacity: 0.55 }));
+  g.push(s('ellipse', { cx: 100, cy: 160, rx: 30, ry: 26, fill: '#fff', opacity: pattern === 'tuxedo' ? 1 : dark ? 0.12 : 0.55 }));
   // paws
   g.push(s('ellipse', { cx: 78, cy: 186, rx: 14, ry: 8, fill: fur }));
   g.push(s('ellipse', { cx: 122, cy: 186, rx: 14, ry: 8, fill: fur }));
@@ -26,7 +38,8 @@ export function catSvg(look: CatLook, mood: Mood = 'happy', size = 120): SVGElem
     g.push(s('path', { d: 'M100 42 v16 M88 44 l3 13 M112 44 l-3 13', stroke: accent, 'stroke-width': 5, 'stroke-linecap': 'round' }));
     g.push(s('path', { d: 'M48 80 h14 M50 94 h12 M152 80 h-14 M150 94 h-12', stroke: accent, 'stroke-width': 4, 'stroke-linecap': 'round' }));
   } else if (pattern === 'tuxedo') {
-    g.push(s('path', { d: 'M100 60 C80 80 80 120 100 134 C120 120 120 80 100 60Z', fill: '#fff', opacity: 0.95 }));
+    // white muzzle and chin with a thin blaze up to the nose, like a real tuxedo cat
+    g.push(s('path', { d: 'M100 84 C96 92 92 98 84 100 C70 102 64 112 68 122 C74 134 90 136 100 134 C110 136 126 134 132 122 C136 112 130 102 116 100 C108 98 104 92 100 84Z', fill: '#fff' }));
   } else if (pattern === 'spots') {
     g.push(s('circle', { cx: 70, cy: 70, r: 9, fill: accent }));
     g.push(s('circle', { cx: 134, cy: 98, r: 7, fill: accent }));
@@ -38,7 +51,7 @@ export function catSvg(look: CatLook, mood: Mood = 'happy', size = 120): SVGElem
   // eyes
   const ex = [76, 124];
   if (mood === 'sleep' || mood === 'happy') {
-    for (const x of ex) g.push(s('path', { d: `M${x - 10} 88 Q${x} ${mood === 'happy' ? 76 : 98} ${x + 10} 88`, fill: 'none', stroke: '#2b2b2b', 'stroke-width': 4, 'stroke-linecap': 'round' }));
+    for (const x of ex) g.push(s('path', { d: `M${x - 10} 88 Q${x} ${mood === 'happy' ? 76 : 98} ${x + 10} 88`, fill: 'none', stroke: ink, 'stroke-width': 4, 'stroke-linecap': 'round' }));
   } else {
     for (const x of ex) {
       g.push(s('ellipse', { cx: x, cy: 86, rx: 11, ry: mood === 'wow' ? 14 : 12, fill: '#fff' }));
@@ -52,17 +65,17 @@ export function catSvg(look: CatLook, mood: Mood = 'happy', size = 120): SVGElem
     s('path', {
       d: mood === 'sad' ? 'M88 120 Q100 110 112 120' : mood === 'wow' ? 'M94 112 Q100 128 106 112 Z' : 'M88 110 Q100 124 100 109 Q100 124 112 110',
       fill: mood === 'wow' ? '#c0392b' : 'none',
-      stroke: '#2b2b2b',
+      stroke: pattern === 'tuxedo' ? '#2b2b2b' : ink,
       'stroke-width': 3,
       'stroke-linecap': 'round',
       'stroke-linejoin': 'round',
     }),
   );
   // whiskers
-  g.push(s('path', { d: 'M52 104 h-26 M52 112 l-24 8 M148 104 h26 M148 112 l24 8', stroke: '#5b5b5b', 'stroke-width': 2, 'stroke-linecap': 'round', opacity: 0.7 }));
+  g.push(s('path', { d: 'M52 104 h-26 M52 112 l-24 8 M148 104 h26 M148 112 l24 8', stroke: dark ? '#d9d9d9' : '#5b5b5b', 'stroke-width': 2, 'stroke-linecap': 'round', opacity: 0.7 }));
   // blush
-  g.push(s('ellipse', { cx: 62, cy: 108, rx: 9, ry: 5, fill: '#ff8fa3', opacity: 0.35 }));
-  g.push(s('ellipse', { cx: 138, cy: 108, rx: 9, ry: 5, fill: '#ff8fa3', opacity: 0.35 }));
+  g.push(s('ellipse', { cx: 62, cy: 108, rx: 9, ry: 5, fill: '#ff8fa3', opacity: dark ? 0.6 : 0.35 }));
+  g.push(s('ellipse', { cx: 138, cy: 108, rx: 9, ry: 5, fill: '#ff8fa3', opacity: dark ? 0.6 : 0.35 }));
   // hat
   switch (hat) {
     case 'beret':
@@ -97,6 +110,7 @@ export function catSvg(look: CatLook, mood: Mood = 'happy', size = 120): SVGElem
 export const FUR_PRESETS: { fur: string; accent: string; pattern: CatLook['pattern'] }[] = [
   { fur: '#f6b26b', accent: '#e69138', pattern: 'tabby' },
   { fur: '#9e9e9e', accent: '#616161', pattern: 'tabby' },
+  { fur: '#2b2b2b', accent: '#111', pattern: 'plain' },
   { fur: '#2b2b2b', accent: '#111', pattern: 'tuxedo' },
   { fur: '#fff3e0', accent: '#f4b183', pattern: 'calico' },
   { fur: '#d7ccc8', accent: '#8d6e63', pattern: 'spots' },

@@ -8,8 +8,8 @@ import { questsFor } from '../core/progress';
 import { dayKey } from '../core/store';
 
 const W = 520;
-const H = 560;
-const proj = ([lon, lat]: [number, number]): [number, number] => [(lon - 126) * 22, (46 - lat) * 26];
+const H = 590;
+const proj = ([lon, lat]: [number, number]): [number, number] => [(lon - 122.6) * 22, (46 - lat) * 26];
 
 // Coarse island outlines (lon, lat) — a friendly cartoon of Japan.
 const ISLANDS: [number, number][][] = [
@@ -23,6 +23,8 @@ const ISLANDS: [number, number][][] = [
   [[130.9, 33.9], [131.2, 33.6], [131.7, 33.6], [131.9, 33.1], [131.6, 32.6], [131.45, 31.6], [131.3, 31.4], [130.7, 31.0], [130.65, 31.4], [130.3, 31.25], [130.15, 31.5], [130.2, 32.1], [130.6, 32.7], [130.2, 32.8], [129.85, 32.75], [129.6, 33.1], [129.8, 33.4], [130.1, 33.55], [130.5, 33.85]],
   // Yakushima
   [[130.4, 30.35], [130.55, 30.45], [130.68, 30.35], [130.55, 30.25]],
+  // Iriomote
+  [[123.68, 24.3], [123.8, 24.42], [123.95, 24.35], [123.9, 24.22], [123.75, 24.22]],
   // Okinawa main island
   [[127.65, 26.08], [127.9, 26.4], [128.25, 26.85], [128.2, 26.9], [127.95, 26.6], [127.7, 26.4]],
 ];
@@ -102,7 +104,7 @@ export function mapScreen(app: App): Screen {
     h(
       'section',
       { class: 'next-card' },
-      h('div', { class: 'next-cat' }, catSvg(d.look, 'happy', 72)),
+      h('div', { class: 'next-cat' }, catSvg(d.look, 'smile', 72)),
       h(
         'div',
         { class: 'next-text' },

@@ -11,11 +11,11 @@ export function welcomeScreen(app: App): Screen {
   const look: CatLook = { ...app.store.data.look };
   let name = app.store.data.name;
   const preview = h('div', { class: 'welcome-cat' });
-  const redraw = (): void => preview.replaceChildren(catSvg(look, 'happy', 180));
+  const redraw = (): void => preview.replaceChildren(catSvg(look, 'smile', 180));
   redraw();
 
   const furs = FUR_PRESETS.map((p) => {
-    const b = h('button', { class: 'swatch', style: `background:${p.fur};border-color:${p.accent}`, 'aria-label': `Fur ${p.fur}` });
+    const b = h('button', { class: 'swatch', style: `background:${p.pattern === 'tuxedo' ? `linear-gradient(135deg, ${p.fur} 62%, #fff 62%)` : p.fur};border-color:${p.accent}`, 'aria-label': `Fur ${p.pattern} ${p.fur}` });
     b.addEventListener('click', () => {
       Object.assign(look, { fur: p.fur, accent: p.accent, pattern: p.pattern });
       sfx.tap();

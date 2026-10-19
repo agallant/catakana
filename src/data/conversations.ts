@@ -246,4 +246,67 @@ export const CONVERSATIONS: Conversation[] = [
     ],
     q: 'What is your cat aiming for next?', options: ['N3', 'A new house', 'A nap'], answer: 0,
   },
+  {
+    id: 'change', from: 44, title: 'Getting better',
+    lines: [
+      { who: 'npc', jp: 'にほんごが じょうずに なりましたね。', en: 'Your Japanese has gotten good.' },
+      { who: 'me', jp: 'ありがとう！ かんじも すこし よめるように なりました。', en: 'Thanks! I can read a few kanji now too.' },
+      { who: 'npc', jp: 'すごい！', en: 'Amazing!' },
+    ],
+    q: 'What can your cat do now?', options: ['Read some kanji', 'Drive a car', 'Speak French'], answer: 0,
+  },
+  {
+    id: 'purpose', from: 45, title: 'Why are you here?',
+    lines: [
+      { who: 'npc', jp: 'どうして ぐじょうに きたんですか。', en: 'Why did you come to Gujo?' },
+      { who: 'me', jp: 'おどりに さんかする ために きました。', en: 'I came to take part in the dance.' },
+      { who: 'npc', jp: 'こんやは あさまで おどりますよ！', en: 'Tonight we dance until morning!' },
+    ],
+    q: 'Until when will they dance tonight?', options: ['Until morning', 'Until 9 pm', 'They won’t dance'], answer: 0,
+  },
+  {
+    id: 'hearsay', from: 47, title: 'Weather news',
+    lines: [
+      { who: 'me', jp: 'あしたも ゆきですか。', en: 'Will it snow tomorrow too?' },
+      { who: 'npc', jp: 'てんきよほうに よると、はれるそうです。', en: 'According to the forecast, it will be sunny.' },
+      { who: 'me', jp: 'よかった！ ゆきの かべを みに いけますね。', en: 'Great! We can go see the snow walls.' },
+    ],
+    q: 'What does the forecast say?', options: ['It will be sunny', 'It will snow', 'It will rain'], answer: 0,
+  },
+  {
+    id: 'oops', from: 49, title: 'Oops!',
+    lines: [
+      { who: 'npc', jp: 'どうしたんですか。', en: 'What happened?' },
+      { who: 'me', jp: 'あかべこを おとして、こわして しまいました…', en: 'I dropped the akabeko and broke it…' },
+      { who: 'npc', jp: 'だいじょうぶ。あたらしいのを あげますよ。', en: 'It’s okay. I’ll give you a new one.' },
+    ],
+    q: 'What happened to the akabeko?', options: ['It broke', 'It ran away', 'It was sold'], answer: 0,
+  },
+  {
+    id: 'expect', from: 51, title: 'Bear watch',
+    lines: [
+      { who: 'me', jp: 'くまは どこに いますか。', en: 'Where are the bears?' },
+      { who: 'npc', jp: 'いまは ふゆだから、ねている はずです。', en: 'It’s winter now, so they should be sleeping.' },
+      { who: 'me', jp: 'じゃあ、わしを さがしましょう。', en: 'Then let’s look for eagles.' },
+    ],
+    q: 'Why aren’t the bears around?', options: ['They should be hibernating', 'They moved away', 'They are eating'], answer: 0,
+  },
+  {
+    id: 'passive', from: 53, title: 'Festival trouble',
+    lines: [
+      { who: 'npc', jp: 'きのう、ねこに さかなを ぬすまれました！', en: 'Yesterday my fish was stolen by a cat!' },
+      { who: 'me', jp: 'え、わたしじゃ ありませんよ！', en: 'Hey, it wasn’t me!' },
+      { who: 'npc', jp: 'ほんとう？ ひげに なにか ついていますよ。', en: 'Really? Something’s stuck to your whiskers.' },
+    ],
+    q: 'What was stolen?', options: ['A fish', 'A drum', 'A hat'], answer: 0,
+  },
+  {
+    id: 'wildcat', from: 55, title: 'The wildcat',
+    lines: [
+      { who: 'me', jp: 'やまねこに あいたいです！', en: 'I want to meet a wildcat!' },
+      { who: 'npc', jp: 'わたしも ずっと さがしているけど、まだ みたことが ないんです。', en: 'I’ve been searching for ages too, but I’ve never seen one.' },
+      { who: 'me', jp: 'めずらしいから、だいじに しないと いけませんね。', en: 'They’re rare, so we have to take good care of them.' },
+    ],
+    q: 'Has the local cat seen a wildcat?', options: ['Never', 'Every day', 'Once last week'], answer: 0,
+  },
 ];
