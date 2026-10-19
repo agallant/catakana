@@ -259,3 +259,19 @@ ruby rt { font-size: 0.55em; }
 .kanji-row { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
 .readings { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 6px 0; font-size: 1.1rem; }
 .prompt-sound { font-size: 2.6rem; font-weight: 800; font-family: var(--jp); }
+
+/* Market & trophies */
+.shop-card { display: flex; gap: 12px; align-items: center; background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 12px; }
+.shop-card .spot-body p { font-size: 0.92rem; }
+.shop-card.owned { border-color: var(--teal); } .shop-card.locked { opacity: 0.6; }
+.big-emoji { font-size: 3rem; animation: nom 0.8s ease 2; } @keyframes nom { 50% { transform: scale(0.75) rotate(-8deg); } }
+.trophy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; }
+.trophy { background: linear-gradient(#fff8e6, #ffe9b8); color: #3b2a20; border: 2px solid #f0c75e; border-radius: 14px; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; text-align: center; font-size: 0.8rem; }
+.trophy.missing { background: var(--bg2); border-color: var(--line); color: var(--muted); }
+.trophy-emoji { font-size: 1.8rem; } .trophy small { color: inherit; opacity: 0.75; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+.tag { font-size: 0.72rem; font-weight: 800; border-radius: 99px; padding: 2px 8px; }
+.tag-castle { background: #ffe0e6; color: #8b2040; } .tag-heritage { background: #d9ecff; color: #1b4a7a; }
+.spot.snapped { border-color: var(--teal); }
+.hud-gear { background: none; border: 0; font-size: 1.3rem; padding: 4px; min-width: 36px; }
+button.hud-stat { cursor: pointer; }

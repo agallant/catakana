@@ -20,7 +20,7 @@ export class App {
   readonly nav = h('nav', { class: 'nav', 'aria-label': 'Main' });
   private current: Screen | null = null;
   private routes = new Map<string, ScreenFactory>();
-  private chrome = new Set<string>(['map', 'dojo', 'cats', 'settings', 'stop', 'explore', 'passport']);
+  private chrome = new Set<string>(['map', 'dojo', 'cats', 'settings', 'stop', 'explore', 'passport', 'shop']);
 
   constructor(readonly root: HTMLElement) {
     this.applySettings();
@@ -83,7 +83,8 @@ export class App {
         h('div', { class: 'xpbar', role: 'progressbar', 'aria-valuenow': lv.into, 'aria-valuemax': lv.need }, h('div', { class: 'xpfill', style: `width:${Math.round((lv.into / lv.need) * 100)}%` })),
       ),
       h('div', { class: 'hud-stat', title: 'Day streak' }, `🔥 ${d.streak}`),
-      h('div', { class: 'hud-stat', title: 'Fish' }, `🐟 ${d.fish}`),
+      h('button', { class: 'hud-stat', title: 'Fish — spend them at the market', onClick: () => this.go('shop') }, `🐟 ${d.fish}`),
+      h('button', { class: 'hud-gear', onClick: () => this.go('settings'), 'aria-label': 'Settings' }, '⚙️'),
     );
   }
 
@@ -91,9 +92,9 @@ export class App {
     const items: [string, string, string][] = [
       ['map', '🗾', 'Journey'],
       ['dojo', '🐾', 'Practice'],
+      ['shop', '🏮', 'Market'],
       ['passport', '📕', 'Passport'],
       ['cats', '😺', 'Cats'],
-      ['settings', '⚙️', 'Settings'],
     ];
     this.nav.replaceChildren(
       ...items.map(([r, icon, label]) =>

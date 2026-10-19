@@ -63,3 +63,22 @@ describe('lesson batches', () => {
     expect(second.items.some((i) => firstIds.has(i.id))).toBe(false);
   });
 });
+
+import { SHOP } from '../src/data/shop';
+import { STOP_BY_ID } from '../src/data/journey';
+describe('market & sights', () => {
+  it('shop items are valid', () => {
+    expect(new Set(SHOP.map((i) => i.id)).size).toBe(SHOP.length);
+    for (const it of SHOP) {
+      expect(it.cost).toBeGreaterThan(0);
+      if (it.from) expect(STOP_BY_ID.has(it.from), it.id).toBe(true);
+      expect(readingOf(it.jp)).not.toMatch(/[{}|]/);
+    }
+    expect(SHOP.filter((i) => i.kind === 'food').length).toBeGreaterThanOrEqual(20);
+  });
+  it('has castles and World Heritage sites to collect', () => {
+    const spots = Object.values(CULTURE).flatMap((c) => c.spots);
+    expect(spots.filter((s) => s.tags?.includes('castle')).length).toBeGreaterThanOrEqual(10);
+    expect(spots.filter((s) => s.tags?.includes('heritage')).length).toBeGreaterThanOrEqual(12);
+  });
+});

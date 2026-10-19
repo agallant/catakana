@@ -41,6 +41,10 @@ export interface SaveData {
   souvenirs: string[];
   /** stop id -> best trivia score */
   trivia: Record<string, number>;
+  /** shop items bought (food and treasures) */
+  owned: string[];
+  /** sights photographed in Explore ("<stop>:<spot name>") */
+  photos: string[];
   settings: Settings;
   stats: { rounds: number; correct: number; wrong: number; playMs: number };
   started: boolean;
@@ -65,6 +69,8 @@ export function defaultSave(): SaveData {
     stamps: [],
     souvenirs: [],
     trivia: {},
+    owned: [],
+    photos: [],
     settings: { furigana: 'always', romaji: true, sound: true, speech: true, speechRate: 0.85, reduceMotion: false },
     stats: { rounds: 0, correct: 0, wrong: 0, playMs: 0 },
     started: false,

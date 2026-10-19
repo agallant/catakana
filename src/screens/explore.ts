@@ -40,20 +40,42 @@ export function exploreScreen(app: App, params: string[]): Screen {
     h(
       'div',
       { class: 'spots' },
-      c.spots.map((sp) =>
-        h(
+      c.spots.map((sp) => {
+        const key = `${stop.id}:${sp.name}`;
+        const snapped = d.photos.includes(key);
+        const photo = h(
+          'button',
+          {
+            class: `btn small ${snapped ? 'ghost' : 'primary'}`,
+            disabled: snapped,
+            onClick: () => {
+              app.store.update((s) => {
+                if (!s.photos.includes(key)) {
+                  s.photos.push(key);
+                  s.fish += 3;
+                }
+              });
+              sfx.coin();
+              app.render();
+            },
+          },
+          snapped ? '📸 In your passport' : '📸 Take a photo (+🐟3)',
+        );
+        return h(
           'article',
-          { class: 'spot' },
+          { class: `spot ${snapped ? 'snapped' : ''}` },
           h('div', { class: 'spot-emoji' }, sp.emoji),
           h(
             'div',
             { class: 'spot-body' },
             h('h3', null, sp.name),
             h('div', { class: 'spot-jp' }, ruby(sp.jp, d.settings.furigana), h('button', { class: 'btn small ghost', onClick: () => void speak(readingOf(sp.jp)), 'aria-label': `Hear ${sp.name}` }, '🔊')),
+            sp.tags?.length ? h('div', { class: 'tags' }, sp.tags.map((t) => h('span', { class: `tag tag-${t}` }, t === 'castle' ? '🏯 Castle' : '🌏 World Heritage'))) : null,
             h('p', null, sp.about),
+            photo,
           ),
-        ),
-      ),
+        );
+      }),
     ),
     h(
       'section',

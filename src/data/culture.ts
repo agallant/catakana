@@ -1,7 +1,11 @@
 /** Sightseeing, souvenirs and trivia for each stop: the "learn about Japan" side of the journey. */
 
+export type SpotTag = 'castle' | 'heritage';
+
 export interface Spot {
   name: string;
+  /** castle and/or UNESCO World Heritage (these become passport collectibles) */
+  tags?: SpotTag[];
   /** Japanese name; may use {kanji|kana} furigana markup */
   jp: string;
   emoji: string;
@@ -79,7 +83,7 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   fuji: {
     spots: [
-      { name: 'Mount Fuji', jp: '{富士山|ふじさん}', emoji: '🗻', about: 'Japan’s tallest peak at 3,776 m — an active volcano and a sacred mountain.' },
+      { name: 'Mount Fuji', tags: ['heritage'], jp: '{富士山|ふじさん}', emoji: '🗻', about: 'Japan’s tallest peak at 3,776 m — an active volcano and a sacred mountain.' },
       { name: 'Tea fields', jp: '{茶畑|ちゃばたけ}', emoji: '🍵', about: 'Rows of bright green tea bushes cover the hills of Shizuoka.' },
       { name: 'Chureito Pagoda', jp: '{忠霊塔|ちゅうれいとう}', emoji: '⛩️', about: 'A five-story pagoda framed by cherry blossoms and Mt. Fuji — a classic postcard view.' },
     ],
@@ -91,7 +95,7 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   nagoya: {
     spots: [
-      { name: 'Nagoya Castle', jp: '{名古屋城|なごやじょう}', emoji: '🏯', about: 'Golden shachihoko — mythical tiger-headed fish — guard the roof.' },
+      { name: 'Nagoya Castle', tags: ['castle'], jp: '{名古屋城|なごやじょう}', emoji: '🏯', about: 'Golden shachihoko — mythical tiger-headed fish — guard the roof.' },
       { name: 'Atsuta Shrine', jp: '{熱田神宮|あつたじんぐう}', emoji: '⛩️', about: 'One of Japan’s most important Shinto shrines, said to hold a legendary sacred sword.' },
       { name: 'Railway museum', jp: 'リニア・{鉄道館|てつどうかん}', emoji: '🚄', about: 'See record-breaking shinkansen and maglev trains up close.' },
     ],
@@ -103,8 +107,9 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   kyoto: {
     spots: [
+      { name: 'Kiyomizu-dera', tags: ['heritage'], jp: '{清水寺|きよみずでら}', emoji: '🏯', about: 'A wooden temple whose huge veranda stands on tall pillars without a single nail.' },
       { name: 'Fushimi Inari', jp: '{伏見稲荷|ふしみいなり}', emoji: '⛩️', about: 'Thousands of vermilion torii gates — and fox statues, the messengers of the rice god Inari.' },
-      { name: 'Kinkaku-ji', jp: '{金閣寺|きんかくじ}', emoji: '✨', about: 'The Golden Pavilion, covered in gold leaf, shines over a mirror-like pond.' },
+      { name: 'Kinkaku-ji', tags: ['heritage'], jp: '{金閣寺|きんかくじ}', emoji: '✨', about: 'The Golden Pavilion, covered in gold leaf, shines over a mirror-like pond.' },
       { name: 'Arashiyama bamboo grove', jp: '{嵐山|あらしやま}', emoji: '🎋', about: 'Towering bamboo stalks creak and sway in the wind along a narrow path.' },
     ],
     trivia: [
@@ -116,7 +121,7 @@ export const CULTURE: Record<string, StopCulture> = {
   osaka: {
     spots: [
       { name: 'Dotonbori', jp: '{道頓堀|どうとんぼり}', emoji: '🌃', about: 'A canal lined with giant neon signs, a mechanical crab, and the famous Glico running man.' },
-      { name: 'Osaka Castle', jp: '{大阪城|おおさかじょう}', emoji: '🏯', about: 'Built for Toyotomi Hideyoshi, the leader who unified Japan in the 1500s.' },
+      { name: 'Osaka Castle', tags: ['castle'], jp: '{大阪城|おおさかじょう}', emoji: '🏯', about: 'Built for Toyotomi Hideyoshi, the leader who unified Japan in the 1500s.' },
       { name: 'Takoyaki stand', jp: 'たこやき', emoji: '🐙', about: 'Batter balls with octopus inside, flipped with picks in a special dimpled pan.' },
     ],
     trivia: [
@@ -127,9 +132,10 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   nara: {
     spots: [
+      { name: 'Horyu-ji', tags: ['heritage'], jp: '{法隆寺|ほうりゅうじ}', emoji: '🛕', about: 'Home to some of the oldest wooden buildings in the world, from around 1,300 years ago.' },
       { name: 'Nara Park', jp: '{奈良公園|ならこうえん}', emoji: '🦌', about: 'Wild deer roam freely; buy shika-senbei crackers and they may bow to you.' },
-      { name: 'Todai-ji', jp: '{東大寺|とうだいじ}', emoji: '🛕', about: 'A giant bronze Buddha in one of the largest wooden buildings in the world.' },
-      { name: 'Kasuga Taisha', jp: '{春日大社|かすがたいしゃ}', emoji: '🏮', about: 'A shrine with thousands of stone and bronze lanterns.' },
+      { name: 'Todai-ji', tags: ['heritage'], jp: '{東大寺|とうだいじ}', emoji: '🛕', about: 'A giant bronze Buddha in one of the largest wooden buildings in the world.' },
+      { name: 'Kasuga Taisha', tags: ['heritage'], jp: '{春日大社|かすがたいしゃ}', emoji: '🏮', about: 'A shrine with thousands of stone and bronze lanterns.' },
     ],
     trivia: [
       { q: 'What do Nara’s deer famously do for crackers?', options: ['Bow', 'Sing', 'Dance'], answer: 0 },
@@ -139,7 +145,7 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   himeji: {
     spots: [
-      { name: 'Himeji Castle', jp: '{姫路城|ひめじじょう}', emoji: '🏰', about: 'The White Heron Castle — an original castle that survived wars and earthquakes.' },
+      { name: 'Himeji Castle', tags: ['castle', 'heritage'], jp: '{姫路城|ひめじじょう}', emoji: '🏰', about: 'The White Heron Castle — an original castle that survived wars and earthquakes.' },
       { name: 'Koko-en Garden', jp: '{好古園|こうこえん}', emoji: '🌿', about: 'Nine connected Japanese gardens beside the castle, with koi ponds and tea houses.' },
     ],
     trivia: [
@@ -150,8 +156,8 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   hiroshima: {
     spots: [
-      { name: 'Peace Memorial Park', jp: '{平和記念公園|へいわきねんこうえん}', emoji: '🕊️', about: 'A park for remembering and for wishing for peace. Visitors fold paper cranes as a symbol of peace.' },
-      { name: 'Itsukushima Shrine', jp: '{厳島神社|いつくしまじんじゃ}', emoji: '⛩️', about: 'On Miyajima island, its big torii gate seems to float on the sea at high tide.' },
+      { name: 'Peace Memorial Park', tags: ['heritage'], jp: '{平和記念公園|へいわきねんこうえん}', emoji: '🕊️', about: 'A park for remembering and for wishing for peace. Visitors fold paper cranes as a symbol of peace.' },
+      { name: 'Itsukushima Shrine', tags: ['heritage'], jp: '{厳島神社|いつくしまじんじゃ}', emoji: '⛩️', about: 'On Miyajima island, its big torii gate seems to float on the sea at high tide.' },
       { name: 'Okonomiyaki', jp: 'お{好|この}み{焼|や}き', emoji: '🥞', about: 'Hiroshima-style is layered: batter, cabbage, noodles, egg, and sauce.' },
     ],
     trivia: [
@@ -163,7 +169,7 @@ export const CULTURE: Record<string, StopCulture> = {
   matsuyama: {
     spots: [
       { name: 'Dogo Onsen', jp: '{道後温泉|どうごおんせん}', emoji: '♨️', about: 'A grand old wooden bathhouse in one of Japan’s oldest hot spring towns.' },
-      { name: 'Matsuyama Castle', jp: '{松山城|まつやまじょう}', emoji: '🏯', about: 'Ride a chairlift up the hill to an original castle overlooking the city.' },
+      { name: 'Matsuyama Castle', tags: ['castle'], jp: '{松山城|まつやまじょう}', emoji: '🏯', about: 'Ride a chairlift up the hill to an original castle overlooking the city.' },
       { name: 'Aoshima (cat island)', jp: '{青島|あおしま}', emoji: '🐈', about: 'A tiny island with dozens of cats and only a handful of people.' },
     ],
     trivia: [
@@ -174,6 +180,7 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   fukuoka: {
     spots: [
+      { name: 'Fukuoka Castle ruins', tags: ['castle'], jp: '{福岡城|ふくおかじょう}', emoji: '🌸', about: 'Huge stone walls in Maizuru Park — a favorite spot for cherry blossom picnics.' },
       { name: 'Yatai food stalls', jp: '{屋台|やたい}', emoji: '🏮', about: 'Tiny open-air stalls where strangers squeeze together for ramen and skewers.' },
       { name: 'Dazaifu Tenmangu', jp: '{太宰府天満宮|だざいふてんまんぐう}', emoji: '📚', about: 'Students visit this shrine to pray for good exam results.' },
     ],
@@ -186,7 +193,7 @@ export const CULTURE: Record<string, StopCulture> = {
   nagasaki: {
     spots: [
       { name: 'Dejima', jp: '{出島|でじま}', emoji: '⚓', about: 'A small fan-shaped island where Dutch traders lived during Japan’s centuries of isolation.' },
-      { name: 'Glover Garden', jp: 'グラバー{園|えん}', emoji: '🌹', about: 'Western-style houses on a hill overlooking the harbor.' },
+      { name: 'Glover Garden', tags: ['heritage'], jp: 'グラバー{園|えん}', emoji: '🌹', about: 'Western-style houses on a hill overlooking the harbor.' },
       { name: 'Megane Bridge', jp: '{眼鏡橋|めがねばし}', emoji: '👓', about: 'An old stone bridge whose reflection in the river looks like a pair of glasses.' },
     ],
     trivia: [
@@ -197,7 +204,7 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   kumamoto: {
     spots: [
-      { name: 'Kumamoto Castle', jp: '{熊本城|くまもとじょう}', emoji: '🏯', about: 'Its curved stone walls, called musha-gaeshi, were made to stop warriors climbing up.' },
+      { name: 'Kumamoto Castle', tags: ['castle'], jp: '{熊本城|くまもとじょう}', emoji: '🏯', about: 'Its curved stone walls, called musha-gaeshi, were made to stop warriors climbing up.' },
       { name: 'Mount Aso', jp: '{阿蘇山|あそさん}', emoji: '🌋', about: 'An active volcano inside an enormous caldera with towns and farms in it.' },
       { name: 'Kumamon Square', jp: 'くまモンスクエア', emoji: '🐻', about: 'Meet the famous black-bear mascot with rosy cheeks.' },
     ],
@@ -211,7 +218,7 @@ export const CULTURE: Record<string, StopCulture> = {
     spots: [
       { name: 'Sakurajima', jp: '{桜島|さくらじま}', emoji: '🌋', about: 'An active volcano across the bay. Locals check the “ash forecast” like a weather report!' },
       { name: 'Ibusuki sand bath', jp: '{砂蒸|すなむ}し', emoji: '🏖️', about: 'Get buried in warm volcanic sand on the beach — it’s like a hot spring without water.' },
-      { name: 'Sengan-en', jp: '{仙巌園|せんがんえん}', emoji: '🌳', about: 'A lord’s garden that uses the volcano and bay as “borrowed scenery”.' },
+      { name: 'Sengan-en', tags: ['heritage'], jp: '{仙巌園|せんがんえん}', emoji: '🌳', about: 'A lord’s garden that uses the volcano and bay as “borrowed scenery”.' },
     ],
     trivia: [
       { q: 'What falls from the sky in Kagoshima sometimes?', options: ['Volcanic ash', 'Frogs', 'Candy'], answer: 0 },
@@ -221,7 +228,7 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   okinawa: {
     spots: [
-      { name: 'Shuri Castle', jp: '{首里城|しゅりじょう}', emoji: '🏯', about: 'The red palace of the Ryukyu Kingdom, being carefully rebuilt after a 2019 fire.' },
+      { name: 'Shuri Castle', tags: ['castle', 'heritage'], jp: '{首里城|しゅりじょう}', emoji: '🏯', about: 'The red palace of the Ryukyu Kingdom, being carefully rebuilt after a 2019 fire.' },
       { name: 'Churaumi Aquarium', jp: '{美|ちゅ}ら{海水族館|うみすいぞくかん}', emoji: '🦈', about: 'Whale sharks glide through one of the world’s largest aquarium tanks.' },
       { name: 'Kokusai Street', jp: '{国際通|こくさいどお}り', emoji: '🌺', about: 'A lively street of shops selling shisa statues, sea salt and purple sweet-potato tarts.' },
     ],
@@ -233,6 +240,7 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   sendai: {
     spots: [
+      { name: 'Aoba Castle ruins', tags: ['castle'], jp: '{青葉城|あおばじょう}', emoji: '🐎', about: 'Date Masamune’s hilltop castle site, guarded by a statue of him on horseback.' },
       { name: 'Zuihoden', jp: '{瑞鳳殿|ずいほうでん}', emoji: '⛩️', about: 'The colorful mausoleum of Date Masamune, the one-eyed samurai lord who founded Sendai.' },
       { name: 'Matsushima Bay', jp: '{松島|まつしま}', emoji: '🏝️', about: 'Over 200 pine-covered islets — one of Japan’s “Three Great Views”.' },
       { name: 'Tanabata Festival', jp: '{七夕|たなばた}', emoji: '🎋', about: 'People write wishes on paper strips and hang them on bamboo.' },
@@ -269,7 +277,7 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   hakodate: {
     spots: [
-      { name: 'Goryokaku', jp: '{五稜郭|ごりょうかく}', emoji: '⭐', about: 'A star-shaped Western-style fort from the 1860s, pink with cherry blossoms in spring.' },
+      { name: 'Goryokaku', tags: ['castle'], jp: '{五稜郭|ごりょうかく}', emoji: '⭐', about: 'A star-shaped Western-style fort from the 1860s, pink with cherry blossoms in spring.' },
       { name: 'Morning Market', jp: '{朝市|あさいち}', emoji: '🦑', about: 'Stalls of crab, sea urchin and squid you can fish for yourself.' },
       { name: 'Mount Hakodate', jp: '{函館山|はこだてやま}', emoji: '🌃', about: 'Take the ropeway up for a sparkling night view of the city between two bays.' },
     ],
@@ -283,7 +291,7 @@ export const CULTURE: Record<string, StopCulture> = {
     spots: [
       { name: 'Nebuta Museum', jp: 'ねぶたの{家|いえ}', emoji: '🏮', about: 'See the giant glowing paper floats from the Nebuta Festival up close.' },
       { name: 'Apple orchards', jp: 'りんご{園|えん}', emoji: '🍎', about: 'Aomori grows about half of Japan’s apples.' },
-      { name: 'Hirosaki Castle', jp: '{弘前城|ひろさきじょう}', emoji: '🌸', about: 'One of Japan’s most famous cherry blossom spots, with petals carpeting the moat.' },
+      { name: 'Hirosaki Castle', tags: ['castle'], jp: '{弘前城|ひろさきじょう}', emoji: '🌸', about: 'One of Japan’s most famous cherry blossom spots, with petals carpeting the moat.' },
     ],
     trivia: [
       { q: 'Aomori is famous for growing…', options: ['Apples', 'Bananas', 'Coffee'], answer: 0 },
@@ -305,8 +313,8 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   nikko: {
     spots: [
-      { name: 'Sleeping Cat carving', jp: '{眠|ねむ}り{猫|ねこ}', emoji: '😴', about: 'A tiny carved cat asleep above a gate at Toshogu — a National Treasure!' },
-      { name: 'Three Wise Monkeys', jp: '{三猿|さんざる}', emoji: '🙈', about: 'See no evil, hear no evil, speak no evil — carved on the sacred stable.' },
+      { name: 'Sleeping Cat carving', tags: ['heritage'], jp: '{眠|ねむ}り{猫|ねこ}', emoji: '😴', about: 'A tiny carved cat asleep above a gate at Toshogu — a National Treasure!' },
+      { name: 'Three Wise Monkeys', tags: ['heritage'], jp: '{三猿|さんざる}', emoji: '🙈', about: 'See no evil, hear no evil, speak no evil — carved on the sacred stable.' },
       { name: 'Kegon Falls', jp: '{華厳滝|けごんのたき}', emoji: '💦', about: 'A roaring waterfall nearly 100 m tall.' },
     ],
     trivia: [
@@ -317,6 +325,7 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   kanazawa: {
     spots: [
+      { name: 'Kanazawa Castle Park', tags: ['castle'], jp: '{金沢城|かなざわじょう}', emoji: '🏯', about: 'White castle walls with lead roof tiles, right next to Kenroku-en.' },
       { name: 'Kenroku-en', jp: '{兼六園|けんろくえん}', emoji: '🌲', about: 'A grand garden where ropes hold up tree branches against winter snow (yukitsuri).' },
       { name: 'Higashi Chaya', jp: 'ひがし{茶屋街|ちゃやがい}', emoji: '🍵', about: 'An old teahouse district with wooden lattice fronts.' },
       { name: 'Omicho Market', jp: '{近江町市場|おうみちょういちば}', emoji: '🦀', about: 'Fresh seafood, crab, and sushi rice bowls piled high.' },
@@ -329,7 +338,7 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   shirakawa: {
     spots: [
-      { name: 'Gassho farmhouses', jp: '{合掌造|がっしょうづく}り', emoji: '🛖', about: 'Huge thatched roofs built without nails, steep like hands in prayer.' },
+      { name: 'Gassho farmhouses', tags: ['heritage'], jp: '{合掌造|がっしょうづく}り', emoji: '🛖', about: 'Huge thatched roofs built without nails, steep like hands in prayer.' },
       { name: 'Ogimachi viewpoint', jp: '{展望台|てんぼうだい}', emoji: '🔭', about: 'Look down on the whole village nestled in the valley.' },
     ],
     trivia: [
@@ -400,8 +409,8 @@ export const CULTURE: Record<string, StopCulture> = {
   },
   yakushima: {
     spots: [
-      { name: 'Jomon Sugi', jp: '{縄文杉|じょうもんすぎ}', emoji: '🌲', about: 'A giant ancient cedar, reached by a long day hike through the forest.' },
-      { name: 'Shiratani Unsuikyo', jp: '{白谷雲水峡|しらたにうんすいきょう}', emoji: '🍃', about: 'A mossy ravine said to have inspired the forest in Princess Mononoke.' },
+      { name: 'Jomon Sugi', tags: ['heritage'], jp: '{縄文杉|じょうもんすぎ}', emoji: '🌲', about: 'A giant ancient cedar, reached by a long day hike through the forest.' },
+      { name: 'Shiratani Unsuikyo', tags: ['heritage'], jp: '{白谷雲水峡|しらたにうんすいきょう}', emoji: '🍃', about: 'A mossy ravine said to have inspired the forest in Princess Mononoke.' },
       { name: 'Turtle beach', jp: 'ウミガメ', emoji: '🐢', about: 'Sea turtles come ashore to lay eggs on Yakushima’s beaches in summer.' },
     ],
     trivia: [

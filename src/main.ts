@@ -12,6 +12,7 @@ import { settingsScreen } from './screens/settings';
 import { exploreScreen } from './screens/explore';
 import { triviaScreen } from './screens/trivia';
 import { passportScreen } from './screens/passport';
+import { shopScreen } from './screens/shop';
 import { registerSW } from 'virtual:pwa-register';
 
 const root = document.getElementById('app');
@@ -29,6 +30,7 @@ app.register('settings', settingsScreen);
 app.register('explore', exploreScreen);
 app.register('trivia', triviaScreen);
 app.register('passport', passportScreen);
+app.register('shop', shopScreen);
 app.render();
 
 registerSW({ immediate: true });
