@@ -63,7 +63,11 @@ export interface Shell {
 }
 
 /** Common chrome: back button, progress bar, a cat mascot who reacts. */
+/** Correct answers in a row within the current game, so the chime climbs with a streak. */
+let streak = 0;
+
 export function shell(ctx: GameContext, title: string): Shell {
+  streak = 0;
   const progress = h('div', { class: 'progress-fill' });
   const lives = h('span', { class: 'lives' });
   const mascot = h('div', { class: 'mascot' }, catSvg(ctx.store.data.look, 'happy', 64));
@@ -121,8 +125,9 @@ export function oops(): string {
 
 export function recordAnswer(ctx: GameContext, item: Item, ok: boolean, sh: Shell): void {
   ctx.store.recordAnswer(item.id, ok);
+  streak = ok ? streak + 1 : 0;
   if (ok) {
-    sfx.correct();
+    sfx.correct(streak - 1);
     sh.say(praise(), 'happy');
   } else {
     sfx.wrong();
