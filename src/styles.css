@@ -323,3 +323,9 @@ button.hud-stat { cursor: pointer; }
 .keigo-ex { font-size: 1.5rem; line-height: 2.1; }
 .keigo-reveal { min-height: 3.2em; text-align: center; margin-top: 10px; font-size: 1.1rem; }
 .count-pile { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 320px; margin: 0 auto 8px; font-size: 2.6rem; line-height: 1.15; }
+.depart-board { display: inline-flex; align-items: center; gap: 14px; background: #1f2430; color: #ffb347; border-radius: 12px; padding: 12px 18px; margin-bottom: 10px; box-shadow: inset 0 0 0 3px #3a4256; }
+.depart-train { color: #e8eef9; font-size: 1.1rem; font-weight: 700; }
+.depart-time { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 2.6rem; font-weight: 800; letter-spacing: 2px; }
+.calendar-card { display: inline-block; min-width: 140px; border-radius: 12px; overflow: hidden; margin-bottom: 10px; background: #fff; color: #3b2a20; box-shadow: 0 3px 0 var(--line, #e9d8c4); border: 2px solid var(--line, #e9d8c4); }
+.cal-month { background: #d64545; color: #fff; font-weight: 800; padding: 4px 12px; font-size: 1.2rem; }
+.cal-day { font-size: 2.8rem; font-weight: 800; padding: 6px 12px 10px; }
