@@ -1,3 +1,5 @@
+import { DAY_TRIPS } from './daytrips';
+
 /** Japan's 47 prefectures, and which prefecture each journey stop is in. */
 export interface Prefecture {
   id: string;
@@ -81,7 +83,9 @@ export const STOP_PREFECTURE: Record<string, string> = {
   amakusa: 'kumamoto', amami: 'kagoshima', izu: 'shizuoka', gotokuji: 'tokyo',
 };
 
-/** Prefectures the player has visited (any stamped stop inside them). */
-export function visitedPrefectures(stamps: string[]): Set<string> {
-  return new Set(stamps.map((s) => STOP_PREFECTURE[s]).filter((p): p is string => p !== undefined));
+/** Prefectures the player has visited: any stamped stop inside them, or a day trip there. */
+export function visitedPrefectures(stamps: string[], daytrips: string[] = []): Set<string> {
+  const out = new Set(stamps.map((s) => STOP_PREFECTURE[s]).filter((p): p is string => p !== undefined));
+  for (const t of DAY_TRIPS) if (daytrips.includes(t.id)) out.add(t.pref);
+  return out;
 }

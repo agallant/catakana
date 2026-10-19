@@ -5,6 +5,7 @@ import { CULTURE, type SpotTag } from '../data/culture';
 import { SHOP, type ShopKind } from '../data/shop';
 import { EVENTS } from '../data/seasons';
 import { PREFECTURES, STOP_PREFECTURE, visitedPrefectures } from '../data/prefectures';
+import { DAY_TRIPS } from '../data/daytrips';
 import { stampSvg } from '../ui/stamp';
 import { ACHIEVEMENTS } from '../core/progress';
 
@@ -51,8 +52,8 @@ export function passportScreen(app: App): Screen {
     return { emoji: sv.emoji, label: sv.name, sub: st.name, got: d.souvenirs.includes(st.id) };
   });
 
-  const visited = visitedPrefectures(d.stamps);
-  const onRoute = new Set(Object.values(STOP_PREFECTURE));
+  const visited = visitedPrefectures(d.stamps, d.daytrips);
+  const onRoute = new Set([...Object.values(STOP_PREFECTURE), ...DAY_TRIPS.map((t) => t.pref)]);
   const prefGrid = h(
     'div',
     { class: 'trophy-grid' },
