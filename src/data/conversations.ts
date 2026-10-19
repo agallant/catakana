@@ -309,4 +309,67 @@ export const CONVERSATIONS: Conversation[] = [
     ],
     q: 'Has the local cat seen a wildcat?', options: ['Never', 'Every day', 'Once last week'], answer: 0,
   },
+  {
+    id: 'castle-move', from: 56, title: 'The moving castle',
+    lines: [
+      { who: 'me', jp: 'え、おしろが うごいたんですか？', en: 'What, the castle moved?' },
+      { who: 'npc', jp: 'ええ。いしがきを なおす ために、70メートル いどうしたんです。', en: 'Yes. It was moved 70 metres so the stone walls could be fixed.' },
+      { who: 'me', jp: 'だから いちが ちがう わけですね。', en: 'So that’s why it’s in a different spot.' },
+    ],
+    q: 'Why was the castle moved?', options: ['To repair the stone walls', 'For a festival', 'It was sold'], answer: 0,
+  },
+  {
+    id: 'island-tour', from: 58, title: 'Can we land?',
+    lines: [
+      { who: 'me', jp: 'きょうは しまに あがれますか。', en: 'Can we land on the island today?' },
+      { who: 'npc', jp: 'なみに よって ちがいます。きょうは なみが たかいので、むずかしいかも しれません。', en: 'It depends on the waves. They’re high today, so it might be hard.' },
+      { who: 'me', jp: 'ざんねんですが、ふねから みるだけでも いいです。', en: 'That’s a shame, but just seeing it from the boat is fine.' },
+    ],
+    q: 'What decides whether you can land?', options: ['The waves', 'The day of the week', 'The ticket price'], answer: 0,
+  },
+  {
+    id: 'kiln', from: 59, title: 'At the kiln',
+    lines: [
+      { who: 'npc', jp: 'このさらは さんかいも やいたんですよ。', en: 'This plate was fired three times, you know.' },
+      { who: 'me', jp: 'こんなに うすいのに、つよいですね。', en: 'It’s so thin, yet strong.' },
+      { who: 'npc', jp: 'むかしは ヨーロッパの おうさまに たいして ゆしゅつ していました。', en: 'Long ago it was exported for the kings of Europe.' },
+    ],
+    q: 'Who bought Arita porcelain long ago?', options: ['European kings', 'Chinese farmers', 'American sailors'], answer: 0,
+  },
+  {
+    id: 'steps', from: 62, title: 'Too many steps',
+    lines: [
+      { who: 'me', jp: 'はあ、はあ…まだ つかないんですか。', en: 'Huff, huff… aren’t we there yet?' },
+      { who: 'npc', jp: 'あと 300だん ありますよ。でも ちょうじょうの けしきは さいこうに ちがいない！', en: 'Another 300 steps. But the view from the top must be the best!' },
+      { who: 'me', jp: 'じゃあ、がんばって のぼる ことに します。', en: 'Then I’ll decide to keep climbing.' },
+    ],
+    q: 'How many steps are left?', options: ['300', '30', '3,000'], answer: 0,
+  },
+  {
+    id: 'new-job', from: 63, title: 'A new job',
+    lines: [
+      { who: 'npc', jp: 'じつは らいげつから くらしきで はたらく ことに なったんです。', en: 'Actually, it’s been decided I’ll work in Kurashiki from next month.' },
+      { who: 'me', jp: 'おめでとう！ どんな しごとですか。', en: 'Congratulations! What kind of job?' },
+      { who: 'npc', jp: 'ジーンズを つくる しごとです。ちいさい ころからの ゆめでした。', en: 'Making jeans. It’s been my dream since I was little.' },
+    ],
+    q: 'What will the cat make?', options: ['Jeans', 'Pottery', 'Udon'], answer: 0,
+  },
+  {
+    id: 'trail', from: 66, title: 'On the old trail',
+    lines: [
+      { who: 'me', jp: 'ちずを みずに あるいて きました。', en: 'I walked here without looking at the map.' },
+      { who: 'npc', jp: 'あぶないですよ！ みちしるべを よく みて くださいね。', en: 'That’s dangerous! Watch the signposts carefully.' },
+      { who: 'me', jp: 'やたがらすが みちを おしえて くれたんです。', en: 'Yatagarasu showed me the way.' },
+    ],
+    q: 'What did the traveller walk without?', options: ['Looking at a map', 'Shoes', 'Water'], answer: 0,
+  },
+  {
+    id: 'homecoming', from: 67, title: 'Back in Tokyo',
+    lines: [
+      { who: 'npc', jp: 'ひさしぶり！ にほんごが ぺらぺらに なりましたね。', en: 'Long time no see! Your Japanese is fluent now.' },
+      { who: 'me', jp: 'たいへんだったにも かかわらず、たのしい たびでした。', en: 'Despite being tough, it was a fun trip.' },
+      { who: 'npc', jp: 'みんなの おかげですね。つぎは どこへ いきますか。', en: 'Thanks to everyone, right? Where will you go next?' },
+    ],
+    q: 'How was the trip?', options: ['Tough but fun', 'Boring', 'Too short'], answer: 0,
+  },
 ];

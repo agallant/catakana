@@ -27,7 +27,8 @@ Tiers: Kana → N5 → N4 → N3 → N2 → N1. Everything runs client-side, off
 | M7.6 | **N4 depth** – more N4 vocabulary (to ~650 words), adjective conjugation, keigo basics | planned |
 | M8 | **N3 season** – 12 destinations (Inuyama → Iriomote) incl. the fifth National Treasure castle, Sado gold mines & Shiretoko (UNESCO), and the Iriomote wildcat; 12 grammar points (ようになる, ために, ように, そうだ, らしい, てしまう, ながら, はずだ, ても, passive, causative, ばかり); ~180 words, 119 N3 kanji with strokes, 60 sentences, 7 conversations | in progress |
 | M8.5 | **N3 depth** – reading passages, kanji compounds game, more N3 kanji (to ~370) | planned |
-| M9 | **N2** – ~1000 kanji, longer texts, keigo introduction | planned |
+| M9 | **N2 season** – 12 destinations (Hirosaki → Asakusa) incl. Hirosaki Castle, Gunkanjima & Hagi (Meiji Industrial heritage), Yoshino & Kumano Kodō (Kii UNESCO); 12 grammar points (わけだ, にとって, によって, に対して, ものの, ばかりか, に違いない, ことになる/ことにする, おかげで/せいで, かわりに, ようとする/ずに, ながらも/にもかかわらず); ~180 words, 132 more kanji with strokes, 60 sentences, 7 conversations | in progress |
+| M9.5 | **N2 depth** – keigo, longer texts, more N2 kanji (to ~1000) | planned |
 | M10 | **N1** – ~2000 kanji, advanced vocab/grammar, literary and news-style reading | planned |
 | M11 | **Polish & depth** – all 47 prefectures, seasonal events, achievements, cloud-free progress export/import, more cats and outfits, sound/music pass, i18n of UI | ongoing |
 

@@ -704,4 +704,148 @@ export const CULTURE: Record<string, StopCulture> = {
     ],
     souvenir: { name: 'Star sand bottle', jp: 'ほしずな', emoji: '⭐', cost: 30 },
   },
+  hirosaki: {
+    spots: [
+      { name: 'Hirosaki Castle', tags: ['castle'], jp: '{弘前城|ひろさきじょう}', emoji: '🏯', about: 'One of twelve original castle keeps — slid 70 m on rails in 2015 so its stone walls could be rebuilt.' },
+      { name: 'Hanaikada on the moat', jp: '{花筏|はないかだ}', emoji: '🌸', about: 'In late April, fallen cherry petals cover the moat in a pink “raft”.' },
+      { name: 'Apple orchards', jp: 'りんご{園|えん}', emoji: '🍎', about: 'Pick apples in autumn — Aomori grows over half of Japan’s apples.' },
+    ],
+    trivia: [
+      { q: 'Why was Hirosaki Castle’s keep moved in 2015?', options: ['To repair the stone walls under it', 'To get a better view', 'It was sold'], answer: 0 },
+      { q: 'きれいな わけだ means…', options: ['No wonder it’s beautiful', 'It isn’t beautiful', 'It will be beautiful'], answer: 0 },
+    ],
+    souvenir: { name: 'Apple pie', jp: 'アップルパイ', emoji: '🥧', cost: 30 },
+  },
+  matsushima: {
+    spots: [
+      { name: 'Matsushima Bay cruise', jp: '{松島湾|まつしまわん}', emoji: '⛴️', about: 'Sail among 260 pine-covered islands — one of the Three Views of Japan.' },
+      { name: 'Zuigan-ji', jp: '{瑞巌寺|ずいがんじ}', emoji: '🛕', about: 'A Zen temple rebuilt by the warlord Date Masamune, with National Treasure halls.' },
+      { name: 'Godaidō', jp: '{五大堂|ごだいどう}', emoji: '🌉', about: 'A tiny temple hall on an islet, reached by red “see-through” bridges.' },
+    ],
+    trivia: [
+      { q: 'Which famous poet travelled to Matsushima in 1689?', options: ['Matsuo Bashō', 'Murasaki Shikibu', 'Natsume Sōseki'], answer: 0 },
+      { q: 'わたしに とって means…', options: ['for me / to me', 'by me', 'instead of me'], answer: 0 },
+    ],
+    souvenir: { name: 'Grilled oysters', jp: 'やきがき', emoji: '🦪', cost: 35 },
+  },
+  gunkanjima: {
+    spots: [
+      { name: 'Hashima (Battleship Island)', tags: ['heritage'], jp: '{軍艦島|ぐんかんじま}', emoji: '🏚️', about: 'An abandoned coal-mining island of concrete apartments — part of the Meiji Industrial Revolution World Heritage site.' },
+      { name: 'Glover Garden', tags: ['heritage'], jp: 'グラバー{園|えん}', emoji: '🏡', about: 'Western-style merchant houses on a Nagasaki hillside, also in the Meiji Industrial heritage group.' },
+      { name: 'Nagasaki night view', jp: '{夜景|やけい}', emoji: '🌃', about: 'From Mt. Inasa, the harbour lights are called a “ten-million-dollar view”.' },
+    ],
+    trivia: [
+      { q: 'What was mined on Gunkanjima?', options: ['Coal', 'Gold', 'Salt'], answer: 0 },
+      { q: 'てんきに よって means…', options: ['depending on the weather', 'despite the weather', 'thanks to the weather'], answer: 0 },
+    ],
+    souvenir: { name: 'Castella cake', jp: 'カステラ', emoji: '🍰', cost: 30 },
+  },
+  arita: {
+    spots: [
+      { name: 'Tozan Shrine', jp: '{陶山神社|とうざんじんじゃ}', emoji: '⛩️', about: 'A shrine whose torii gate and guardian lions are made of Arita porcelain.' },
+      { name: 'Tonbai-bei walls', jp: 'トンバイ{塀|べい}', emoji: '🧱', about: 'Lanes lined with walls made from old kiln bricks and broken pottery.' },
+      { name: 'Kyushu Ceramic Museum', jp: '{陶磁|とうじ}{文化館|ぶんかかん}', emoji: '🏺', about: 'See the blue-and-white and colourful porcelain that once filled European palaces.' },
+    ],
+    trivia: [
+      { q: 'What is Arita famous for?', options: ['Porcelain', 'Pearls', 'Paper lanterns'], answer: 0 },
+      { q: 'しごとに たいして しんけんだ means…', options: ['serious about work', 'tired of work', 'late for work'], answer: 0 },
+    ],
+    souvenir: { name: 'Arita-ware teacup', jp: 'ありたやき', emoji: '🍵', cost: 60 },
+  },
+  hagi: {
+    spots: [
+      { name: 'Shōka Sonjuku', tags: ['heritage'], jp: '{松下村塾|しょうかそんじゅく}', emoji: '📜', about: 'The tiny school where Yoshida Shōin taught the young samurai who helped modernise Japan.' },
+      { name: 'Hagi reverberatory furnace', tags: ['heritage'], jp: '{反射炉|はんしゃろ}', emoji: '🔥', about: 'An experimental furnace for casting iron cannons, from the 1850s.' },
+      { name: 'Hagi Castle ruins', tags: ['castle'], jp: '{萩城|はぎじょう}{跡|あと}', emoji: '🏯', about: 'Stone walls and a moat by the sea where the Mōri lords once ruled.' },
+    ],
+    trivia: [
+      { q: 'Hagi’s young samurai helped bring about…', options: ['The Meiji Restoration', 'The Heian period', 'The Tokyo Olympics'], answer: 0 },
+      { q: 'ちいさい ものの means…', options: ['although it is small', 'because it is small', 'it must be small'], answer: 0 },
+    ],
+    souvenir: { name: 'Natsumikan jelly', jp: 'なつみかんゼリー', emoji: '🍊', cost: 25 },
+  },
+  iwakuni: {
+    spots: [
+      { name: 'Kintai Bridge', jp: '{錦帯橋|きんたいきょう}', emoji: '🌉', about: 'Five wooden arches over the Nishiki River, rebuilt by hand after a 1950 flood.' },
+      { name: 'Iwakuni Castle', tags: ['castle'], jp: '{岩国城|いわくにじょう}', emoji: '🏯', about: 'Take the ropeway up for a view of the bridge far below.' },
+      { name: 'White snake museum', jp: '{白蛇|しろへび}', emoji: '🐍', about: 'Meet the rare white snakes that are a lucky symbol of the town.' },
+    ],
+    trivia: [
+      { q: 'What is special about Kintai Bridge’s construction?', options: ['Wooden arches built without nails', 'It is made of glass', 'It floats'], answer: 0 },
+      { q: 'こどもばかりか おとなも means…', options: ['not only children but adults too', 'only children', 'children instead of adults'], answer: 0 },
+    ],
+    souvenir: { name: 'Iwakuni sushi', jp: 'いわくにずし', emoji: '🍱', cost: 35 },
+  },
+  kotohira: {
+    spots: [
+      { name: 'Kotohiragū (Konpira-san)', jp: '{金刀比羅宮|ことひらぐう}', emoji: '⛩️', about: '785 stone steps up to a shrine for sailors — 1,368 to the inner shrine.' },
+      { name: 'Kanamaru-za', jp: '{金丸座|かなまるざ}', emoji: '🎭', about: 'Japan’s oldest surviving kabuki theatre, still used every spring.' },
+      { name: 'Udon school', jp: 'うどん{学校|がっこう}', emoji: '🍜', about: 'Knead Sanuki udon dough with your feet, then cut and eat it.' },
+    ],
+    trivia: [
+      { q: 'Who did Konpira-san protect?', options: ['Sailors at sea', 'Farmers', 'Miners'], answer: 0 },
+      { q: 'つかれたに ちがいない means…', options: ['you must be tired', 'you are not tired', 'try not to get tired'], answer: 0 },
+    ],
+    souvenir: { name: 'Sanuki udon', jp: 'さぬきうどん', emoji: '🍜', cost: 25 },
+  },
+  kurashiki: {
+    spots: [
+      { name: 'Bikan Historical Quarter', jp: '{美観地区|びかんちく}', emoji: '🛶', about: 'White-walled storehouses and willows along a canal — ride a little boat.' },
+      { name: 'Ivy Square', jp: 'アイビースクエア', emoji: '🧶', about: 'A red-brick cotton mill from 1889, now covered in ivy.' },
+      { name: 'Ohara Museum of Art', jp: '{大原美術館|おおはらびじゅつかん}', emoji: '🖼️', about: 'Japan’s first museum of Western art, with works by El Greco and Monet.' },
+    ],
+    trivia: [
+      { q: 'Nearby Kojima is famous for making…', options: ['Denim jeans', 'Pianos', 'Robots'], answer: 0 },
+      { q: 'はたらく ことに なった means…', options: ['it was decided that I’d work', 'I decided not to work', 'I must work'], answer: 0 },
+    ],
+    souvenir: { name: 'Muscat grapes', jp: 'マスカット', emoji: '🍇', cost: 45 },
+  },
+  amanohashidate: {
+    spots: [
+      { name: 'Amanohashidate sandbar', jp: '{天橋立|あまのはしだて}', emoji: '🌲', about: 'A 3.6 km strip of pines across the bay — walk or cycle across it.' },
+      { name: 'Matanozoki at Kasamatsu Park', jp: '{股|また}のぞき', emoji: '🙃', about: 'Look upside down through your legs and the sandbar becomes a bridge to heaven.' },
+      { name: 'Ine boathouses', jp: '{伊根|いね}の{舟屋|ふなや}', emoji: '🛥️', about: 'Homes where boats park inside the ground floor, right on the water.' },
+    ],
+    trivia: [
+      { q: 'How do visitors traditionally view Amanohashidate?', options: ['Upside down between their legs', 'From a submarine', 'With their eyes closed'], answer: 0 },
+      { q: 'はれた おかげで means…', options: ['thanks to the clear weather', 'because of the bad weather', 'in place of sun'], answer: 0 },
+    ],
+    souvenir: { name: 'Chie no mochi', jp: 'ちえのもち', emoji: '🍡', cost: 20 },
+  },
+  yoshino: {
+    spots: [
+      { name: 'Hitome Senbon', tags: ['heritage'], jp: '{一目千本|ひとめせんぼん}', emoji: '🌸', about: '“A thousand trees at a glance” — cherry blossoms climbing the mountain in waves.' },
+      { name: 'Kinpusen-ji', tags: ['heritage'], jp: '{金峯山寺|きんぷせんじ}', emoji: '🛕', about: 'A huge wooden hall at the heart of Shugendō mountain worship (Kii UNESCO site).' },
+      { name: 'Yoshino Mizumaki Shrine', tags: ['heritage'], jp: '{吉水神社|よしみずじんじゃ}', emoji: '⛩️', about: 'Where Emperor Go-Daigo lived in hiding during the Southern Court era.' },
+    ],
+    trivia: [
+      { q: 'About how many cherry trees grow on Mt. Yoshino?', options: ['30,000', '300', '3 million'], answer: 0 },
+      { q: 'くるまの かわりに means…', options: ['instead of a car', 'because of a car', 'by car'], answer: 0 },
+    ],
+    souvenir: { name: 'Kuzumochi', jp: 'くずもち', emoji: '🍮', cost: 25 },
+  },
+  kumano: {
+    spots: [
+      { name: 'Kumano Kodō trail', tags: ['heritage'], jp: '{熊野古道|くまのこどう}', emoji: '🥾', about: 'Mossy stone paths through cedar forest, walked by pilgrims for over 1,000 years.' },
+      { name: 'Nachi Falls', tags: ['heritage'], jp: '{那智|なち}の{滝|たき}', emoji: '💧', about: 'A 133 m waterfall beside a red pagoda — worshipped as a god itself.' },
+      { name: 'Kumano Hongū Taisha', tags: ['heritage'], jp: '{熊野本宮大社|くまのほんぐうたいしゃ}', emoji: '⛩️', about: 'The head shrine of Kumano, near Japan’s largest torii gate.' },
+    ],
+    trivia: [
+      { q: 'Which other pilgrimage route shares UNESCO status with Kumano Kodō?', options: ['Camino de Santiago', 'The Silk Road', 'Route 66'], answer: 0 },
+      { q: 'やすまずに means…', options: ['without resting', 'after resting', 'while resting'], answer: 0 },
+    ],
+    souvenir: { name: 'Mehari-zushi', jp: 'めはりずし', emoji: '🍙', cost: 25 },
+  },
+  asakusa: {
+    spots: [
+      { name: 'Kaminarimon & Nakamise', jp: '{雷門|かみなりもん}', emoji: '🏮', about: 'Walk under the giant lantern and down 250 m of snack and souvenir stalls.' },
+      { name: 'Rickshaw ride', jp: '{人力車|じんりきしゃ}', emoji: '🛺', about: 'A puller in split-toe tabi runs you around the old downtown streets.' },
+      { name: 'Sumida River fireworks', jp: '{隅田川|すみだがわ}{花火|はなび}', emoji: '🎆', about: 'One of Japan’s oldest firework festivals, every July.' },
+    ],
+    trivia: [
+      { q: 'What hangs in the Kaminarimon gate?', options: ['A giant red lantern', 'A huge bell', 'A golden cat'], answer: 0 },
+      { q: 'とおかったにも かかわらず means…', options: ['despite being far', 'because it was far', 'it must be far'], answer: 0 },
+    ],
+    souvenir: { name: 'Ningyo-yaki', jp: 'にんぎょうやき', emoji: '🧁', cost: 25 },
+  },
 };

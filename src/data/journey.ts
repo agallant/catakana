@@ -594,6 +594,134 @@ export const STOPS: Stop[] = [
     ],
     npc: { name: 'Yamaneko', jp: 'やまねこ', look: L('#a1887f', '#4e342e', 'spots', '#ffd24a', 'none'), hello: ['しまに ついた ばかりですか？', 'Did you just arrive on the island?'] },
   },
+  // ---- N2 season: upper-intermediate grammar, history and heritage ----
+  {
+    id: 'hirosaki', name: 'Hirosaki', jp: '弘前', reading: 'ひろさき', region: 'Tohoku', lonlat: [140.46, 40.6], emoji: '🌸', transport: 'plane', tier: 'N2',
+    teaches: [],
+    facts: [
+      'Hirosaki Castle is one of only twelve castles in Japan with an original keep from the Edo period or earlier.',
+      'In 2015 the whole 400-tonne keep was lifted onto rails and slid about 70 m so its stone walls could be repaired.',
+      'About 2,600 cherry trees bloom in the castle park, and fallen petals cover the moat like a pink carpet (hanaikada).',
+      'Aomori Prefecture grows more than half of all apples eaten in Japan.',
+    ],
+    npc: { name: 'Ringo', jp: 'りんご', look: L('#ffffff', '#cc0000', 'spots', '#3d2b1f', 'bow'), hello: ['にほんごが じょうずな わけだ。たくさん たびを したんですね。', 'No wonder your Japanese is good. You’ve travelled a lot.'] },
+  },
+  {
+    id: 'matsushima', name: 'Matsushima', jp: '松島', reading: 'まつしま', region: 'Tohoku', lonlat: [141.06, 38.37], emoji: '🌲', transport: 'train', tier: 'N2',
+    teaches: [],
+    facts: [
+      'Matsushima Bay has over 260 small islands covered in pine trees and is one of the Three Views of Japan (Nihon Sankei).',
+      'The poet Matsuo Bashō visited in 1689 on his famous journey to the deep north.',
+      'The islands helped shield the town from the 2011 tsunami, and the area has worked hard to rebuild.',
+    ],
+    npc: { name: 'Basho', jp: 'ばしょう', look: L('#d9d2c5', '#7f6a55', 'tabby', '#3d2b1f', 'straw'), hello: ['たびびとに とって、うみの けしきは たからものです。', 'For a traveller, sea views are a treasure.'] },
+  },
+  {
+    id: 'gunkanjima', name: 'Gunkanjima', jp: '軍艦島', reading: 'ぐんかんじま', region: 'Kyushu', lonlat: [129.74, 32.63], emoji: '🏚️', transport: 'plane', tier: 'N2',
+    teaches: [],
+    facts: [
+      'Hashima, nicknamed Gunkanjima (“Battleship Island”), was a coal-mining island off Nagasaki.',
+      'In 1959 over 5,000 people lived on an island only about 480 m long — one of the most crowded places on Earth.',
+      'The mine closed in 1974 and the island was abandoned. It is part of the UNESCO Sites of Japan’s Meiji Industrial Revolution.',
+    ],
+    npc: { name: 'Kurogane', jp: 'くろがね', look: L('#616161', '#212121', 'tuxedo', '#ffd24a', 'none'), hello: ['てんきに よって、しまに あがれない ひも あります。', 'Depending on the weather, some days you can’t land on the island.'] },
+  },
+  {
+    id: 'arita', name: 'Arita', jp: '有田', reading: 'ありた', region: 'Kyushu', lonlat: [129.88, 33.19], emoji: '🏺', transport: 'train', tier: 'N2',
+    teaches: [],
+    facts: [
+      'Arita is the birthplace of Japanese porcelain — kaolin clay was found here in the early 1600s.',
+      'Arita ware was exported to Europe through Imari port, and kings filled whole rooms with it.',
+      'At Tozan Shrine even the torii gate is made of porcelain!',
+    ],
+    npc: { name: 'Kama', jp: 'かま', look: L('#ffffff', '#3d85c6', 'spots', '#3d85c6', 'headband'), hello: ['しょくにんは どんな しごとに たいしても しんけんです。', 'Craftspeople are serious about every job.'] },
+  },
+  {
+    id: 'hagi', name: 'Hagi', jp: '萩', reading: 'はぎ', region: 'Chugoku', lonlat: [131.4, 34.41], emoji: '🍊', transport: 'bus', tier: 'N2',
+    teaches: [],
+    facts: [
+      'Hagi was a castle town of the Chōshū domain, whose young samurai helped bring about the Meiji Restoration in 1868.',
+      'Yoshida Shōin taught many of them at his tiny private school, Shōka Sonjuku.',
+      'Hagi’s reverberatory furnace and Shōka Sonjuku are part of the Meiji Industrial Revolution World Heritage site.',
+      'Summer oranges (natsumikan) grow over the old earthen walls of the samurai district.',
+    ],
+    npc: { name: 'Shoin', jp: 'しょういん', look: L('#3d2b1f', '#1a1a1a', 'tuxedo', '#6aa84f', 'scarf'), hello: ['ちいさな まちですが、れきしは おおきいんです。', 'It’s a small town, but its history is big.'] },
+  },
+  {
+    id: 'iwakuni', name: 'Iwakuni', jp: '岩国', reading: 'いわくに', region: 'Chugoku', lonlat: [132.18, 34.17], emoji: '🌉', transport: 'train', tier: 'N2',
+    teaches: [],
+    facts: [
+      'Kintai Bridge has five wooden arches built without nails, first completed in 1673.',
+      'A flood washed it away in 1950, and it was rebuilt using traditional techniques.',
+      'Iwakuni is home to rare white snakes, considered a sign of good luck.',
+    ],
+    npc: { name: 'Shirohebi', jp: 'しろへび', look: L('#ffffff', '#e0e0e0', 'tabby', '#cc0000', 'crown'), hello: ['しろへびを みると、えんぎが いいばかりか、おかねも たまるそうですよ。', 'Seeing a white snake isn’t just lucky — they say it brings money too.'] },
+  },
+  {
+    id: 'kotohira', name: 'Kotohira', jp: '琴平', reading: 'ことひら', region: 'Shikoku', lonlat: [133.82, 34.19], emoji: '⛩️', transport: 'train', tier: 'N2',
+    teaches: [],
+    facts: [
+      'Kotohiragū (Konpira-san) is a shrine for sailors and sea safety, reached by 785 stone steps to the main hall — 1,368 to the inner shrine.',
+      'In the Edo period, people who could not travel sent dogs on the pilgrimage in their place (konpira-mairi dogs).',
+      'Kanamaru-za is the oldest surviving kabuki theatre in Japan.',
+      'Kagawa is famous for Sanuki udon — locals eat more udon than anyone else in Japan.',
+    ],
+    npc: { name: 'Konpira', jp: 'こんぴら', look: L('#f6b26b', '#e69138', 'tabby', '#3d85c6', 'headband'), hello: ['あんなに たくさん かいだんを のぼったなら、つかれたに ちがいない！', 'After climbing that many steps, you must be tired!'] },
+  },
+  {
+    id: 'kurashiki', name: 'Kurashiki', jp: '倉敷', reading: 'くらしき', region: 'Chugoku', lonlat: [133.77, 34.6], emoji: '🛶', transport: 'train', tier: 'N2',
+    teaches: [],
+    facts: [
+      'Kurashiki’s Bikan historical quarter has white-walled storehouses beside a willow-lined canal.',
+      'Ivy Square is an old cotton-spinning mill turned into a hotel and museum.',
+      'Nearby Kojima is famous as the home of Japanese denim jeans.',
+      'The Ohara Museum (1930) was Japan’s first museum of Western art.',
+    ],
+    npc: { name: 'Denim', jp: 'デニム', look: L('#9fc5e8', '#3d85c6', 'tabby', '#ffd24a', 'beret'), hello: ['らいげつから ここで はたらく ことに なりました。', 'It’s been decided I’ll work here from next month.'] },
+  },
+  {
+    id: 'amanohashidate', name: 'Amanohashidate', jp: '天橋立', reading: 'あまのはしだて', region: 'Kansai', lonlat: [135.19, 35.57], emoji: '🌉', transport: 'train', tier: 'N2',
+    teaches: [],
+    facts: [
+      'Amanohashidate is a 3.6 km pine-covered sandbar across a bay — another of the Three Views of Japan.',
+      'Visitors bend over and look at it upside down between their legs (matanozoki) so it looks like a bridge to heaven.',
+      'Nearby Ine has funaya — wooden boathouses where fishing boats park inside the ground floor of homes.',
+    ],
+    npc: { name: 'Matanozoki', jp: 'またのぞき', look: L('#e8c39e', '#c68e5b', 'calico', '#3d85c6', 'none'), hello: ['はれた おかげで、よく みえますね！', 'Thanks to the clear weather, you can see it well!'] },
+  },
+  {
+    id: 'yoshino', name: 'Yoshino', jp: '吉野', reading: 'よしの', region: 'Kansai', lonlat: [135.86, 34.37], emoji: '🌸', transport: 'train', tier: 'N2',
+    teaches: [],
+    facts: [
+      'Mount Yoshino has about 30,000 cherry trees that bloom in waves up the mountain.',
+      'It is part of the UNESCO Sacred Sites and Pilgrimage Routes in the Kii Mountain Range.',
+      'Yoshino was the seat of the Southern Court during a 14th-century split in the imperial line.',
+      'Shugendō mountain monks (yamabushi) still train here, blowing conch-shell horns.',
+    ],
+    npc: { name: 'Yamabushi', jp: 'やまぶし', look: L('#ffffff', '#6aa84f', 'tabby', '#6aa84f', 'headband'), hello: ['くるまの かわりに、あるいて やまを のぼりましょう。', 'Instead of a car, let’s climb the mountain on foot.'] },
+  },
+  {
+    id: 'kumano', name: 'Kumano Kodo', jp: '熊野古道', reading: 'くまのこどう', region: 'Kansai', lonlat: [135.89, 33.67], emoji: '🥾', transport: 'bus', tier: 'N2',
+    teaches: [],
+    facts: [
+      'The Kumano Kodō are ancient pilgrimage trails through the forests of the Kii Peninsula, walked for over 1,000 years.',
+      'Along with the Camino de Santiago in Spain, they are one of only two UNESCO World Heritage pilgrimage routes.',
+      'Nachi Falls drops 133 m — the tallest single-drop waterfall in Japan — beside a red three-story pagoda.',
+      'The three-legged crow Yatagarasu is the messenger of Kumano (and the emblem of Japan’s football team).',
+    ],
+    npc: { name: 'Yatagarasu', jp: 'やたがらす', look: L('#212121', '#000000', 'tuxedo', '#ffd24a', 'straw'), hello: ['やすまずに あるこうと すると、つかれますよ。', 'If you try to walk without resting, you’ll get tired.'] },
+  },
+  {
+    id: 'asakusa', name: 'Asakusa', jp: '浅草', reading: 'あさくさ', region: 'Kanto', lonlat: [139.8, 35.71], emoji: '🏮', transport: 'shinkansen', tier: 'N2',
+    teaches: [],
+    facts: [
+      'Sensō-ji is Tokyo’s oldest temple, founded in 645. Its Kaminarimon gate has a giant red lantern.',
+      'Nakamise-dōri, the shopping street to the temple, has sold snacks and souvenirs for about 300 years.',
+      'Rickshaw pullers in Asakusa give tours of the old downtown (shitamachi).',
+      'Your journey began in Tokyo — Maneki has come to Asakusa to meet you, and Kaminari the rickshaw cat will pull you both through the old streets!',
+    ],
+    npc: { name: 'Kaminari', jp: 'かみなり', look: L('#f6b26b', '#cc0000', 'tabby', '#3d2b1f', 'headband'), hello: ['とおかったにも かかわらず、よく かえって きましたね！', 'Despite the long way, you made it back!'] },
+  },
 ];
 
 export const STOP_BY_ID = new Map(STOPS.map((s) => [s.id, s]));
