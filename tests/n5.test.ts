@@ -5,6 +5,7 @@ import { N5_WORDS, ALL_WORDS, TOUR_WORDS } from '../src/data/vocab';
 import { N4_CONTENT } from '../src/data/n4';
 import { N3_CONTENT } from '../src/data/n3';
 import { N2_CONTENT } from '../src/data/n2';
+import { N1_CONTENT } from '../src/data/n1';
 import { TOUR_CONTENT } from '../src/data/tour';
 import { kanaTokens, wordsThrough, firstStopOfTier, newWordsAt } from '../src/core/curriculum';
 import { decoyChunk, sentencesThrough } from '../src/core/sentences';
@@ -91,5 +92,20 @@ describe('N2 content', () => {
   });
   it('N2 comes after N3 in the journey', () => {
     expect(STOPS.findIndex((s) => s.tier === 'N2')).toBeGreaterThan(STOPS.findLastIndex((s) => s.tier === 'N3'));
+  });
+});
+
+describe('N1 content', () => {
+  it('every N1 stop has grammar, words and sentences', () => {
+    const n1Stops = STOPS.filter((s) => s.tier === 'N1');
+    expect(n1Stops).toHaveLength(12);
+    expect(Object.keys(N1_CONTENT).sort()).toEqual(n1Stops.map((s) => s.id).sort());
+    for (const s of n1Stops) {
+      expect(TOUR_WORDS.filter((w) => w.stop === s.id).length, s.id).toBeGreaterThanOrEqual(8);
+      expect(N1_CONTENT[s.id]!.sentences.length, s.id).toBeGreaterThanOrEqual(4);
+    }
+  });
+  it('the journey ends at Gōtoku-ji', () => {
+    expect(STOPS.at(-1)!.id).toBe('gotokuji');
   });
 });

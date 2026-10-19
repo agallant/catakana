@@ -722,6 +722,131 @@ export const STOPS: Stop[] = [
     ],
     npc: { name: 'Kaminari', jp: 'かみなり', look: L('#f6b26b', '#cc0000', 'tabby', '#3d2b1f', 'headband'), hello: ['とおかったにも かかわらず、よく かえって きましたね！', 'Despite the long way, you made it back!'] },
   },
+  // ---- N1 season: advanced, formal Japanese; folklore, prehistory and the long way home ----
+  {
+    id: 'ogasawara', name: 'Ogasawara Islands', jp: '小笠原諸島', reading: 'おがさわらしょとう', region: 'Tokyo', lonlat: [142.19, 27.09], emoji: '🐋', transport: 'ferry', tier: 'N1',
+    teaches: [],
+    facts: [
+      'The Ogasawara Islands are part of Tokyo, yet the only way there is a 24-hour ferry that sails about once a week.',
+      'They have never been joined to a continent, so many plants, snails and birds live nowhere else — a UNESCO World Natural Heritage site.',
+      'Humpback whales visit in winter and spring, and dolphins swim around the bays all year.',
+    ],
+    npc: { name: 'Kujira', jp: 'くじら', look: L('#9fc5e8', '#3d85c6', 'spots', '#3d2b1f', 'straw'), hello: ['ふねで にじゅうよじかん とあって、さすがに つかれたでしょう。', 'After 24 hours on a ship, you must be tired, as expected.'] },
+  },
+  {
+    id: 'tono', name: 'Tōno', jp: '遠野', reading: 'とおの', region: 'Tohoku', lonlat: [141.53, 39.33], emoji: '👹', transport: 'train', tier: 'N1',
+    teaches: [],
+    facts: [
+      'In 1910 Yanagita Kunio published Tōno Monogatari, local folk tales that founded the study of Japanese folklore.',
+      'The tales tell of kappa river imps, zashiki-warashi house spirits and mountain people.',
+      'At Kappa-buchi pool you can borrow a “kappa fishing” licence and dangle a cucumber in the water.',
+      'Magariya farmhouses are L-shaped so families and their horses could live under one roof.',
+    ],
+    npc: { name: 'Zashiki', jp: 'ざしき', look: L('#fafafa', '#cc0000', 'plain', '#3d2b1f', 'bow'), hello: ['とおの ならではの むかしばなしを ききませんか。', 'Want to hear a folk tale you can only hear in Tōno?'] },
+  },
+  {
+    id: 'sannai', name: 'Sannai-Maruyama', jp: '三内丸山', reading: 'さんないまるやま', region: 'Tohoku', lonlat: [140.7, 40.81], emoji: '🏺', transport: 'train', tier: 'N1',
+    teaches: [],
+    facts: [
+      'Sannai-Maruyama is one of the largest Jōmon villages ever found, lived in for about 1,700 years from 5,900 years ago.',
+      'Six enormous chestnut-wood pillars once held up a tower — their holes are still visible today.',
+      'It is part of the Jōmon Prehistoric Sites in Northern Japan, a UNESCO World Heritage site since 2021.',
+    ],
+    npc: { name: 'Dogu', jp: 'どぐう', look: L('#d9b38c', '#8d6e63', 'tabby', '#3d2b1f', 'none'), hello: ['この あなは、むかしの はしらの あとに ほかなりません。', 'These holes are nothing other than traces of ancient pillars.'] },
+  },
+  {
+    id: 'eiheiji', name: 'Eihei-ji', jp: '永平寺', reading: 'えいへいじ', region: 'Chubu', lonlat: [136.36, 36.06], emoji: '🧘', transport: 'train', tier: 'N1',
+    teaches: [],
+    facts: [
+      'Eihei-ji was founded by the Zen master Dōgen in 1244 and is still a training monastery for around 200 monks.',
+      'Trainee monks wake at about 3:30 a.m. for zazen meditation — even washing and eating are part of practice.',
+      'Fukui is also Japan’s dinosaur capital: most dinosaur fossils found in Japan come from here.',
+      'Maruoka Castle nearby has one of the twelve original castle keeps.',
+    ],
+    npc: { name: 'Zen', jp: 'ぜん', look: L('#424242', '#212121', 'plain', '#ffd24a', 'none'), hello: ['しゅぎょう ですから、はやく おきざるを えません。', 'It’s training, so I have no choice but to get up early.'] },
+  },
+  {
+    id: 'sekigahara', name: 'Sekigahara', jp: '関ケ原', reading: 'せきがはら', region: 'Chubu', lonlat: [136.47, 35.36], emoji: '⚔️', transport: 'train', tier: 'N1',
+    teaches: [],
+    facts: [
+      'In 1600 about 160,000 samurai fought at Sekigahara — the battle that let Tokugawa Ieyasu unite Japan.',
+      'It was decided in a single day, partly because some lords switched sides in the middle of the fight.',
+      'The Tokugawa shogunate that followed kept the peace for over 260 years.',
+    ],
+    npc: { name: 'Ieyasu', jp: 'いえやす', look: L('#ffd966', '#bf9000', 'tabby', '#3d2b1f', 'crown'), hello: ['このたたかいを さかいに、にほんの れきしは かわりました。', 'This battle was the turning point of Japanese history.'] },
+  },
+  {
+    id: 'sakai', name: 'Sakai', jp: '堺', reading: 'さかい', region: 'Kansai', lonlat: [135.48, 34.56], emoji: '🔪', transport: 'train', tier: 'N1',
+    teaches: [],
+    facts: [
+      'Daisen Kofun, the giant keyhole-shaped tomb said to be Emperor Nintoku’s, is one of the largest tombs in the world.',
+      'It is part of the Mozu-Furuichi Kofun Group, a UNESCO World Heritage site since 2019.',
+      'Sakai knives are used by many professional chefs in Japan.',
+      'Sen no Rikyū, the master who perfected the tea ceremony, was a Sakai merchant.',
+    ],
+    npc: { name: 'Rikyu', jp: 'りきゅう', look: L('#d9d2c5', '#6aa84f', 'calico', '#6aa84f', 'scarf'), hello: ['しょうばいの かたわら、おちゃを たのしんで います。', 'Alongside my business, I enjoy tea.'] },
+  },
+  {
+    id: 'kinosaki', name: 'Kinosaki Onsen', jp: '城崎温泉', reading: 'きのさきおんせん', region: 'Kansai', lonlat: [134.82, 35.63], emoji: '♨️', transport: 'train', tier: 'N1',
+    teaches: [],
+    facts: [
+      'Visitors stroll between seven public baths (sotoyu) in yukata and wooden geta along a willow-lined canal.',
+      'The writer Shiga Naoya stayed here in 1913 and wrote the famous short story “At Kinosaki”.',
+      'In winter, people come for matsuba snow crab from the Sea of Japan.',
+    ],
+    npc: { name: 'Yukata', jp: 'ゆかた', look: L('#f4cccc', '#cc0000', 'calico', '#3d85c6', 'headband'), hello: ['この けしきを みたら、かかずには いられません。', 'Seeing this view, I can’t help but write.'] },
+  },
+  {
+    id: 'munakata', name: 'Munakata & Okinoshima', jp: '宗像', reading: 'むなかた', region: 'Kyushu', lonlat: [130.52, 33.83], emoji: '🏝️', transport: 'shinkansen', tier: 'N1',
+    teaches: [],
+    facts: [
+      'Okinoshima is a sacred island where ancient rituals for safe sea voyages left about 80,000 national treasures.',
+      'Traditionally, visitors had to purify themselves in the sea, take nothing away, and never speak of what they saw.',
+      'Since its UNESCO listing in 2017, ordinary visitors may not land at all — people worship it from Munakata Taisha on the mainland.',
+    ],
+    npc: { name: 'Miko', jp: 'みこ', look: L('#ffffff', '#cc0000', 'plain', '#cc0000', 'bow'), hello: ['しまの ことを はなすべからず、と いわれて います。', 'It is said that one must not speak of the island.'] },
+  },
+  {
+    id: 'amakusa', name: 'Amakusa', jp: '天草', reading: 'あまくさ', region: 'Kyushu', lonlat: [130.02, 32.38], emoji: '⛪', transport: 'bus', tier: 'N1',
+    teaches: [],
+    facts: [
+      'When Christianity was banned in the 1600s, believers here were forced to practise in secret for about 250 years.',
+      'Sakitsu Church stands in a fishing village, and its floor is covered in tatami mats.',
+      'These are part of the Hidden Christian Sites in the Nagasaki Region, a UNESCO World Heritage site.',
+      'Wild dolphins live year-round in the sea around Amakusa.',
+    ],
+    npc: { name: 'Iruka', jp: 'いるか', look: L('#b7b7b7', '#666666', 'tuxedo', '#3d85c6', 'scarf'), hello: ['むかしの ひとびとは かくれる ことを よぎなくされました。', 'People long ago were forced to hide.'] },
+  },
+  {
+    id: 'amami', name: 'Amami Ōshima', jp: '奄美大島', reading: 'あまみおおしま', region: 'Kyushu', lonlat: [129.49, 28.38], emoji: '🐇', transport: 'plane', tier: 'N1',
+    teaches: [],
+    facts: [
+      'The Amami rabbit is a “living fossil” with short ears that lives only on Amami Ōshima and Tokunoshima.',
+      'The island’s subtropical forest became part of a UNESCO World Natural Heritage site in 2021.',
+      'Ōshima tsumugi silk is dyed with tree bark and then iron-rich mud, giving it a deep shiny black.',
+    ],
+    npc: { name: 'Usagi', jp: 'うさぎ', look: L('#5d4037', '#3e2723', 'plain', '#3d2b1f', 'none'), hello: ['もりを まもるべく、よるは ゆっくり うんてんして ください。', 'To protect the forest, please drive slowly at night.'] },
+  },
+  {
+    id: 'izu', name: 'Izu Peninsula', jp: '伊豆', reading: 'いず', region: 'Chubu', lonlat: [138.95, 34.85], emoji: '🌊', transport: 'plane', tier: 'N1',
+    teaches: [],
+    facts: [
+      'Kawabata Yasunari’s story “The Dancing Girl of Izu” follows a student walking over Amagi Pass with travelling performers.',
+      'The Nirayama Reverberatory Furnace (1857) is the only one in Japan still standing — part of the Meiji Industrial Revolution heritage.',
+      'Clear spring water makes Izu one of the best places in Japan to grow wasabi.',
+    ],
+    npc: { name: 'Odoriko', jp: 'おどりこ', look: L('#fce5cd', '#e06666', 'calico', '#3d2b1f', 'bow'), hello: ['あめであれ ゆきであれ、たびは つづきます。', 'Rain or snow, the journey goes on.'] },
+  },
+  {
+    id: 'gotokuji', name: 'Gōtoku-ji', jp: '豪徳寺', reading: 'ごうとくじ', region: 'Kanto', lonlat: [139.65, 35.65], emoji: '🐾', transport: 'shinkansen', tier: 'N1',
+    teaches: [],
+    facts: [
+      'Legend says a temple cat beckoned Lord Ii Naotaka inside just before lightning struck — the origin of the maneki-neko.',
+      'Thousands of white beckoning-cat figures fill the shelves, left by people whose wishes came true.',
+      'You started your journey with Maneki in Tokyo. Now, fluent in Japanese, you have come home.',
+    ],
+    npc: { name: 'Maneki', jp: 'まねき', look: L('#fafafa', '#e0e0e0', 'plain', '#3d85c6', 'bow'), hello: ['おかえり！ あなたの たびを ほこりに おもって やみません。', 'Welcome home! I am endlessly proud of your journey.'] },
+  },
 ];
 
 export const STOP_BY_ID = new Map(STOPS.map((s) => [s.id, s]));

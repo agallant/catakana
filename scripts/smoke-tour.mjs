@@ -1,4 +1,4 @@
-// Smoke test for the N2 season: seeds a save through the stops in $STOP_IDS and visits N2 screens.
+// Smoke test for late-tour stops: seeds a save through the stops in $STOP_IDS and visits N2/N1 screens.
 import { chromium, devices } from 'playwright';
 import { mkdirSync } from 'node:fs';
 const base = process.argv[2] ?? 'http://localhost:4173/catakana/';
@@ -17,7 +17,7 @@ await page.evaluate((ids) => {
   localStorage.setItem('catakana.save.v1', JSON.stringify({ v: 1, started: true, name: 'Tama', fish: 500, stops, stamps: ids, introduced: [] }));
 }, ids);
 await page.reload();
-const shots = [['', 'map'], ['stop/hirosaki', 'stop'], ['lesson/hirosaki', 'lesson'], ['explore/kumano', 'explore'], ['trivia/asakusa', 'trivia'], ['play/kotohira/story/1', 'story'], ['play/kurashiki/sushi/2', 'sushi'], ['play/kurashiki/bento/1', 'bento'], ['play/arita/trace/1', 'trace'], ['passport', 'passport']];
+const shots = [['', 'map'], ['stop/gotokuji', 'stop'], ['lesson/sannai', 'lesson1'], ['explore/amami', 'explore1'], ['play/izu/train/2', 'train'], ['lesson/hirosaki', 'lesson'], ['explore/kumano', 'explore'], ['trivia/asakusa', 'trivia'], ['play/kotohira/story/1', 'story'], ['play/kurashiki/sushi/2', 'sushi'], ['play/kurashiki/bento/1', 'bento'], ['play/arita/trace/1', 'trace'], ['passport', 'passport']];
 for (const [r, n] of shots) {
   await page.goto(`${base}#/${r}`); await page.reload(); await page.waitForTimeout(800);
   await page.screenshot({ path: `${out}/${n}.png` });

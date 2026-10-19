@@ -29,7 +29,8 @@ Tiers: Kana → N5 → N4 → N3 → N2 → N1. Everything runs client-side, off
 | M8.5 | **N3 depth** – reading passages, kanji compounds game, more N3 kanji (to ~370) | planned |
 | M9 | **N2 season** – 12 destinations (Hirosaki → Asakusa) incl. Hirosaki Castle, Gunkanjima & Hagi (Meiji Industrial heritage), Yoshino & Kumano Kodō (Kii UNESCO); 12 grammar points (わけだ, にとって, によって, に対して, ものの, ばかりか, に違いない, ことになる/ことにする, おかげで/せいで, かわりに, ようとする/ずに, ながらも/にもかかわらず); ~180 words, 132 more kanji with strokes, 60 sentences, 7 conversations | in progress |
 | M9.5 | **N2 depth** – keigo, longer texts, more N2 kanji (to ~1000) | planned |
-| M10 | **N1** – ~2000 kanji, advanced vocab/grammar, literary and news-style reading | planned |
+| M10 | **N1 season** – 12 destinations (Ogasawara → Gōtoku-ji) incl. Ogasawara & Amami (UNESCO natural), Jōmon Sannai-Maruyama, Mozu kofun, Okinoshima, Hidden Christian sites, Nirayama furnace, Maruoka Castle; folklore (Tōno), Zen (Eihei-ji), Sekigahara and literary onsen towns; 12 formal grammar points, ~180 words, N1 kanji with strokes, 60 sentences, 7 conversations; finale with Maneki at the maneki-neko temple | in progress |
+| M10.5 | **N1 depth** – literary and news-style reading, more N1 kanji (to ~2000) | planned |
 | M11 | **Polish & depth** – all 47 prefectures, seasonal events, achievements, cloud-free progress export/import, more cats and outfits, sound/music pass, i18n of UI | ongoing |
 
 ## Design principles
