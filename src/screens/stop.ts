@@ -50,7 +50,7 @@ export function stopScreen(app: App, params: string[]): Screen {
     h(
       'section',
       { class: 'npc' },
-      h('div', { class: 'npc-cat' }, catSvg(stop.npc.look, 'happy', 84)),
+      h('div', { class: 'npc-cat' }, catSvg(stop.npc.look, 'smile', 84)),
       h('div', { class: 'speech' }, h('strong', null, `${stop.npc.name}`), h('div', { class: 'jp' }, ruby(stop.npc.hello[0], d.settings.furigana)), h('div', { class: 'small' }, stop.npc.hello[1])),
     ),
     h('section', { class: 'facts' }, h('h3', null, 'Travel notes 📒'), h('ul', null, stop.facts.map((f) => h('li', null, f)))),

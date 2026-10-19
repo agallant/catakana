@@ -7,7 +7,7 @@ import { sfx } from '../core/audio';
 export function catsScreen(app: App): Screen {
   const d = app.store.data;
   const owned = new Set(d.unlockedHats);
-  const preview = h('div', { class: 'welcome-cat' }, catSvg(d.look, 'happy', 170));
+  const preview = h('div', { class: 'welcome-cat' }, catSvg(d.look, 'smile', 170));
   const hats = HATS.map((hat) => {
     const have = owned.has(hat.id) || hat.cost === 0;
     return h(
@@ -47,7 +47,7 @@ export function catsScreen(app: App): Screen {
   const all = npcCats();
   const grid = all.map((c) => {
     const got = d.cats.includes(c.id);
-    return h('div', { class: `cat-card ${got ? '' : 'unseen'}` }, h('div', null, catSvg(c.look, 'happy', 72)), h('strong', null, got ? c.name : '???'), h('small', null, got ? c.from : 'Not met yet'));
+    return h('div', { class: `cat-card ${got ? '' : 'unseen'}` }, h('div', null, catSvg(c.look, 'smile', 72)), h('strong', null, got ? c.name : '???'), h('small', null, got ? c.from : 'Not met yet'));
   });
   const el = h(
     'div',

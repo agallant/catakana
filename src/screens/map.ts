@@ -104,7 +104,7 @@ export function mapScreen(app: App): Screen {
     h(
       'section',
       { class: 'next-card' },
-      h('div', { class: 'next-cat' }, catSvg(d.look, 'happy', 72)),
+      h('div', { class: 'next-cat' }, catSvg(d.look, 'smile', 72)),
       h(
         'div',
         { class: 'next-text' },
