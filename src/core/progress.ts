@@ -5,6 +5,7 @@ import { SHOP } from '../data/shop';
 import { visitedPrefectures } from '../data/prefectures';
 import { SEASONAL_TREATS } from '../data/seasons';
 import { KANJI } from '../data/kanji';
+import { COUNTERS } from '../data/counters';
 import { ALL_KANA } from '../data/kana';
 import { mastery } from './srs';
 
@@ -68,6 +69,11 @@ const castles = () => STOPS.flatMap((s) => (CULTURE[s.id]?.spots ?? []).filter((
 const heritage = () => STOPS.flatMap((s) => (CULTURE[s.id]?.spots ?? []).filter((sp) => sp.tags?.includes('heritage')).map((sp) => `${s.id}:${sp.name}`));
 const masteredKana = (d: SaveData, script: 'hiragana' | 'katakana') => ALL_KANA.filter((k) => k.script === script && mastery(d.srs[k.id]) >= 0.6).length;
 
+/** How many different items with this SRS id prefix were answered correctly at least once. */
+function solved(d: SaveData, prefix: string): number {
+  return Object.entries(d.srs).filter(([k, r]) => k.startsWith(prefix) && r.correct > 0).length;
+}
+
 export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'first-star', name: 'First Paw-step', emoji: '🐾', desc: 'Earn your first star', test: (d) => Object.values(d.stops).some((s) => s >= 1) },
   { id: 'tokyo-done', name: 'Hello Tokyo', emoji: '🗼', desc: 'Finish Tokyo', test: (d) => (d.stops.tokyo ?? 0) >= 1 },
@@ -100,6 +106,11 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'heritage10', name: 'Heritage Hunter', emoji: '🌏', desc: 'Photograph 10 World Heritage sites', test: (d) => heritage().filter((c) => d.photos.includes(c)).length >= 10 },
   { id: 'cats10', name: 'Cat Collector', emoji: '😺', desc: 'Befriend 10 local cats', test: (d) => d.cats.length >= 10 },
   { id: 'rich', name: 'Fat Cat', emoji: '💰', desc: 'Hold 500 fish at once', test: (d) => d.fish >= 500 },
+  { id: 'okami', name: 'Okami-san', emoji: '🙇', desc: 'Use 12 different keigo forms correctly in Ryokan Manners', test: (d) => solved(d, 'keigo:') >= 12 },
+  { id: 'counter-cat', name: 'Counting Cat', emoji: '🔢', desc: 'Count correctly with all nine counters in Cat Count', test: (d) => COUNTERS.every((c) => solved(d, `count:${c.id}:`) > 0) },
+  { id: 'conductor', name: 'Station Master', emoji: '🕰️', desc: 'Read 20 different times and dates in Timetable', test: (d) => solved(d, 'time:') + solved(d, 'date:') >= 20 },
+  { id: 'chef', name: 'Head Chef', emoji: '🍳', desc: 'Cook 30 different verb and adjective forms in Verb Kitchen', test: (d) => solved(d, 'conj:') + solved(d, 'adj:') >= 30 },
+  { id: 'bookworm', name: 'Bookworm', emoji: '📚', desc: 'Read 10 stories in Story Time', test: (d) => Object.keys(d.srs).filter((k) => k.startsWith('story:')).length >= 10 },
   { id: 'kanji-all', name: 'Kanji Master', emoji: '👑', desc: `Learn all ${KANJI.length} kanji`, test: (d) => KANJI.every((k) => d.introduced.includes(`kj:${k.char}`)) },
 ];
 
