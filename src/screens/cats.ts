@@ -35,8 +35,8 @@ export function catsScreen(app: App): Screen {
   const furs = FUR_PRESETS.map((p) =>
     h('button', {
       class: 'swatch',
-      style: `background:${p.fur};border-color:${p.accent}`,
-      'aria-label': `Fur ${p.fur}`,
+      style: `background:${p.pattern === 'tuxedo' ? `linear-gradient(135deg, ${p.fur} 62%, #fff 62%)` : p.fur};border-color:${p.accent}`,
+      'aria-label': `Fur ${p.pattern} ${p.fur}`,
       onClick: () => {
         app.store.update((s) => Object.assign(s.look, { fur: p.fur, accent: p.accent, pattern: p.pattern }));
         sfx.tap();
