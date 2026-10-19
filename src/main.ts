@@ -1,0 +1,28 @@
+import './styles.css';
+import { App } from './ui/app';
+import { welcomeScreen } from './screens/welcome';
+import { mapScreen } from './screens/map';
+import { travelScreen } from './screens/travel';
+import { stopScreen } from './screens/stop';
+import { lessonScreen } from './screens/lesson';
+import { playScreen } from './screens/play';
+import { dojoScreen } from './screens/dojo';
+import { catsScreen } from './screens/cats';
+import { settingsScreen } from './screens/settings';
+import { registerSW } from 'virtual:pwa-register';
+
+const root = document.getElementById('app');
+if (!root) throw new Error('#app missing');
+const app = new App(root);
+app.register('welcome', welcomeScreen);
+app.register('map', mapScreen);
+app.register('travel', travelScreen);
+app.register('stop', stopScreen);
+app.register('lesson', lessonScreen);
+app.register('play', playScreen);
+app.register('dojo', dojoScreen);
+app.register('cats', catsScreen);
+app.register('settings', settingsScreen);
+app.render();
+
+registerSW({ immediate: true });
