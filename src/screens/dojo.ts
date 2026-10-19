@@ -6,6 +6,7 @@ import { currentStopIndex, learnedKanaThrough, wordsThrough } from '../core/curr
 import { kanjiThrough } from '../core/items';
 import { phrasesThrough } from '../games/shadow';
 import { GAMES } from '../games';
+import { gameList } from '../ui/gamelist';
 import { speak } from '../core/audio';
 import { mastery, isDue } from '../core/srs';
 import { STOPS } from '../data/journey';
@@ -116,9 +117,9 @@ export function dojoScreen(app: App): Screen {
     { class: 'screen dojo' },
     h('h2', null, '🐾 Practice dojo'),
     h('p', { class: 'hint' }, dueCount ? `${dueCount} characters are ready for review.` : 'Pick a game to review everything you have learned so far.'),
-    h('div', { class: 'game-list' }, GAMES.filter((g) => g.available?.(idx) ?? true).map((g) =>
+    gameList(GAMES.filter((g) => g.available?.(idx) ?? true), (g) =>
       h('button', { class: 'game-card', onClick: () => app.go(`play/${stop.id}/${g.id}/${level}/review`) }, h('span', { class: 'game-emoji' }, g.emoji), h('span', { class: 'game-info' }, h('strong', null, g.name), h('small', null, g.blurb)), h('span', { class: `skill skill-${g.skill}` }, g.skill)),
-    )),
+    ),
     h('h3', null, 'Kana chart & word book'),
     h('div', { class: 'chips' }, tab('hiragana', 'ひらがな'), tab('katakana', 'カタカナ'), tab('kanji', '漢字'), tab('words', '📒 Words'), tab('phrases', '💬 Phrases')),
     h('p', { class: 'hint' }, 'Tap a character to hear it. Brighter = more mastered. Dashed = ready for review.'),

@@ -332,3 +332,4 @@ button.hud-stat { cursor: pointer; }
 .rp-head { font-weight: 800; text-align: center; margin-bottom: 6px; }
 .rp-head small { color: var(--muted); font-weight: 600; }
 .rp-why { min-height: 2.6em; margin-top: 10px; text-align: center; }
+.skill-tabs { flex-wrap: wrap; margin: 4px 0 10px; }
