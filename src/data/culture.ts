@@ -848,4 +848,148 @@ export const CULTURE: Record<string, StopCulture> = {
     ],
     souvenir: { name: 'Ningyo-yaki', jp: 'にんぎょうやき', emoji: '🧁', cost: 25 },
   },
+  ogasawara: {
+    spots: [
+      { name: 'Ogasawara Islands', tags: ['heritage'], jp: '{小笠原諸島|おがさわらしょとう}', emoji: '🏝️', about: 'Oceanic islands never joined to a continent, full of species found nowhere else — a UNESCO natural site.' },
+      { name: 'Whale watching', jp: 'ホエールウォッチング', emoji: '🐋', about: 'Humpback whales breach close to shore from winter to spring.' },
+      { name: 'Minamijima', jp: '{南島|みなみじま}', emoji: '🐚', about: 'A limestone island with a white beach covered in shells of extinct snails. Visitors must be guided.' },
+    ],
+    trivia: [
+      { q: 'How do most people reach the Ogasawara Islands?', options: ['A 24-hour ferry', 'A bridge', 'A two-hour flight'], answer: 0 },
+      { q: 'しまとあって、さかなが おいしい means…', options: ['being an island, the fish is good', 'despite being an island', 'instead of an island'], answer: 0 },
+    ],
+    souvenir: { name: 'Shimazushi', jp: 'しまずし', emoji: '🍣', cost: 40 },
+  },
+  tono: {
+    spots: [
+      { name: 'Kappa-buchi', jp: 'カッパ{淵|ぶち}', emoji: '🥒', about: 'A quiet stream where kappa are said to live — fish for them with a cucumber.' },
+      { name: 'Denshōen', jp: '{伝承園|でんしょうえん}', emoji: '🏚️', about: 'A magariya farmhouse where storytellers still tell Tōno folk tales.' },
+      { name: 'Tōno Furusato Village', jp: '{遠野|とおの}ふるさと{村|むら}', emoji: '🌾', about: 'Old thatched farmhouses in a rice-field valley, like stepping into the tales.' },
+    ],
+    trivia: [
+      { q: 'Who collected the Tōno Monogatari folk tales?', options: ['Yanagita Kunio', 'Matsuo Bashō', 'Natsume Sōseki'], answer: 0 },
+      { q: 'What do kappa love to eat, according to legend?', options: ['Cucumbers', 'Mochi', 'Fish eggs'], answer: 0 },
+    ],
+    souvenir: { name: 'Jingisukan lamb', jp: 'ジンギスカン', emoji: '🍖', cost: 35 },
+  },
+  sannai: {
+    spots: [
+      { name: 'Sannai-Maruyama Site', tags: ['heritage'], jp: '{三内丸山遺跡|さんないまるやまいせき}', emoji: '🏺', about: 'A huge Jōmon village with rebuilt pit houses and a six-pillar tower — part of the Jōmon Prehistoric Sites.' },
+      { name: 'Sannai Maruyama Jōmon Jiyūkan', jp: '{縄文時遊館|じょうもんじゆうかん}', emoji: '🗿', about: 'A museum of dogū clay figures, pottery and jade beads found on the site.' },
+      { name: 'Nebuta Museum Wa Rasse', jp: 'ねぶたの{家|いえ} ワ・ラッセ', emoji: '🏮', about: 'See the giant glowing floats from Aomori’s summer Nebuta festival.' },
+    ],
+    trivia: [
+      { q: 'About how long ago did people start living at Sannai-Maruyama?', options: ['5,900 years ago', '590 years ago', '59,000 years ago'], answer: 0 },
+      { q: 'Jōmon is named after…', options: ['cord-marked pottery', 'a famous king', 'a kind of rice'], answer: 0 },
+    ],
+    souvenir: { name: 'Jōmon cookie', jp: 'じょうもんクッキー', emoji: '🍪', cost: 20 },
+  },
+  eiheiji: {
+    spots: [
+      { name: 'Eihei-ji Temple', jp: '{永平寺|えいへいじ}', emoji: '🧘', about: 'Seventy halls linked by covered stairways in a cedar forest; monks train here every day.' },
+      { name: 'Maruoka Castle', tags: ['castle'], jp: '{丸岡城|まるおかじょう}', emoji: '🏯', about: 'One of the twelve original keeps, with a roof of stone tiles.' },
+      { name: 'Fukui Dinosaur Museum', jp: '{恐竜博物館|きょうりゅうはくぶつかん}', emoji: '🦕', about: 'One of the world’s biggest dinosaur museums, built near real fossil beds.' },
+    ],
+    trivia: [
+      { q: 'Who founded Eihei-ji?', options: ['Dōgen', 'Kūkai', 'Saichō'], answer: 0 },
+      { q: 'What is shōjin ryōri?', options: ['Buddhist vegetarian cooking', 'Fried fish', 'Festival sweets'], answer: 0 },
+    ],
+    souvenir: { name: 'Goma-dōfu', jp: 'ごまどうふ', emoji: '🍮', cost: 25 },
+  },
+  sekigahara: {
+    spots: [
+      { name: 'Sekigahara Battlefield', jp: '{関ケ原古戦場|せきがはらこせんじょう}', emoji: '⚔️', about: 'Flags mark where each army camped in 1600.' },
+      { name: 'Battlefield Memorial Museum', jp: '{記念館|きねんかん}', emoji: '🏛️', about: 'Watch the battle unfold on a big screen, then try on armour.' },
+      { name: 'Ōgaki Castle', tags: ['castle'], jp: '{大垣城|おおがきじょう}', emoji: '🏯', about: 'The western army’s base the night before the battle.' },
+    ],
+    trivia: [
+      { q: 'Who won the Battle of Sekigahara?', options: ['Tokugawa Ieyasu', 'Oda Nobunaga', 'Minamoto no Yoritomo'], answer: 0 },
+      { q: 'How long did the Tokugawa peace last?', options: ['Over 260 years', '26 years', '2,600 years'], answer: 0 },
+    ],
+    souvenir: { name: 'Samurai-shaped senbei', jp: 'ぶしょうせんべい', emoji: '🍘', cost: 20 },
+  },
+  sakai: {
+    spots: [
+      { name: 'Daisen Kofun', tags: ['heritage'], jp: '{大仙古墳|だいせんこふん}', emoji: '🗻', about: 'A keyhole-shaped tomb 486 m long, best seen from the city hall’s top floor.' },
+      { name: 'Sakai knife workshops', jp: '{堺打刃物|さかいうちはもの}', emoji: '🔪', about: 'Watch smiths hammer and sharpen blades used by top chefs.' },
+      { name: 'Sakai Rishō no Mori', jp: 'さかい{利晶|りしょう}の{杜|もり}', emoji: '🍵', about: 'Learn about Sen no Rikyū and drink tea in a recreated tea room.' },
+    ],
+    trivia: [
+      { q: 'What shape is Daisen Kofun?', options: ['A keyhole', 'A star', 'A circle only'], answer: 0 },
+      { q: 'Sen no Rikyū perfected…', options: ['the tea ceremony', 'sushi', 'kabuki'], answer: 0 },
+    ],
+    souvenir: { name: 'Kurumi-mochi', jp: 'くるみもち', emoji: '🍡', cost: 25 },
+  },
+  kinosaki: {
+    spots: [
+      { name: 'Seven outdoor baths', jp: '{外湯|そとゆ}めぐり', emoji: '♨️', about: 'Hop between seven public baths in yukata — one pass opens them all.' },
+      { name: 'Willow-lined canal', jp: '{大谿川|おおたにがわ}', emoji: '🌿', about: 'Stone bridges and willows along the main street, glowing with lanterns at night.' },
+      { name: 'Onsen-ji', jp: '{温泉寺|おんせんじ}', emoji: '🛕', about: 'The temple of the monk said to have founded the hot springs 1,300 years ago.' },
+    ],
+    trivia: [
+      { q: 'Which writer stayed at Kinosaki in 1913?', options: ['Shiga Naoya', 'Murakami Haruki', 'Mishima Yukio'], answer: 0 },
+      { q: 'What do visitors wear between baths?', options: ['Yukata and geta', 'Kimono and zōri', 'Swimsuits'], answer: 0 },
+    ],
+    souvenir: { name: 'Matsuba crab', jp: 'まつばがに', emoji: '🦀', cost: 80 },
+  },
+  munakata: {
+    spots: [
+      { name: 'Okinoshima', tags: ['heritage'], jp: '{沖ノ島|おきのしま}', emoji: '🏝️', about: 'A sacred island of ancient sea rituals — today worshipped only from afar.' },
+      { name: 'Munakata Taisha Hetsu-gū', tags: ['heritage'], jp: '{宗像大社|むなかたたいしゃ}', emoji: '⛩️', about: 'The mainland shrine of the three sea goddesses, with a treasure hall of Okinoshima finds.' },
+      { name: 'Shinbaru-Nuyama Mounds', tags: ['heritage'], jp: '{新原|しんばる}・{奴山古墳群|ぬやまこふんぐん}', emoji: '🌅', about: 'Ancient burial mounds facing the sea toward Okinoshima.' },
+    ],
+    trivia: [
+      { q: 'Which rule did Okinoshima visitors traditionally follow?', options: ['Never speak of what they saw', 'Bring a gift of rice', 'Visit only at night'], answer: 0 },
+      { q: 'About how many national treasures came from Okinoshima?', options: ['80,000', '80', '800'], answer: 0 },
+    ],
+    souvenir: { name: 'Mentaiko', jp: 'めんたいこ', emoji: '🌶️', cost: 35 },
+  },
+  amakusa: {
+    spots: [
+      { name: 'Sakitsu Village', tags: ['heritage'], jp: '{崎津集落|さきつしゅうらく}', emoji: '⛪', about: 'A fishing village with a Gothic church whose floor is tatami — a Hidden Christian heritage site.' },
+      { name: 'Amakusa Christian Museum', jp: 'キリシタン{館|かん}', emoji: '✝️', about: 'Learn how believers hid their faith in Buddhist statues and prayers for 250 years.' },
+      { name: 'Dolphin watching', jp: 'イルカウォッチング', emoji: '🐬', about: 'About 200 wild bottlenose dolphins live year-round around Amakusa.' },
+    ],
+    trivia: [
+      { q: 'How long did hidden Christians practise in secret?', options: ['About 250 years', 'About 25 years', 'About 2,500 years'], answer: 0 },
+      { q: 'What covers Sakitsu Church’s floor?', options: ['Tatami mats', 'Marble', 'Sand'], answer: 0 },
+    ],
+    souvenir: { name: 'Amakusa sea urchin bowl', jp: 'うにどん', emoji: '🍚', cost: 60 },
+  },
+  amami: {
+    spots: [
+      { name: 'Kinsakubaru Primeval Forest', tags: ['heritage'], jp: '{金作原|きんさくばる}{原生林|げんせいりん}', emoji: '🌴', about: 'Giant tree ferns in a subtropical jungle — part of a UNESCO natural site.' },
+      { name: 'Mangrove canoeing', jp: 'マングローブ', emoji: '🛶', about: 'Paddle through Japan’s second-largest mangrove forest at high tide.' },
+      { name: 'Tsumugi mud-dyeing', jp: '{大島紬|おおしまつむぎ}', emoji: '🧵', about: 'See silk dyed again and again in iron-rich mud until it turns glossy black.' },
+    ],
+    trivia: [
+      { q: 'What is unusual about the Amami rabbit?', options: ['Short ears — a “living fossil”', 'It can swim underwater', 'It is bright blue'], answer: 0 },
+      { q: 'What is used to dye Ōshima tsumugi black?', options: ['Mud and tree bark', 'Squid ink', 'Charcoal'], answer: 0 },
+    ],
+    souvenir: { name: 'Keihan chicken rice', jp: 'けいはん', emoji: '🍲', cost: 30 },
+  },
+  izu: {
+    spots: [
+      { name: 'Nirayama Reverberatory Furnace', tags: ['heritage'], jp: '{韮山反射炉|にらやまはんしゃろ}', emoji: '🔥', about: 'The only working-era reverberatory furnace still standing in Japan (1857).' },
+      { name: 'Jōgasaki Coast', jp: '{城ヶ崎海岸|じょうがさきかいがん}', emoji: '🌊', about: 'Lava cliffs and a swaying suspension bridge 23 m above the waves.' },
+      { name: 'Jōren Falls & wasabi fields', jp: '{浄蓮|じょうれん}の{滝|たき}', emoji: '🌿', about: 'A waterfall near Amagi Pass, beside terraces of fresh wasabi.' },
+    ],
+    trivia: [
+      { q: 'Which story is set on Amagi Pass?', options: ['The Dancing Girl of Izu', 'Botchan', 'The Tale of Genji'], answer: 0 },
+      { q: 'Izu’s clear spring water is perfect for growing…', options: ['Wasabi', 'Bananas', 'Cotton'], answer: 0 },
+    ],
+    souvenir: { name: 'Fresh wasabi', jp: 'なまわさび', emoji: '🌱', cost: 30 },
+  },
+  gotokuji: {
+    spots: [
+      { name: 'Maneki-neko shelves', jp: '{招福猫児|しょうふくびょうじ}', emoji: '🐾', about: 'Thousands of white beckoning cats left by people whose wishes came true.' },
+      { name: 'Three-story pagoda', jp: '{三重塔|さんじゅうのとう}', emoji: '🛕', about: 'Look closely — little cats are carved among the pagoda’s decorations.' },
+      { name: 'Ii family graves', jp: '{井伊家墓所|いいけぼしょ}', emoji: '🪦', about: 'Resting place of the Hikone lords — linking back to Hikone Castle’s cat legend.' },
+    ],
+    trivia: [
+      { q: 'Which lord did the temple cat beckon to safety?', options: ['Ii Naotaka', 'Tokugawa Ieyasu', 'Date Masamune'], answer: 0 },
+      { q: 'Gōtoku-ji’s cats raise which paw?', options: ['The right paw', 'The left paw', 'Both paws'], answer: 0 },
+    ],
+    souvenir: { name: 'Maneki-neko figurine', jp: 'まねきねこ', emoji: '🐱', cost: 100 },
+  },
 };

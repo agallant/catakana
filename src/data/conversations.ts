@@ -372,4 +372,67 @@ export const CONVERSATIONS: Conversation[] = [
     ],
     q: 'How was the trip?', options: ['Tough but fun', 'Boring', 'Too short'], answer: 0,
   },
+  {
+    id: 'ferry', from: 68, title: 'Twenty-four hours at sea',
+    lines: [
+      { who: 'npc', jp: 'いっしゅうかんに いちびんしか ない とあって、ふねは まんいんでした。', en: 'With only one ferry a week, the ship was full.' },
+      { who: 'me', jp: 'それでも くる かちが ありました。くじらが みえましたから！', en: 'Still, it was worth coming. I saw whales!' },
+      { who: 'npc', jp: 'ここならではの けしきですね。', en: 'A view you can only get here.' },
+    ],
+    q: 'Why was the ferry full?', options: ['There is only one sailing a week', 'It was a holiday', 'It was free'], answer: 0,
+  },
+  {
+    id: 'kappa', from: 69, title: 'Kappa fishing',
+    lines: [
+      { who: 'me', jp: 'きゅうりで かっぱが つれるって ほんとうですか。', en: 'Is it true you can catch a kappa with a cucumber?' },
+      { who: 'npc', jp: 'さあ。でも、とおのの ひとは みんな しんじて いますよ。', en: 'Who knows. But everyone in Tōno believes it.' },
+      { who: 'me', jp: 'それなら、ためさずには いられませんね。', en: 'In that case, I can’t help but try.' },
+    ],
+    q: 'What bait is used for kappa?', options: ['A cucumber', 'A fish', 'Rice balls'], answer: 0,
+  },
+  {
+    id: 'zen-morning', from: 71, title: 'Morning at the temple',
+    lines: [
+      { who: 'npc', jp: 'あさ さんじはんに おきざるを えないのは たいへんです。', en: 'Having no choice but to get up at 3:30 is hard.' },
+      { who: 'me', jp: 'ねこには むりかも しれません…', en: 'That might be impossible for a cat…' },
+      { who: 'npc', jp: 'でも、しずかな あさの ざぜんは すばらしいですよ。', en: 'But quiet morning zazen is wonderful.' },
+    ],
+    q: 'What time do the monks get up?', options: ['3:30', '5:30', '7:00'], answer: 0,
+  },
+  {
+    id: 'battle', from: 72, title: 'The turning point',
+    lines: [
+      { who: 'me', jp: 'たたかいは なんにち つづいたんですか。', en: 'How many days did the battle last?' },
+      { who: 'npc', jp: 'たった いちにちです。うらぎりが あった ことが おおきかったと いわれて います。', en: 'Just one day. It’s said that the betrayals made a big difference.' },
+      { who: 'me', jp: 'その ひを さかいに、へいわな じだいが はじまったんですね。', en: 'So from that day on, a peaceful era began.' },
+    ],
+    q: 'How long did the battle last?', options: ['One day', 'One month', 'One year'], answer: 0,
+  },
+  {
+    id: 'secret-island', from: 75, title: 'The secret island',
+    lines: [
+      { who: 'me', jp: 'おきのしまには いけますか。', en: 'Can I go to Okinoshima?' },
+      { who: 'npc', jp: 'いまは いっぱんの ひとは じょうりく できません。とおくから おがむ ことに なって います。', en: 'Ordinary people can’t land now. We worship it from afar.' },
+      { who: 'me', jp: 'わかりました。しまの ひみつは まもるべき ですね。', en: 'I understand. The island’s secrets should be kept.' },
+    ],
+    q: 'How do people worship Okinoshima today?', options: ['From a distance', 'By swimming there', 'By climbing it'], answer: 0,
+  },
+  {
+    id: 'rabbit', from: 77, title: 'Night drive',
+    lines: [
+      { who: 'npc', jp: 'よるの もりでは、あまみの くろうさぎに あえる かも しれません。', en: 'In the forest at night, you might meet an Amami rabbit.' },
+      { who: 'me', jp: 'うさぎを まもるべく、ゆっくり はしりましょう。', en: 'Let’s drive slowly to protect the rabbits.' },
+      { who: 'npc', jp: 'あ、みて！ みちの はしに いますよ！', en: 'Oh, look! There’s one at the side of the road!' },
+    ],
+    q: 'Why drive slowly?', options: ['To protect the rabbits', 'Because of fog', 'To save fuel'], answer: 0,
+  },
+  {
+    id: 'home', from: 79, title: 'Welcome home',
+    lines: [
+      { who: 'npc', jp: 'おかえりなさい。ずいぶん とおくまで いきましたね。', en: 'Welcome back. You went a really long way.' },
+      { who: 'me', jp: 'はい。あめであれ ゆきであれ、たのしい たびでした。', en: 'Yes. Rain or snow, it was a fun journey.' },
+      { who: 'npc', jp: 'あなたの これからの たびを おうえんして やみません。', en: 'I will always cheer on your journeys to come.' },
+    ],
+    q: 'Who welcomes you home at Gōtoku-ji?', options: ['Maneki', 'Kappa', 'Ieyasu'], answer: 0,
+  },
 ];

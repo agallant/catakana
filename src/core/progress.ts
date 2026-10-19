@@ -81,6 +81,8 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'treasure-castles', name: 'Five Treasures', emoji: '🏯', desc: 'Photograph all five National Treasure castles (Himeji, Hikone, Matsue, Matsumoto, Inuyama)', test: (d) => ['himeji:Himeji Castle', 'hikone:Hikone Castle', 'matsue:Matsue Castle', 'matsumoto:Matsumoto Castle', 'inuyama:Inuyama Castle'].every((p) => d.photos.includes(p)) },
   { id: 'n3', name: 'N3 Voyager', emoji: '🐆', desc: 'Reach Iriomote and finish the N3 season', test: (d) => (d.stops.iriomote ?? 0) >= 1 },
   { id: 'n2', name: 'N2 Pilgrim', emoji: '🥾', desc: 'Complete the N2 season by reaching Asakusa', test: (d) => (d.stops.asakusa ?? 0) >= 1 },
+  { id: 'n1', name: 'Grand Master Cat', emoji: '🐾', desc: 'Finish the N1 season and come home to Gōtoku-ji', test: (d) => (d.stops.gotokuji ?? 0) >= 1 },
+  { id: 'islands', name: 'Island Hopper', emoji: '🏝️', desc: 'Visit Ogasawara, Amami, Yakushima and Iriomote', test: (d) => ['ogasawara', 'amami', 'yakushima', 'iriomote'].every((s) => (d.stops[s] ?? 0) >= 1) },
   { id: 'kii', name: 'Sacred Mountains', emoji: '⛰️', desc: 'Photograph every Kii Mountains World Heritage spot in Yoshino and Kumano', test: (d) => ['yoshino:Hitome Senbon', 'yoshino:Kinpusen-ji', 'yoshino:Yoshimizu Shrine', 'kumano:Kumano Kodō trail', 'kumano:Nachi Falls', 'kumano:Kumano Hongū Taisha'].every((p) => d.photos.includes(p)) },
   { id: 'streak3', name: 'Three-day Purr', emoji: '🔥', desc: 'Play 3 days in a row', test: (d) => d.streak >= 3 },
   { id: 'streak7', name: 'Week of Whiskers', emoji: '📅', desc: 'Play 7 days in a row', test: (d) => d.streak >= 7 },
