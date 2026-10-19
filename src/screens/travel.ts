@@ -40,6 +40,6 @@ export function travelScreen(app: App, params: string[]): Screen {
     ),
   );
   sfx.purr();
-  window.setTimeout(() => void speak(`まもなく、${stop.reading}です。`), 1800);
-  return { el };
+  const t = window.setTimeout(() => void speak(`まもなく、${stop.reading}です。`), 1800);
+  return { el, dispose: () => window.clearTimeout(t) };
 }
