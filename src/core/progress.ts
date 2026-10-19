@@ -102,6 +102,15 @@ export interface Unlock {
 type UnlockListener = (u: Unlock) => void;
 const listeners = new Set<UnlockListener>();
 
+/** Notify listeners; a burst of unlocks (e.g. an old save catching up) becomes one summary toast. */
+function emit(unlocks: Unlock[]): void {
+  const shown: Unlock[] =
+    unlocks.length > 2
+      ? [{ kind: 'achievement', label: `${unlocks.length} rewards unlocked! See your passport 📕`, emoji: '🏅' }]
+      : unlocks;
+  shown.forEach((u) => listeners.forEach((l) => l(u)));
+}
+
 /** The app shows a toast for every unlock. */
 export function onUnlock(fn: UnlockListener): () => void {
   listeners.add(fn);
@@ -129,7 +138,7 @@ export function track(store: Store, e: GameEvent): Unlock[] {
     }
   });
   const all = [...out, ...checkAchievements(store, false)];
-  all.forEach((u) => listeners.forEach((l) => l(u)));
+  emit(all);
   return all;
 }
 
@@ -143,6 +152,6 @@ export function checkAchievements(store: Store, notify = true): Unlock[] {
     });
     for (const a of fresh) out.push({ kind: 'achievement', label: `Achievement: ${a.name}`, emoji: a.emoji });
   }
-  if (notify) out.forEach((u) => listeners.forEach((l) => l(u)));
+  if (notify) emit(out);
   return out;
 }
