@@ -4,6 +4,7 @@ import { STOPS } from '../src/data/journey';
 import { N5_WORDS, ALL_WORDS, TOUR_WORDS } from '../src/data/vocab';
 import { N4_CONTENT } from '../src/data/n4';
 import { N3_CONTENT } from '../src/data/n3';
+import { N2_CONTENT } from '../src/data/n2';
 import { TOUR_CONTENT } from '../src/data/tour';
 import { kanaTokens, wordsThrough, firstStopOfTier, newWordsAt } from '../src/core/curriculum';
 import { decoyChunk, sentencesThrough } from '../src/core/sentences';
@@ -75,5 +76,20 @@ describe('N3 content', () => {
     const n3Stops = STOPS.filter((s) => s.tier === 'N3');
     expect(Object.keys(N3_CONTENT).sort()).toEqual(n3Stops.map((s) => s.id).sort());
     for (const s of n3Stops) expect(TOUR_WORDS.filter((w) => w.stop === s.id).length, s.id).toBeGreaterThanOrEqual(8);
+  });
+});
+
+describe('N2 content', () => {
+  it('every N2 stop has grammar, words and sentences', () => {
+    const n2Stops = STOPS.filter((s) => s.tier === 'N2');
+    expect(n2Stops).toHaveLength(12);
+    expect(Object.keys(N2_CONTENT).sort()).toEqual(n2Stops.map((s) => s.id).sort());
+    for (const s of n2Stops) {
+      expect(TOUR_WORDS.filter((w) => w.stop === s.id).length, s.id).toBeGreaterThanOrEqual(8);
+      expect(N2_CONTENT[s.id]!.sentences.length, s.id).toBeGreaterThanOrEqual(4);
+    }
+  });
+  it('N2 comes after N3 in the journey', () => {
+    expect(STOPS.findIndex((s) => s.tier === 'N2')).toBeGreaterThan(STOPS.findLastIndex((s) => s.tier === 'N3'));
   });
 });
