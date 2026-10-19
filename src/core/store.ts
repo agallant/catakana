@@ -114,9 +114,9 @@ export class Store {
     this.touchStreak();
   }
 
-  private load(): SaveData {
+  private load(rawOverride?: string): SaveData {
     try {
-      const raw = this.storage?.getItem(KEY);
+      const raw = rawOverride ?? this.storage?.getItem(KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as Partial<SaveData>;
         const base = defaultSave();
@@ -203,6 +203,25 @@ export class Store {
     this.update((d) => {
       d.stops[stop] = Math.max(d.stops[stop] ?? 0, stars);
     });
+  }
+
+  /** Serialise progress for a backup file. */
+  exportJson(): string {
+    return JSON.stringify({ app: 'catakana', exported: new Date().toISOString(), save: this.data });
+  }
+
+  /** Restore from a backup; returns false (and changes nothing) if the file isn't a Catakana save. */
+  importJson(text: string): boolean {
+    try {
+      const parsed = JSON.parse(text) as { app?: string; save?: Partial<SaveData> };
+      if (parsed.app !== 'catakana' || !parsed.save || typeof parsed.save !== 'object') return false;
+      this.data = this.load(JSON.stringify(parsed.save));
+      this.save();
+      this.listeners.forEach((l) => l(this.data));
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   reset(): void {

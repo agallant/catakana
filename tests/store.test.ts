@@ -44,3 +44,20 @@ describe('quests & achievements', () => {
     expect(STOPS[placementStart(8, 8)]!.tier).toBe('N5');
   });
 });
+
+describe('backup', () => {
+  it('round-trips progress and rejects foreign files', () => {
+    const a = new Store(mem());
+    a.update((d) => {
+      d.fish = 42;
+      d.stops.tokyo = 3;
+    });
+    const b = new Store(mem());
+    expect(b.importJson(a.exportJson())).toBe(true);
+    expect(b.data.fish).toBe(42);
+    expect(b.data.stamps).toContain('tokyo');
+    expect(b.importJson('{"hello":1}')).toBe(false);
+    expect(b.importJson('not json')).toBe(false);
+    expect(b.data.fish).toBe(42);
+  });
+});

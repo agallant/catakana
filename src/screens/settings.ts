@@ -22,9 +22,42 @@ export function settingsScreen(app: App): Screen {
     h('div', { class: 'setting col' }, h('span', null, 'Furigana (reading aids over kanji)'), h('div', { class: 'chips' }, furi)),
     h('div', { class: 'setting col' }, h('button', { class: 'btn ghost', onClick: () => { sfx.meow(); void speak('こんにちは'); } }, '🔊 Test voice'), h('small', null, hasJapaneseVoice() ? 'Japanese voice found ✔' : 'No Japanese voice found. Add one in your device’s text-to-speech settings.')),
     h('div', { class: 'setting col' }, h('strong', null, 'Your progress'), h('small', null, `${d.stats.correct} right · ${d.stats.wrong} wrong · ${d.stats.rounds} rounds played`), h('small', null, 'Saved only on this device.')),
+    h(
+      'div',
+      { class: 'setting col' },
+      h('strong', null, 'Backup'),
+      h('small', null, 'Progress lives only on this device. Save a backup file to move it to another device.'),
+      h(
+        'div',
+        { class: 'row' },
+        h('button', { class: 'btn ghost', onClick: () => exportSave(app) }, '💾 Export progress'),
+        h('label', { class: 'btn ghost' }, '📂 Import', h('input', { type: 'file', accept: 'application/json,.json', hidden: true, onChange: (e: Event) => void importSave(app, e) })),
+      ),
+    ),
     h('button', { class: 'btn danger', onClick: () => { if (confirm('Erase all progress on this device?')) { app.store.reset(); app.go('welcome'); } } }, 'Erase progress'),
     h('p', { class: 'hint' }, 'Catakana · works offline · made with 🐾'),
     h('p', { class: 'hint' }, 'Stroke order data from KanjiVG © Ulrich Apel (CC BY-SA 3.0).'),
   );
   return { el };
+}
+
+function exportSave(app: App): void {
+  const blob = new Blob([app.store.exportJson()], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `catakana-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+async function importSave(app: App, e: Event): Promise<void> {
+  const file = (e.target as HTMLInputElement).files?.[0];
+  if (!file) return;
+  const text = await file.text();
+  if (!confirm('Replace the progress on this device with this backup?')) return;
+  if (app.store.importJson(text)) app.go('map');
+  else alert('That file is not a Catakana backup.');
 }
