@@ -187,12 +187,12 @@ export const STORIES: Story[] = [
   {
     id: 'otaru-glass', title: 'Glass floats of Otaru', emoji: '🫧', from: 'otaru',
     text: [
-      'むかし、おたるは にしん{漁|りょう}で とても にぎやかな {町|まち}でした。{漁|りょう}に {使|つか}う ガラスの うきを {作|つく}るために、ガラスの {工場|こうじょう}が できました。',
+      'むかし、おたるは にしん{漁|りょう}で とても にぎやかな {町|まち}でした。{町|まち}の ガラス{工場|こうじょう}では、ランプの ほかに、{漁|りょう}に {使|つか}う ガラスの うきも {作|つく}って いました。',
       'にしんが とれなく なってからも、ガラスを {作|つく}る {技術|ぎじゅつ}は {残|のこ}りました。いまでは コップや ランプなど、きれいな {作品|さくひん}が {作|つく}られて います。',
       'わたしは {体験|たいけん}{工房|こうぼう}で、{自分|じぶん}で ガラスを ふいて みました。{思|おも}ったより {息|いき}が {必要|ひつよう}で、ねこの {形|かたち}に するのは {無理|むり}でした。',
     ],
     questions: [
-      { q: 'Why were glassworks first built in Otaru?', options: ['To make floats for herring fishing', 'To make windows for the canal warehouses', 'To make music boxes'], answer: 0 },
+      { q: 'Besides lamps, what did Otaru’s glassworks make?', options: ['Glass floats for fishing', 'Windows for the canal warehouses', 'Music boxes'], answer: 0 },
       { q: 'What happened after the herring disappeared?', options: ['The glass-making skills remained', 'All the factories closed', 'The town moved'], answer: 0 },
       { q: 'How did the writer’s glass-blowing go?', options: ['It needed more breath than expected', 'It came out as a perfect cat', 'The writer did not try'], answer: 0 },
     ],

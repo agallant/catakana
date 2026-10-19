@@ -64,7 +64,7 @@ export const KEIGO: KeigoVerb[] = [
   {
     id: 'miru', plain: '{見|み}る', masu: '{見|み}ます', en: 'see, look', from: MORE,
     sonkei: { form: 'ご{覧|らん}になります', ex: 'こちらの {写真|しゃしん}を ＿＿か。', en: 'Would you like to look at this photo?' },
-    kenjo: { form: '{拝見|はいけん}します', ex: 'きっぷを ＿＿。', en: 'May I see your ticket?' },
+    kenjo: { form: '{拝見|はいけん}します', ex: 'わたしが お{客|きゃく}さまの きっぷを ＿＿。', en: 'I will check your ticket.' },
   },
   {
     id: 'shitteiru', plain: '{知|し}っている', masu: '{知|し}っています', en: 'know', from: MORE,
@@ -78,7 +78,7 @@ export const KEIGO: KeigoVerb[] = [
   },
   {
     id: 'kiku', plain: '{聞|き}く', masu: '{聞|き}きます', en: 'hear, ask', from: MORE,
-    sonkei: { form: 'お{聞|き}きになります', ex: 'この ニュースを もう ＿＿か。', en: 'Have you heard this news yet?' },
+    sonkei: { form: 'お{聞|き}きになります', ex: 'この あと、ガイドの {話|はなし}を ＿＿か。', en: 'Will you listen to the guide’s talk after this?' },
     kenjo: { form: '{伺|うかが}います', ex: 'ちょっと ＿＿が、{駅|えき}は どちらですか。', en: 'May I ask — which way is the station?' },
   },
   {
