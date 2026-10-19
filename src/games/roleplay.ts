@@ -1,5 +1,5 @@
 import { h, sleep } from '../ui/dom';
-import { speak } from '../core/audio';
+import { hasJapaneseVoice, speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
 import { chime, shell } from './common';
 import { pickItems, shuffle } from '../core/srs';
@@ -67,7 +67,7 @@ export const roleplayGame: GameDef = {
       sh.setProgress(idx, scene.turns.length);
       const turn = scene.turns[idx]!;
       // level 3: hear the other cat first, the text appears after you answer
-      const npcText = h('div', { class: 'jp' }, ctx.level === 3 && isSpoken(turn.npc) ? '🔊 …' : turn.npc);
+      const npcText = h('div', { class: 'jp' }, ctx.level === 3 && isSpoken(turn.npc) && hasJapaneseVoice() ? '🔊 …' : turn.npc);
       log.appendChild(
         h('div', { class: 'convo-line npc' }, h('div', { class: 'convo-cat' }, catSvg(npcLook, 'happy', 40)), h('div', { class: 'convo-bubble' }, npcText, ctx.level === 1 ? h('small', null, turn.en) : null)),
       );
