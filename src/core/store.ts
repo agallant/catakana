@@ -45,6 +45,10 @@ export interface SaveData {
   owned: string[];
   /** sights photographed in Explore ("<stop>:<spot name>") */
   photos: string[];
+  /** today's quest progress */
+  daily: { day: string; progress: Record<string, number>; claimed: string[] };
+  /** unlocked achievement ids */
+  achievements: string[];
   settings: Settings;
   stats: { rounds: number; correct: number; wrong: number; playMs: number };
   started: boolean;
@@ -71,6 +75,8 @@ export function defaultSave(): SaveData {
     trivia: {},
     owned: [],
     photos: [],
+    daily: { day: '', progress: {}, claimed: [] },
+    achievements: [],
     settings: { furigana: 'always', romaji: true, sound: true, speech: true, speechRate: 0.85, reduceMotion: false },
     stats: { rounds: 0, correct: 0, wrong: 0, playMs: 0 },
     started: false,

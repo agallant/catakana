@@ -14,6 +14,7 @@ import { KANJI_BY_CHAR } from '../data/kanji';
 import { ALL_WORDS } from '../data/vocab';
 import { loadStrokes } from '../core/strokes';
 import { strokeAnimation } from '../ui/writer';
+import { track } from '../core/progress';
 
 /** Stroke-order animation slot, filled once the stroke data has loaded. */
 function strokesFor(text: string): HTMLElement {
@@ -128,6 +129,7 @@ export function lessonScreen(app: App, params: string[]): Screen {
       show();
     } else {
       app.store.introduce(cards.map(idOf));
+      track(app.store, { type: 'lesson' });
       app.go(`stop/${stop.id}`);
     }
   };

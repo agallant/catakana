@@ -17,3 +17,30 @@ describe('store', () => {
     expect(s.data.fish).toBe(0);
   });
 });
+
+import { questsFor, track, ACHIEVEMENTS } from '../src/core/progress';
+import { placementStart } from '../src/screens/placement';
+import { STOPS } from '../src/data/journey';
+
+describe('quests & achievements', () => {
+  it('picks three distinct quests per day, deterministically', () => {
+    const a = questsFor('2026-10-19');
+    expect(a).toHaveLength(3);
+    expect(new Set(a.map((q) => q.id)).size).toBe(3);
+    expect(questsFor('2026-10-19').map((q) => q.id)).toEqual(a.map((q) => q.id));
+  });
+  it('completes the play-games quest and unlocks achievements', () => {
+    const s = new Store(mem());
+    for (let i = 0; i < 3; i++) track(s, { type: 'game', game: 'sushi', skill: 'reading', correct: 5, total: 10, stars: 1 });
+    expect(s.data.daily.claimed).toContain('games3');
+    s.update((d) => (d.stops.tokyo = 1));
+    const unlocks = track(s, { type: 'photo' });
+    expect(unlocks.some((u) => u.label.includes('First Paw-step'))).toBe(true);
+    expect(new Set(ACHIEVEMENTS.map((a) => a.id)).size).toBe(ACHIEVEMENTS.length);
+  });
+  it('placement skips what you already know', () => {
+    expect(placementStart(3, 2)).toBe(0);
+    expect(STOPS[placementStart(8, 2)]!.id).toBe('fukuoka');
+    expect(STOPS[placementStart(8, 8)]!.tier).toBe('N5');
+  });
+});

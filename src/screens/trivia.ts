@@ -5,6 +5,7 @@ import { CULTURE, type Trivia } from '../data/culture';
 import { sfx } from '../core/audio';
 import { shuffle } from '../core/srs';
 import { catSvg } from '../ui/cat';
+import { track } from '../core/progress';
 
 /** Questions for a stop: its own trivia plus a few from earlier stops (spaced review of culture). */
 export function triviaFor(stopId: string, rng: () => number = Math.random): Trivia[] {
@@ -28,6 +29,7 @@ export function triviaScreen(app: App, params: string[]): Screen {
         d.trivia[stop.id] = Math.max(d.trivia[stop.id] ?? 0, score);
       });
       sfx.win();
+      track(app.store, { type: 'trivia', score });
       root.replaceChildren(
         h(
           'div',

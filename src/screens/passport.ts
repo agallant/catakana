@@ -4,6 +4,7 @@ import { STOPS } from '../data/journey';
 import { CULTURE, type SpotTag } from '../data/culture';
 import { SHOP, type ShopKind } from '../data/shop';
 import { stampSvg } from '../ui/stamp';
+import { ACHIEVEMENTS } from '../core/progress';
 
 interface Badge {
   emoji: string;
@@ -59,6 +60,15 @@ export function passportScreen(app: App): Screen {
     ...shelf('🍙 Foods tasted', market('food'), 'Buy food at the Neko Market.'),
     ...shelf('🎎 Treasures', market('treasure'), 'Buy treasures at the Neko Market.'),
     ...shelf('🎁 Omiyage', souvenirs, 'Buy souvenirs in Explore.'),
+    h('h3', null, `🏅 Achievements (${d.achievements.length}/${ACHIEVEMENTS.length})`),
+    h(
+      'div',
+      { class: 'ach-grid' },
+      ACHIEVEMENTS.map((a) => {
+        const got = d.achievements.includes(a.id);
+        return h('div', { class: `ach ${got ? '' : 'locked'}` }, h('span', { class: 'ach-emoji' }, a.emoji), h('span', null, h('strong', null, a.name), h('br'), h('small', null, a.desc)));
+      }),
+    ),
     h('button', { class: 'btn primary big', onClick: () => app.go('shop') }, '🏮 Go to the Neko Market'),
   );
   return { el };

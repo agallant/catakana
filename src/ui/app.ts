@@ -2,6 +2,7 @@ import { Store, level } from '../core/store';
 import { configureAudio, sfx } from '../core/audio';
 import { h } from './dom';
 import { catSvg } from './cat';
+import { checkAchievements, onUnlock, type Unlock } from '../core/progress';
 
 export type Route = { name: string; params: string[] };
 
@@ -18,6 +19,7 @@ export class App {
   readonly main = h('main', { class: 'main', id: 'main' });
   readonly hud = h('header', { class: 'hud' });
   readonly nav = h('nav', { class: 'nav', 'aria-label': 'Main' });
+  readonly toasts = h('div', { class: 'toasts', 'aria-live': 'polite' });
   private current: Screen | null = null;
   private routes = new Map<string, ScreenFactory>();
   private chrome = new Set<string>(['map', 'dojo', 'cats', 'settings', 'stop', 'explore', 'passport', 'shop']);
@@ -28,7 +30,9 @@ export class App {
       this.applySettings();
       this.renderHud();
     });
-    root.replaceChildren(this.hud, this.main, this.nav);
+    root.replaceChildren(this.hud, this.main, this.nav, this.toasts);
+    onUnlock((u) => this.toast(u));
+    queueMicrotask(() => checkAchievements(this.store));
     window.addEventListener('hashchange', () => this.render());
   }
 
@@ -36,6 +40,15 @@ export class App {
     const s = this.store.data.settings;
     configureAudio({ sound: s.sound, speech: s.speech, rate: s.speechRate });
     document.documentElement.classList.toggle('reduce-motion', s.reduceMotion);
+  }
+
+  /** Slide-in notification for quest completions and achievements. */
+  toast(u: Unlock): void {
+    const t = h('div', { class: `toast toast-${u.kind}` }, h('span', { class: 'toast-emoji' }, u.emoji), h('span', null, u.label));
+    this.toasts.appendChild(t);
+    sfx.win();
+    window.setTimeout(() => t.classList.add('out'), 3200);
+    window.setTimeout(() => t.remove(), 3700);
   }
 
   register(name: string, f: ScreenFactory): void {

@@ -104,7 +104,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .stop { cursor: pointer; } .stop circle { fill: #fff; stroke: var(--pink-d); stroke-width: 2; }
 .stop.locked circle { stroke: #aaa; fill: #eee; } .stop.locked { opacity: 0.7; }
 .stop.current circle { fill: var(--gold); animation: pulse 1.4s infinite; transform-origin: center; transform-box: fill-box; }
-.stop-emoji { font-size: 12px; pointer-events: none; } .stop-stars { font-size: 9px; fill: #e0a800; }
+.map-emoji { font-size: 12px; pointer-events: none; } .map-stars { font-size: 9px; fill: #e0a800; }
 @keyframes pulse { 50% { transform: scale(1.25); } }
 .map-info { text-align: center; min-height: 1.4em; color: var(--pink-d); font-weight: 700; }
 .stop-list { display: grid; gap: 8px; }
@@ -128,7 +128,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .travel-card h2 { margin: 0; } .fact { background: #fff6dd; padding: 10px; border-radius: 12px; text-align: left; margin: 8px 0; }
 
 /* Stop */
-.stop-hero { text-align: center; } .stop-emoji { font-size: 3.2rem; } .stop-hero h1 { margin: 0; }
+.stop-hero { text-align: center; } .stop-hero .stop-emoji { font-size: 3.2rem; } .stop-hero h1 { margin: 0; }
 .npc { display: flex; gap: 10px; align-items: center; margin: 10px 0; }
 .speech { flex: 1; background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 10px 14px; position: relative; }
 .speech::before { content: ''; position: absolute; left: -9px; top: 22px; border: 8px solid transparent; border-right-color: var(--line); border-left: 0; }
@@ -285,3 +285,23 @@ button.hud-stat { cursor: pointer; }
 .convo-bubble small { display: block; color: var(--muted); font-size: 0.8rem; }
 .phrase-jp { font-size: clamp(1.4rem, 7vw, 2rem); font-weight: 700; }
 .big-mic { font-size: 1.8rem; border-radius: 50%; width: 72px; height: 72px; padding: 0; }
+
+/* Toasts, quests, achievements */
+.toasts { position: fixed; top: calc(8px + env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); z-index: 50; display: flex; flex-direction: column; gap: 6px; width: min(92vw, 420px); pointer-events: none; }
+.toast { display: flex; gap: 10px; align-items: center; background: #fff8e1; color: #3b2a20; border: 2px solid var(--gold); border-radius: 16px; padding: 10px 14px; font-weight: 800; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); animation: drop 0.35s ease; transition: opacity 0.4s, transform 0.4s; }
+.toast.out { opacity: 0; transform: translateY(-10px); }
+.toast-achievement { background: #e8f7ff; border-color: var(--teal); }
+.toast-emoji { font-size: 1.6rem; }
+@keyframes drop { from { transform: translateY(-20px); opacity: 0; } }
+.quests { background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 10px 12px; margin: 12px 0; }
+.quests h3 { margin: 0 0 6px; font-size: 1rem; }
+.quest { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.quest-emoji { font-size: 1.3rem; }
+.quest-main { flex: 1; font-size: 0.9rem; }
+.quest-bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-top: 3px; }
+.quest-fill { height: 100%; background: var(--gold); }
+.quest.done .quest-main { text-decoration: line-through; color: var(--muted); }
+.ach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.ach { display: flex; gap: 8px; align-items: center; background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 8px; font-size: 0.85rem; }
+.ach.locked { opacity: 0.45; filter: grayscale(1); }
+.ach-emoji { font-size: 1.6rem; font-family: var(--jp); }

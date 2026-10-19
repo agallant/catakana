@@ -6,6 +6,7 @@ import { catSvg } from '../ui/cat';
 import { sfx, speak } from '../core/audio';
 import { getPref, setPref } from '../core/prefs';
 import { readingOf } from './explore';
+import { track } from '../core/progress';
 
 /** Neko Market: spend fish on traditional foods and treasures (each is a trophy). */
 export function shopScreen(app: App): Screen {
@@ -26,6 +27,7 @@ export function shopScreen(app: App): Screen {
       s.owned.push(it.id);
     });
     sfx.coin();
+    track(app.store, { type: 'buy', kind: it.kind });
     if (it.kind === 'food') {
       sfx.purr();
       void speak('いただきます！ おいしい！');
