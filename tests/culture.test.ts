@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { CULTURE } from '../src/data/culture';
 import { STOPS } from '../src/data/journey';
 import { kanaToRomaji } from '../src/data/kana';
-import { readableStations } from '../src/games/station';
+import { kanjiSignMode, readableStations } from '../src/games/station';
 import { triviaFor } from '../src/screens/trivia';
 import { readingOf } from '../src/screens/explore';
 import { romajiHints, ROMAJI_FADE_STOP } from '../src/core/romaji';
@@ -47,6 +47,17 @@ describe('station signs', () => {
   it('becomes available as kana are learned', () => {
     expect(readableStations(0)).toHaveLength(0);
     expect(readableStations(STOPS.length - 1)).toHaveLength(STOPS.length);
+  });
+  it('shows kanji-only signs at level 2 from N4', () => {
+    const n5 = STOPS.findIndex((s) => s.tier === 'N5');
+    const n4 = STOPS.findIndex((s) => s.tier === 'N4');
+    expect(kanjiSignMode(n5, 2)).toBe(false);
+    expect(kanjiSignMode(n4, 2)).toBe(true);
+    expect(kanjiSignMode(n4, 1)).toBe(false);
+    expect(kanjiSignMode(n4, 3)).toBe(false);
+    // every sign has kanji to read, and no two stations share a reading
+    for (const s of STOPS) expect(s.jp, s.id).toMatch(/[\u4e00-\u9fff]/);
+    expect(new Set(STOPS.map((s) => s.reading)).size).toBe(STOPS.length);
   });
 });
 

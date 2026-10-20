@@ -18,6 +18,13 @@ export function readableStations(index: number): Item[] {
 
 const MIN_STATIONS = 4;
 
+const KANJI_TIERS = new Set(['N4', 'N3', 'N2', 'N1']);
+
+/** From N4, level 2 shows the sign in kanji only: read the place name and pick its kana. */
+export function kanjiSignMode(stopIndex: number, level: number): boolean {
+  return level === 2 && KANJI_TIERS.has(STOPS[stopIndex]?.tier ?? '');
+}
+
 /** Read the platform sign and figure out where the train has stopped. */
 export const stationGame: GameDef = {
   id: 'station',
@@ -45,21 +52,24 @@ export const stationGame: GameDef = {
       sh.setProgress(idx, rounds.length);
       const st = rounds[idx]!;
       const listening = ctx.level === 3;
+      const kanjiSign = kanjiSignMode(ctx.stopIndex, ctx.level);
       const stopIdx = STOPS.findIndex((s) => `st:${s.id}` === st.id);
-      const prev = STOPS[stopIdx - 1]?.reading ?? '';
-      const nxt = STOPS[stopIdx + 1]?.reading ?? '';
+      const neighbour = (i: number): string => (kanjiSign ? STOPS[i]?.jp : STOPS[i]?.reading) ?? '';
+      const prev = neighbour(stopIdx - 1);
+      const nxt = neighbour(stopIdx + 1);
       const choices = shuffle([st, ...shuffle(stations.filter((s) => s.id !== st.id)).slice(0, ctx.level === 1 ? 2 : 3)]);
       let locked = false;
       const announce = `つぎは、${st.reading}。${st.reading}です。`;
       const sign = h(
         'div',
         { class: 'sign' },
-        h('div', { class: 'sign-main jp' }, listening ? '？？？' : st.text),
-        h('div', { class: 'sign-sub' }, ctx.hints && !listening ? st.romaji.toUpperCase() : STOPS[stopIdx]!.jp),
+        h('div', { class: 'sign-main jp' }, listening ? '？？？' : kanjiSign ? STOPS[stopIdx]!.jp : st.text),
+        h('div', { class: 'sign-sub' }, kanjiSign ? ' ' : ctx.hints && !listening ? st.romaji.toUpperCase() : STOPS[stopIdx]!.jp),
         h('div', { class: 'sign-bar jp' }, h('span', null, prev ? `← ${prev}` : ''), h('span', null, nxt ? `${nxt} →` : '')),
       );
       const buttons = choices.map((c) => {
-        const b = h('button', { class: `choice text ${listening ? 'jp' : ''}` }, listening ? c.text : `${c.emoji} ${c.en}`);
+        const kana = listening || kanjiSign;
+        const b = h('button', { class: `choice text ${kana ? 'jp' : ''}` }, kana ? c.text : `${c.emoji} ${c.en}`);
         b.addEventListener('click', async () => {
           if (locked) return;
           locked = true;
@@ -79,7 +89,7 @@ export const stationGame: GameDef = {
         return b;
       });
       sh.body.replaceChildren(
-        h('div', { class: 'announce', role: 'note' }, listening ? '🔊 Listen to the announcement' : '🚃 The train stops. Which station is it?'),
+        h('div', { class: 'announce', role: 'note' }, listening ? '🔊 Listen to the announcement' : kanjiSign ? '🚃 A kanji sign! How do you read this station?' : '🚃 The train stops. Which station is it?'),
         sign,
         h('button', { class: 'btn small ghost', onClick: () => void speak(announce) }, '🔊 Announcement'),
         h('div', { class: 'choices one-col' }, buttons),
