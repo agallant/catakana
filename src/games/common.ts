@@ -70,7 +70,8 @@ let streak = 0;
 export function shell(ctx: GameContext, title: string): Shell {
   streak = 0;
   const progress = h('div', { class: 'progress-fill' });
-  const lives = h('span', { class: 'lives' });
+  // hearts are emoji, so screen readers get a plain count instead
+  const lives = h('span', { class: 'lives', role: 'img' });
   const mascot = h('div', { class: 'mascot' }, catSvg(ctx.store.data.look, 'happy', 64));
   const bubble = h('div', { class: 'bubble', 'aria-live': 'polite' });
   const body = h('div', { class: 'game-body' });
@@ -81,7 +82,7 @@ export function shell(ctx: GameContext, title: string): Shell {
     h('div', { class: 'game-title' }, title),
     lives,
   );
-  const bar = h('div', { class: 'progress' }, progress);
+  const bar = h('div', { class: 'progress', role: 'progressbar', 'aria-label': 'Progress', 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-valuenow': '0' }, progress);
   const chat = h('div', { class: 'chat' }, mascot, bubble);
   const el = h('div', { class: 'game' }, top, bar, body, chat);
   ctx.root.replaceChildren(el);
@@ -90,10 +91,15 @@ export function shell(ctx: GameContext, title: string): Shell {
   return {
     body,
     setProgress(done, total) {
-      progress.style.width = `${Math.round((done / total) * 100)}%`;
+      const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+      progress.style.width = `${pct}%`;
+      bar.setAttribute('aria-valuenow', String(pct));
+      bar.setAttribute('aria-valuetext', `${done} of ${total}`);
     },
     setLives(n) {
-      lives.textContent = '❤️'.repeat(Math.max(0, n)) + '🤍'.repeat(Math.max(0, 3 - n));
+      const left = Math.max(0, Math.min(3, n));
+      lives.textContent = '❤️'.repeat(left) + '🤍'.repeat(3 - left);
+      lives.setAttribute('aria-label', `${left} of 3 lives left`);
     },
     say(msg, mood = 'happy') {
       bubble.textContent = msg;
