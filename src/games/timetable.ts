@@ -9,6 +9,7 @@ import {
   DURATION_KANJI,
   DURATION_MAX,
   DURATION_UNITS,
+  type DurationUnit,
   dayDistractors,
   dayReadings,
   durationDistractors,
@@ -65,7 +66,10 @@ function datePuzzle(level: number): Puzzle {
   return { id: `date:${mo}:${day}`, card, hint: level === 1 ? `${MONTHS_EN[mo - 1]} ${day} — how do you say it?` : 'How do you say this date?', answers: days.map((x) => month + x), wrongs };
 }
 
-const DURATION_EN: Record<string, string> = { hour: 'hours', week: 'weeks', month: 'months', year: 'years' };
+/** “1 hour”, “3 weeks”: the duration in English, singular for one. */
+export function durationEnglish(unit: DurationUnit, n: number): string {
+  return `${n} ${unit}${n === 1 ? '' : 's'}`;
+}
 const DURATION_EMOJI: Record<string, string> = { hour: '⏱️', week: '🗓️', month: '🌙', year: '🎍' };
 
 /** A “how long?” card: hours and months at level 1, weeks and years too from level 2. */
@@ -74,8 +78,8 @@ function durationPuzzle(level: number): Puzzle {
   const unit = level === 1 ? sample(['hour', 'month'] as const) : sample(DURATION_UNITS);
   const n = sample([1, 3, 4, 6, 8, 10, 1 + Math.floor(Math.random() * DURATION_MAX[unit]), ...(unit === 'hour' ? [7, 9] : [])]);
   const shown = `${n}${DURATION_KANJI[unit]}`;
-  const card = h('div', { class: 'calendar-card', 'aria-label': `${n} ${DURATION_EN[unit]}` }, h('div', { class: 'cal-month' }, DURATION_EMOJI[unit]!), h('div', { class: 'cal-day jp' }, shown));
-  return { id: `dur:${unit}:${n}`, card, hint: level === 1 ? `${n} ${DURATION_EN[unit]} — how long is the trip?` : 'How long? Say the duration.', answers: durationReadings(unit, n), wrongs: durationDistractors(unit, n) };
+  const card = h('div', { class: 'calendar-card', 'aria-label': durationEnglish(unit, n) }, h('div', { class: 'cal-month' }, DURATION_EMOJI[unit]!), h('div', { class: 'cal-day jp' }, shown));
+  return { id: `dur:${unit}:${n}`, card, hint: level === 1 ? `${durationEnglish(unit, n)} — how long is the trip?` : 'How long? Say the duration.', answers: durationReadings(unit, n), wrongs: durationDistractors(unit, n) };
 }
 
 export type PuzzleKind = 'time' | 'date' | 'duration';

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { shell } from '../src/games/common';
+import { answerAnnouncement, shell } from '../src/games/common';
 import { DEFAULT_LOOK } from '../src/core/store';
 import type { GameContext } from '../src/games/types';
 
@@ -27,5 +27,22 @@ describe('game shell accessibility', () => {
     expect(bar.getAttribute('aria-valuetext')).toBe('3 of 8');
     sh.setProgress(0, 0);
     expect(bar.getAttribute('aria-valuenow')).toBe('0');
+  });
+});
+
+describe('answer announcements', () => {
+  it('say the right answer after a miss, since it is otherwise shown only in colour', () => {
+    expect(answerAnnouncement({ id: 'k', kind: 'kana', text: 'あ', reading: 'あ', romaji: 'a' }, false)).toBe('Not quite. あ means a.');
+    expect(answerAnnouncement({ id: 'w', kind: 'word', text: '猫', reading: 'ねこ', romaji: 'neko', en: 'cat', emoji: '🐱' }, false)).toBe('Not quite. 猫 (ねこ) means cat.');
+    expect(answerAnnouncement({ id: 't', kind: 'word', text: 'よじ', reading: 'よじ', romaji: '' }, false)).toBe('Not quite. よじ.');
+    expect(answerAnnouncement({ id: 'w', kind: 'word', text: '猫', reading: 'ねこ', romaji: 'neko' }, true)).toBe('Correct.');
+  });
+  it('are spoken from a hidden live region in the shell', () => {
+    const c = ctx();
+    const sh = shell(c, 'Test');
+    sh.announce('Correct.');
+    const live = c.root.querySelector('.sr-only')!;
+    expect(live.getAttribute('aria-live')).toBe('assertive');
+    expect(live.textContent).toBe('Correct.');
   });
 });

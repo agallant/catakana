@@ -59,6 +59,8 @@ export interface Shell {
   setProgress(done: number, total: number): void;
   setLives(n: number): void;
   say(msg: string, mood?: 'happy' | 'sad' | 'think' | 'wow'): void;
+  /** Tell screen-reader users what happened (visually hidden). */
+  announce(msg: string): void;
   flash(ok: boolean): void;
   destroy(): void;
 }
@@ -74,6 +76,7 @@ export function shell(ctx: GameContext, title: string): Shell {
   const lives = h('span', { class: 'lives', role: 'img' });
   const mascot = h('div', { class: 'mascot' }, catSvg(ctx.store.data.look, 'happy', 64));
   const bubble = h('div', { class: 'bubble', 'aria-live': 'polite' });
+  const live = h('div', { class: 'sr-only', 'aria-live': 'assertive' });
   const body = h('div', { class: 'game-body' });
   const top = h(
     'div',
@@ -84,7 +87,7 @@ export function shell(ctx: GameContext, title: string): Shell {
   );
   const bar = h('div', { class: 'progress', role: 'progressbar', 'aria-label': 'Progress', 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-valuenow': '0' }, progress);
   const chat = h('div', { class: 'chat' }, mascot, bubble);
-  const el = h('div', { class: 'game' }, top, bar, body, chat);
+  const el = h('div', { class: 'game' }, top, bar, body, chat, live);
   ctx.root.replaceChildren(el);
 
   let timer: number | undefined;
@@ -108,6 +111,9 @@ export function shell(ctx: GameContext, title: string): Shell {
       timer = window.setTimeout(() => {
         mascot.replaceChildren(catSvg(ctx.store.data.look, 'happy', 64));
       }, 1600);
+    },
+    announce(msg) {
+      live.textContent = msg;
     },
     flash(ok) {
       el.classList.remove('flash-ok', 'flash-bad');
@@ -141,7 +147,16 @@ export function recordAnswer(ctx: GameContext, item: Item, ok: boolean, sh: Shel
   ctx.store.recordAnswer(item.id, ok);
   chime(ok);
   sh.say(ok ? praise() : oops(), ok ? 'happy' : 'sad');
+  sh.announce(answerAnnouncement(item, ok));
   sh.flash(ok);
+}
+
+/** What a screen reader hears after an answer: the right answer is otherwise only shown in colour. */
+export function answerAnnouncement(item: Item, ok: boolean): string {
+  if (ok) return 'Correct.';
+  const reading = item.reading && item.reading !== item.text ? ` (${item.reading})` : '';
+  const what = meaning(item).replace(/^\p{Extended_Pictographic}\uFE0F?\s*/u, '');
+  return `Not quite. ${item.text}${reading}${what && what !== item.text ? ` means ${what}` : ''}.`;
 }
 
 /** What an item means: emoji + English for words, the sound for kana. */
