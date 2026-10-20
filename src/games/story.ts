@@ -9,6 +9,7 @@ import { readingOf } from '../screens/explore';
 
 const stopOf = (s: Story): number => STOPS.findIndex((st) => st.id === s.from);
 
+/** Stories unlocked by stop `stopIndex` (every story whose stop is on the route up to there). */
 export function storiesThrough(stopIndex: number): Story[] {
   return STORIES.filter((s) => {
     const at = stopOf(s);
