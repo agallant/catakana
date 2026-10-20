@@ -2,11 +2,12 @@ import { h, ruby, sleep } from '../ui/dom';
 import { speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
 import { recordAnswer, shell } from './common';
-import { pickItems, shuffle } from '../core/srs';
+import { pickItems, shuffle, type SrsRecord } from '../core/srs';
 import { BLANK, PARTICLES, particleDistractors, type ParticleItem } from '../data/particles';
 import { STOPS } from '../data/journey';
 import { readingOf } from '../screens/explore';
 
+/** Particle sentences unlocked at or before stop `stopIndex`. */
 export function particlesThrough(stopIndex: number): ParticleItem[] {
   return PARTICLES.filter((p) => {
     const at = STOPS.findIndex((s) => s.id === p.from);
@@ -25,6 +26,21 @@ export function splitByTier(items: ParticleItem[], stopIndex: number): { fresh: 
   return { fresh, review: items.filter((p) => !fresh.includes(p)) };
 }
 
+/**
+ * Pick a round: up to FRESH sentences from this stop's level, then spaced review of earlier levels,
+ * then more of this level if there is too little review (e.g. at N5 stops) — up to ROUNDS in all.
+ */
+export function particleRounds(stopIndex: number, srs: Record<string, SrsRecord>): ParticleItem[] {
+  const tag = (list: ParticleItem[]) => list.map((p) => ({ ...p, id: `particle:${p.id}` }));
+  const { fresh, review } = splitByTier(particlesThrough(stopIndex), stopIndex);
+  const first = pickItems(tag(fresh), srs, Math.min(FRESH, fresh.length));
+  const older = pickItems(tag(review), srs, Math.min(ROUNDS - first.length, review.length));
+  const taken = new Set(first.map((p) => p.id));
+  const rest = tag(fresh).filter((p) => !taken.has(p.id));
+  const extra = pickItems(rest, srs, Math.min(ROUNDS - first.length - older.length, rest.length));
+  return shuffle([...first, ...older, ...extra]);
+}
+
 /** Particle Pounce: pounce on the particle that fills the gap (は, を, に, で, より, によって…). */
 export const particlesGame: GameDef = {
   id: 'particles',
@@ -37,12 +53,7 @@ export const particlesGame: GameDef = {
   available: (stopIndex) => stopIndex === undefined || particlesThrough(stopIndex).length > 0,
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Particle Pounce 🐾');
-    const items = particlesThrough(ctx.stopIndex);
-    // mostly this level's particles, topped up with spaced review of earlier ones
-    const tag = (list: ParticleItem[]) => list.map((p) => ({ ...p, id: `particle:${p.id}` }));
-    const { fresh, review } = splitByTier(items, ctx.stopIndex);
-    const first = pickItems(tag(fresh), ctx.store.data.srs, Math.min(FRESH, fresh.length));
-    const rounds = shuffle([...first, ...pickItems(tag(review), ctx.store.data.srs, Math.min(ROUNDS - first.length, review.length))]);
+    const rounds = particleRounds(ctx.stopIndex, ctx.store.data.srs);
     if (!rounds.length) return ctx.quit();
     const mode = ctx.level === 1 ? 'always' : ctx.store.data.settings.furigana;
     let idx = 0;
