@@ -55,6 +55,8 @@ export function playScreen(app: App, params: string[]): Screen {
     focus: review ? pool : onlyKnown(kanjify(focusForStop(stopIndex))),
     quit: () => app.go(home),
     finish(summary) {
+      // a game's delayed callback can land after the player quit: no results or rewards then
+      if (!root.isConnected) return;
       const r = rewards(summary, level);
       app.store.markPlayed();
       app.store.update((d) => {

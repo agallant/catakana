@@ -110,6 +110,7 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'counter-cat', name: 'Counting Cat', emoji: '🔢', desc: 'Count correctly with all nine counters in Cat Count', test: (d) => COUNTERS.every((c) => solved(d, `count:${c.id}:`) > 0) },
   { id: 'conductor', name: 'Station Master', emoji: '🕰️', desc: 'Read 20 different times and dates in Timetable', test: (d) => solved(d, 'time:') + solved(d, 'date:') >= 20 },
   { id: 'chef', name: 'Head Chef', emoji: '🍳', desc: 'Cook 30 different verb and adjective forms in Verb Kitchen', test: (d) => solved(d, 'conj:') + solved(d, 'adj:') >= 30 },
+  { id: 'pouncer', name: 'Particle Pouncer', emoji: '🐾', desc: 'Fill 20 different particle gaps in Particle Pounce', test: (d) => solved(d, 'particle:') >= 20 },
   { id: 'smooth-talker', name: 'Smooth Talker', emoji: '🎭', desc: 'Give 12 natural replies in Role Play', test: (d) => solved(d, 'rp:') >= 12 },
   { id: 'bookworm', name: 'Bookworm', emoji: '📚', desc: 'Read 10 stories in Story Time', test: (d) => Object.keys(d.srs).filter((k) => k.startsWith('story:')).length >= 10 },
   { id: 'kanji-all', name: 'Kanji Master', emoji: '👑', desc: `Learn all ${KANJI.length} kanji`, test: (d) => KANJI.every((k) => d.introduced.includes(`kj:${k.char}`)) },
