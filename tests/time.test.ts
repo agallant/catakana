@@ -59,7 +59,7 @@ describe('time and dates', () => {
 });
 
 import { STOPS } from '../src/data/journey';
-import { puzzleKinds, timetableGame, TIME_FROM, DATE_FROM, DURATION_FROM } from '../src/games/timetable';
+import { durationEnglish, puzzleKinds, timetableGame, TIME_FROM, DATE_FROM, DURATION_FROM } from '../src/games/timetable';
 import { romajiToHiragana } from '../src/data/kana';
 describe('timetable game', () => {
   it('unlocks with clock times in the N5 tour', () => {
@@ -82,6 +82,10 @@ describe('timetable game', () => {
 });
 
 describe('durations', () => {
+  it('read naturally in English', () => {
+    expect(durationEnglish('hour', 1)).toBe('1 hour');
+    expect(durationEnglish('month', 6)).toBe('6 months');
+  });
   it('know the sound changes', () => {
     expect(durationReadings('hour', 4)).toEqual(['よじかん']);
     expect(durationReadings('hour', 9)).toEqual(['くじかん']);
