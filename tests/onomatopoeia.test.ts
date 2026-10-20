@@ -33,4 +33,8 @@ describe('onomatopoeia', () => {
     expect(onoThrough(STOPS.findIndex((s) => s.id === 'hakodate'))).toHaveLength(0);
     expect(onoThrough(STOPS.length - 1)).toHaveLength(ONOMATOPOEIA.length);
   });
+  it('cover every level from N5 to N1', () => {
+    const tiers = new Set(ONOMATOPOEIA.map((o) => STOPS.find((s) => s.id === o.from)!.tier));
+    for (const t of ['N5', 'N4', 'N3', 'N2', 'N1']) expect(tiers.has(t as never), t).toBe(true);
+  });
 });

@@ -57,4 +57,19 @@ export const ONOMATOPOEIA: Ono[] = [
   { id: 'pikapika', word: 'ぴかぴか', en: 'spotless, shiny clean', emoji: '🪟', ex: '{窓|まど}を {拭|ふ}いて、＿に なりました。', exEn: 'I wiped the windows until they were spotless.', wrong: ['ぺこぺこ', 'イライラ', 'ザーザー'], from: 'naoshima' },
   { id: 'kirakira', word: 'キラキラ', en: 'twinkling, glittering', emoji: '✨', ex: '{夜空|よぞら}に {星|ほし}が ＿ {光|ひか}っています。', exEn: 'Stars are twinkling in the night sky.', wrong: ['ねばねば', 'ぺこぺこ', 'ズルズル'], from: 'tokushima' },
   { id: 'boroboro', word: 'ボロボロ', en: 'worn out, falling apart', emoji: '👟', ex: '{古|ふる}い {靴|くつ}が ＿に なりました。', exEn: 'My old shoes have fallen apart.', wrong: ['ワクワク', 'ニコニコ', 'ビュービュー'], from: 'takachiho' },
+  // feelings and scenes (N2 route)
+  { id: 'hirahira', word: 'ひらひら', en: 'fluttering', emoji: '🌸', ex: '{桜|さくら}の {花|はな}びらが ＿ {散|ち}って いる。', exEn: 'Cherry petals are fluttering down.', wrong: ['ねばねば', 'ぺこぺこ', 'イライラ'], from: 'hirosaki' },
+  { id: 'shimijimi', word: 'しみじみ', en: 'deeply, with feeling', emoji: '🍃', ex: '{松島|まつしま}の {景色|けしき}を ＿ {眺|なが}めた。', exEn: 'I gazed at the Matsushima view, deeply moved.', wrong: ['ガチャン', 'ぺこぺこ', 'ねばねば'], from: 'matsushima' },
+  { id: 'hissori', word: 'ひっそり', en: 'hushed, deserted', emoji: '🏚️', ex: '{無人|むじん}の {島|しま}は ＿と {静|しず}まり{返|かえ}って いた。', exEn: 'The uninhabited island lay hushed and still.', wrong: ['ワクワク', 'ペラペラ', 'さくさく'], from: 'gunkanjima' },
+  { id: 'zurari', word: 'ずらり', en: 'all in a row', emoji: '🏺', ex: '{店先|みせさき}に {茶碗|ちゃわん}が ＿と {並|なら}んで いる。', exEn: 'Tea bowls are lined up in rows outside the shop.', wrong: ['ぐっすり', 'イライラ', 'ぺこぺこ'], from: 'arita' },
+  { id: 'hetoheto', word: 'へとへと', en: 'worn out, exhausted', emoji: '🥵', ex: '{石段|いしだん}を {全部|ぜんぶ} {登|のぼ}って、＿に なった。', exEn: 'After climbing all the stone steps, I was worn out.', wrong: ['キラキラ', 'ふわふわ', 'ニャー'], from: 'kotohira' },
+  { id: 'tekuteku', word: 'てくてく', en: 'trudging along on foot', emoji: '🥾', ex: '{古道|こどう}を ＿ {歩|ある}いた。', exEn: 'I trudged along the old pilgrim trail.', wrong: ['ザーザー', 'ねばねば', 'ガチャン'], from: 'kumano' },
+  { id: 'waiwai', word: 'わいわい', en: 'noisily, merrily', emoji: '🎉', ex: '{仲見世|なかみせ}で {観光客|かんこうきゃく}が ＿ {楽|たの}しんで いる。', exEn: 'Tourists are having a lively time on Nakamise Street.', wrong: ['しとしと', 'ねばねば', 'ぐっすり'], from: 'asakusa' },
+  // subtler moods (N1 route)
+  { id: 'uttori', word: 'うっとり', en: 'entranced, spellbound', emoji: '😍', ex: '{夕日|ゆうひ}に {染|そ}まる {海|うみ}を ＿ {見|み}つめた。', exEn: 'I gazed, spellbound, at the sea glowing in the sunset.', wrong: ['イライラ', 'ねばねば', 'ガチャン'], from: 'ogasawara' },
+  { id: 'zotto', word: 'ぞっと', en: 'a shiver of fear', emoji: '😨', ex: '{河童|かっぱ}の {話|はなし}を {聞|き}いて、{背筋|せすじ}が ＿した。', exEn: 'Hearing the kappa story sent a shiver down my spine.', wrong: ['ぽかぽか', 'さくさく', 'ペラペラ'], from: 'tono' },
+  { id: 'mokumoku', word: 'もくもく', en: 'silently and steadily', emoji: '🧹', ex: '{修行僧|しゅぎょうそう}は ＿と {掃除|そうじ}を {続|つづ}けた。', exEn: 'The trainee monks went on cleaning in silence.', wrong: ['ワクワク', 'ガチャン', 'ぺこぺこ'], from: 'eiheiji' },
+  { id: 'harahara', word: 'はらはら', en: 'on edge, in suspense', emoji: '😬', ex: '{合戦|かっせん}の {再現|さいげん}を ＿しながら {見|み}た。', exEn: 'I watched the battle re-enactment on the edge of my seat.', wrong: ['ぽかぽか', 'さくさく', 'ねばねば'], from: 'sekigahara' },
+  { id: 'jikkuri', word: 'じっくり', en: 'taking one’s time, thoroughly', emoji: '⏳', ex: '{温泉|おんせん}に ＿ {浸|つ}かって {疲|つか}れを とった。', exEn: 'I soaked unhurriedly in the hot spring and shook off my tiredness.', wrong: ['ガチャン', 'イライラ', 'ペラペラ'], from: 'kinosaki' },
+  { id: 'honobono', word: 'ほのぼの', en: 'heartwarming', emoji: '🐈', ex: '{招|まね}き{猫|ねこ}が {並|なら}ぶ、＿と した {光景|こうけい}だ。', exEn: 'Rows of beckoning cats make a heartwarming sight.', wrong: ['ねばねば', 'イライラ', 'ザーザー'], from: 'gotokuji' },
 ];
