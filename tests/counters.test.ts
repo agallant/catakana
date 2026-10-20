@@ -43,4 +43,20 @@ describe('counters', () => {
     expect(countersThrough(aomori).map((k) => k.id)).toEqual(['tsu', 'nin']);
     expect(countersThrough(STOPS.length - 1)).toHaveLength(COUNTERS.length);
   });
+  it('know the N3–N2 counters and their traps', () => {
+    expect(c('kaidan').readings[2]).toContain('さんがい');
+    expect(c('kai').readings[2]).toEqual(['さんかい']);
+    expect(counterDistractors(c('kai'), 3)).toContain('さんがい');
+    expect(c('soku').readings[2]![0]).toBe('さんぞく');
+    expect(c('ken').readings[2]![0]).toBe('さんげん');
+    expect(c('kai').readings[5]![0]).toBe('ろっかい');
+    expect(counterDistractors(c('sai'), 6)).toContain('ろっさい');
+    expect(c('tou').readings[0]![0]).toBe('いっとう');
+    expect(written(c('kaidan'), 3)).toBe('三階');
+    expect(written(c('sai'), 10)).toBe('十歳');
+  });
+  it('are listed in route order, so the last unlocked one is the newest', () => {
+    const at = COUNTERS.map((k) => STOPS.findIndex((s) => s.id === k.from));
+    for (let i = 1; i < at.length; i++) expect(at[i]!, COUNTERS[i]!.id).toBeGreaterThanOrEqual(at[i - 1]!);
+  });
 });

@@ -78,6 +78,36 @@ export const COUNTERS: Counter[] = [
     things: [['🚗', 'cars'], ['🚲', 'bicycles'], ['📷', 'cameras']],
     readings: regular('だい'),
   },
+  {
+    id: 'kaidan', kanji: '階', what: 'floors of a building', from: 'inuyama',
+    things: [['🏯', 'castle floors'], ['🏢', 'office floors'], ['🏨', 'hotel floors']],
+    readings: [['いっかい'], ['にかい'], ['さんがい', 'さんかい'], ['よんかい'], ['ごかい'], ['ろっかい'], ['ななかい', 'しちかい'], ['はっかい', 'はちかい'], ['きゅうかい'], ['じゅっかい', 'じっかい']],
+  },
+  {
+    id: 'soku', kanji: '足', what: 'pairs of footwear', from: 'gujo',
+    things: [['🩴', 'pairs of geta'], ['👟', 'pairs of sneakers'], ['🧦', 'pairs of socks']],
+    readings: [['いっそく'], ['にそく'], ['さんぞく'], ['よんそく'], ['ごそく'], ['ろくそく'], ['ななそく', 'しちそく'], ['はっそく', 'はちそく'], ['きゅうそく'], ['じゅっそく', 'じっそく']],
+  },
+  {
+    id: 'ken', kanji: '軒', what: 'houses and shops', from: 'tsumago',
+    things: [['🏠', 'houses'], ['🏪', 'shops'], ['🏮', 'inns']],
+    readings: [['いっけん'], ['にけん'], ['さんげん', 'さんけん'], ['よんけん'], ['ごけん'], ['ろっけん'], ['ななけん', 'しちけん'], ['はっけん', 'はちけん'], ['きゅうけん'], ['じゅっけん', 'じっけん']],
+  },
+  {
+    id: 'kai', kanji: '回', what: 'times (how often)', from: 'sado',
+    things: [['🔔', 'rings of the bell'], ['🏊', 'laps of the pool'], ['🎯', 'tries']],
+    readings: [['いっかい'], ['にかい'], ['さんかい'], ['よんかい'], ['ごかい'], ['ろっかい'], ['ななかい', 'しちかい'], ['はっかい', 'はちかい'], ['きゅうかい'], ['じゅっかい', 'じっかい']],
+  },
+  {
+    id: 'tou', kanji: '頭', what: 'large animals', from: 'shiretoko',
+    things: [['🐄', 'cows'], ['🐎', 'horses'], ['🦌', 'deer']],
+    readings: [['いっとう'], ['にとう'], ['さんとう'], ['よんとう'], ['ごとう'], ['ろくとう'], ['ななとう', 'しちとう'], ['はっとう', 'はちとう'], ['きゅうとう'], ['じゅっとう', 'じっとう']],
+  },
+  {
+    id: 'sai', kanji: '歳', what: 'years of age', from: 'hirosaki',
+    things: [['🎂', 'years old (birthday cake)'], ['🐱', 'years old (a kitten growing up)']],
+    readings: [['いっさい'], ['にさい'], ['さんさい'], ['よんさい'], ['ごさい'], ['ろくさい'], ['ななさい', 'しちさい'], ['はっさい', 'はちさい'], ['きゅうさい'], ['じゅっさい', 'じっさい']],
+  },
 ];
 
 /** The counter written with its number, e.g. 三匹. */
@@ -88,11 +118,11 @@ export function written(c: Counter, n: number): string {
 }
 
 const NUMS = ['いち', 'に', 'さん', 'よん', 'ご', 'ろく', 'なな', 'はち', 'きゅう', 'じゅう'];
-const BASE: Record<string, string> = { tsu: 'つ', nin: 'にん', hiki: 'ひき', hon: 'ほん', mai: 'まい', ko: 'こ', hai: 'はい', satsu: 'さつ', dai: 'だい' };
+const BASE: Record<string, string> = { tsu: 'つ', nin: 'にん', hiki: 'ひき', hon: 'ほん', mai: 'まい', ko: 'こ', hai: 'はい', satsu: 'さつ', dai: 'だい', kai: 'かい', kaidan: 'かい', soku: 'そく', ken: 'けん', tou: 'とう', sai: 'さい' };
 /** Numbers that shrink to a small っ before some counters. */
 const GEM: Record<number, string> = { 1: 'いっ', 6: 'ろっ', 8: 'はっ', 10: 'じゅっ' };
 const ALT_NUMS: Record<number, string[]> = { 4: ['よ', 'し'], 7: ['しち'], 9: ['く'] };
-const VOICE: Record<string, string> = { は: 'ば', ひ: 'び', ほ: 'ぼ', か: 'が', こ: 'ご', さ: 'ざ' };
+const VOICE: Record<string, string> = { は: 'ば', ひ: 'び', ほ: 'ぼ', か: 'が', こ: 'ご', さ: 'ざ', そ: 'ぞ', け: 'げ', と: 'ど' };
 const HALF: Record<string, string> = { は: 'ぱ', ひ: 'ぴ', ほ: 'ぽ' };
 
 const swapFirst = (base: string, map: Record<string, string>): string | undefined => (map[base[0]!] ? map[base[0]!] + base.slice(1) : undefined);

@@ -108,7 +108,7 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'cats10', name: 'Cat Collector', emoji: '😺', desc: 'Befriend 10 local cats', test: (d) => d.cats.length >= 10 },
   { id: 'rich', name: 'Fat Cat', emoji: '💰', desc: 'Hold 500 fish at once', test: (d) => d.fish >= 500 },
   { id: 'okami', name: 'Okami-san', emoji: '🙇', desc: 'Use 12 different keigo forms correctly in Ryokan Manners', test: (d) => solved(d, 'keigo:') >= 12 },
-  { id: 'counter-cat', name: 'Counting Cat', emoji: '🔢', desc: 'Count correctly with all nine counters in Cat Count', test: (d) => COUNTERS.every((c) => solved(d, `count:${c.id}:`) > 0) },
+  { id: 'counter-cat', name: 'Counting Cat', emoji: '🔢', desc: `Count correctly with all ${COUNTERS.length} counters in Cat Count`, test: (d) => COUNTERS.every((c) => solved(d, `count:${c.id}:`) > 0) },
   { id: 'conductor', name: 'Station Master', emoji: '🕰️', desc: 'Read 20 different times and dates in Timetable', test: (d) => solved(d, 'time:') + solved(d, 'date:') >= 20 },
   { id: 'chef', name: 'Head Chef', emoji: '🍳', desc: 'Cook 30 different verb and adjective forms in Verb Kitchen', test: (d) => solved(d, 'conj:') + solved(d, 'adj:') >= 30 },
   { id: 'pouncer', name: 'Particle Pouncer', emoji: '🐾', desc: 'Fill 20 different particle gaps in Particle Pounce', test: (d) => solved(d, 'particle:') >= 20 },
