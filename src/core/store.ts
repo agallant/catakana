@@ -7,7 +7,7 @@ export interface CatLook {
   accent: string;
   pattern: 'plain' | 'tabby' | 'tuxedo' | 'spots' | 'calico';
   eyes: string;
-  hat: 'none' | 'beret' | 'bow' | 'scarf' | 'straw' | 'crown' | 'headband' | 'sakura' | 'kitsune' | 'kabuto';
+  hat: 'none' | 'beret' | 'bow' | 'scarf' | 'straw' | 'crown' | 'headband' | 'sakura' | 'kitsune' | 'kabuto' | 'bell' | 'tenugui' | 'kanzashi' | 'conductor' | 'sugegasa' | 'yukata';
 }
 
 export interface Settings {
