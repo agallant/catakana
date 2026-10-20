@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { BLANK, PARTICLES, particleDistractors } from '../src/data/particles';
 import { STOP_BY_ID, STOPS } from '../src/data/journey';
-import { particlesThrough } from '../src/games/particles';
+import { particleRounds, particlesThrough, splitByTier } from '../src/games/particles';
 
 const at = (id: string) => STOPS.findIndex((s) => s.id === id);
 
@@ -31,5 +31,21 @@ describe('particles', () => {
     expect(particlesThrough(at('hakodate')).length).toBeGreaterThan(0);
     expect(particlesThrough(at('kawagoe')).length).toBeGreaterThan(particlesThrough(at('yakushima')).length);
     expect(particlesThrough(STOPS.length - 1)).toHaveLength(PARTICLES.length);
+  });
+  it('split into the current level and earlier review', () => {
+    const last = STOPS.length - 1;
+    const { fresh, review } = splitByTier(particlesThrough(last), last);
+    expect(fresh.length).toBeGreaterThanOrEqual(3);
+    expect(fresh.length + review.length).toBe(PARTICLES.length);
+    for (const p of fresh) expect(STOPS.find((s) => s.id === p.from)!.tier).toBe(STOPS[last]!.tier);
+  });
+  it('always fill a round of eight once enough sentences are unlocked, without repeats', () => {
+    for (const stop of ['beppu', 'kawagoe', 'iriomote', 'asakusa', 'gotokuji']) {
+      const rounds = particleRounds(at(stop), {});
+      expect(rounds, stop).toHaveLength(8);
+      expect(new Set(rounds.map((r) => r.id)).size, stop).toBe(8);
+    }
+    // early on, a round is just everything there is
+    expect(particleRounds(at('hakodate'), {})).toHaveLength(particlesThrough(at('hakodate')).length);
   });
 });
