@@ -135,6 +135,51 @@ export function catSvg(look: CatLook, mood: Mood = 'happy', size = 120): SVGElem
       g.push(s('path', { d: 'M100 34 Q86 18 76 0 M100 34 Q114 18 124 0', fill: 'none', stroke: '#ffd24a', 'stroke-width': 5, 'stroke-linecap': 'round' }));
       g.push(s('circle', { cx: 100, cy: 38, r: 6, fill: '#ffd24a', stroke: '#e0a800', 'stroke-width': 1.5 }));
       break;
+    case 'bell':
+      // a maneki-neko style red collar with a golden suzu bell
+      g.push(s('path', { d: 'M62 128 Q100 146 138 128 L138 136 Q100 154 62 136Z', fill: '#d32f2f' }));
+      g.push(s('circle', { cx: 100, cy: 148, r: 8, fill: '#ffd24a', stroke: '#e0a800', 'stroke-width': 1.5 }));
+      g.push(s('path', { d: 'M94 150 h12', stroke: '#a07800', 'stroke-width': 1.5, 'stroke-linecap': 'round' }));
+      g.push(s('circle', { cx: 100, cy: 153, r: 1.6, fill: '#a07800' }));
+      break;
+    case 'tenugui':
+      // a folded hand towel on top of the head, as at an onsen
+      g.push(s('rect', { x: 72, y: 30, width: 56, height: 14, rx: 3, fill: '#fff', stroke: '#3d6fb6', 'stroke-width': 1.5 }));
+      g.push(s('path', { d: 'M76 37 q4 -4 8 0 t8 0 t8 0 t8 0 t8 0 t8 0', fill: 'none', stroke: '#3d6fb6', 'stroke-width': 2 }));
+      break;
+    case 'kanzashi':
+      // a hairpin by the left ear with blossoms and dangling strands
+      g.push(s('path', { d: 'M66 40 L92 60', stroke: '#8d6e63', 'stroke-width': 3, 'stroke-linecap': 'round' }));
+      for (let k = 0; k < 5; k++) {
+        const a = (k / 5) * Math.PI * 2 - Math.PI / 2;
+        g.push(s('circle', { cx: 66 + Math.cos(a) * 5, cy: 40 + Math.sin(a) * 5, r: 4.2, fill: '#ff5d8f' }));
+      }
+      g.push(s('circle', { cx: 66, cy: 40, r: 2.6, fill: '#ffe066' }));
+      g.push(s('path', { d: 'M62 46 v14 M66 47 v18 M70 46 v12', stroke: '#ffd24a', 'stroke-width': 1.5 }));
+      for (const [x, y] of [[62, 60], [66, 65], [70, 58]] as const) g.push(s('circle', { cx: x, cy: y, r: 2, fill: '#ff5d8f' }));
+      break;
+    case 'conductor':
+      // a station master's cap: navy crown, dark band and visor, gold badge
+      g.push(s('path', { d: 'M58 50 Q60 22 100 20 Q140 22 142 50 Z', fill: '#1f3a68' }));
+      g.push(s('rect', { x: 58, y: 44, width: 84, height: 8, fill: '#16294a' }));
+      g.push(s('path', { d: 'M58 48 h84', stroke: '#ffd24a', 'stroke-width': 1.5 }));
+      g.push(s('path', { d: 'M60 52 Q100 68 140 52 Q100 58 60 52Z', fill: '#111' }));
+      g.push(s('circle', { cx: 100, cy: 34, r: 6, fill: '#ffd24a', stroke: '#e0a800', 'stroke-width': 1.5 }));
+      break;
+    case 'sugegasa':
+      // a wide conical sedge hat
+      g.push(s('path', { d: 'M28 54 L100 8 L172 54 Q100 64 28 54Z', fill: '#d9b77a', stroke: '#a8834a', 'stroke-width': 1.5, 'stroke-linejoin': 'round' }));
+      g.push(s('path', { d: 'M100 8 L58 57 M100 8 L80 60 M100 8 L120 60 M100 8 L142 57', stroke: '#b8935a', 'stroke-width': 1.5 }));
+      break;
+    case 'yukata':
+      // an indigo summer robe with a white collar and red obi, paws on top
+      g.push(s('path', { d: 'M52 150 Q52 130 72 130 L100 154 L128 130 Q148 130 148 150 Q148 186 100 190 Q52 186 52 150Z', fill: '#2f4f8f' }));
+      g.push(s('path', { d: 'M72 130 L100 154 L128 130', fill: 'none', stroke: '#fff', 'stroke-width': 5, 'stroke-linejoin': 'round' }));
+      for (const [x, y] of [[66, 152], [134, 150], [80, 180], [122, 180]] as const) g.push(s('circle', { cx: x, cy: y, r: 3, fill: '#fff', opacity: 0.8 }));
+      g.push(s('path', { d: 'M51 160 L149 160 L145 172 L55 172 Z', fill: '#d94f4f' }));
+      g.push(s('ellipse', { cx: 78, cy: 186, rx: 14, ry: 8, fill: fur }));
+      g.push(s('ellipse', { cx: 122, cy: 186, rx: 14, ry: 8, fill: fur }));
+      break;
     default:
   }
   return s('svg', { viewBox: '0 0 200 200', width: size, height: size, class: `cat cat-${mood}`, role: 'img', 'aria-label': `cat feeling ${mood}` }, ...g);
@@ -150,4 +195,7 @@ export const FUR_PRESETS: { fur: string; accent: string; pattern: CatLook['patte
   { fur: '#fafafa', accent: '#e0e0e0', pattern: 'plain' },
   { fur: '#c9a27a', accent: '#8b5a2b', pattern: 'tabby' },
   { fur: '#b0bec5', accent: '#78909c', pattern: 'plain' },
+  { fur: '#f3e5c8', accent: '#d4b483', pattern: 'tabby' },
+  { fur: '#8d6e63', accent: '#5d4037', pattern: 'tabby' },
+  { fur: '#ffcc80', accent: '#ef6c00', pattern: 'spots' },
 ];

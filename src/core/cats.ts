@@ -25,12 +25,18 @@ export function collectCat(store: Store, stopId: string, _bonus: boolean): Colle
 export const HATS: { id: CatLook['hat']; name: string; cost: number }[] = [
   { id: 'none', name: 'No hat', cost: 0 },
   { id: 'bow', name: 'Bow', cost: 20 },
+  { id: 'bell', name: 'Bell collar', cost: 25 },
   { id: 'scarf', name: 'Scarf', cost: 30 },
+  { id: 'tenugui', name: 'Onsen towel', cost: 35 },
   { id: 'headband', name: 'Headband', cost: 40 },
   { id: 'beret', name: 'Beret', cost: 50 },
   { id: 'straw', name: 'Straw hat', cost: 60 },
+  { id: 'kanzashi', name: 'Kanzashi hairpin', cost: 70 },
   { id: 'sakura', name: 'Sakura crown', cost: 80 },
+  { id: 'conductor', name: 'Station master cap', cost: 90 },
+  { id: 'sugegasa', name: 'Sedge hat', cost: 100 },
   { id: 'kitsune', name: 'Fox mask', cost: 120 },
+  { id: 'yukata', name: 'Yukata', cost: 140 },
   { id: 'crown', name: 'Crown', cost: 150 },
   { id: 'kabuto', name: 'Samurai kabuto', cost: 200 },
 ];
