@@ -212,6 +212,7 @@ ruby rt { font-size: 0.55em; }
 .spot-jp { font-size: 1.3rem; display: flex; align-items: center; gap: 4px; }
 .choice.text { font-size: 1.05rem; text-align: left; }
 .choices.one-col { grid-template-columns: 1fr; }
+.choices.two-col { grid-template-columns: repeat(2, 1fr); }
 .stamp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
 .stamp-cell { background: #fffaf2; border: 2px solid var(--line); border-radius: 16px; padding: 6px; display: flex; flex-direction: column; align-items: center; color: #3b2a20; }
 .stamp-cell:disabled { opacity: 0.6; }
