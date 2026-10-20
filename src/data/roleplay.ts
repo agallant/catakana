@@ -307,7 +307,7 @@ export const SCENES: Scene[] = [
         replies: [
           R('はちじごろ でる よていです。', 'I plan to leave around eight.', true, '〜よていです = it’s my plan to ~.'),
           R('はちじごろ おたちに なります。', '(honorific about yourself)', false, 'おたちになる is respectful — only for the guest, said by the host.'),
-          R('はちじかん たちます。', 'I will stand for eight hours.', false, 'じかん is a length of time, and たつ here means “stand”.'),
+          R('はちじかん たちます。', 'Eight hours will pass.', false, '〜じかん is a length of time (たつ = 経つ, “pass”), not the clock time you leave.'),
         ],
       },
       {
