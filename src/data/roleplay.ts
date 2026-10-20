@@ -386,4 +386,91 @@ export const SCENES: Scene[] = [
       },
     ],
   },
+  {
+    id: 'lost-property', title: 'Lost on the train', emoji: '☂️', from: 'toyama', role: 'Station staff',
+    turns: [
+      {
+        npc: 'どうしましたか。', en: 'What’s the matter?',
+        replies: [
+          R('でんしゃに かさを わすれて しまったんです。', 'I left my umbrella on the train.', true, 'わすれて しまった adds regret: “I went and left it.”'),
+          R('かさを わすれて ください。', 'Please forget the umbrella.', false, 'わすれて ください = please forget it — not what you mean.'),
+          R('かさが すきです。', 'I like umbrellas.', false, 'Doesn’t explain the problem.'),
+        ],
+      },
+      {
+        npc: 'どんな かさですか。', en: 'What kind of umbrella is it?',
+        replies: [
+          R('あおくて、ねこの えが かいて あります。', 'It’s blue, with a cat drawn on it.', true, '〜て あります describes something drawn or written on it.'),
+          R('あおい かさを かいます。', 'I’ll buy a blue umbrella.', false, 'かいます here means “buy” — you’re meant to describe it.'),
+          R('きのう ふりました。', 'It rained yesterday.', false, 'Doesn’t describe the umbrella.'),
+        ],
+      },
+      {
+        npc: 'みつかったら、れんらくしましょうか。', en: 'Shall we contact you if it turns up?',
+        replies: [
+          R('はい、こちらに でんわして いただけますか。', 'Yes, could you call me at this number?', true, '〜て いただけますか is a polite request.'),
+          R('いいえ、みつかりません。', 'No, it won’t be found.', false, 'Gives up and turns down their kind offer.'),
+          R('れんらくしましょう！', 'Let’s get in touch!', false, 'Echoes their offer back as a suggestion instead of answering it.'),
+        ],
+      },
+    ],
+  },
+  {
+    id: 'room-trouble', title: 'A problem with the room', emoji: '🛎️', from: 'amanohashidate', role: 'Front desk',
+    turns: [
+      {
+        npc: 'フロントで ございます。いかが なさいましたか。', en: 'Front desk. How may we help?',
+        replies: [
+          R('おそれいりますが、へやの エアコンが うごかないんです。', 'Sorry to bother you, but the air conditioner in my room isn’t working.', true, 'おそれいりますが cushions a complaint; 〜んです explains the situation.'),
+          R('エアコン、だめ。', 'Air con, no good.', false, 'Far too blunt for a hotel front desk.'),
+          R('はやく エアコンを なおせ！', 'Fix the air con, now!', false, 'A rude command — complaints go down better with a cushion phrase.'),
+        ],
+      },
+      {
+        npc: 'たいへん もうしわけ ございません。すぐに かかりの ものを うかがわせます。', en: 'We’re terribly sorry. We’ll send someone up right away.',
+        replies: [
+          R('ありがとうございます。おまちして おります。', 'Thank you. I’ll be waiting.', true, 'おまちして おります is humble and gracious.'),
+          R('では、うかがって ください。', 'Then please (humbly) visit.', false, 'うかがう is humble — for your own actions, not for asking staff to come.'),
+          R('もうしわけ ございません。', 'I’m terribly sorry.', false, 'No need to apologise — they’re the ones apologising.'),
+        ],
+      },
+      {
+        npc: 'なおらない ばあいは、おへやを おかえ いたしましょうか。', en: 'If it can’t be fixed, shall we move you to another room?',
+        replies: [
+          R('そうして いただけると たすかります。', 'That would be a great help.', true, '〜て いただけると たすかります = it would really help if you could.'),
+          R('かえって ください。', 'Please go home.', false, 'かえる (帰る) = go home — a mix-up with かえる (替える) = change.'),
+          R('へやは いりません。', 'I don’t need a room.', false, 'You still need somewhere to sleep!'),
+        ],
+      },
+    ],
+  },
+  {
+    id: 'homestay-farewell', title: 'Saying goodbye to a host family', emoji: '🎁', from: 'izu', role: 'Host mother',
+    turns: [
+      {
+        npc: 'あしたで もう おわかれですね。さびしく なります。', en: 'Tomorrow we say goodbye. We’ll miss you.',
+        replies: [
+          R('ほんとうに おせわに なりました。この ごおんは わすれません。', 'Thank you for everything. I will never forget your kindness.', true, 'ご恩 (ごおん) is a debt of kindness — deep, formal gratitude.'),
+          R('じゃあね、またね！', 'Bye, see you!', false, 'Too light for a heartfelt farewell to your host.'),
+          R('おせわを します。', 'I’ll look after you.', false, 'Reverses the meaning — they looked after you.'),
+        ],
+      },
+      {
+        npc: 'また いつでも あそびに いらしてね。', en: 'Come and visit any time.',
+        replies: [
+          R('ありがとうございます。ぜひ また うかがわせて いただきます。', 'Thank you. I will certainly come and visit again.', true, 'うかがわせて いただく is humble: “allow me to visit”.'),
+          R('はい、また いらっしゃいます。', 'Yes, I will (honourably) come again.', false, 'いらっしゃる is respectful — never use it about yourself.'),
+          R('いいえ、けっこうです。', 'No, thank you.', false, 'Turns down a warm invitation.'),
+        ],
+      },
+      {
+        npc: 'これ、おみやげに どうぞ。', en: 'Here, a little gift for you.',
+        replies: [
+          R('おきづかい いただき、きょうしゅくです。', 'I’m humbled by your thoughtfulness.', true, 'お気遣い + 恐縮です: gracious, humble thanks for a gift.'),
+          R('ちょうだい！', 'Gimme!', false, 'Childish and grabby.'),
+          R('おみやげを さしあげます。', 'I’ll give you a souvenir.', false, 'さしあげる is humble giving from you — the wrong direction.'),
+        ],
+      },
+    ],
+  },
 ];
