@@ -44,4 +44,33 @@ export const PHRASES: Phrase[] = [
   P('kaado', 'カードで はらえますか', 'かーどではらえますか', 'Can I pay by card?', '💳', 26, ['カードで払えますか']),
   P('michi', 'みちに まよいました', 'みちにまよいました', 'I’m lost', '🧭', 28, ['道に迷いました']),
   P('tasukete', 'たすけて ください', 'たすけてください', 'Please help me', '🆘', 31, ['助けてください', '助けて下さい']),
+  // N4
+  P('yoyaku', 'よやくして いるんですが', 'よやくしているんですが', 'I have a reservation', '📋', 33, ['予約しているんですが']),
+  P('checkin', 'チェックインを おねがいします', 'ちぇっくいんをおねがいします', 'Check-in, please', '🛎️', 35, ['チェックインをお願いします']),
+  P('nimotsu', 'にもつを あずけても いいですか', 'にもつをあずけてもいいですか', 'May I leave my luggage here?', '🧳', 37, ['荷物を預けてもいいですか']),
+  P('osokunatte', 'おそく なって すみません', 'おそくなってすみません', 'Sorry I’m late', '⏰', 39, ['遅くなってすみません']),
+  P('tabetakoto', 'たべた ことが ありません', 'たべたことがありません', 'I’ve never eaten it before', '🍽️', 41, ['食べたことがありません']),
+  P('kaeri', 'かえりの でんしゃは なんじですか', 'かえりのでんしゃはなんじですか', 'What time is the train back?', '🚃', 43, ['帰りの電車は何時ですか']),
+  P('tetsudau', 'てつだいましょうか', 'てつだいましょうか', 'Shall I help?', '🤲', 44, ['手伝いましょうか']),
+  // N3
+  P('allergy', 'アレルギーが あるんです', 'あれるぎーがあるんです', 'I have an allergy', '⚠️', 45, ['アレルギーがあるんです']),
+  P('chikaku', 'この ちかくに コンビニは ありますか', 'このちかくにこんびにはありますか', 'Is there a convenience store near here?', '🏪', 47, ['この近くにコンビニはありますか']),
+  P('wasuremono', 'わすれものを して しまいました', 'わすれものをしてしまいました', 'I’ve left something behind', '🎒', 49, ['忘れ物をしてしまいました']),
+  P('okuresou', 'すこし おくれそうです', 'すこしおくれそうです', 'I think I’ll be a little late', '🐢', 51, ['少し遅れそうです']),
+  P('tsukaikata', 'つかいかたを おしえて もらえますか', 'つかいかたをおしえてもらえますか', 'Could you show me how to use it?', '🧑‍🏫', 53, ['使い方を教えてもらえますか']),
+  P('netsu', 'ねつが あるみたいです', 'ねつがあるみたいです', 'I seem to have a fever', '🤒', 55, ['熱があるみたいです']),
+  // N2
+  P('osoreirimasu', 'おそれいりますが', 'おそれいりますが', 'Excuse me, but… (very polite)', '🙇', 57, ['恐れ入りますが']),
+  P('shouchi', 'しょうちしました', 'しょうちしました', 'Understood (polite)', '✅', 59, ['承知しました']),
+  P('otesuu', 'おてすうを おかけしました', 'おてすうをおかけしました', 'Sorry for the trouble I caused', '🙏', 61, ['お手数をおかけしました']),
+  P('kekkou', 'けっこうです', 'けっこうです', 'No, thank you (I’m fine)', '🙅', 63, ['結構です']),
+  P('osewa', 'おせわに なりました', 'おせわになりました', 'Thank you for everything (when leaving)', '👋', 65, ['お世話になりました']),
+  P('osakini', 'おさきに しつれいします', 'おさきにしつれいします', 'Excuse me for leaving first', '🚪', 67, ['お先に失礼します']),
+  // N1
+  P('ukagau', 'あした うかがっても よろしいでしょうか', 'あしたうかがってもよろしいでしょうか', 'Might I call on you tomorrow?', '📅', 69, ['明日伺ってもよろしいでしょうか']),
+  P('haiken', 'はいけんしても よろしいですか', 'はいけんしてもよろしいですか', 'May I take a look? (humble)', '👀', 71, ['拝見してもよろしいですか']),
+  P('kyoushuku', 'きょうしゅくです', 'きょうしゅくです', 'I’m much obliged (humble)', '🙇‍♀️', 73, ['恐縮です']),
+  P('goenryo', 'ごえんりょなく', 'ごえんりょなく', 'Please don’t hold back', '😊', 75, ['ご遠慮なく']),
+  P('omenikakarete', 'おめに かかれて こうえいです', 'おめにかかれてこうえいです', 'It’s an honour to meet you', '🌟', 77, ['お目にかかれて光栄です']),
+  P('tanoshimini', 'また おめに かかれるのを たのしみに して おります', 'またおめにかかれるのをたのしみにしております', 'I look forward to meeting you again', '🎐', 79, ['またお目にかかれるのを楽しみにしております']),
 ];

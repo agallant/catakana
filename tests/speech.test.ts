@@ -29,6 +29,14 @@ describe('listening & speaking data', () => {
     }
     expect(new Set(CONVERSATIONS.map((c) => c.id)).size).toBe(CONVERSATIONS.length);
   });
+  it('phrases have a spaceless hiragana reading and cover every level', () => {
+    for (const p of PHRASES) {
+      expect(p.kana, p.id).toMatch(/^[\u3041-\u3096ー]+$/);
+      expect(p.from, p.id).toBeLessThan(STOPS.length);
+    }
+    const tiers = new Set(PHRASES.map((p) => STOPS[p.from]!.tier));
+    for (const t of ['N5', 'N4', 'N3', 'N2', 'N1']) expect(tiers.has(t as never), t).toBe(true);
+  });
   it('phrases are unique and available from the start', () => {
     expect(new Set(PHRASES.map((p) => p.id)).size).toBe(PHRASES.length);
     expect(PHRASES.filter((p) => p.from === 0).length).toBeGreaterThanOrEqual(3);
