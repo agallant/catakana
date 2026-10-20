@@ -1,8 +1,8 @@
 import { h, ruby, sleep } from '../ui/dom';
 import { hasJapaneseVoice, speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { recordAnswer, shell } from './common';
-import { pickItems, shuffle } from '../core/srs';
+import { levelFirst, recordAnswer, shell } from './common';
+import { shuffle } from '../core/srs';
 import { ONO_BLANK, ONOMATOPOEIA, type Ono } from '../data/onomatopoeia';
 import { STOPS } from '../data/journey';
 import { readingOf } from '../screens/explore';
@@ -35,10 +35,15 @@ export const onomatopoeiaGame: GameDef = {
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Nyan Sounds 🎶');
     const words = onoThrough(ctx.stopIndex);
-    const rounds = pickItems(
+    // up to five words from this stop's level, then spaced review of earlier ones
+    const at = new Map(STOPS.map((s, i) => [s.id, i]));
+    const rounds = levelFirst(
       words.map((o) => ({ ...o, id: `ono:${o.id}` })),
+      (o) => at.get(o.from) ?? 0,
+      ctx.stopIndex,
       ctx.store.data.srs,
-      Math.min(ROUNDS, words.length),
+      ROUNDS,
+      5,
     );
     if (!rounds.length) return ctx.quit();
     const mode = ctx.level === 1 ? 'always' : ctx.store.data.settings.furigana;
