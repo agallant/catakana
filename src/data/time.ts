@@ -120,3 +120,52 @@ export function monthDistractors(mo: number): string[] {
   const cands: (string | undefined)[] = [naive, monthReading((mo % 12) + 1), monthReading(mo === 1 ? 12 : mo - 1), mo <= 10 ? monthReading(mo + 2) : monthReading(mo - 2)];
   return uniq([monthReading(mo)], cands);
 }
+
+/** How long: hours, weeks, months and years (よじかん, いっしゅうかん, ろっかげつ, よねん). */
+export type DurationUnit = 'hour' | 'week' | 'month' | 'year';
+
+export const DURATION_UNITS: DurationUnit[] = ['hour', 'week', 'month', 'year'];
+
+/** Max count per unit, and how each is written after the number. */
+export const DURATION_MAX: Record<DurationUnit, number> = { hour: 12, week: 10, month: 10, year: 10 };
+export const DURATION_KANJI: Record<DurationUnit, string> = { hour: '時間', week: '週間', month: 'か月', year: '年' };
+
+/** 1, 6, 8 and 10 shrink to a small っ before か and し (いっかげつ, ろっかげつ, はっしゅうかん). */
+const GEM_DUR: Record<number, string[]> = { 1: ['いっ'], 6: ['ろっ'], 8: ['はっ', 'はち'], 10: ['じゅっ', 'じっ'] };
+
+/** Every accepted reading of `n` units, main one first (ろっかげつ; はっしゅうかん / はちしゅうかん). */
+export function durationReadings(unit: DurationUnit, n: number): string[] {
+  switch (unit) {
+    case 'hour':
+      return hourReadings(n).map((r) => r + 'かん');
+    case 'week':
+    case 'month': {
+      const suffix = unit === 'week' ? 'しゅうかん' : 'かげつ';
+      // ろくしゅうかん keeps its く; ろっかげつ doesn't
+      const nums = n === 6 && unit === 'week' ? ['ろく'] : n === 7 ? ['なな', 'しち'] : GEM_DUR[n] ?? [NUMS[n]!];
+      return nums.map((x) => x + suffix);
+    }
+    case 'year':
+      return n === 4 ? ['よねん'] : n === 7 ? ['ななねん', 'しちねん'] : n === 9 ? ['きゅうねん', 'くねん'] : [NUMS[n] + 'ねん'];
+  }
+}
+
+/**
+ * Wrong durations that teach: the plain number (いちかげつ, よんじかん), the clock time or month name
+ * without the duration ending (よじ, さんがつ), and neighbouring numbers.
+ */
+export function durationDistractors(unit: DurationUnit, n: number): string[] {
+  const right = durationReadings(unit, n);
+  const cands: (string | undefined)[] = [];
+  if (unit === 'hour') {
+    cands.push(NUMS[n] + 'じかん', hourReadings(n)[0]);
+  } else if (unit === 'week') {
+    cands.push(NUMS[n] + 'しゅうかん', NUMS[n] + 'しゅう', n === 6 ? 'ろっしゅうかん' : undefined);
+  } else if (unit === 'month') {
+    cands.push(NUMS[n] + 'かげつ', monthReading(n), n === 6 ? 'ろくかげつ' : undefined);
+  } else {
+    cands.push(NUMS[n] + 'ねん', n === 4 ? 'しねん' : undefined, n === 10 ? 'とおねん' : undefined);
+  }
+  for (const m of [n + 1, n - 1, n + 2, n - 2, n + 3]) if (m >= 1 && m <= DURATION_MAX[unit]) cands.push(durationReadings(unit, m)[0]);
+  return uniq(right, cands);
+}
