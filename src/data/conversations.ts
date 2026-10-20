@@ -435,4 +435,79 @@ export const CONVERSATIONS: Conversation[] = [
     ],
     q: 'Who welcomes you home at Gōtoku-ji?', options: ['Maneki', 'Kappa', 'Ieyasu'], answer: 0,
   },
+  {
+    id: 'otaru-clock', from: 50, title: 'The steam clock',
+    lines: [
+      { who: 'npc', jp: 'あ、もうすぐ じょうき どけいが なりますよ。', en: 'Oh, the steam clock is about to chime.' },
+      { who: 'me', jp: 'どのくらいの かんかくで なるんですか。', en: 'How often does it chime?' },
+      { who: 'npc', jp: '15ふんごとに メロディーが ながれる そうです。', en: 'Apparently a melody plays every 15 minutes.' },
+      { who: 'me', jp: 'じゃあ、オルゴールを えらびながら まちましょう。', en: 'Then let’s pick out a music box while we wait.' },
+    ],
+    q: 'How often does the steam clock play?', options: ['Every 15 minutes', 'Every hour', 'Once a day'], answer: 0,
+  },
+  {
+    id: 'naoshima-pumpkin', from: 52, title: 'The yellow pumpkin',
+    lines: [
+      { who: 'npc', jp: 'あの きいろい かぼちゃ、しゃしんで みた ことが ある でしょう？', en: 'You’ve seen that yellow pumpkin in photos, right?' },
+      { who: 'me', jp: 'はい！ じっさいに みると、おもったより おおきいですね。', en: 'Yes! In person it’s bigger than I thought.' },
+      { who: 'npc', jp: 'じつは 2021ねんに たいふうで うみに ながされて しまった ことが あるんです。', en: 'Actually, a typhoon once swept it into the sea, in 2021.' },
+      { who: 'me', jp: 'えっ！ でも もどって きて よかったですね。', en: 'What! Good thing it came back.' },
+    ],
+    q: 'What happened to the pumpkin in 2021?', options: ['A typhoon swept it into the sea', 'It was painted red', 'It was moved to Tokyo'], answer: 0,
+  },
+  {
+    id: 'takachiho-boat', from: 54, title: 'Rowing the gorge',
+    lines: [
+      { who: 'me', jp: 'ボートを こぎながら たきを みるのは はじめてです。', en: 'It’s my first time watching a waterfall while rowing a boat.' },
+      { who: 'npc', jp: 'まないの たきですね。みずが つめたいので、ちかづきすぎない ように して ください。', en: 'That’s Manai Falls. The water is cold, so try not to get too close.' },
+      { who: 'me', jp: 'わかりました。でも もう ちょっと ぬれて しまいました！', en: 'Got it. But I’ve already got a little wet!' },
+    ],
+    q: 'What does the local cat warn about?', options: ['Getting too close to the falls', 'Dropping the oars', 'Fish in the river'], answer: 0,
+  },
+  {
+    id: 'hagi-bowl', from: 60, title: 'A bowl that changes',
+    lines: [
+      { who: 'npc', jp: 'はぎやきは つかえば つかうほど いろが かわる と いわれて います。', en: 'They say Hagi ware changes colour the more you use it.' },
+      { who: 'me', jp: 'へえ。ちゃわんに とって、としを とるのも わるくない わけですね。', en: 'Huh. So for a tea bowl, getting older isn’t a bad thing.' },
+      { who: 'npc', jp: 'ええ。「はぎの ななばけ」と いうんですよ。', en: 'Right. They call it “Hagi’s seven changes”.' },
+    ],
+    q: 'What happens to Hagi ware with use?', options: ['Its colour changes', 'It gets heavier', 'It cracks in two'], answer: 0,
+  },
+  {
+    id: 'matanozoki', from: 64, title: 'Upside down',
+    lines: [
+      { who: 'me', jp: 'みんな うしろを むいて、あしの あいだから のぞいて いますね。', en: 'Everyone’s facing backwards and peeking between their legs.' },
+      { who: 'npc', jp: '「またのぞき」です。さかさまに みると、はしだてが てんに かかる はしの ように みえる わけです。', en: 'It’s matanozoki. Upside down, the sandbar looks like a bridge to the sky.' },
+      { who: 'me', jp: 'はずかしい ものの、やって みます！', en: 'It’s embarrassing, but I’ll give it a try!' },
+    ],
+    q: 'Why do people look between their legs?', options: ['The sandbar looks like a bridge in the sky', 'To spot fish', 'For luck in exams'], answer: 0,
+  },
+  {
+    id: 'yoshino-bloom', from: 65, title: 'Thirty thousand trees',
+    lines: [
+      { who: 'npc', jp: 'よしのやまには やく 3まんぼんの さくらが ある そうです。', en: 'They say Mt Yoshino has about 30,000 cherry trees.' },
+      { who: 'me', jp: 'いっぺんに さくんですか。', en: 'Do they all bloom at once?' },
+      { who: 'npc', jp: 'いいえ。ふもとから やまの うえに かけて、じゅんばんに さいて いくんです。だから ながく たのしめる わけです。', en: 'No. They bloom in turn from the foot up the mountain, so you can enjoy them for a long time.' },
+    ],
+    q: 'How do Yoshino’s cherry trees bloom?', options: ['In turn from the foot up the mountain', 'All on one day', 'Only in autumn'], answer: 0,
+  },
+  {
+    id: 'sakai-kofun', from: 73, title: 'The biggest tomb',
+    lines: [
+      { who: 'me', jp: 'だいせん こふんって、なかに はいれるんですか。', en: 'Can you go inside the Daisen tomb?' },
+      { who: 'npc', jp: 'いいえ。くないちょうが かんりして いるが ゆえに、たちいりは できないんです。', en: 'No. Because the Imperial Household Agency manages it, no one may enter.' },
+      { who: 'me', jp: 'じゃあ、どこから みれば いいんですか。', en: 'Then where should I look at it from?' },
+      { who: 'npc', jp: 'しやくしょの てんぼうロビーが おすすめです。もっとも、おおきすぎて かたちは わかりにくいですが。', en: 'I recommend the city hall’s observation lobby. Mind you, it’s so big the shape is hard to make out.' },
+    ],
+    q: 'Why can’t visitors enter the tomb?', options: ['The Imperial Household Agency manages it', 'It is flooded', 'It is under construction'], answer: 0,
+  },
+  {
+    id: 'kinosaki-baths', from: 74, title: 'Seven baths',
+    lines: [
+      { who: 'npc', jp: 'きのさきでは、ゆかたに げたで そとゆを めぐるのが ならわしです。', en: 'In Kinosaki it’s the custom to tour the public baths in yukata and geta.' },
+      { who: 'me', jp: 'そとゆは いくつ あるんですか。', en: 'How many public baths are there?' },
+      { who: 'npc', jp: 'ななつです。やどの パスが あれば どこでも はいれますから、みっつと いわず、ぜんぶ まわって みては？', en: 'Seven. Your inn’s pass gets you into any of them, so why stop at three — try them all?' },
+    ],
+    q: 'How many public baths are there in Kinosaki?', options: ['Seven', 'Three', 'Twelve'], answer: 0,
+  },
 ];

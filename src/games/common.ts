@@ -2,7 +2,8 @@ import { h, ruby } from '../ui/dom';
 import type { FuriganaMode } from '../core/store';
 import { sfx } from '../core/audio';
 import type { GameContext, Item, ItemKind } from './types';
-import { pickItems, sample, shuffle } from '../core/srs';
+import { pickItems, sample, shuffle, type SrsRecord } from '../core/srs';
+import { STOPS } from '../data/journey';
 import { catSvg } from '../ui/cat';
 
 export const ROUNDS = 10;
@@ -150,4 +151,27 @@ export function displayPrompt(item: Item, opts: { romaji?: boolean; furigana?: F
     h('div', { class: 'prompt-jp jp' }, withRuby ? ruby(`{${item.text}|${item.reading}}`, opts.furigana ?? 'always') : item.text),
     opts.romaji ? h('div', { class: 'prompt-romaji' }, item.romaji) : null,
   );
+}
+
+/**
+ * Pick up to `total` items, leading with this stop's JLPT level: up to `fresh` of the current
+ * level, then spaced review of earlier levels, then more of the current level if review runs short.
+ * `stopOf` gives the stop index from which an item is available.
+ */
+export function levelFirst<T extends { id: string }>(
+  items: T[],
+  stopOf: (item: T) => number,
+  stopIndex: number,
+  srs: Record<string, SrsRecord>,
+  total: number,
+  fresh: number,
+): T[] {
+  const tier = STOPS[stopIndex]?.tier;
+  const current = items.filter((it) => STOPS[stopOf(it)]?.tier === tier);
+  const review = items.filter((it) => !current.includes(it));
+  const first = pickItems(current, srs, Math.min(fresh, current.length));
+  const older = pickItems(review, srs, Math.min(total - first.length, review.length));
+  const rest = current.filter((it) => !first.includes(it));
+  const extra = pickItems(rest, srs, Math.min(total - first.length - older.length, rest.length));
+  return shuffle([...first, ...older, ...extra]);
 }

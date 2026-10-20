@@ -1,8 +1,8 @@
 import { h, ruby, sleep } from '../ui/dom';
 import { speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { recordAnswer, shell } from './common';
-import { pickItems, shuffle, type SrsRecord } from '../core/srs';
+import { levelFirst, recordAnswer, shell } from './common';
+import { shuffle, type SrsRecord } from '../core/srs';
 import { BLANK, PARTICLES, particleDistractors, type ParticleItem } from '../data/particles';
 import { STOPS } from '../data/journey';
 import { readingOf } from '../screens/explore';
@@ -26,19 +26,11 @@ export function splitByTier(items: ParticleItem[], stopIndex: number): { fresh: 
   return { fresh, review: items.filter((p) => !fresh.includes(p)) };
 }
 
-/**
- * Pick a round: up to FRESH sentences from this stop's level, then spaced review of earlier levels,
- * then more of this level if there is too little review (e.g. at N5 stops) — up to ROUNDS in all.
- */
+/** A round of up to ROUNDS sentences, leading with up to FRESH from this stop's level. */
 export function particleRounds(stopIndex: number, srs: Record<string, SrsRecord>): ParticleItem[] {
-  const tag = (list: ParticleItem[]) => list.map((p) => ({ ...p, id: `particle:${p.id}` }));
-  const { fresh, review } = splitByTier(particlesThrough(stopIndex), stopIndex);
-  const first = pickItems(tag(fresh), srs, Math.min(FRESH, fresh.length));
-  const older = pickItems(tag(review), srs, Math.min(ROUNDS - first.length, review.length));
-  const taken = new Set(first.map((p) => p.id));
-  const rest = tag(fresh).filter((p) => !taken.has(p.id));
-  const extra = pickItems(rest, srs, Math.min(ROUNDS - first.length - older.length, rest.length));
-  return shuffle([...first, ...older, ...extra]);
+  const at = new Map(STOPS.map((s, i) => [s.id, i]));
+  const tagged = particlesThrough(stopIndex).map((p) => ({ ...p, id: `particle:${p.id}` }));
+  return levelFirst(tagged, (p) => at.get(p.from) ?? 0, stopIndex, srs, ROUNDS, FRESH);
 }
 
 /** Particle Pounce: pounce on the particle that fills the gap (は, を, に, で, より, によって…). */
