@@ -1,8 +1,8 @@
 import { h, sleep } from '../ui/dom';
 import { speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { chime, shell } from './common';
-import { pickItems, shuffle } from '../core/srs';
+import { chime, levelFirst, shell } from './common';
+import { shuffle } from '../core/srs';
 import { CONVERSATIONS, type Conversation } from '../data/conversations';
 import { catSvg } from '../ui/cat';
 
@@ -23,7 +23,8 @@ export const cafeGame: GameDef = {
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Café Chat ☕');
     const all = conversationsThrough(ctx.stopIndex).map((c) => ({ ...c, id: `c:${c.id}` }));
-    const rounds = shuffle(pickItems(all, ctx.store.data.srs, 3));
+    // two from this stop's level when there are enough, plus one for review
+    const rounds = levelFirst(all, (c) => c.from, ctx.stopIndex, ctx.store.data.srs, 3, 2);
     let idx = 0;
     let correct = 0;
     sh.setLives(3);
