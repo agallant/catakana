@@ -38,4 +38,13 @@ describe('keigo', () => {
     expect(basic).toBeGreaterThan(4);
     expect(keigoThrough(STOPS.length - 1).length).toBeGreaterThan(basic);
   });
+
+  it('adds formal business keigo in N1', () => {
+    const ogasawara = STOPS.findIndex((s) => s.id === 'ogasawara');
+    const n2 = keigoThrough(ogasawara - 1).length;
+    const n1 = keigoThrough(ogasawara).map((v) => v.id);
+    expect(n1.length).toBeGreaterThan(n2);
+    expect(n1).toEqual(expect.arrayContaining(['yomu', 'kariru', 'hikiukeru', 'omou', 'miseru', 'kaeru', 'suwaru']));
+    for (const v of KEIGO) expect(STOPS[STOPS.findIndex((s) => s.id === v.from)]!.tier, v.id).toMatch(/^N[421]$/);
+  });
 });

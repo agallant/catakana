@@ -1,8 +1,8 @@
 import { h, ruby, sleep } from '../ui/dom';
 import { speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { recordAnswer, shell } from './common';
-import { pickItems, shuffle } from '../core/srs';
+import { levelFirst, recordAnswer, shell } from './common';
+import { shuffle } from '../core/srs';
 import { KEIGO, keigoDistractors, keigoRounds, type KeigoRound } from '../data/keigo';
 import { STOPS } from '../data/journey';
 import { readingOf } from '../screens/explore';
@@ -30,7 +30,9 @@ export const keigoGame: GameDef = {
     const sh = shell(ctx, 'Ryokan Manners 🙇');
     const verbs = keigoThrough(ctx.stopIndex);
     const all = keigoRounds(verbs);
-    const rounds = pickItems(all, ctx.store.data.srs, Math.min(ROUNDS, all.length));
+    // the current tier's verbs first, so new N2/N1 keigo isn't buried under the N4 basics
+    const stopOf = (r: KeigoRound) => STOPS.findIndex((st) => st.id === r.verb.from);
+    const rounds = levelFirst(all, stopOf, ctx.stopIndex, ctx.store.data.srs, Math.min(ROUNDS, all.length), 5);
     if (!rounds.length) return ctx.quit();
     const mode = ctx.level === 1 ? 'always' : ctx.store.data.settings.furigana;
     let idx = 0;

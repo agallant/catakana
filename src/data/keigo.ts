@@ -26,9 +26,11 @@ export interface KeigoVerb {
   kenjo?: KeigoUse;
 }
 
-/** Special keigo verbs from the end of N4; the rest arrive with the N2 season. */
+/** Special keigo verbs from the end of N4; more arrive with the N2 season and formal business keigo with N1. */
 const BASIC = 'kawagoe';
 const MORE = 'hirosaki';
+/** formal business keigo for the N1 season */
+const FORMAL = 'ogasawara';
 
 export const KEIGO: KeigoVerb[] = [
   {
@@ -109,6 +111,35 @@ export const KEIGO: KeigoVerb[] = [
   {
     id: 'motsu', plain: '{持|も}つ', masu: '{持|も}ちます', en: 'carry, hold', from: MORE,
     kenjo: { form: 'お{持|も}ちします', ex: 'お{荷物|にもつ}を ＿＿。', en: 'Let me carry your luggage.' },
+  },
+  {
+    id: 'yomu', plain: '{読|よ}む', masu: '{読|よ}みます', en: 'read', from: FORMAL,
+    sonkei: { form: 'お{読|よ}みになります', ex: 'この {記事|きじ}を ＿＿か。', en: 'Would you like to read this article?' },
+    kenjo: { form: '{拝読|はいどく}します', ex: '{先生|せんせい}の {新|あたら}しい ご{本|ほん}を ＿＿。', en: 'I will read your new book, sensei.' },
+  },
+  {
+    id: 'kariru', plain: '{借|か}りる', masu: '{借|か}ります', en: 'borrow', from: FORMAL,
+    kenjo: { form: '{拝借|はいしゃく}します', ex: 'すみません、ちょっと お{手洗|てあら}いを ＿＿。', en: 'Excuse me, I will just use the restroom.' },
+  },
+  {
+    id: 'hikiukeru', plain: '{引|ひ}き{受|う}ける', masu: '{引|ひ}き{受|う}けます', en: 'take on, accept', from: FORMAL,
+    kenjo: { form: '{承|うけたまわ}ります', ex: 'ご{注文|ちゅうもん}は わたくしが ＿＿。', en: 'I will take your order.' },
+  },
+  {
+    id: 'omou', plain: '{思|おも}う', masu: '{思|おも}います', en: 'think, feel', from: FORMAL,
+    kenjo: { form: '{存|ぞん}じます', ex: 'お{会|あ}いできて、{大変|たいへん} うれしく ＿＿。', en: 'I am very glad to meet you.' },
+  },
+  {
+    id: 'miseru', plain: '{見|み}せる', masu: '{見|み}せます', en: 'show', from: FORMAL,
+    kenjo: { form: 'お{目|め}にかけます', ex: '{旅|たび}の {写真|しゃしん}を ＿＿。', en: 'Let me show you photos from my journey.' },
+  },
+  {
+    id: 'kaeru', plain: '{帰|かえ}る', masu: '{帰|かえ}ります', en: 'go home', from: FORMAL,
+    sonkei: { form: 'お{帰|かえ}りになります', ex: '{社長|しゃちょう}は {何時|なんじ}ごろ ＿＿か。', en: 'Around what time will the company president go home?' },
+  },
+  {
+    id: 'suwaru', plain: '{座|すわ}る', masu: '{座|すわ}ります', en: 'sit', from: FORMAL,
+    sonkei: { form: 'お{掛|か}けになります', ex: '{社長|しゃちょう}は いつも この {席|せき}に ＿＿。', en: 'The company president always sits in this seat.' },
   },
 ];
 
