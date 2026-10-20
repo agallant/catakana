@@ -21,6 +21,12 @@ describe('role-play scenes', () => {
     expect(scenesThrough(0)).toHaveLength(0);
     expect(scenesThrough(STOPS.length - 1)).toHaveLength(SCENES.length);
   });
+  it('has at least three scenes in every tier from N5 to N1', () => {
+    for (const tier of ['N5', 'N4', 'N3', 'N2', 'N1']) {
+      const n = SCENES.filter((s) => STOP_BY_ID.get(s.from)?.tier === tier || (tier === 'N5' && STOP_BY_ID.get(s.from)?.tier === 'Kana')).length;
+      expect(n, tier).toBeGreaterThanOrEqual(3);
+    }
+  });
   it('matches what was said to the closest reply', () => {
     const turn = SCENES.find((s) => s.id === 'konbini')!.turns[1]!;
     expect(matchSpoken(['はい、お願いします'], turn.replies)?.ok).toBe(true);

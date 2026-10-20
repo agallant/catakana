@@ -1,8 +1,8 @@
 import { h, sleep } from '../ui/dom';
 import { hasJapaneseVoice, speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { chime, shell } from './common';
-import { pickItems, shuffle } from '../core/srs';
+import { chime, levelFirst, shell } from './common';
+import { shuffle } from '../core/srs';
 import { recognitionSupported, recognizeOnce, speechScore } from '../core/speech';
 import { SCENES, type Reply, type Scene } from '../data/roleplay';
 import { STOPS } from '../data/journey';
@@ -46,8 +46,10 @@ export const roleplayGame: GameDef = {
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Role Play 🎭');
     const scenes = scenesThrough(ctx.stopIndex);
-    // the least-practised scene, judged by its first turn
-    const scene = pickItems(scenes.map((s) => ({ ...s, id: `rp:${s.id}:0` })), ctx.store.data.srs, 1)[0];
+    // the least-practised scene (judged by its first turn), usually from the current level:
+    // two current-tier candidates and one review, so about two plays in three stay on level
+    const stopOf = (s: Scene): number => STOPS.findIndex((st) => st.id === s.from);
+    const scene = levelFirst(scenes.map((s) => ({ ...s, id: `rp:${s.id}:0` })), stopOf, ctx.stopIndex, ctx.store.data.srs, 3, 2, 1)[0];
     if (!scene) return ctx.quit();
     const sceneId = scene.id.split(':')[1]!;
     const canSpeak = ctx.level >= 2 && recognitionSupported();
