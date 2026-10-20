@@ -1,4 +1,4 @@
-import { dayKey, type SaveData, type Store } from './store';
+import { dayKey, HAT_IDS, type SaveData, type Store } from './store';
 import { STOPS } from '../data/journey';
 import { CULTURE } from '../data/culture';
 import { SHOP } from '../data/shop';
@@ -104,6 +104,7 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'gourmet', name: 'Gourmet Cat', emoji: '🍱', desc: 'Taste every food at the market', test: (d) => SHOP.filter((i) => i.kind === 'food').every((i) => d.owned.includes(i.id)) },
   { id: 'castles5', name: 'Castle Hopper', emoji: '🏰', desc: 'Photograph 5 castles', test: (d) => castles().filter((c) => d.photos.includes(c)).length >= 5 },
   { id: 'heritage10', name: 'Heritage Hunter', emoji: '🌏', desc: 'Photograph 10 World Heritage sites', test: (d) => heritage().filter((c) => d.photos.includes(c)).length >= 10 },
+  { id: 'fashion', name: 'Fashionista', emoji: '👘', desc: 'Own 8 outfits from the wardrobe', test: (d) => HAT_IDS.filter((id) => id !== 'none' && d.unlockedHats.includes(id)).length >= 8 },
   { id: 'cats10', name: 'Cat Collector', emoji: '😺', desc: 'Befriend 10 local cats', test: (d) => d.cats.length >= 10 },
   { id: 'rich', name: 'Fat Cat', emoji: '💰', desc: 'Hold 500 fish at once', test: (d) => d.fish >= 500 },
   { id: 'okami', name: 'Okami-san', emoji: '🙇', desc: 'Use 12 different keigo forms correctly in Ryokan Manners', test: (d) => solved(d, 'keigo:') >= 12 },

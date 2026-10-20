@@ -3,6 +3,7 @@ import { h } from '../ui/dom';
 import { catSvg, FUR_PRESETS } from '../ui/cat';
 import { HATS, npcCats } from '../core/cats';
 import { sfx } from '../core/audio';
+import { checkAchievements } from '../core/progress';
 
 export function catsScreen(app: App): Screen {
   const d = app.store.data;
@@ -21,6 +22,8 @@ export function catsScreen(app: App): Screen {
               s.fish -= hat.cost;
               s.unlockedHats.push(hat.id);
             });
+            // the 8th outfit unlocks Fashionista right away
+            checkAchievements(app.store);
           }
           app.store.update((s) => {
             s.look.hat = hat.id;

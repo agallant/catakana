@@ -2,12 +2,15 @@ import { review, type SrsRecord } from './srs';
 
 export type FuriganaMode = 'always' | 'tap' | 'off';
 
+export const PATTERNS = ['plain', 'tabby', 'tuxedo', 'spots', 'calico'] as const;
+export const HAT_IDS = ['none', 'beret', 'bow', 'scarf', 'straw', 'crown', 'headband', 'sakura', 'kitsune', 'kabuto', 'bell', 'tenugui', 'kanzashi', 'conductor', 'sugegasa', 'yukata'] as const;
+
 export interface CatLook {
   fur: string;
   accent: string;
-  pattern: 'plain' | 'tabby' | 'tuxedo' | 'spots' | 'calico';
+  pattern: (typeof PATTERNS)[number];
   eyes: string;
-  hat: 'none' | 'beret' | 'bow' | 'scarf' | 'straw' | 'crown' | 'headband' | 'sakura' | 'kitsune' | 'kabuto' | 'bell' | 'tenugui' | 'kanzashi' | 'conductor' | 'sugegasa' | 'yukata';
+  hat: (typeof HAT_IDS)[number];
 }
 
 export interface Settings {
@@ -253,6 +256,19 @@ export function isValidSave(x: unknown): x is Partial<SaveData> {
   return ['introduced', 'cats'].every((k) => x[k] === undefined || isStringArray(x[k]));
 }
 
+const isColour = (v: unknown): v is string => typeof v === 'string' && /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(v);
+
+/** Keep only known patterns and accessories and #rgb / #rrggbb colours; anything else falls back to the default look. */
+export function sanitizeLook(l: Record<string, unknown>): CatLook {
+  return {
+    fur: isColour(l.fur) ? l.fur : DEFAULT_LOOK.fur,
+    accent: isColour(l.accent) ? l.accent : DEFAULT_LOOK.accent,
+    eyes: isColour(l.eyes) ? l.eyes : DEFAULT_LOOK.eyes,
+    pattern: (PATTERNS as readonly unknown[]).includes(l.pattern) ? (l.pattern as CatLook['pattern']) : DEFAULT_LOOK.pattern,
+    hat: (HAT_IDS as readonly unknown[]).includes(l.hat) ? (l.hat as CatLook['hat']) : DEFAULT_LOOK.hat,
+  };
+}
+
 /** Merge a parsed save over the defaults, keeping only fields of the expected type. */
 function sanitize(p: Record<string, unknown>): SaveData {
   const base = defaultSave();
@@ -273,7 +289,7 @@ function sanitize(p: Record<string, unknown>): SaveData {
   assign('trivia', isRecord);
   for (const k of ['cats', 'introduced', 'unlockedHats', 'stamps', 'souvenirs', 'owned', 'photos', 'daytrips', 'achievements'] as const) assign(k, isStringArray);
   if (isRecord(p.daily) && str(p.daily.day) && isRecord(p.daily.progress) && isStringArray(p.daily.claimed)) out.daily = p.daily as SaveData['daily'];
-  if (isRecord(p.look)) out.look = { ...base.look, ...p.look };
+  if (isRecord(p.look)) out.look = sanitizeLook(p.look);
   if (isRecord(p.settings)) out.settings = { ...base.settings, ...p.settings };
   if (isRecord(p.stats)) out.stats = { ...base.stats, ...p.stats };
   // copy arrays so later pushes don't alias the parsed object

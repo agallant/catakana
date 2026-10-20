@@ -76,6 +76,10 @@ describe('backup validation', () => {
     expect(s.data.stamps).toEqual([]);
     expect(s.data.fish).toBe(3);
   });
+  it('repairs an unknown accessory or colour in a saved look', () => {
+    const s = new Store(mem({ 'catakana.save.v1': JSON.stringify({ v: 1, stops: {}, srs: {}, fish: 0, xp: 0, look: { fur: '#2b2b2b', accent: '#111', pattern: 'plain', eyes: 'nope', hat: 'tophat' } }) }));
+    expect(s.data.look).toMatchObject({ fur: '#2b2b2b', pattern: 'plain', eyes: '#3d85c6', hat: 'none' });
+  });
 });
 
 import { COUNTERS } from '../src/data/counters';
@@ -98,5 +102,12 @@ describe('skill-game achievements', () => {
     expect(has(s, 'counter-cat')).toBe(false);
     s.update((d) => (d.srs[`count:${COUNTERS[0]!.id}:1`] = rec(1)));
     expect(has(s, 'counter-cat')).toBe(true);
+  });
+  it('counts owned outfits for Fashionista, ignoring “none” and unknown ids', () => {
+    const s = new Store(mem());
+    s.update((d) => (d.unlockedHats = ['none', 'bow', 'bell', 'scarf', 'tenugui', 'headband', 'beret', 'tophat', 'straw']));
+    expect(has(s, 'fashion')).toBe(false);
+    s.update((d) => d.unlockedHats.push('yukata'));
+    expect(has(s, 'fashion')).toBe(true);
   });
 });
