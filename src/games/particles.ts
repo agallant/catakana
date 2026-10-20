@@ -15,6 +15,15 @@ export function particlesThrough(stopIndex: number): ParticleItem[] {
 }
 
 const ROUNDS = 8;
+/** rounds drawn from the current level's sentences when there are enough */
+const FRESH = 5;
+
+/** Split unlocked items into this stop's JLPT level and earlier review. */
+export function splitByTier(items: ParticleItem[], stopIndex: number): { fresh: ParticleItem[]; review: ParticleItem[] } {
+  const tier = STOPS[stopIndex]?.tier;
+  const fresh = items.filter((p) => STOPS.find((s) => s.id === p.from)?.tier === tier);
+  return { fresh, review: items.filter((p) => !fresh.includes(p)) };
+}
 
 /** Particle Pounce: pounce on the particle that fills the gap (は, を, に, で, より, によって…). */
 export const particlesGame: GameDef = {
@@ -29,11 +38,11 @@ export const particlesGame: GameDef = {
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Particle Pounce 🐾');
     const items = particlesThrough(ctx.stopIndex);
-    const rounds = pickItems(
-      items.map((p) => ({ ...p, id: `particle:${p.id}` })),
-      ctx.store.data.srs,
-      Math.min(ROUNDS, items.length),
-    );
+    // mostly this level's particles, topped up with spaced review of earlier ones
+    const tag = (list: ParticleItem[]) => list.map((p) => ({ ...p, id: `particle:${p.id}` }));
+    const { fresh, review } = splitByTier(items, ctx.stopIndex);
+    const first = pickItems(tag(fresh), ctx.store.data.srs, Math.min(FRESH, fresh.length));
+    const rounds = shuffle([...first, ...pickItems(tag(review), ctx.store.data.srs, Math.min(ROUNDS - first.length, review.length))]);
     if (!rounds.length) return ctx.quit();
     const mode = ctx.level === 1 ? 'always' : ctx.store.data.settings.furigana;
     let idx = 0;
