@@ -1,0 +1,60 @@
+/**
+ * Onomatopoeia and mimetic words (擬音語・擬態語): ニャー, ゴロゴロ, ドキドキ, ペラペラ…
+ * Each example has one ＿ for the word; `wrong` lists words that clearly do not fit that sentence.
+ */
+export interface Ono {
+  id: string;
+  word: string;
+  en: string;
+  emoji: string;
+  /** example sentence with ＿ (furigana markup allowed) */
+  ex: string;
+  exEn: string;
+  /** at least three other words from this list that do not fit the example */
+  wrong: string[];
+  /** stop id from which the word appears */
+  from: string;
+}
+
+export const ONO_BLANK = '＿';
+
+export const ONOMATOPOEIA: Ono[] = [
+  // animal sounds (N5 route)
+  { id: 'nya', word: 'ニャー', en: 'meow', emoji: '🐱', ex: 'ねこが ＿と なきました。', exEn: 'The cat went “meow”.', wrong: ['ワンワン', 'ケロケロ', 'コケコッコー'], from: 'aomori' },
+  { id: 'wanwan', word: 'ワンワン', en: 'woof woof', emoji: '🐶', ex: 'いぬが ＿ ほえています。', exEn: 'The dog is barking.', wrong: ['ニャー', 'ケロケロ', 'チュンチュン'], from: 'aomori' },
+  { id: 'kerokero', word: 'ケロケロ', en: 'ribbit (a frog)', emoji: '🐸', ex: 'かえるが ＿ ないています。', exEn: 'The frogs are croaking.', wrong: ['ワンワン', 'コケコッコー', 'ニャー'], from: 'akita' },
+  { id: 'chunchun', word: 'チュンチュン', en: 'tweet tweet (a sparrow)', emoji: '🐦', ex: 'あさ、すずめが ＿ ないています。', exEn: 'In the morning the sparrows are chirping.', wrong: ['ワンワン', 'ケロケロ', 'ニャー'], from: 'akita' },
+  { id: 'kokekokko', word: 'コケコッコー', en: 'cock-a-doodle-doo', emoji: '🐓', ex: 'にわとりが ＿と なきました。', exEn: 'The rooster crowed.', wrong: ['ニャー', 'ワンワン', 'ケロケロ'], from: 'nikko' },
+  { id: 'gorogoro', word: 'ゴロゴロ', en: 'purr (also: rumbling, lazing about)', emoji: '😺', ex: 'ねこが のどを ＿ ならしています。', exEn: 'The cat is purring.', wrong: ['ワンワン', 'ケロケロ', 'トントン'], from: 'nikko' },
+  // everyday sounds
+  { id: 'tonton', word: 'トントン', en: 'knock knock, tap tap', emoji: '🚪', ex: 'ドアを ＿ たたきました。', exEn: 'I knocked on the door.', wrong: ['ズルズル', 'ニャー', 'ザーザー'], from: 'kanazawa' },
+  { id: 'pachipachi', word: 'パチパチ', en: 'clapping', emoji: '👏', ex: 'コンサートの あと、みんなが ＿ てを たたきました。', exEn: 'After the concert everyone clapped.', wrong: ['ズルズル', 'ワンワン', 'しとしと'], from: 'shirakawa' },
+  { id: 'zuruzuru', word: 'ズルズル', en: 'slurp (noodles)', emoji: '🍜', ex: 'ラーメンを ＿ すすります。', exEn: 'I slurp my ramen.', wrong: ['トントン', 'パチパチ', 'ニャー'], from: 'takayama' },
+  { id: 'gachan', word: 'ガチャン', en: 'crash, smash', emoji: '🍽️', ex: 'おさらが ＿と われました。', exEn: 'The plate smashed with a crash.', wrong: ['ニャー', 'しとしと', 'ふわふわ'], from: 'ise' },
+  // weather and feelings (N4 route)
+  { id: 'zaza', word: 'ザーザー', en: 'pouring (rain)', emoji: '☔', ex: '{雨|あめ}が ＿ {降|ふ}っています。', exEn: 'It is pouring with rain.', wrong: ['ワンワン', 'ドキドキ', 'ペラペラ'], from: 'hikone' },
+  { id: 'shitoshito', word: 'しとしと', en: 'drizzling softly', emoji: '🌧️', ex: '{静|しず}かな {雨|あめ}が ＿ {降|ふ}っています。', exEn: 'A quiet rain is drizzling down.', wrong: ['ガチャン', 'ワクワク', 'ぺこぺこ'], from: 'uji' },
+  { id: 'byubyu', word: 'ビュービュー', en: 'howling (wind)', emoji: '🌬️', ex: '{冷|つめ}たい {風|かぜ}が ＿ {吹|ふ}いています。', exEn: 'A cold wind is howling.', wrong: ['ニコニコ', 'ねばねば', 'ぺこぺこ'], from: 'koyasan' },
+  { id: 'pokapoka', word: 'ぽかぽか', en: 'nice and warm', emoji: '☀️', ex: '{今日|きょう}は {日|ひ}が あたって、＿ あたたかいです。', exEn: 'Today the sun is out and it is lovely and warm.', wrong: ['イライラ', 'ねばねば', 'ズルズル'], from: 'okayama' },
+  { id: 'dokidoki', word: 'ドキドキ', en: 'heart pounding', emoji: '💓', ex: '{試験|しけん}の {前|まえ}は {胸|むね}が ＿します。', exEn: 'My heart pounds before an exam.', wrong: ['ザーザー', 'さくさく', 'ズルズル'], from: 'tottori' },
+  { id: 'wakuwaku', word: 'ワクワク', en: 'excited, thrilled', emoji: '🤩', ex: '{明日|あした}から {旅行|りょこう}なので、＿しています。', exEn: 'I’m excited because my trip starts tomorrow.', wrong: ['ザーザー', 'つるつる', 'ズルズル'], from: 'matsue' },
+  { id: 'iraira', word: 'イライラ', en: 'irritated, on edge', emoji: '😤', ex: '{電車|でんしゃ}が {来|こ}なくて、＿しています。', exEn: 'The train isn’t coming and I’m getting irritated.', wrong: ['ぽかぽか', 'さくさく', 'ニャー'], from: 'matsumoto' },
+  { id: 'gakkari', word: 'がっかり', en: 'disappointed', emoji: '😞', ex: '{雨|あめ}で {花火|はなび}が {中止|ちゅうし}になって、＿しました。', exEn: 'The fireworks were cancelled for rain, and I was disappointed.', wrong: ['ぴかぴか', 'さくさく', 'トントン'], from: 'nagano' },
+  { id: 'hotto', word: 'ほっと', en: 'relieved', emoji: '😮‍💨', ex: '{財布|さいふ}が {見|み}つかって、＿しました。', exEn: 'I found my wallet and was relieved.', wrong: ['ねばねば', 'ズルズル', 'ザーザー'], from: 'kusatsu' },
+  { id: 'nikoniko', word: 'ニコニコ', en: 'smiling', emoji: '😊', ex: 'あの ねこは いつも ＿ {笑|わら}っています。', exEn: 'That cat is always smiling.', wrong: ['ザーザー', 'ねばねば', 'ガチャン'], from: 'hiraizumi' },
+  { id: 'perapera', word: 'ペラペラ', en: 'fluent', emoji: '🗣️', ex: 'タマは {英語|えいご}が ＿です。', exEn: 'Tama speaks fluent English.', wrong: ['ぺこぺこ', 'ぽかぽか', 'ねばねば'], from: 'yamagata' },
+  { id: 'pekopeko', word: 'ぺこぺこ', en: 'starving', emoji: '🍽️', ex: 'おなかが ＿です。', exEn: 'I’m starving.', wrong: ['ペラペラ', 'ぴかぴか', 'ニコニコ'], from: 'yamagata' },
+  { id: 'yukkuri', word: 'ゆっくり', en: 'slowly, unhurried', emoji: '🐢', ex: 'もう {少|すこ}し ＿ {話|はな}してください。', exEn: 'Please speak a little more slowly.', wrong: ['ガチャン', 'ねばねば', 'ぺこぺこ'], from: 'kawagoe' },
+  // manner and texture (N3 route)
+  { id: 'gussuri', word: 'ぐっすり', en: 'sleeping soundly', emoji: '😴', ex: 'ねこが ＿ {寝|ね}ています。', exEn: 'The cat is fast asleep.', wrong: ['ペラペラ', 'ガチャン', 'さくさく'], from: 'inuyama' },
+  { id: 'nonbiri', word: 'のんびり', en: 'relaxed, leisurely', emoji: '♨️', ex: '{休|やす}みの {日|ひ}は {温泉|おんせん}で ＿ します。', exEn: 'On my day off I relax at a hot spring.', wrong: ['ガチャン', 'ねばねば', 'ワンワン'], from: 'gujo' },
+  { id: 'burabura', word: 'ぶらぶら', en: 'strolling, wandering', emoji: '🚶', ex: '{午後|ごご}は {町|まち}を ＿ {歩|ある}きました。', exEn: 'In the afternoon I strolled around town.', wrong: ['ねばねば', 'さくさく', 'ザーザー'], from: 'tsumago' },
+  { id: 'surasura', word: 'すらすら', en: 'smoothly, without a hitch', emoji: '📖', ex: '{漢字|かんじ}が ＿ {読|よ}めるように なりました。', exEn: 'I can now read kanji smoothly.', wrong: ['ねばねば', 'ぺこぺこ', 'ガチャン'], from: 'toyama' },
+  { id: 'fuwafuwa', word: 'ふわふわ', en: 'fluffy, soft', emoji: '☁️', ex: 'この ねこの {毛|け}は ＿です。', exEn: 'This cat’s fur is fluffy.', wrong: ['ザーザー', 'ペラペラ', 'イライラ'], from: 'sado' },
+  { id: 'tsurutsuru', word: 'つるつる', en: 'slippery, smooth', emoji: '🧊', ex: '{凍|こお}った {道|みち}は ＿ {滑|すべ}ります。', exEn: 'Icy roads are slippery.', wrong: ['ぺこぺこ', 'ニコニコ', 'ワクワク'], from: 'aizu' },
+  { id: 'nebaneba', word: 'ねばねば', en: 'sticky, stringy', emoji: '🫘', ex: '{納豆|なっとう}は ＿しています。', exEn: 'Natto is sticky.', wrong: ['ペラペラ', 'ビュービュー', 'ワクワク'], from: 'otaru' },
+  { id: 'sakusaku', word: 'さくさく', en: 'crispy, crunchy', emoji: '🍤', ex: 'この てんぷらは ＿して おいしいです。', exEn: 'This tempura is crispy and delicious.', wrong: ['ペラペラ', 'イライラ', 'ビュービュー'], from: 'shiretoko' },
+  { id: 'pikapika', word: 'ぴかぴか', en: 'spotless, shiny clean', emoji: '🪟', ex: '{窓|まど}を {拭|ふ}いて、＿に なりました。', exEn: 'I wiped the windows until they were spotless.', wrong: ['ぺこぺこ', 'イライラ', 'ザーザー'], from: 'naoshima' },
+  { id: 'kirakira', word: 'キラキラ', en: 'twinkling, glittering', emoji: '✨', ex: '{夜空|よぞら}に {星|ほし}が ＿ {光|ひか}っています。', exEn: 'Stars are twinkling in the night sky.', wrong: ['ねばねば', 'ぺこぺこ', 'ズルズル'], from: 'tokushima' },
+  { id: 'boroboro', word: 'ボロボロ', en: 'worn out, falling apart', emoji: '👟', ex: '{古|ふる}い {靴|くつ}が ＿に なりました。', exEn: 'My old shoes have fallen apart.', wrong: ['ワクワク', 'ニコニコ', 'ビュービュー'], from: 'takachiho' },
+];
