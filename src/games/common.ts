@@ -165,12 +165,14 @@ export function levelFirst<T extends { id: string }>(
   srs: Record<string, SrsRecord>,
   total: number,
   fresh: number,
+  /** at most this many items from earlier levels (default: as many as fit) */
+  reviewLimit = total,
 ): T[] {
   const tier = STOPS[stopIndex]?.tier;
   const current = items.filter((it) => STOPS[stopOf(it)]?.tier === tier);
   const review = items.filter((it) => !current.includes(it));
   const first = pickItems(current, srs, Math.min(fresh, current.length));
-  const older = pickItems(review, srs, Math.min(total - first.length, review.length));
+  const older = pickItems(review, srs, Math.min(reviewLimit, total - first.length, review.length));
   const rest = current.filter((it) => !first.includes(it));
   const extra = pickItems(rest, srs, Math.min(total - first.length - older.length, rest.length));
   return shuffle([...first, ...older, ...extra]);

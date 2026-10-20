@@ -24,9 +24,9 @@ export const shadowGame: GameDef = {
     const phrases = phrasesThrough(ctx.stopIndex);
     // phrases first, topped up with words from the pool
     const words = ctx.pool.filter((i) => i.kind === 'word').map((w) => ({ id: w.id, jp: w.text, kana: w.reading, en: w.en ?? '', emoji: w.emoji ?? '', from: 0 }) as Phrase);
-    // up to three phrases from this stop's level, one for review, and one word
-    const picked = levelFirst(phrases, (p) => p.from, ctx.stopIndex, ctx.store.data.srs, 4, 3);
-    const rounds = shuffle([...picked, ...pickItems(words, ctx.store.data.srs, 1)]).slice(0, 5);
+    // up to three phrases from this stop's level and at most one for review; words from the stop fill the rest
+    const picked = levelFirst(phrases, (p) => p.from, ctx.stopIndex, ctx.store.data.srs, 4, 3, 1);
+    const rounds = shuffle([...picked, ...pickItems(words, ctx.store.data.srs, 5 - picked.length)]).slice(0, 5);
     const canRecognize = recognitionSupported();
     let idx = 0;
     let correct = 0;

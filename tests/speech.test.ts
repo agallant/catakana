@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { levenshtein, normalizeJa, speechScore } from '../src/core/speech';
 import { CONVERSATIONS } from '../src/data/conversations';
 import { PHRASES } from '../src/data/phrases';
+import { toHiragana } from '../src/data/kana';
 import { STOPS } from '../src/data/journey';
 
 describe('speech scoring', () => {
@@ -32,10 +33,14 @@ describe('listening & speaking data', () => {
   it('phrases have a spaceless hiragana reading and cover every level', () => {
     for (const p of PHRASES) {
       expect(p.kana, p.id).toMatch(/^[\u3041-\u3096ー]+$/);
+      expect(p.kana, p.id).toBe(toHiragana(p.jp).replace(/\s/g, ''));
       expect(p.from, p.id).toBeLessThan(STOPS.length);
     }
-    const tiers = new Set(PHRASES.map((p) => STOPS[p.from]!.tier));
-    for (const t of ['N5', 'N4', 'N3', 'N2', 'N1']) expect(tiers.has(t as never), t).toBe(true);
+    // every level has a phrase from its very first stop
+    for (const t of ['N5', 'N4', 'N3', 'N2', 'N1']) {
+      const first = STOPS.findIndex((s) => s.tier === t);
+      expect(PHRASES.some((p) => p.from === first), t).toBe(true);
+    }
   });
   it('phrases are unique and available from the start', () => {
     expect(new Set(PHRASES.map((p) => p.id)).size).toBe(PHRASES.length);

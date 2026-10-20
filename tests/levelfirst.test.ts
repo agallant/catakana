@@ -24,4 +24,9 @@ describe('levelFirst', () => {
     const two = CONVERSATIONS.slice(0, 2);
     expect(levelFirst(two, (c) => c.from, STOPS.length - 1, {}, 5, 3)).toHaveLength(2);
   });
+  it('caps review items when asked, even if that leaves the round short', () => {
+    const first = STOPS.findIndex((s) => s.tier === 'N4');
+    const picked = levelFirst(conversationsThrough(first), (c) => c.from, first, {}, 4, 3, 1);
+    expect(picked.filter((c) => tierOf(c.from) !== 'N4').length).toBeLessThanOrEqual(1);
+  });
 });
