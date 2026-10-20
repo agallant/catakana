@@ -28,6 +28,9 @@ describe('stories', () => {
     expect(nextStory(all, {})?.id).toBe('gotokuji-maneki');
     // once it is read, the next-latest unread one
     expect(nextStory(all, { 'story:gotokuji-maneki': { seen: 1 } })?.from).toBe('amami');
+    // and it doesn't depend on the list's order: reversed, the route still decides
+    expect(nextStory([...all].reverse(), {})?.id).toBe('gotokuji-maneki');
+    expect(nextStory([...all].reverse(), { 'story:gotokuji-maneki': { seen: 1 } })?.from).toBe('amami');
   });
 });
 

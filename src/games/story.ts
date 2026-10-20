@@ -17,7 +17,10 @@ export function storiesThrough(stopIndex: number): Story[] {
   });
 }
 
-/** The story to read next: the least-read one, and among those the one from the latest stop on the route. */
+/**
+ * The story to read next: the least-read one, and among those the one from the latest stop on the route.
+ * Expects stories from `storiesThrough`, so every story's stop is on the route.
+ */
 export function nextStory(stories: Story[], srs: Record<string, { seen?: number } | undefined>): Story | undefined {
   const seen = (s: Story): number => srs[`story:${s.id}`]?.seen ?? 0;
   return [...stories].sort((a, b) => seen(a) - seen(b) || stopOf(b) - stopOf(a))[0];
