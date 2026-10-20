@@ -76,7 +76,7 @@ export function shell(ctx: GameContext, title: string): Shell {
   const lives = h('span', { class: 'lives', role: 'img' });
   const mascot = h('div', { class: 'mascot' }, catSvg(ctx.store.data.look, 'happy', 64));
   const bubble = h('div', { class: 'bubble', 'aria-live': 'polite' });
-  const live = h('div', { class: 'sr-only', 'aria-live': 'assertive' });
+  const live = h('div', { class: 'sr-only', 'aria-live': 'polite' });
   const body = h('div', { class: 'game-body' });
   const top = h(
     'div',
@@ -155,7 +155,7 @@ export function recordAnswer(ctx: GameContext, item: Item, ok: boolean, sh: Shel
 export function answerAnnouncement(item: Item, ok: boolean): string {
   if (ok) return 'Correct.';
   const reading = item.reading && item.reading !== item.text ? ` (${item.reading})` : '';
-  const what = meaning(item).replace(/^\p{Extended_Pictographic}\uFE0F?\s*/u, '');
+  const what = item.kind === 'kana' ? item.romaji : (item.en ?? '');
   return `Not quite. ${item.text}${reading}${what && what !== item.text ? ` means ${what}` : ''}.`;
 }
 

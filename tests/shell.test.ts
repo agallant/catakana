@@ -36,13 +36,15 @@ describe('answer announcements', () => {
     expect(answerAnnouncement({ id: 'w', kind: 'word', text: '猫', reading: 'ねこ', romaji: 'neko', en: 'cat', emoji: '🐱' }, false)).toBe('Not quite. 猫 (ねこ) means cat.');
     expect(answerAnnouncement({ id: 't', kind: 'word', text: 'よじ', reading: 'よじ', romaji: '' }, false)).toBe('Not quite. よじ.');
     expect(answerAnnouncement({ id: 'w', kind: 'word', text: '猫', reading: 'ねこ', romaji: 'neko' }, true)).toBe('Correct.');
+    // the meaning comes from the English field, so compound emoji never leak into speech
+    expect(answerAnnouncement({ id: 'c', kind: 'word', text: 'りょうりにん', reading: 'りょうりにん', romaji: 'ryourinin', en: 'cook', emoji: '👩‍🍳' }, false)).toBe('Not quite. りょうりにん means cook.');
   });
-  it('are spoken from a hidden live region in the shell', () => {
+  it('are spoken politely from a hidden live region in the shell', () => {
     const c = ctx();
     const sh = shell(c, 'Test');
     sh.announce('Correct.');
     const live = c.root.querySelector('.sr-only')!;
-    expect(live.getAttribute('aria-live')).toBe('assertive');
+    expect(live.getAttribute('aria-live')).toBe('polite');
     expect(live.textContent).toBe('Correct.');
   });
 });
