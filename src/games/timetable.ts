@@ -42,6 +42,7 @@ interface Puzzle {
   wrongs: string[];
 }
 
+/** A departure board: on the hour or half past at level 1, any minute later. */
 function timePuzzle(level: number): Puzzle {
   const hr = 1 + Math.floor(Math.random() * 12);
   const minutes = level === 1 ? [0, 30] : [0, 1, 3, 5, 6, 8, 10, 15, 20, 30, 40, 45, sample([11, 13, 16, 18, 24, 33, 47, 56])];
@@ -51,6 +52,7 @@ function timePuzzle(level: number): Puzzle {
   return { id: `time:${hr}:${m}`, card, hint: 'What time does it leave?', answers: timeReadings(hr, m), wrongs: timeDistractors(hr, m) };
 }
 
+/** A calendar page: days 1–10 at level 1, the irregular dates (14, 20, 24…) later. */
 function datePuzzle(level: number): Puzzle {
   const mo = 1 + Math.floor(Math.random() * 12);
   const d = level === 1 ? 1 + Math.floor(Math.random() * 10) : sample([...Array.from({ length: 10 }, (_, i) => i + 1), 14, 17, 19, 20, 24, 1 + Math.floor(Math.random() * 31)]);
@@ -66,6 +68,7 @@ function datePuzzle(level: number): Puzzle {
 const DURATION_EN: Record<string, string> = { hour: 'hours', week: 'weeks', month: 'months', year: 'years' };
 const DURATION_EMOJI: Record<string, string> = { hour: '⏱️', week: '🗓️', month: '🌙', year: '🎍' };
 
+/** A “how long?” card: hours and months at level 1, weeks and years too from level 2. */
 function durationPuzzle(level: number): Puzzle {
   // level 1 sticks to hours and months; the tricky っ forms come at all levels
   const unit = level === 1 ? sample(['hour', 'month'] as const) : sample(DURATION_UNITS);

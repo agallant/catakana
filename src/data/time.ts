@@ -133,6 +133,7 @@ export const DURATION_KANJI: Record<DurationUnit, string> = { hour: '時間', we
 /** 1, 6, 8 and 10 shrink to a small っ before か and し (いっかげつ, ろっかげつ, はっしゅうかん). */
 const GEM_DUR: Record<number, string[]> = { 1: ['いっ'], 6: ['ろっ'], 8: ['はっ', 'はち'], 10: ['じゅっ', 'じっ'] };
 
+/** Every accepted reading of `n` units, main one first (ろっかげつ; はっしゅうかん / はちしゅうかん). */
 export function durationReadings(unit: DurationUnit, n: number): string[] {
   switch (unit) {
     case 'hour':
