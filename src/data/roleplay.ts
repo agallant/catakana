@@ -473,4 +473,91 @@ export const SCENES: Scene[] = [
       },
     ],
   },
+  {
+    id: 'tea-ceremony', title: 'A tea ceremony', emoji: '🍵', from: 'uji', role: 'Tea master',
+    turns: [
+      {
+        npc: 'どうぞ、おかしを おとりください。', en: 'Please, take a sweet.',
+        replies: [
+          R('ちょうだい いたします。', 'I humbly accept.', true, 'ちょうだいいたします is a humble “I’ll accept” — just right in a tea room.'),
+          R('いただきました。', 'I had it.', false, 'Past tense — you haven’t taken it yet.'),
+          R('おかしを ください。', 'Give me a sweet.', false, 'They’re already offering — no need to ask.'),
+        ],
+      },
+      {
+        npc: 'おちゃを どうぞ。', en: 'Here is your tea.',
+        replies: [
+          R('おてまえ ちょうだい いたします。', 'I gratefully receive your tea.', true, 'お点前 (おてまえ) is the host’s preparation — the set phrase before you drink.'),
+          R('ごちそうさまでした。', 'Thanks for the meal.', false, 'Said after, not before drinking.'),
+          R('おちゃを いれて ください。', 'Please make me some tea.', false, 'They just did!'),
+        ],
+      },
+      {
+        npc: 'いかがでしたか。', en: 'How was it?',
+        replies: [
+          R('けっこうな おてまえで ございました。', 'It was a splendid preparation.', true, 'The classic compliment to the host after drinking.'),
+          R('まあまあでした。', 'It was so-so.', false, 'Honest, perhaps, but rude in a tea room.'),
+          R('おちゃを のみたいです。', 'I want to drink tea.', false, 'You just drank it.'),
+        ],
+      },
+    ],
+  },
+  {
+    id: 'bike-rental', title: 'Renting a bicycle', emoji: '🚲', from: 'naoshima', role: 'Rental shop staff',
+    turns: [
+      {
+        npc: 'いらっしゃいませ。でんどう じてんしゃも ございますが。', en: 'Welcome. We also have electric bikes.',
+        replies: [
+          R('さかが おおいそうなので、でんどうの ほうを かりたいです。', 'I hear there are lots of hills, so I’d like an electric one.', true, '〜そうなので = since I hear ~; 〜の ほう picks one of the options.'),
+          R('でんどうの ほうを かしたいです。', 'I’d like to lend an electric one.', false, 'かす = lend; you want かりる (borrow).'),
+          R('さかが おおいので、じてんしゃは きらいです。', 'There are lots of hills, so I hate bikes.', false, 'Doesn’t answer — and you came to rent one!'),
+        ],
+      },
+      {
+        npc: 'なんじかん ごりようですか。', en: 'How many hours will you use it?',
+        replies: [
+          R('よじかん ぐらい おねがいします。', 'About four hours, please.', true, 'よじかん = four hours; ぐらい = about.'),
+          R('よじごろ おねがいします。', 'Around four o’clock, please.', false, 'よじごろ is a time of day — they asked how long.'),
+          R('よんじかん ぐらい おねがいします。', 'About four hours (misread).', false, '4時間 is よじかん, not よんじかん.'),
+        ],
+      },
+      {
+        npc: 'へんきゃくは ごご ろくじまでに おねがいします。', en: 'Please return it by 6 p.m.',
+        replies: [
+          R('わかりました。おくれないように します。', 'Understood. I’ll make sure not to be late.', true, '〜ないように する = make sure not to ~.'),
+          R('わかりました。ろくじから かえします。', 'Understood. I’ll return it from six.', false, 'から = from; までに = by.'),
+          R('おくれても いいですか。', 'Is it OK if I’m late?', false, 'Not the best reply to a deadline!'),
+        ],
+      },
+    ],
+  },
+  {
+    id: 'tour-cancelled', title: 'A cancelled boat tour', emoji: '⛴️', from: 'gunkanjima', role: 'Tour office staff',
+    turns: [
+      {
+        npc: 'もうしわけ ございません。なみが たかいため、きょうの ツアーは ちゅうしと なりました。', en: 'We’re very sorry. Because of high waves, today’s tour has been cancelled.',
+        replies: [
+          R('そうですか。てんこうでは しかたが ないですね。', 'I see. It can’t be helped with the weather.', true, 'しかたが ない = it can’t be helped — graceful acceptance.'),
+          R('なみが たかいのに、いきます。', 'Even though the waves are high, I’m going.', false, 'のに = even though; a cancelled boat isn’t leaving.'),
+          R('ツアーは たのしかったです。', 'The tour was fun.', false, 'It never happened!'),
+        ],
+      },
+      {
+        npc: 'ほかの ひに ふりかえるか、はらいもどしを するか、おえらびいただけます。', en: 'You can switch to another day or get a refund.',
+        replies: [
+          R('では、あしたの びんに ふりかえて いただけますか。', 'Then could you switch me to tomorrow’s boat?', true, 'ふりかえる = rebook; 〜て いただけますか is a polite request.'),
+          R('では、あしたの びんに ふりかえて さしあげます。', 'Then I’ll (humbly) switch it for you.', false, 'さしあげる is you doing something for them — backwards.'),
+          R('では、きのうの びんで おねがいします。', 'Then yesterday’s boat, please.', false, 'きのう is already past.'),
+        ],
+      },
+      {
+        npc: 'あしたも てんこう しだいで ちゅうしに なる かのうせいが ございます。', en: 'Tomorrow’s may also be cancelled, depending on the weather.',
+        replies: [
+          R('わかりました。ちゅうしの ばあいは、はらいもどしで おねがいします。', 'Understood. If it’s cancelled, I’d like a refund.', true, '〜の ばあいは = in case of ~: a clear backup plan.'),
+          R('わかりました。ちゅうしに なるに ちがいありません。', 'Understood. It will surely be cancelled.', false, 'に ちがいない = must surely — gloomy, and not a plan.'),
+          R('では、ちゅうしに して ください。', 'Then please cancel it.', false, 'Asks them to cancel a tour that might still run.'),
+        ],
+      },
+    ],
+  },
 ];
