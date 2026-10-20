@@ -55,6 +55,20 @@ describe('counters', () => {
     expect(written(c('kaidan'), 3)).toBe('三階');
     expect(written(c('sai'), 10)).toBe('十歳');
   });
+  it('know the N2–N1 counters and their traps', () => {
+    expect(c('seki').readings[0]![0]).toBe('いっせき');
+    expect(counterDistractors(c('seki'), 3)).toContain('さんぜき');
+    expect(c('zen').readings[0]).toEqual(['いちぜん']);
+    expect(counterDistractors(c('zen'), 1)).toContain('いっぜん');
+    expect(counterDistractors(c('zen'), 8)).toContain('はっぜん');
+    expect(c('ki').readings[5]![0]).toBe('ろっき');
+    expect(counterDistractors(c('ki'), 3)).toContain('さんぎ');
+    expect(c('shu').readings[0]![0]).toBe('いっしゅ');
+    expect(counterDistractors(c('shu'), 3)).toContain('さんじゅ');
+    expect(c('mune').readings).toEqual(c('tou').readings);
+    expect(written(c('ki'), 5)).toBe('五基');
+    expect(written(c('shu'), 10)).toBe('十首');
+  });
   it('are listed in route order, so the last unlocked one is the newest', () => {
     const at = COUNTERS.map((k) => STOPS.findIndex((s) => s.id === k.from));
     for (let i = 1; i < at.length; i++) expect(at[i]!, COUNTERS[i]!.id).toBeGreaterThanOrEqual(at[i - 1]!);

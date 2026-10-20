@@ -108,6 +108,31 @@ export const COUNTERS: Counter[] = [
     things: [['🎂', 'years old (birthday cake)'], ['🐱', 'years old (a kitten growing up)']],
     readings: [['いっさい'], ['にさい'], ['さんさい'], ['よんさい'], ['ごさい'], ['ろくさい'], ['ななさい', 'しちさい'], ['はっさい', 'はちさい'], ['きゅうさい'], ['じゅっさい', 'じっさい']],
   },
+  {
+    id: 'seki', kanji: '隻', what: 'ships', from: 'gunkanjima',
+    things: [['🚢', 'ships'], ['⛴️', 'ferries'], ['🛳️', 'warships']],
+    readings: [['いっせき'], ['にせき'], ['さんせき'], ['よんせき'], ['ごせき'], ['ろくせき'], ['ななせき', 'しちせき'], ['はっせき', 'はちせき'], ['きゅうせき'], ['じゅっせき', 'じっせき']],
+  },
+  {
+    id: 'mune', kanji: '棟', what: 'buildings', from: 'sannai',
+    things: [['🛖', 'pit dwellings'], ['🏢', 'apartment blocks'], ['🏫', 'school buildings']],
+    readings: [['いっとう'], ['にとう'], ['さんとう'], ['よんとう'], ['ごとう'], ['ろくとう'], ['ななとう', 'しちとう'], ['はっとう', 'はちとう'], ['きゅうとう'], ['じゅっとう', 'じっとう']],
+  },
+  {
+    id: 'zen', kanji: '膳', what: 'pairs of chopsticks, bowls of rice', from: 'eiheiji',
+    things: [['🥢', 'pairs of chopsticks'], ['🍚', 'bowls of rice']],
+    readings: [['いちぜん'], ['にぜん'], ['さんぜん'], ['よんぜん'], ['ごぜん'], ['ろくぜん'], ['ななぜん', 'しちぜん'], ['はちぜん'], ['きゅうぜん'], ['じゅうぜん', 'じゅっぜん']],
+  },
+  {
+    id: 'ki', kanji: '基', what: 'large fixed structures', from: 'sakai',
+    things: [['⛰️', 'burial mounds (kofun)'], ['⛩️', 'torii gates'], ['🗼', 'towers']],
+    readings: [['いっき'], ['にき'], ['さんき'], ['よんき'], ['ごき'], ['ろっき', 'ろくき'], ['ななき', 'しちき'], ['はっき', 'はちき'], ['きゅうき'], ['じゅっき', 'じっき']],
+  },
+  {
+    id: 'shu', kanji: '首', what: 'waka and tanka poems', from: 'kinosaki',
+    things: [['📜', 'waka poems'], ['🖌️', 'tanka poems']],
+    readings: [['いっしゅ'], ['にしゅ'], ['さんしゅ'], ['よんしゅ'], ['ごしゅ'], ['ろくしゅ'], ['ななしゅ', 'しちしゅ'], ['はっしゅ', 'はちしゅ'], ['きゅうしゅ'], ['じゅっしゅ', 'じっしゅ']],
+  },
 ];
 
 /** The counter written with its number, e.g. 三匹. */
@@ -118,11 +143,11 @@ export function written(c: Counter, n: number): string {
 }
 
 const NUMS = ['いち', 'に', 'さん', 'よん', 'ご', 'ろく', 'なな', 'はち', 'きゅう', 'じゅう'];
-const BASE: Record<string, string> = { tsu: 'つ', nin: 'にん', hiki: 'ひき', hon: 'ほん', mai: 'まい', ko: 'こ', hai: 'はい', satsu: 'さつ', dai: 'だい', kai: 'かい', kaidan: 'かい', soku: 'そく', ken: 'けん', tou: 'とう', sai: 'さい' };
+const BASE: Record<string, string> = { tsu: 'つ', nin: 'にん', hiki: 'ひき', hon: 'ほん', mai: 'まい', ko: 'こ', hai: 'はい', satsu: 'さつ', dai: 'だい', kai: 'かい', kaidan: 'かい', soku: 'そく', ken: 'けん', tou: 'とう', sai: 'さい', seki: 'せき', mune: 'とう', zen: 'ぜん', ki: 'き', shu: 'しゅ' };
 /** Numbers that shrink to a small っ before some counters. */
 const GEM: Record<number, string> = { 1: 'いっ', 6: 'ろっ', 8: 'はっ', 10: 'じゅっ' };
 const ALT_NUMS: Record<number, string[]> = { 4: ['よ', 'し'], 7: ['しち'], 9: ['く'] };
-const VOICE: Record<string, string> = { は: 'ば', ひ: 'び', ほ: 'ぼ', か: 'が', こ: 'ご', さ: 'ざ', そ: 'ぞ', け: 'げ', と: 'ど' };
+const VOICE: Record<string, string> = { は: 'ば', ひ: 'び', ほ: 'ぼ', か: 'が', こ: 'ご', さ: 'ざ', そ: 'ぞ', け: 'げ', と: 'ど', せ: 'ぜ', し: 'じ', き: 'ぎ' };
 const HALF: Record<string, string> = { は: 'ぱ', ひ: 'ぴ', ほ: 'ぽ' };
 
 const swapFirst = (base: string, map: Record<string, string>): string | undefined => (map[base[0]!] ? map[base[0]!] + base.slice(1) : undefined);
