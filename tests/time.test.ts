@@ -59,7 +59,7 @@ describe('time and dates', () => {
 });
 
 import { STOPS } from '../src/data/journey';
-import { timetableGame, TIME_FROM, DATE_FROM, DURATION_FROM } from '../src/games/timetable';
+import { puzzleKinds, timetableGame, TIME_FROM, DATE_FROM, DURATION_FROM } from '../src/games/timetable';
 import { romajiToHiragana } from '../src/data/kana';
 describe('timetable game', () => {
   it('unlocks with clock times in the N5 tour', () => {
@@ -70,6 +70,10 @@ describe('timetable game', () => {
     expect(timetableGame.available!(at)).toBe(true);
     const dur = STOPS.findIndex((s) => s.id === DURATION_FROM);
     expect(STOPS[dur]!.tier).toBe('N4');
+    // rounds rotate through the unlocked kinds: durations join at Hikone, not before
+    expect(puzzleKinds(at)).toEqual(['time']);
+    expect(puzzleKinds(dur - 1)).toEqual(['time', 'date']);
+    expect(puzzleKinds(dur)).toEqual(['time', 'date', 'duration']);
   });
   it('accepts typed romaji answers', () => {
     expect(romajiToHiragana('yojijuppun')).toBe('よじじゅっぷん');

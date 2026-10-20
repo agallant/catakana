@@ -78,6 +78,17 @@ function durationPuzzle(level: number): Puzzle {
   return { id: `dur:${unit}:${n}`, card, hint: level === 1 ? `${n} ${DURATION_EN[unit]} — how long is the trip?` : 'How long? Say the duration.', answers: durationReadings(unit, n), wrongs: durationDistractors(unit, n) };
 }
 
+export type PuzzleKind = 'time' | 'date' | 'duration';
+const PUZZLES: Record<PuzzleKind, (level: number) => Puzzle> = { time: timePuzzle, date: datePuzzle, duration: durationPuzzle };
+
+/** The puzzle kinds unlocked by this stop, in the order rounds rotate through them. */
+export function puzzleKinds(stopIndex: number): PuzzleKind[] {
+  const kinds: PuzzleKind[] = ['time'];
+  if (reached(DATE_FROM, stopIndex)) kinds.push('date');
+  if (reached(DURATION_FROM, stopIndex)) kinds.push('duration');
+  return kinds;
+}
+
 /** Timetable: read departure times and calendar dates out loud (よじ, くじ, いっぷん, ついたち, はつか…). */
 export const timetableGame: GameDef = {
   id: 'timetable',
@@ -91,8 +102,7 @@ export const timetableGame: GameDef = {
   start(ctx: GameContext) {
     const sh = shell(ctx, 'Timetable 🕰️');
     if (!reached(TIME_FROM, ctx.stopIndex)) return ctx.quit();
-    const dates = reached(DATE_FROM, ctx.stopIndex);
-    const durations = reached(DURATION_FROM, ctx.stopIndex);
+    const kinds = puzzleKinds(ctx.stopIndex);
     const ROUNDS = 8;
     let idx = 0;
     let correct = 0;
@@ -105,8 +115,7 @@ export const timetableGame: GameDef = {
         return ctx.finish({ correct, total: ROUNDS });
       }
       sh.setProgress(idx, ROUNDS);
-      const kinds = [timePuzzle, ...(dates ? [datePuzzle] : []), ...(durations ? [durationPuzzle] : [])];
-      const p = kinds[idx % kinds.length]!(ctx.level);
+      const p = PUZZLES[kinds[idx % kinds.length]!](ctx.level);
       const main = p.answers[0]!;
       let locked = false;
       const reveal = h('div', { class: 'type-preview jp' }, ' ');
