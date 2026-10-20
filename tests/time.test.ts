@@ -1,5 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { dayDistractors, dayReadings, monthDistractors, monthReading, minuteReadings, timeDistractors, timeReadings } from '../src/data/time';
+import {
+  DURATION_MAX,
+  DURATION_UNITS,
+  dayDistractors,
+  dayReadings,
+  durationDistractors,
+  durationReadings,
+  monthDistractors,
+  monthReading,
+  minuteReadings,
+  timeDistractors,
+  timeReadings,
+} from '../src/data/time';
 
 describe('time and dates', () => {
   it('reads clock times', () => {
@@ -47,7 +59,7 @@ describe('time and dates', () => {
 });
 
 import { STOPS } from '../src/data/journey';
-import { timetableGame, TIME_FROM, DATE_FROM } from '../src/games/timetable';
+import { timetableGame, TIME_FROM, DATE_FROM, DURATION_FROM } from '../src/games/timetable';
 import { romajiToHiragana } from '../src/data/kana';
 describe('timetable game', () => {
   it('unlocks with clock times in the N5 tour', () => {
@@ -56,9 +68,44 @@ describe('timetable game', () => {
     expect(STOPS.findIndex((s) => s.id === DATE_FROM)).toBeGreaterThan(at);
     expect(timetableGame.available!(at - 1)).toBe(false);
     expect(timetableGame.available!(at)).toBe(true);
+    const dur = STOPS.findIndex((s) => s.id === DURATION_FROM);
+    expect(STOPS[dur]!.tier).toBe('N4');
   });
   it('accepts typed romaji answers', () => {
     expect(romajiToHiragana('yojijuppun')).toBe('よじじゅっぷん');
     expect(romajiToHiragana('shigatsutsuitachi')).toBe('しがつついたち');
+  });
+});
+
+describe('durations', () => {
+  it('know the sound changes', () => {
+    expect(durationReadings('hour', 4)).toEqual(['よじかん']);
+    expect(durationReadings('hour', 9)).toEqual(['くじかん']);
+    expect(durationReadings('week', 1)).toEqual(['いっしゅうかん']);
+    expect(durationReadings('week', 6)).toEqual(['ろくしゅうかん']);
+    expect(durationReadings('week', 8)).toContain('はっしゅうかん');
+    expect(durationReadings('month', 6)).toEqual(['ろっかげつ']);
+    expect(durationReadings('month', 10)).toContain('じゅっかげつ');
+    expect(durationReadings('year', 4)).toEqual(['よねん']);
+    expect(durationReadings('year', 9)).toContain('きゅうねん');
+  });
+  it('offer traps that teach', () => {
+    expect(durationDistractors('hour', 4)).toEqual(expect.arrayContaining(['よんじかん', 'よじ']));
+    expect(durationDistractors('month', 1)).toContain('いちかげつ');
+    expect(durationDistractors('month', 3)).toContain('さんがつ');
+    expect(durationDistractors('month', 6)).toContain('ろくかげつ');
+    expect(durationDistractors('week', 6)).toContain('ろっしゅうかん');
+    expect(durationDistractors('year', 4)).toContain('よんねん');
+  });
+  it('always have three distinct wrong answers', () => {
+    for (const unit of DURATION_UNITS) {
+      for (let n = 1; n <= DURATION_MAX[unit]; n++) {
+        const right = durationReadings(unit, n);
+        const wrong = durationDistractors(unit, n);
+        expect(wrong.length, `${unit} ${n}`).toBeGreaterThanOrEqual(3);
+        expect(new Set(wrong).size).toBe(wrong.length);
+        for (const w of wrong) expect(right).not.toContain(w);
+      }
+    }
   });
 });

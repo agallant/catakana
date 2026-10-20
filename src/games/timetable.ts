@@ -5,11 +5,25 @@ import { recordAnswer, shell } from './common';
 import { sample, shuffle } from '../core/srs';
 import { STOPS } from '../data/journey';
 import { romajiToHiragana } from '../data/kana';
-import { dayDistractors, dayReadings, monthDistractors, monthReading, timeDistractors, timeReadings } from '../data/time';
+import {
+  DURATION_KANJI,
+  DURATION_MAX,
+  DURATION_UNITS,
+  dayDistractors,
+  dayReadings,
+  durationDistractors,
+  durationReadings,
+  monthDistractors,
+  monthReading,
+  timeDistractors,
+  timeReadings,
+} from '../data/time';
 
 /** Clock times arrive at Kanazawa, calendar dates at Kobe (both N5). */
 export const TIME_FROM = 'kanazawa';
 export const DATE_FROM = 'kobe';
+/** How-long durations (～時間, ～週間, ～か月, ～年) arrive with N4 at Hikone. */
+export const DURATION_FROM = 'hikone';
 
 const reached = (id: string, stopIndex: number): boolean => {
   const at = STOPS.findIndex((s) => s.id === id);
@@ -49,13 +63,25 @@ function datePuzzle(level: number): Puzzle {
   return { id: `date:${mo}:${day}`, card, hint: level === 1 ? `${MONTHS_EN[mo - 1]} ${day} — how do you say it?` : 'How do you say this date?', answers: days.map((x) => month + x), wrongs };
 }
 
+const DURATION_EN: Record<string, string> = { hour: 'hours', week: 'weeks', month: 'months', year: 'years' };
+const DURATION_EMOJI: Record<string, string> = { hour: '⏱️', week: '🗓️', month: '🌙', year: '🎍' };
+
+function durationPuzzle(level: number): Puzzle {
+  // level 1 sticks to hours and months; the tricky っ forms come at all levels
+  const unit = level === 1 ? sample(['hour', 'month'] as const) : sample(DURATION_UNITS);
+  const n = sample([1, 3, 4, 6, 8, 10, 1 + Math.floor(Math.random() * DURATION_MAX[unit]), ...(unit === 'hour' ? [7, 9] : [])]);
+  const shown = `${n}${DURATION_KANJI[unit]}`;
+  const card = h('div', { class: 'calendar-card', 'aria-label': `${n} ${DURATION_EN[unit]}` }, h('div', { class: 'cal-month' }, DURATION_EMOJI[unit]!), h('div', { class: 'cal-day jp' }, shown));
+  return { id: `dur:${unit}:${n}`, card, hint: level === 1 ? `${n} ${DURATION_EN[unit]} — how long is the trip?` : 'How long? Say the duration.', answers: durationReadings(unit, n), wrongs: durationDistractors(unit, n) };
+}
+
 /** Timetable: read departure times and calendar dates out loud (よじ, くじ, いっぷん, ついたち, はつか…). */
 export const timetableGame: GameDef = {
   id: 'timetable',
   name: 'Timetable',
   jp: 'じこくひょう',
   emoji: '🕰️',
-  blurb: 'Read departure times and dates: よじ, いっぷん, ついたち, はつか…',
+  blurb: 'Read departure times, dates and durations: よじ, いっぷん, ついたち, ろっかげつ…',
   kinds: ['word'],
   skill: 'reading',
   available: (stopIndex) => stopIndex === undefined || reached(TIME_FROM, stopIndex),
@@ -63,6 +89,7 @@ export const timetableGame: GameDef = {
     const sh = shell(ctx, 'Timetable 🕰️');
     if (!reached(TIME_FROM, ctx.stopIndex)) return ctx.quit();
     const dates = reached(DATE_FROM, ctx.stopIndex);
+    const durations = reached(DURATION_FROM, ctx.stopIndex);
     const ROUNDS = 8;
     let idx = 0;
     let correct = 0;
@@ -75,7 +102,8 @@ export const timetableGame: GameDef = {
         return ctx.finish({ correct, total: ROUNDS });
       }
       sh.setProgress(idx, ROUNDS);
-      const p = dates && idx % 2 === 1 ? datePuzzle(ctx.level) : timePuzzle(ctx.level);
+      const kinds = [timePuzzle, ...(dates ? [datePuzzle] : []), ...(durations ? [durationPuzzle] : [])];
+      const p = kinds[idx % kinds.length]!(ctx.level);
       const main = p.answers[0]!;
       let locked = false;
       const reveal = h('div', { class: 'type-preview jp' }, ' ');
