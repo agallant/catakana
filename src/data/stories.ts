@@ -253,4 +253,56 @@ export const STORIES: Story[] = [
       { q: 'According to the officials, where does the problem really lie?', options: ['In how people keep their cats', 'In the cats themselves', 'In the rabbits’ diet'], answer: 0 },
     ],
   },
+  {
+    id: 'hakodate-night', title: 'The night view of Hakodate', emoji: '🌃', from: 'hakodate',
+    text: [
+      'きのうの {夜|よる}、ロープウェイで はこだてやまに のぼりました。',
+      'やまの うえは とても さむかったです。でも、{町|まち}の あかりが ほしの ように きれいでした。',
+      'となりの ひとが「せかいで いちばん きれいな やけいです」と いいました。わたしも そう おもいます。',
+    ],
+    questions: [
+      { q: 'How did the writer go up the mountain?', options: ['By ropeway', 'On foot', 'By bus'], answer: 0 },
+      { q: 'What was it like at the top?', options: ['Very cold', 'Very hot', 'Very crowded'], answer: 0 },
+      { q: 'What did the town lights look like?', options: ['Like stars', 'Like fireworks', 'Like the sun'], answer: 0 },
+    ],
+  },
+  {
+    id: 'kenrokuen', title: 'A garden in the snow', emoji: '🌲', from: 'kanazawa',
+    text: [
+      'かなざわの けんろくえんは、にほんで ゆうめいな にわです。',
+      'ふゆに なると、{木|き}に たくさんの なわを かけます。これは「ゆきづり」と いいます。おもい ゆきで えだが おれない ように するのです。',
+      'わたしは ゆきの {日|ひ}に いきました。しろい にわは とても しずかで、きれいでした。',
+    ],
+    questions: [
+      { q: 'What is yukitsuri?', options: ['Ropes that stop snow breaking branches', 'A winter festival', 'A kind of tea'], answer: 0 },
+      { q: 'When are the ropes put up?', options: ['In winter', 'In summer', 'In spring'], answer: 0 },
+      { q: 'What was the garden like on the snowy day?', options: ['Very quiet and beautiful', 'Very noisy', 'Closed'], answer: 0 },
+    ],
+  },
+  {
+    id: 'koyasan-stay', title: 'A night at a mountain temple', emoji: '🛕', from: 'koyasan',
+    text: [
+      'こうやさんには {百|ひゃく}いじょうの お{寺|てら}が あって、お{寺|てら}に とまる ことも できます。',
+      'ゆうごはんは しょうじん{料理|りょうり}でした。{肉|にく}や {魚|さかな}を つかわないのに、とても おいしかったです。',
+      'つぎの {朝|あさ}は {六時|ろくじ}に おきて、お{坊|ぼう}さんと いっしょに おきょうを ききました。ねむかったけど、こころが しずかに なりました。',
+    ],
+    questions: [
+      { q: 'What is special about shōjin ryōri?', options: ['It uses no meat or fish', 'It is very spicy', 'It is eaten standing'], answer: 0 },
+      { q: 'What did the writer do in the morning?', options: ['Listened to sutras with the monks', 'Went skiing', 'Took a train home'], answer: 0 },
+      { q: 'How did the writer feel afterwards?', options: ['Their mind felt calm', 'Angry', 'Hungry'], answer: 0 },
+    ],
+  },
+  {
+    id: 'crow-castle', title: 'The crow castle', emoji: '🏯', from: 'matsumoto',
+    text: [
+      'まつもとじょうは {黒|くろ}い おしろなので、「からすじょう」と よばれて います。',
+      'こくほうに なって いる おしろの ひとつで、なかに はいる ことも できます。かいだんが とても きゅうなので、きを つけなければ なりません。',
+      'うえまで のぼると、まどから {山|やま}が よく みえました。{白|しろ}い ひめじじょうと くらべて みたいと おもいました。',
+    ],
+    questions: [
+      { q: 'Why is it called the crow castle?', options: ['Because it is black', 'Because crows live there', 'Because it is small'], answer: 0 },
+      { q: 'What must you be careful of inside?', options: ['The very steep stairs', 'The dark rooms', 'The guards'], answer: 0 },
+      { q: 'Which castle does the writer want to compare it with?', options: ['White Himeji Castle', 'Osaka Castle', 'Hirosaki Castle'], answer: 0 },
+    ],
+  },
 ];
