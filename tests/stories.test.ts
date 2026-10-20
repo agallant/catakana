@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { STORIES } from '../src/data/stories';
 import { STOP_BY_ID } from '../src/data/journey';
 import { readingOf } from '../src/screens/explore';
-import { storiesThrough } from '../src/games/story';
+import { nextStory, storiesThrough } from '../src/games/story';
 
 describe('stories', () => {
   it('are well formed', () => {
@@ -16,6 +16,18 @@ describe('stories', () => {
   it('unlock along the journey', () => {
     expect(storiesThrough(0)).toHaveLength(0);
     expect(storiesThrough(999)).toHaveLength(STORIES.length);
+  });
+  it('end the journey with the maneki-neko legend at Gōtoku-ji', () => {
+    expect(STORIES.find((s) => s.from === 'gotokuji')?.id).toBe('gotokuji-maneki');
+    const n1 = STORIES.filter((s) => STOP_BY_ID.get(s.from)?.tier === 'N1');
+    expect(n1.length).toBeGreaterThanOrEqual(6);
+  });
+  it('offer the newest unread story on the route first', () => {
+    const all = storiesThrough(999);
+    // nothing read yet: the finale, whatever its position in the list
+    expect(nextStory(all, {})?.id).toBe('gotokuji-maneki');
+    // once it is read, the next-latest unread one
+    expect(nextStory(all, { 'story:gotokuji-maneki': { seen: 1 } })?.from).toBe('amami');
   });
 });
 

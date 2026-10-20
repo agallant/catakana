@@ -7,11 +7,19 @@ import { STORIES, type Story } from '../data/stories';
 import { STOPS } from '../data/journey';
 import { readingOf } from '../screens/explore';
 
+const stopOf = (s: Story): number => STOPS.findIndex((st) => st.id === s.from);
+
 export function storiesThrough(stopIndex: number): Story[] {
   return STORIES.filter((s) => {
-    const at = STOPS.findIndex((st) => st.id === s.from);
+    const at = stopOf(s);
     return at >= 0 && at <= stopIndex;
   });
+}
+
+/** The story to read next: the least-read one, and among those the one from the latest stop on the route. */
+export function nextStory(stories: Story[], srs: Record<string, { seen?: number } | undefined>): Story | undefined {
+  const seen = (s: Story): number => srs[`story:${s.id}`]?.seen ?? 0;
+  return [...stories].sort((a, b) => seen(a) - seen(b) || stopOf(b) - stopOf(a))[0];
 }
 
 /** Story Time: read a short passage (with furigana), then answer questions about it. */
@@ -28,7 +36,7 @@ export const storyGame: GameDef = {
     const sh = shell(ctx, 'Story Time 📖');
     const all = storiesThrough(ctx.stopIndex);
     // newest unread story first, else the least-practised one
-    const story = [...all].sort((a, b) => (ctx.store.data.srs[`story:${a.id}`]?.seen ?? 0) - (ctx.store.data.srs[`story:${b.id}`]?.seen ?? 0) || all.indexOf(b) - all.indexOf(a))[0];
+    const story = nextStory(all, ctx.store.data.srs);
     if (!story) return ctx.quit();
     // level 1: furigana on everything; 2: learner's setting; 3: no furigana
     const mode = ctx.level === 1 ? 'always' : ctx.level === 3 ? 'off' : ctx.store.data.settings.furigana;
