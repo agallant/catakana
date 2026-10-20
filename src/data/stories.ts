@@ -305,4 +305,60 @@ export const STORIES: Story[] = [
       { q: 'Which castle does the writer want to compare it with?', options: ['White Himeji Castle', 'Osaka Castle', 'Hirosaki Castle'], answer: 0 },
     ],
   },
+  {
+    id: 'gujo-dance', title: 'Dancing till dawn in Gujō', emoji: '💃', from: 'gujo',
+    text: [
+      '{郡上八幡|ぐじょうはちまん}では、{夏|なつ}に 30{日|にち}{以上|いじょう} {盆|ぼん}おどりが {続|つづ}きます。これを「{郡上|ぐじょう}おどり」と いいます。',
+      'お{盆|ぼん}の {四日間|よっかかん}は、{朝|あさ}まで おどり{続|つづ}ける「{徹夜|てつや}おどり」が あるらしいです。',
+      '{見|み}に {来|き}た だけの つもりでしたが、{輪|わ}の {中|なか}に {入|はい}って しまいました。{下駄|げた}の {音|おと}を {聞|き}きながら、{見|み}よう{見|み}まねで おどりました。',
+      '{最後|さいご}には {手|て}の {動|うご}きを {覚|おぼ}えられるように なりました。{来年|らいねん}は ゆかたを {着|き}て {来|く}る つもりです。',
+    ],
+    questions: [
+      { q: 'How long does the Gujō Odori go on each summer?', options: ['More than 30 nights', 'One night', 'One week'], answer: 0 },
+      { q: 'What is “tetsuya odori”?', options: ['Dancing until morning', 'Dancing in the rain', 'A dance only for children'], answer: 0 },
+      { q: 'What does the writer plan for next year?', options: ['To come wearing a yukata', 'To watch from far away', 'To teach the dance'], answer: 0 },
+    ],
+  },
+  {
+    id: 'tsumago-promise', title: 'The town that keeps a promise', emoji: '🏘️', from: 'tsumago',
+    text: [
+      '{妻籠宿|つまごじゅく}は、{江戸|えど}{時代|じだい}に {中山道|なかせんどう}を {旅|たび}する {人|ひと}が {泊|と}まった {宿場町|しゅくばまち}です。',
+      '{町|まち}を {歩|ある}くと、{電線|でんせん}が ほとんど {見|み}えないので、{昔|むかし}に {戻|もど}ったような {気|き}が します。',
+      '{町|まち}の {人|ひと}たちは、{古|ふる}い {町並|まちな}みを {守|まも}るために「{売|う}らない・{貸|か}さない・こわさない」という {約束|やくそく}を {作|つく}ったそうです。',
+      'わたしは {馬籠宿|まごめじゅく}まで {約|やく}8キロの {道|みち}を {歩|ある}きました。{山道|やまみち}でしたが、{途中|とちゅう}の {茶屋|ちゃや}で お{茶|ちゃ}を もらって {元気|げんき}が {出|で}ました。',
+    ],
+    questions: [
+      { q: 'What was Tsumago in the Edo period?', options: ['A post town for Nakasendō travellers', 'A castle town', 'A fishing port'], answer: 0 },
+      { q: 'Why does the town feel like the past?', options: ['You can hardly see any power lines', 'Nobody lives there', 'Everyone wears armour'], answer: 0 },
+      { q: 'What did the townspeople promise?', options: ['Not to sell, rent out or tear down', 'Not to open any shops', 'Not to let tourists in'], answer: 0 },
+    ],
+  },
+  {
+    id: 'kintai-bridge', title: 'The bridge that came back', emoji: '🌉', from: 'iwakuni',
+    text: [
+      '{錦帯橋|きんたいきょう}は、1673{年|ねん}に {錦川|にしきがわ}に かけられた、{五|いつ}つの アーチを {持|も}つ {木|き}の {橋|はし}です。',
+      'それまでの {橋|はし}は {洪水|こうずい}の たびに {流|なが}されて いました。そこで、{流|なが}されにくい {形|かたち}を {工夫|くふう}した わけです。',
+      'ところが 1950{年|ねん}、{台風|たいふう}に よって {橋|はし}は {流|なが}されて しまいました。{地元|じもと}の {人々|ひとびと}に とって、それは {大|おお}きな ショックでした。',
+      '{費用|ひよう}が かかる にも かかわらず、{人々|ひとびと}は {木|き}の {橋|はし}を {作|つく}り{直|なお}す ことに しました。1953{年|ねん}に {再建|さいけん}され、{今|いま}でも {定期的|ていきてき}に {架|か}け{替|か}えが {行|おこな}われて います。',
+    ],
+    questions: [
+      { q: 'What is special about the bridge’s shape?', options: ['Five wooden arches', 'It floats on boats', 'It is one long stone slab'], answer: 0 },
+      { q: 'What happened in 1950?', options: ['A typhoon washed it away', 'It was moved to Tokyo', 'It burned down'], answer: 0 },
+      { q: 'What did the people decide?', options: ['To rebuild it in wood despite the cost', 'To build a concrete bridge', 'To use a ferry instead'], answer: 0 },
+    ],
+  },
+  {
+    id: 'arita-imari', title: 'Why Europe said “Imari”', emoji: '🏺', from: 'arita',
+    text: [
+      '{有田焼|ありたやき}の {歴史|れきし}は、17{世紀|せいき}の はじめに {泉山|いずみやま}で {磁器|じき}の {原料|げんりょう}と なる {石|いし}が {見|み}つかった ことから {始|はじ}まった と いわれて います。',
+      '{有田|ありた}の {焼|や}き{物|もの}は {近|ちか}くの {伊万里|いまり}の {港|みなと}から {運|はこ}ばれたため、ヨーロッパでは「イマリ」と {呼|よ}ばれる ように なりました。',
+      '{毎年|まいとし} ゴールデンウィークに {開|ひら}かれる {陶器市|とうきいち}には、{百万人|ひゃくまんにん}{近|ちか}くの {人|ひと}が {訪|おとず}れる そうです。',
+      'わたしも {小|ちい}さい {茶碗|ちゃわん}を {一|ひと}つ {買|か}おうと した ものの、{選|えら}びきれずに {結局|けっきょく} {三|みっ}つも {買|か}って しまいました。',
+    ],
+    questions: [
+      { q: 'Why was Arita ware called “Imari” in Europe?', options: ['It was shipped from Imari port', 'Imari was the potter’s name', 'It was painted with imari flowers'], answer: 0 },
+      { q: 'When is the big pottery fair?', options: ['Golden Week', 'New Year', 'Obon'], answer: 0 },
+      { q: 'How many bowls did the writer end up buying?', options: ['Three', 'One', 'None'], answer: 0 },
+    ],
+  },
 ];
