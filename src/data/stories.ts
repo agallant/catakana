@@ -212,6 +212,20 @@ export const STORIES: Story[] = [
     ],
   },
   {
+    id: 'sekigahara-1600', title: 'The battle that split the realm', emoji: '⚔️', from: 'sekigahara',
+    text: [
+      '{慶長|けいちょう}{五年|ごねん}（1600{年|ねん}）、{美濃国|みののくに}の {関ケ原|せきがはら}で、{徳川家康|とくがわいえやす}{率|ひき}いる {東軍|とうぐん}と {石田三成|いしだみつなり}を {中心|ちゅうしん}とする {西軍|せいぐん}が {激突|げきとつ}した。「{天下分|てんかわ}け{目|め}の{戦|たたか}い」と {呼|よ}ばれる この {合戦|かっせん}は、わずか {半日|はんにち}で {決着|けっちゃく}が ついたと いわれる。',
+      '{勝敗|しょうはい}を {分|わ}けたのは、{松尾山|まつおやま}に {陣|じん}を {構|かま}えていた {小早川秀秋|こばやかわひであき}の {寝返|ねがえ}りであった。{西軍|せいぐん}に {属|ぞく}していた {秀秋|ひであき}が {東軍|とうぐん}に {付|つ}いたことで、{西軍|せいぐん}は {総崩|そうくず}れとなった。',
+      'この {勝利|しょうり}により {家康|いえやす}は {天下|てんか}の {実権|じっけん}を {握|にぎ}り、{三年後|さんねんご}には {征夷大将軍|せいいたいしょうぐん}に {任|にん}じられた。{以後|いご}{二百六十年|にひゃくろくじゅうねん}{余|あま}りに わたる {江戸|えど}{時代|じだい}の {幕開|まくあ}けである。{今|いま}も {古戦場|こせんじょう}には {武将|ぶしょう}たちの {陣跡|じんあと}に {旗|はた}が {立|た}ち、{訪|おとず}れる {人|ひと}は {往時|おうじ}に {思|おも}いを {馳|は}せている。',
+    ],
+    questions: [
+      { q: 'Who led the Eastern army?', options: ['Tokugawa Ieyasu', 'Ishida Mitsunari', 'Kobayakawa Hideaki'], answer: 0 },
+      { q: 'How long is the battle said to have lasted?', options: ['Only about half a day', 'Three days', 'A whole summer'], answer: 0 },
+      { q: 'What decided the outcome?', options: ['Kobayakawa Hideaki switched to the Eastern side', 'Heavy snow stopped the Western army', 'Cannon fire from a nearby castle'], answer: 0 },
+      { q: 'What happened three years later?', options: ['Ieyasu was appointed shogun, opening the Edo period', 'Mitsunari became shogun', 'The capital moved to Sekigahara'], answer: 0 },
+    ],
+  },
+  {
     id: 'shiga-kinosaki', title: 'At Kinosaki', emoji: '♨️', from: 'kinosaki',
     text: [
       '{大正|たいしょう}{二年|にねん}、{作家|さっか}の {志賀直哉|しがなおや}は {東京|とうきょう}で {電車|でんしゃ}に はねられ、{一命|いちめい}を {取|と}り{留|と}めたのち、{養生|ようじょう}のため {城崎|きのさき}{温泉|おんせん}に {滞在|たいざい}した。',
@@ -251,6 +265,20 @@ export const STORIES: Story[] = [
       { q: 'How was the problem recorded?', options: ['By automatic cameras', 'By tourists’ phones', 'By satellite'], answer: 0 },
       { q: 'What happens to the cats that are caught?', options: ['New owners are sought for them', 'They are released on another island', 'They are kept in a zoo'], answer: 0 },
       { q: 'According to the officials, where does the problem really lie?', options: ['In how people keep their cats', 'In the cats themselves', 'In the rabbits’ diet'], answer: 0 },
+    ],
+  },
+  {
+    id: 'gotokuji-maneki', title: 'The cat who beckoned', emoji: '🐾', from: 'gotokuji',
+    text: [
+      '{江戸|えど}{時代|じだい}の {初|はじ}め、{彦根藩主|ひこねはんしゅ}の {井伊直孝|いいなおたか}が {鷹狩|たかが}りの {帰|かえ}り{道|みち}、{世田谷|せたがや}の {小|ちい}さな {寺|てら}の {前|まえ}を {通|とお}りかかった。{門前|もんぜん}では {一匹|いっぴき}の {猫|ねこ}が、まるで {手招|てまね}きするかのように {片手|かたて}を {上|あ}げていたという。',
+      '{不思議|ふしぎ}に {思|おも}った {直孝|なおたか}が {寺|てら}に {立|た}ち{寄|よ}ると、ほどなくして {激|はげ}しい {雷雨|らいう}となった。{雨|あめ}に {濡|ぬ}れずに {済|す}んだうえ、{和尚|おしょう}の {法話|ほうわ}にも {心|こころ}を {打|う}たれた {直孝|なおたか}は、のちに この {寺|てら}を {井伊家|いいけ}の {菩提寺|ぼだいじ}と {定|さだ}め、{寺|てら}は {大|おお}いに {栄|さか}えた。',
+      '{今|いま}、{豪徳寺|ごうとくじ}の {境内|けいだい}には、{願|ねが}いが {叶|かな}った {人々|ひとびと}が {奉納|ほうのう}した {招|まね}き{猫|ねこ}が {所狭|ところせま}しと {並|なら}ぶ。ここの {猫|ねこ}は {小判|こばん}を {持|も}っていない。{福|ふく}そのものではなく、{人|ひと}との {縁|えん}を {招|まね}くのだと {伝|つた}えられている。',
+    ],
+    questions: [
+      { q: 'What was Ii Naotaka doing when he passed the temple?', options: ['Returning from a falcon hunt', 'Fleeing a battle', 'Looking for his lost cat'], answer: 0 },
+      { q: 'What did the cat at the gate seem to do?', options: ['Beckon him with a raised paw', 'Block the path', 'Run off into the woods'], answer: 0 },
+      { q: 'Why was Naotaka glad he stopped?', options: ['A violent thunderstorm broke out and he stayed dry', 'He found treasure in the temple', 'The monk gave him a cat'], answer: 0 },
+      { q: 'Why don’t Gōtoku-ji’s cats hold a gold coin?', options: ['They are said to beckon ties with people, not fortune itself', 'Coins are forbidden in temples', 'The coins were stolen long ago'], answer: 0 },
     ],
   },
   {
