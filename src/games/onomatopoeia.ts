@@ -42,8 +42,8 @@ export const onomatopoeiaGame: GameDef = {
     );
     if (!rounds.length) return ctx.quit();
     const mode = ctx.level === 1 ? 'always' : ctx.store.data.settings.furigana;
-    // level 2 is listening only when the device can actually say the word
-    const earOnly = ctx.level === 2 && hasJapaneseVoice();
+    // level 2 is listening only when speech is on and the device can actually say the word
+    const earOnly = ctx.level === 2 && ctx.store.data.settings.speech && hasJapaneseVoice();
     let idx = 0;
     let correct = 0;
     let lives = 3;
@@ -60,7 +60,12 @@ export const onomatopoeiaGame: GameDef = {
       const filled = o.ex.replace(ONO_BLANK, o.word);
       let locked = false;
       const reveal = h('div', { class: 'keigo-reveal' }, ' ');
-      const play = (): void => void speak(o.word);
+      const wordEl = h('div', { class: 'prompt-jp jp' }, earOnly ? '🔊 …' : o.word);
+      // if the word could not be spoken after all, show it so the round stays answerable
+      const play = (): void =>
+        void speak(o.word).then((spoke) => {
+          if (!spoke) wordEl.textContent = o.word;
+        });
       const done = async (ok: boolean, b: HTMLElement, right: HTMLElement | undefined): Promise<void> => {
         locked = true;
         b.classList.add(ok ? 'right' : 'wrong');
@@ -116,7 +121,7 @@ export const onomatopoeiaGame: GameDef = {
         h(
           'div',
           { class: 'prompt' },
-          h('div', { class: 'prompt-jp jp' }, earOnly ? '🔊 …' : o.word),
+          wordEl,
           h('button', { class: 'btn ghost', onClick: play, 'aria-label': 'Play the sound word again' }, '🔊 Again'),
         ),
         h('div', { class: 'choices one-col' }, buttons),
