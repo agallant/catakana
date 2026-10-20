@@ -262,4 +262,128 @@ export const SCENES: Scene[] = [
       },
     ],
   },
+  {
+    id: 'takkyubin', title: 'Sending your luggage ahead', emoji: '📦', from: 'otaru', role: 'Convenience-store clerk',
+    turns: [
+      {
+        npc: 'いらっしゃいませ。おにもつの はっそうですか。', en: 'Welcome. Are you sending a parcel?',
+        replies: [
+          R('はい、この スーツケースを ホテルまで おくりたいんですが。', 'Yes, I’d like to send this suitcase to my hotel.', true, 'おくりたい = want to send; 〜んですが softens the request.'),
+          R('はい、この スーツケースを ホテルまで もらいたいんですが。', 'Yes, I’d like to receive this suitcase at the hotel.', false, 'もらう = receive; you want おくる (send).'),
+          R('いいえ、はっそうです。', 'No, it’s a shipment.', false, 'Says no and yes at once.'),
+        ],
+      },
+      {
+        npc: 'おとどけは いつが よろしいですか。', en: 'When would you like it delivered?',
+        replies: [
+          R('あさっての ごぜんちゅうに おねがいします。', 'The morning of the day after tomorrow, please.', true, 'あさって = the day after tomorrow; ごぜんちゅう = in the morning.'),
+          R('おとといの ごぜんちゅうに おねがいします。', 'The morning of the day before yesterday, please.', false, 'おととい is in the past!'),
+          R('いつが よろしいですか。', 'When would be good?', false, 'That just repeats their question.'),
+        ],
+      },
+      {
+        npc: 'では、こちらに おなまえと ごじゅうしょを おかきください。', en: 'Then please write your name and address here.',
+        replies: [
+          R('はい。ボールペンを おかりしても いいですか。', 'Sure. May I borrow a pen?', true, 'おかりする is the humble “borrow”.'),
+          R('はい、かいて ください。', 'Yes, please write it.', false, 'That asks the clerk to write it for you.'),
+          R('おなまえは なんですか。', 'What is your name?', false, 'They asked for yours.'),
+        ],
+      },
+    ],
+  },
+  {
+    id: 'minshuku', title: 'A night at a minshuku', emoji: '🛏️', from: 'tsumago', role: 'Innkeeper',
+    turns: [
+      {
+        npc: 'ゆうしょくに たべられない ものは ありますか。', en: 'Is there anything you can’t eat at dinner?',
+        replies: [
+          R('たまごの アレルギーが あるので、たまごは ぬきで おねがいします。', 'I’m allergic to eggs, so no eggs, please.', true, '〜ぬきで = without ~; ので gives the reason politely.'),
+          R('たまごが すきなので、たべられません。', 'I like eggs, so I can’t eat them.', false, 'The reason doesn’t fit the result.'),
+          R('はい、なんでも たべられません。', 'Yes, I can’t eat anything.', false, 'なんでも + negative sounds like you eat nothing at all.'),
+        ],
+      },
+      {
+        npc: 'あしたは なんじに おたちですか。', en: 'What time will you be leaving tomorrow?',
+        replies: [
+          R('はちじごろ でる よていです。', 'I plan to leave around eight.', true, '〜よていです = it’s my plan to ~.'),
+          R('はちじごろ おたちに なります。', '(honorific about yourself)', false, 'おたちになる is respectful — only for the guest, said by the host.'),
+          R('はちじかん たちます。', 'Eight hours will pass.', false, '〜じかん is a length of time (たつ = 経つ, “pass”), not the clock time you leave.'),
+        ],
+      },
+      {
+        npc: 'では、ごゆっくり おやすみください。', en: 'Then have a good rest.',
+        replies: [
+          R('ありがとうございます。おやすみなさい。', 'Thank you. Good night.', true, 'The natural bedtime reply.'),
+          R('いってきます。', 'I’m off!', false, 'Said when leaving home.'),
+          R('おかえりなさい。', 'Welcome home.', false, 'Said to someone coming back.'),
+        ],
+      },
+    ],
+  },
+  {
+    id: 'interview', title: 'A part-time job interview', emoji: '🤝', from: 'kurashiki', role: 'Café manager',
+    turns: [
+      {
+        npc: 'どうぞ、おかけください。', en: 'Please, have a seat.',
+        replies: [
+          R('しつれいします。', 'Excuse me (as I sit).', true, 'しつれいします before sitting, entering or leaving a formal room.'),
+          R('おじゃましました。', 'Sorry for intruding (when leaving).', false, 'That’s for leaving someone’s home.'),
+          R('いただきます。', 'Let’s eat.', false, 'Only before eating.'),
+        ],
+      },
+      {
+        npc: 'では、じこしょうかいを おねがいします。', en: 'Then please introduce yourself.',
+        replies: [
+          R('モチと もうします。にほんごを べんきょうして、にねんめです。', 'My name is Mochi. I’m in my second year of studying Japanese.', true, 'もうします = humble “to be called”.'),
+          R('モチと おっしゃいます。', '(honorific about yourself)', false, 'おっしゃる raises the speaker — never for your own name.'),
+          R('モチさんです。', 'I am Mr Mochi.', false, 'Never add さん to your own name.'),
+        ],
+      },
+      {
+        npc: 'なにか しつもんは ありますか。', en: 'Do you have any questions?',
+        replies: [
+          R('しごとの ないようについて うかがっても よろしいでしょうか。', 'May I ask about what the work involves?', true, 'うかがう = humble “ask”; よろしいでしょうか is very polite.'),
+          R('きゅうりょうは いくら くれるの？', 'How much will you pay me, huh?', false, 'Far too casual for an interview.'),
+          R('しつもんは ございません、と おっしゃいます。', '(honorific about yourself)', false, 'Mixes politeness levels and raises yourself.'),
+        ],
+      },
+      {
+        npc: 'けっかは らいしゅう ごれんらく します。', en: 'We’ll let you know the result next week.',
+        replies: [
+          R('ほんじつは ありがとうございました。しつれいいたします。', 'Thank you for today. Goodbye.', true, 'ほんじつ and しつれいいたします keep it formal to the end.'),
+          R('またね！', 'See ya!', false, 'Too casual.'),
+          R('ごれんらく します。', 'I’ll contact you.', false, 'They will contact you, not the other way round.'),
+        ],
+      },
+    ],
+  },
+  {
+    id: 'temple-stay', title: 'A stay at a Zen temple', emoji: '🧘', from: 'eiheiji', role: 'Monk',
+    turns: [
+      {
+        npc: 'しゅくぼうの きまりは ごぞんじですか。', en: 'Do you know the rules of the temple lodging?',
+        replies: [
+          R('もうしわけ ありません、ぞんじて おりません。おしえて いただけますか。', 'I’m sorry, I don’t. Could you teach me?', true, 'ぞんじておりません is the humble “I don’t know”.'),
+          R('いいえ、ごぞんじでは ありません。', '(honorific about yourself)', false, 'ごぞんじ raises the person who knows — not you.'),
+          R('はい、しりません。', 'Yes, I don’t know.', false, 'はい + しりません contradicts itself, and しりません is blunt.'),
+        ],
+      },
+      {
+        npc: 'しょくじちゅうは、ひとことも はなさないで ください。', en: 'Please don’t say a single word during meals.',
+        replies: [
+          R('しょうち いたしました。', 'Understood.', true, 'The formal way to accept an instruction.'),
+          R('わかったよ。', 'Got it.', false, 'Far too casual with a monk.'),
+          R('はなしても いいですか。', 'May I talk?', false, 'You were just asked not to.'),
+        ],
+      },
+      {
+        npc: 'あさの ざぜんは ごじからです。おくれないように。', en: 'Morning zazen starts at five. Don’t be late.',
+        replies: [
+          R('はい、ごじまえに まいります。', 'Yes, I will come before five.', true, 'まいります = humble “come/go”.'),
+          R('はい、ごじまえに いらっしゃいます。', '(honorific about yourself)', false, 'いらっしゃる is respectful — use まいる for yourself.'),
+          R('はい、ごじごろ ねます。', 'Yes, I’ll go to bed around five.', false, 'That’s when you should be sitting zazen!'),
+        ],
+      },
+    ],
+  },
 ];
