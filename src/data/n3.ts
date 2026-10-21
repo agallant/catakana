@@ -120,6 +120,18 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         { jp: 'ゆきの かべは とても たかいそうです。', en: 'I hear the snow walls are very tall.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'you-da',
+        title: '〜ようだ / 〜みたいだ — it seems (from what I see)',
+        pattern: 'あめが ふっているようです',
+        explain: 'Plain form + ようです means “it seems …”, a guess from what you notice yourself. Nouns take の (うわさの ようです) and な-adjectives take な (しずかな ようです). みたいです is the casual version and attaches straight to nouns and な-adjectives (うわさみたいです). Unlike 〜そうだ (I hear), it is your own judgement.',
+        examples: [
+          { jp: 'そとは ゆきが ふっているようです。', en: 'It seems to be snowing outside.' },
+          { jp: 'あの みちは あぶないみたいです。', en: 'That road seems dangerous.' },
+        ],
+      },
+    ],
     words: [
       ['雪の壁', 'ゆきのかべ', 'snow wall', '🧱'],
       ['立山', 'たてやま', 'Mount Tateyama', '🏔️'],
@@ -142,6 +154,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['ゆきの', 'かべは', 'たかいそうです。'], en: 'I hear the snow walls are tall.' },
       { chunks: ['あの', 'はしは', 'あぶなそうです。'], en: 'That bridge looks dangerous.' },
       { chunks: ['トロッコで', 'きょうこくへ', 'いきました。'], en: 'I went into the gorge by mine-cart train.' },
+      { chunks: ['そとは', 'ゆきが', 'ふっている', 'ようです。'], en: 'It seems to be snowing outside.' },
     ],
   },
   sado: {
@@ -191,6 +204,18 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         { jp: 'ケーキを ぜんぶ たべちゃった！', en: 'I ate the whole cake!' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'ba-yokatta',
+        title: '〜ばよかった — I should have …',
+        pattern: 'はやく でれば よかった',
+        explain: 'ば form + よかった expresses regret: “if only I had …”. はやく でれば よかった = I should have left early. For “I shouldn’t have”, use the negative ば form: たべなければ よかった. It often follows a 〜てしまった mistake.',
+        examples: [
+          { jp: 'おまもりを かえば よかった。', en: 'I should have bought a charm.' },
+          { jp: 'ケーキを ぜんぶ たべなければ よかった。', en: 'I shouldn’t have eaten the whole cake.' },
+        ],
+      },
+    ],
     words: [
       ['鶴ヶ城', 'つるがじょう', 'Tsuruga Castle', '🏯'],
       ['赤べこ', 'あかべこ', 'red cow toy', '🐂'],
@@ -214,6 +239,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['ねこが', 'ケーキを', 'ぜんぶ', 'たべちゃった！'], en: 'The cat ate the whole cake!' },
       { chunks: ['あかべこの', 'くびが', 'ゆれています。'], en: 'The akabeko’s head is wobbling.' },
       { chunks: ['しゅくだいを', 'わすれて', 'しまいました。'], en: 'I forgot my homework.' },
+      { chunks: ['おまもりを', 'かえば', 'よかった。'], en: 'I should have bought a charm.' },
     ],
   },
   otaru: {
