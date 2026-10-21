@@ -149,7 +149,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         pattern: 'さむくないです / さむかったです',
         explain: 'い-adjectives change their ending: さむい → さむくない (not cold), さむかった (was cold), さむくなかった (wasn’t cold). いい is special: よくない, よかった. な-adjectives use じゃない and でした: しずかじゃないです.',
         examples: [
-          { jp: 'あきたの ふゆは とても さむかったです。', en: 'Winter in Akita was very cold.' },
+          { jp: 'あきたは とても さむかったです。', en: 'Akita was very cold.' },
           { jp: 'この まちは しずかじゃないです。', en: 'This town isn’t quiet.' },
         ],
       },
