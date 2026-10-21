@@ -100,6 +100,8 @@ describe('extra grammar', () => {
     expect(grammarsAt('aizu').map((g) => g.id)).toEqual(['teshimau', 'ba-yokatta']);
     expect(grammarsAt('takachiho').map((g) => g.id)).toEqual(['causative', 'saserareru']);
     expect(grammarsAt('otaru').map((g) => g.id)).toEqual(['nagara', 'tokoro']);
+    expect(grammarsAt('naoshima').map((g) => g.id)).toEqual(['temo', 'noni']);
+    expect(grammarsAt('sado').map((g) => g.id)).toEqual(['rashii', 'ppoi']);
   });
   it('gives every grammar point a unique id and examples', () => {
     const all = Object.keys(TOUR_CONTENT).flatMap((s) => grammarsAt(s));
