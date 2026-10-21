@@ -106,7 +106,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         id: 'te-miru',
         title: '〜てみます — try doing',
         pattern: 'しょうじんりょうりを たべて みます',
-        explain: 'て-form + みます means “try doing (and see how it is)”. みたいです = want to try: ざぜんを して みたいです.',
+        explain: 'て-form + みます means “try doing (and see how it is)”. て-form + みたいです means “want to try doing”: ざぜんを して みたいです.',
         examples: [
           { jp: 'しょうじんりょうりを たべて みます。', en: 'I’ll try eating temple food.' },
           { jp: 'おてらに とまって みたいです。', en: 'I want to try staying at a temple.' },
