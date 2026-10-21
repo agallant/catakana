@@ -61,6 +61,18 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         { jp: 'けんこうの ために、まいにち あるきます。', en: 'I walk every day for my health.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'noni-purpose',
+        title: '〜のに — for (doing), used for',
+        pattern: 'サンプルを つくるのに つかいます',
+        explain: 'Dictionary form + のに means “for doing” when talking about what something is used for, what it takes, or how good it is for a purpose: つくるのに つかいます (use it for making), つくるのに じかんが かかります (it takes time to make). Unlike ために, it goes with words like つかう, かかる, いい, べんり and ひつよう, not with your own goals in general.',
+        examples: [
+          { jp: 'これは サンプルを つくるのに つかいます。', en: 'This is used for making the samples.' },
+          { jp: 'ひとつ つくるのに みっか かかります。', en: 'It takes three days to make one.' },
+        ],
+      },
+    ],
     words: [
       ['踊る', 'おどる', 'to dance', '💃'],
       ['盆踊り', 'ぼんおどり', 'Bon festival dance', '🏮'],
@@ -84,6 +96,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['まつりの', 'じゅんびを', 'しています。'], en: 'They are preparing for the festival.' },
       { chunks: ['あめの', 'ために', 'でんしゃが', 'おくれました。'], en: 'The train was late because of the rain.' },
       { chunks: ['この', 'サンプルは', 'ほんものみたいです。'], en: 'This sample looks like the real thing.' },
+      { chunks: ['ひとつ', 'つくるのに', 'みっか', 'かかります。'], en: 'It takes three days to make one.' },
     ],
   },
   tsumago: {
@@ -97,6 +110,18 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         { jp: 'みんなに きこえるように、おおきい こえで はなします。', en: 'I speak loudly so everyone can hear.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'you-ni-iu',
+        title: '〜ように いう — tell someone to',
+        pattern: 'ちゅういするように いわれました',
+        explain: 'Dictionary or ない form + ように + いう / たのむ reports a request or instruction: “told (someone) to …”. The person told takes に: ともだちに まつように いいました. With the passive (〜ように いわれました) it means you were told, and the に-person becomes the one who told you (Xに …ように いわれました = was told by X). Watch out: in くまに ちゅういするように いわれました, くまに belongs to ちゅういする (watch out for bears); the speaker who told you is left unsaid.',
+        examples: [
+          { jp: 'かいどうで くまに ちゅういするように いわれました。', en: 'I was told to watch out for bears on the old road.' },
+          { jp: 'わすれないように、ともだちに たのみました。', en: 'I asked my friend not to forget.' },
+        ],
+      },
+    ],
     words: [
       ['宿場町', 'しゅくばまち', 'post town', '🏚️'],
       ['街道', 'かいどう', 'old highway', '🛤️'],
@@ -120,6 +145,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['くまが', 'こないように', 'すずを', 'ならします。'], en: 'I ring a bell so bears won’t come.' },
       { chunks: ['でんしゃに', 'まにあうように', 'はしりました。'], en: 'I ran so I’d make the train.' },
       { chunks: ['むかしながらの', 'まちが', 'のこっています。'], en: 'An old-fashioned town remains.' },
+      { chunks: ['くまに', 'ちゅういするように', 'いわれました。'], en: 'I was told to watch out for bears.' },
     ],
   },
   toyama: {
