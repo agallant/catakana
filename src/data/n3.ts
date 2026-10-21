@@ -359,7 +359,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         id: 'ba-hodo',
         title: '〜ば〜ほど — the more …, the more …',
         pattern: 'ちかづけば ちかづくほど おおきく みえます',
-        explain: 'Say the same word twice: first in the ば form, then in the plain form + ほど. ちかづけば ちかづくほど = the closer you get, the more …. い-adjectives use ければ … いほど (さむければ さむいほど); な-adjectives and nouns use なら … なほど (しずかなら しずかなほど).',
+        explain: 'Say the same word twice: first in the ば form, then in the plain form + ほど. ちかづけば ちかづくほど = the closer you get, the more …. い-adjectives use ければ … いほど (さむければ さむいほど); な-adjectives use なら … なほど (しずかなら しずかなほど). Nouns use であれば … であるほど (プロであれば プロであるほど).',
         examples: [
           { jp: 'ちかづけば ちかづくほど、たきは おおきく みえます。', en: 'The closer you get, the bigger the waterfall looks.' },
           { jp: 'さむければ さむいほど、りゅうひょうが ふえます。', en: 'The colder it gets, the more drift ice there is.' },
