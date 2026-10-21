@@ -500,7 +500,6 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['薬', 'くすり', 'medicine', '💊'],
       ['風邪', 'かぜ', 'a cold', '🤧'],
       ['疲れる', 'つかれる', 'to get tired', '😩'],
-      ['入る', 'はいる', 'to enter / take (a bath)', '♨️'],
       ['洗う', 'あらう', 'to wash', '🧼'],
       ['浴びる', 'あびる', 'to take (a shower)', '🚿'],
       ['気持ちいい', 'きもちいい', 'feels good', '😌'],

@@ -65,6 +65,18 @@ describe('N4 content', () => {
 });
 
 describe('tour dedup', () => {
+  it('lists each kanji word once across the whole tour', () => {
+    const seen = new Map<string, string>();
+    const dups: string[] = [];
+    for (const [stop, c] of Object.entries(TOUR_CONTENT))
+      for (const [written, reading] of c.words) {
+        if (written === reading) continue;
+        const key = `${written}|${reading}`;
+        if (seen.has(key)) dups.push(`${key} at ${seen.get(key)} and ${stop}`);
+        else seen.set(key, stop);
+      }
+    expect(dups).toEqual([]);
+  });
   it('keeps homophones with different meanings', () => {
     const tomaru = TOUR_WORDS.filter((w) => w.reading === 'とまる').map((w) => w.kanji);
     expect(tomaru).toContain('止まる');

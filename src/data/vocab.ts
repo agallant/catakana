@@ -225,9 +225,10 @@ const seenTour = new Set<string>();
 export const TOUR_WORDS: Word[] = TOUR.flatMap(({ tier, content }) =>
   Object.entries(content).flatMap(([stop, c]) =>
     c.words
-      .filter(([, reading, en]) => {
-        // skip words taught earlier: any kana-stage reading, or the same reading + meaning in the tour
-        const key = `${reading}|${normMeaning(en)}`;
+      .filter(([written, reading, en]) => {
+        // skip words taught earlier: any kana-stage reading, or the same word in the tour —
+        // the same kanji form (元気/げんき, however it's glossed), or for kana-only words the same meaning
+        const key = written !== reading ? `${reading}|${written}` : `${reading}|${normMeaning(en)}`;
         if (kanaStageReadings.has(reading) || seenTour.has(key)) return false;
         seenTour.add(key);
         return true;
