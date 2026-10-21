@@ -115,7 +115,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         id: 'you-ni-iu',
         title: '〜ように いう — tell someone to',
         pattern: 'ちゅういするように いわれました',
-        explain: 'Dictionary or ない form + ように + いう / たのむ reports a request or instruction: “told (someone) to …”. The person told takes に: ともだちに まつように いいました. With the passive, it means you were told: くまに ちゅういするように いわれました.',
+        explain: 'Dictionary or ない form + ように + いう / たのむ reports a request or instruction: “told (someone) to …”. The person told takes に: ともだちに まつように いいました. With the passive (〜ように いわれました) it means you were told, and the に-person becomes the one who told you (Xに …ように いわれました = was told by X). Watch out: in くまに ちゅういするように いわれました, くまに belongs to ちゅういする (watch out for bears); the speaker who told you is left unsaid.',
         examples: [
           { jp: 'かいどうで くまに ちゅういするように いわれました。', en: 'I was told to watch out for bears on the old road.' },
           { jp: 'わすれないように、ともだちに たのみました。', en: 'I asked my friend not to forget.' },
