@@ -211,6 +211,18 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'あした にっこうへ いきます。', en: 'I will go to Nikko tomorrow.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'yo-ne',
+        title: 'よ / ね — sentence endings',
+        pattern: 'いいですね / いきますよ',
+        explain: 'Add ね to share a feeling or check that the listener agrees (“…, isn’t it?”). Add よ to tell someone something new (“…, you know!”). Both go at the very end.',
+        examples: [
+          { jp: 'きょうは あついですね。', en: 'It’s hot today, isn’t it?' },
+          { jp: 'あした いきますよ。', en: 'I’m going tomorrow, you know.' },
+        ],
+      },
+    ],
     words: [
       ['起きる', 'おきる', 'to wake up', '⏰'],
       ['寝る', 'ねる', 'to sleep', '😴'],
@@ -240,6 +252,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['あした', 'ともだちに', 'あいます。'], en: 'I will meet a friend tomorrow.' },
       { chunks: ['わたしは', 'ろくじに', 'おきます。'], en: 'I wake up at six.' },
       { chunks: ['きょう', 'うちへ', 'かえります。'], en: 'I will go home today.' },
+      { chunks: ['きょうは', 'あつい', 'ですね。'], en: 'It’s hot today, isn’t it?' },
     ],
   },
   kanazawa: {
@@ -253,7 +266,20 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'ねこは さかなを たべます。', en: 'The cat eats fish.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'hoshii',
+        title: '〜が ほしい — want (a thing)',
+        pattern: 'あたらしい くつが ほしいです',
+        explain: 'ほしい is an adjective meaning “wanted”. The thing you want takes が: すしが ほしいです (I want sushi). For wanting to DO something, use 〜たい, which comes later at Beppu.',
+        examples: [
+          { jp: 'あたらしい かばんが ほしいです。', en: 'I want a new bag.' },
+          { jp: 'なにが ほしいですか。', en: 'What do you want?' },
+        ],
+      },
+    ],
     words: [
+      ['欲しい', 'ほしい', 'wanted / want', '🎁'],
       ['朝ご飯', 'あさごはん', 'breakfast', '🍳'],
       ['昼ご飯', 'ひるごはん', 'lunch', '🍱'],
       ['晩ご飯', 'ばんごはん', 'dinner', '🍲'],
@@ -289,6 +315,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['おちゃを', 'のみます。'], en: 'I drink tea.' },
       { chunks: ['はしで', 'すしを', 'たべます。'], en: 'I eat sushi with chopsticks.' },
       { chunks: ['おべんとうを', 'つくります。'], en: 'I make a boxed lunch.' },
+      { chunks: ['あたらしい', 'くつが', 'ほしい', 'です。'], en: 'I want new shoes.' },
     ],
   },
   shirakawa: {
