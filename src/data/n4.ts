@@ -148,6 +148,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'くだものの なかで ももが いちばん すきです。', en: 'Of all fruits I like peaches best.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'sugiru',
+        title: '〜すぎます — too much',
+        pattern: 'ももを たべすぎました',
+        explain: 'Add すぎます for “too …”: to a verb’s ます stem (たべます → たべすぎます), to an い-adjective without い (たかい → たかすぎます), or to a な-adjective as it is (しずか → しずかすぎます). いい becomes よすぎます.',
+        examples: [
+          { jp: 'ももを たべすぎました。', en: 'I ate too many peaches.' },
+          { jp: 'この にわは ひろすぎます。', en: 'This garden is too big.' },
+        ],
+      },
+    ],
     words: [
       ['同じ', 'おなじ', 'same', '🟰'],
       ['近い', 'ちかい', 'near', '📍'],
@@ -177,6 +189,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['くだものの', 'なかで', 'ももが', 'いちばん', 'すきです。'], en: 'Of all fruits I like peaches best.' },
       { chunks: ['でんしゃより', 'しんかんせんの', 'ほうが', 'はやいです。'], en: 'The shinkansen is faster than the train.' },
       { chunks: ['この', 'にわは', 'とても', 'ひろいです。'], en: 'This garden is very spacious.' },
+      { chunks: ['ももを', 'たべすぎました。'], en: 'I ate too many peaches.' },
     ],
   },
   tottori: {
@@ -233,6 +246,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'かみさまは ここに いると おもいます。', en: 'I think the gods are here.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'kamoshirenai',
+        title: '〜かもしれません — might, maybe',
+        pattern: 'あめが ふるかもしれません',
+        explain: 'Plain form + かもしれません means “might …” and is less sure than と思います. With nouns and な-adjectives, drop だ: おばけかもしれません.',
+        examples: [
+          { jp: 'あしたは あめが ふるかもしれません。', en: 'It might rain tomorrow.' },
+          { jp: 'あれは おばけかもしれません。', en: 'That might be a ghost.' },
+        ],
+      },
+    ],
     words: [
       ['思う', 'おもう', 'to think', '💭'],
       ['考える', 'かんがえる', 'to consider', '🤔'],
@@ -262,6 +287,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['かみさまは', 'いずもに', 'いると', 'おもいます。'], en: 'I think the gods are in Izumo.' },
       { chunks: ['この', 'もんだいは', 'むずかしいと', 'おもいます。'], en: 'I think this problem is difficult.' },
       { chunks: ['たぶん', 'おばけは', 'いないと', 'おもいます。'], en: 'I think there probably aren’t ghosts.' },
+      { chunks: ['あれは', 'おばけ', 'かもしれません。'], en: 'That might be a ghost.' },
     ],
   },
   matsumoto: {
