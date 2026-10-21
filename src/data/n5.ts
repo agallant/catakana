@@ -64,6 +64,13 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['母', 'はは', '(my) mother', '👩'],
       ['両親', 'りょうしん', 'parents', '👫'],
       ['大人', 'おとな', 'adult', '🧑'],
+      ['皆さん', 'みなさん', 'everyone', '👥'],
+      ['方', 'かた', 'person (polite)', '🙇'],
+      ['兄弟', 'きょうだい', 'siblings', '👫'],
+      ['奥さん', 'おくさん', '(someone’s) wife', '👩'],
+      ['ご主人', 'ごしゅじん', '(someone’s) husband', '👨'],
+      ['おじいさん', 'おじいさん', 'grandfather', '👴'],
+      ['おばあさん', 'おばあさん', 'grandmother', '👵'],
     ],
     sentences: [
       { chunks: ['わたしは', 'ねこ', 'です。'], en: 'I am a cat.' },
@@ -111,6 +118,8 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['とても', 'とても', 'very', '💯'],
       ['少し', 'すこし', 'a little', '🤏'],
       ['たくさん', 'たくさん', 'a lot', '🍎'],
+      ['茶色', 'ちゃいろ', 'brown', '🟫'],
+      ['すっぱい', 'すっぱい', 'sour', '🍋'],
     ],
     sentences: [
       { chunks: ['これは', 'わたしの', 'ほん', 'です。'], en: 'This is my book.' },
@@ -195,6 +204,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['今日', 'きょう', 'today', '📅'],
       ['明日', 'あした', 'tomorrow', '➡️'],
       ['昨日', 'きのう', 'yesterday', '⬅️'],
+      ['門', 'もん', 'gate', '⛩️'],
     ],
     sentences: [
       { chunks: ['ねこは', 'よく', 'ねます。'], en: 'Cats sleep a lot.' },
@@ -239,6 +249,11 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['すぐ', 'すぐ', 'right away', '⚡'],
       ['毎朝', 'まいあさ', 'every morning', '🌅'],
       ['毎晩', 'まいばん', 'every night', '🌙'],
+      ['分', 'ふん', 'minute', '⏲️'],
+      ['晩', 'ばん', 'evening', '🌆'],
+      ['昨夜', 'ゆうべ', 'last night', '🌃'],
+      ['今朝', 'けさ', 'this morning', '🌄'],
+      ['毎年', 'まいとし', 'every year', '🎆'],
     ],
     sentences: [
       { chunks: ['ねこは', 'さかなを', 'たべます。'], en: 'The cat eats fish.' },
@@ -285,6 +300,9 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['電気', 'でんき', 'electricity, light', '💡'],
       ['つける', 'つける', 'to turn on', '🔛'],
       ['消す', 'けす', 'to turn off', '📴'],
+      ['本棚', 'ほんだな', 'bookshelf', '📚'],
+      ['置く', 'おく', 'to put', '📥'],
+      ['並べる', 'ならべる', 'to line up', '📏'],
     ],
     sentences: [
       { chunks: ['あした', 'しらかわごうへ', 'いきます。'], en: 'I will go to Shirakawa-go tomorrow.' },
@@ -328,6 +346,8 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['市場', 'いちば', 'market', '🧺'],
       ['一緒に', 'いっしょに', 'together', '🤝'],
       ['牛乳', 'ぎゅうにゅう', 'milk', '🥛'],
+      ['八百屋', 'やおや', 'greengrocer', '🥬'],
+      ['袋', 'ふくろ', 'bag', '🛍️'],
     ],
     sentences: [
       { chunks: ['これは', 'いくら', 'ですか。'], en: 'How much is this?' },
@@ -371,6 +391,10 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['まっすぐ', 'まっすぐ', 'straight ahead', '⬆️'],
       ['曲がる', 'まがる', 'to turn', '↪️'],
       ['交番', 'こうばん', 'police box', '👮'],
+      ['角', 'かど', 'corner', '📐'],
+      ['信号', 'しんごう', 'traffic light', '🚦'],
+      ['向こう', 'むこう', 'over there, the other side', '👉'],
+      ['隣', 'となり', 'next door', '🏘️'],
     ],
     sentences: [
       { chunks: ['でんしゃで', 'いせへ', 'いきます。'], en: 'I go to Ise by train.' },
@@ -418,6 +442,9 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['今年', 'ことし', 'this year', '📆'],
       ['毎週', 'まいしゅう', 'every week', '🔁'],
       ['夏休み', 'なつやすみ', 'summer holidays', '🏖️'],
+      ['先月', 'せんげつ', 'last month', '⏮️'],
+      ['今月', 'こんげつ', 'this month', '📅'],
+      ['毎月', 'まいつき', 'every month', '🔁'],
     ],
     sentences: [
       { chunks: ['はこの', 'なかに', 'ねこが', 'います。'], en: 'There is a cat in the box.' },
@@ -463,6 +490,8 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['呼ぶ', 'よぶ', 'to call', '📣'],
       ['座る', 'すわる', 'to sit', '🪑'],
       ['立つ', 'たつ', 'to stand', '🧍'],
+      ['出かける', 'でかける', 'to go out', '👟'],
+      ['遅い', 'おそい', 'slow, late', '🐢'],
     ],
     sentences: [
       { chunks: ['きのう', 'カツオを', 'たべました。'], en: 'I ate bonito yesterday.' },
@@ -507,6 +536,9 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['タオル', 'タオル', 'towel', '🧺'],
       ['石鹸', 'せっけん', 'soap', '🧼'],
       ['磨く', 'みがく', 'to brush, polish', '🪥'],
+      ['温い', 'ぬるい', 'lukewarm', '🫖'],
+      ['石', 'いし', 'stone', '🪨'],
+      ['脱ぐ', 'ぬぐ', 'to take off (clothes)', '👕'],
     ],
     sentences: [
       { chunks: ['おんせんに', 'はいりたい', 'です。'], en: 'I want to get in a hot spring.' },
@@ -550,6 +582,9 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['閉める', 'しめる', 'to close', '📁'],
       ['狭い', 'せまい', 'narrow', '↔️'],
       ['若い', 'わかい', 'young', '🌱'],
+      ['山登り', 'やまのぼり', 'mountain climbing', '🥾'],
+      ['雲', 'くも', 'cloud', '☁️'],
+      ['虹', 'にじ', 'rainbow', '🌈'],
     ],
     sentences: [
       { chunks: ['ちょっと', 'まって', 'ください。'], en: 'Please wait a moment.' },
