@@ -354,6 +354,18 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         { jp: 'そんな はずが ありません！', en: 'That can’t be!' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'ba-hodo',
+        title: '〜ば〜ほど — the more …, the more …',
+        pattern: 'ちかづけば ちかづくほど おおきく みえます',
+        explain: 'Say the same word twice: first in the ば form, then in the plain form + ほど. ちかづけば ちかづくほど = the closer you get, the more …. い-adjectives use ければ … いほど (さむければ さむいほど); な-adjectives use なら … なほど (しずかなら しずかなほど). Nouns use であれば … であるほど (プロであれば プロであるほど).',
+        examples: [
+          { jp: 'ちかづけば ちかづくほど、たきは おおきく みえます。', en: 'The closer you get, the bigger the waterfall looks.' },
+          { jp: 'さむければ さむいほど、りゅうひょうが ふえます。', en: 'The colder it gets, the more drift ice there is.' },
+        ],
+      },
+    ],
     words: [
       ['流氷', 'りゅうひょう', 'drift ice', '🧊'],
       ['半島', 'はんとう', 'peninsula', '🗺️'],
@@ -376,6 +388,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['そんな', 'はずが', 'ありません。'], en: 'That can’t be.' },
       { chunks: ['やせいの', 'どうぶつに', 'えさを', 'あげないで', 'ください。'], en: 'Please don’t feed wild animals.' },
       { chunks: ['りゅうひょうの', 'うえを', 'あるきました。'], en: 'I walked on the drift ice.' },
+      { chunks: ['ちかづけば', 'ちかづくほど', 'おおきく', 'みえます。'], en: 'The closer you get, the bigger it looks.' },
     ],
   },
   naoshima: {
@@ -534,6 +547,18 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         { jp: 'うちの ねこは ねて ばかり います。', en: 'My cat does nothing but sleep.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'dake-de-naku',
+        title: '〜だけでなく — not only … but also',
+        pattern: 'やまねこだけでなく、すいぎゅうも います',
+        explain: 'X だけでなく Y も means “not only X but also Y”. It follows nouns directly and plain-form verbs and い-adjectives (みるだけでなく, めずらしいだけでなく). な-adjectives take な (きれいなだけでなく). The second part usually has も.',
+        examples: [
+          { jp: 'この しまには やまねこだけでなく、すいぎゅうも います。', en: 'This island has not only wildcats but also water buffalo.' },
+          { jp: 'マングローブを みるだけでなく、カヌーにも のりました。', en: 'I didn’t just look at the mangroves, I rode a canoe too.' },
+        ],
+      },
+    ],
     words: [
       ['山猫', 'やまねこ', 'wildcat', '🐆'],
       ['珍しい', 'めずらしい', 'rare', '💎'],
@@ -557,6 +582,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['やまねこを', 'さがしましたが', 'みつかりませんでした。'], en: 'I searched for the wildcat but couldn’t find it.' },
       { chunks: ['めずらしい', 'いきものを', 'まもりましょう。'], en: 'Let’s protect rare creatures.' },
       { chunks: ['カヌーで', 'マングローブを', 'すすみました。'], en: 'We went through the mangroves by canoe.' },
+      { chunks: ['やまねこだけでなく', 'すいぎゅうも', 'います。'], en: 'There are not only wildcats but also water buffalo.' },
     ],
   },
 };
