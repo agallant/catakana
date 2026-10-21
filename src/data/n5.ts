@@ -142,6 +142,18 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'しずかな まちです。', en: 'It is a quiet town.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'adj-forms',
+        title: 'Adjective forms: 〜くない / 〜かった',
+        pattern: 'さむくないです / さむかったです',
+        explain: 'い-adjectives change their ending: さむい → さむくない (not cold), さむかった (was cold), さむくなかった (wasn’t cold). いい is special: よくない, よかった. な-adjectives use じゃない and でした: しずかじゃないです.',
+        examples: [
+          { jp: 'あきたは とても さむかったです。', en: 'Akita was very cold.' },
+          { jp: 'この まちは しずかじゃないです。', en: 'This town isn’t quiet.' },
+        ],
+      },
+    ],
     words: [
       ['小さい', 'ちいさい', 'small', '🐭'],
       ['長い', 'ながい', 'long', '📏'],
@@ -172,6 +184,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['しずかな', 'まち', 'です。'], en: 'It is a quiet town.' },
       { chunks: ['わたしは', 'さかなが', 'すき', 'です。'], en: 'I like fish.' },
       { chunks: ['あかい', 'りんごは', 'おいしい', 'です。'], en: 'Red apples are delicious.' },
+      { chunks: ['この', 'りんごは', 'たかくない', 'です。'], en: 'This apple isn’t expensive.' },
     ],
   },
   nikko: {
@@ -430,6 +443,18 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'みなとに ねこが います。', en: 'There is a cat at the port.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'ga-demo',
+        title: 'が / でも — but',
+        pattern: 'ちいさいですが、きれいです',
+        explain: 'Join two sentences with が to say “…, but …”: ちいさいですが、きれいです (It’s small, but pretty). でも starts a new sentence with “But …”: でも、ねこは いません.',
+        examples: [
+          { jp: 'みなとは ちいさいですが、きれいです。', en: 'The port is small, but pretty.' },
+          { jp: 'いぬが います。でも、ねこは いません。', en: 'There is a dog. But there is no cat.' },
+        ],
+      },
+    ],
     words: [
       ['ある', 'ある', 'to exist (things)', '📦'],
       ['いる', 'いる', 'to exist (living things)', '🐈'],
@@ -467,6 +492,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['こうべには', 'みなとが', 'あります。'], en: 'Kobe has a port.' },
       { chunks: ['ベッドの', 'したに', 'いぬが', 'います。'], en: 'There is a dog under the bed.' },
       { chunks: ['えきの', 'まえに', 'みせが', 'あります。'], en: 'There is a shop in front of the station.' },
+      { chunks: ['こうべの', 'みなとは', 'ちいさいですが、', 'きれいです。'], en: 'Kobe’s port is small, but pretty.' },
     ],
   },
   kochi: {
