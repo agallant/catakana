@@ -497,7 +497,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         id: 'ba',
         title: '〜ば — if (conditional)',
         pattern: 'はやく いけば、まにあいます',
-        explain: 'To make the ば form, change a verb’s last う-sound to its え-sound and add ば: いく → いけば, みる → みれば, する → すれば, くる → くれば. い-adjectives swap い for ければ: さむい → さむければ. Nouns and な-adjectives use なら: しずかなら. ば focuses on the condition, while たら also covers “when”.',
+        explain: 'To make the ば form, change a verb’s last う-sound to its え-sound and add ば: いく → いけば, みる → みれば, する → すれば, くる → くれば. い-adjectives swap い for ければ: さむい → さむければ (but いい → よければ). Nouns and な-adjectives use なら: しずかなら. ば focuses on the condition, while たら also covers “when”.',
         examples: [
           { jp: 'はやく いけば、じゅひょうが みられます。', en: 'If you go early, you can see the snow monsters.' },
           { jp: 'さむければ、いもにを たべましょう。', en: 'If it’s cold, let’s eat imoni stew.' },
