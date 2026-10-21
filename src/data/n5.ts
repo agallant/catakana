@@ -396,6 +396,18 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'みせで パンを かいます。', en: 'I buy bread at the shop.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'to-mo',
+        title: 'と / も — and, also',
+        pattern: 'パンと たまご / わたしも いきます',
+        explain: 'と joins nouns (“and”): パンと たまご. After a person it means “with”: ともだちと いきます. も replaces は, が or を to mean “also / too”: わたしも いきます (I’ll go too).',
+        examples: [
+          { jp: 'ともだちと いせへ いきます。', en: 'I go to Ise with a friend.' },
+          { jp: 'わたしも じんじゃが すきです。', en: 'I like shrines too.' },
+        ],
+      },
+    ],
     words: [
       ['電車', 'でんしゃ', 'train', '🚃'],
       ['地下鉄', 'ちかてつ', 'subway', '🚇'],
@@ -430,6 +442,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['つぎの', 'えきで', 'おります。'], en: 'I get off at the next station.' },
       { chunks: ['みちを', 'まっすぐ', 'いきます。'], en: 'I go straight along the road.' },
       { chunks: ['じてんしゃで', 'がっこうへ', 'いきます。'], en: 'I go to school by bicycle.' },
+      { chunks: ['ともだちと', 'じんじゃへ', 'いきます。'], en: 'I go to the shrine with a friend.' },
     ],
   },
   kobe: {
@@ -506,6 +519,18 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'ねこは しごとを しません。', en: 'Cats don’t work.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'mae-ato',
+        title: '〜まえに / 〜あとで — before, after',
+        pattern: 'ねる まえに / ごはんの あとで',
+        explain: 'Dictionary form + まえに means “before doing”: ねる まえに (before sleeping). A noun + の あとで means “after”: しごとの あとで (after work). Nouns take の まえに too: ごはんの まえに.',
+        examples: [
+          { jp: 'ねる まえに ほんを よみます。', en: 'I read a book before sleeping.' },
+          { jp: 'しごとの あとで うみへ いきました。', en: 'I went to the sea after work.' },
+        ],
+      },
+    ],
     words: [
       ['月曜日', 'げつようび', 'Monday', '🌙'],
       ['火曜日', 'かようび', 'Tuesday', '🔥'],
@@ -540,6 +565,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['にちようびは', 'やすみ', 'でした。'], en: 'Sunday was a day off.' },
       { chunks: ['せんしゅう', 'こうちへ', 'いきました。'], en: 'I went to Kochi last week.' },
       { chunks: ['しゅくだいを', 'しませんでした。'], en: 'I didn’t do my homework.' },
+      { chunks: ['しごとの', 'あとで', 'カツオを', 'たべました。'], en: 'I ate bonito after work.' },
     ],
   },
   beppu: {
