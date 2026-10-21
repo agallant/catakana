@@ -13,6 +13,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'わたしは ひこねに すんでいます。', en: 'I live in Hikone.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'te-aru',
+        title: '〜てあります — has been done (and stays so)',
+        pattern: 'でんきが つけて あります',
+        explain: 'て-form of a transitive verb (one that acts on something: ならべる, つける) + あります describes a state someone set up on purpose. The thing takes が: かぶとが ならべて あります. Compare 〜ています with verbs that change by themselves: まどが しまっています.',
+        examples: [
+          { jp: 'おしろの なかに かぶとが ならべて あります。', en: 'Helmets have been lined up inside the castle.' },
+          { jp: 'へやの でんきが つけて あります。', en: 'The room’s light has been left on.' },
+        ],
+      },
+    ],
     words: [
       ['住む', 'すむ', 'to live (somewhere)', '🏡'],
       ['動く', 'うごく', 'to move', '🏃'],
@@ -37,6 +49,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['わたしは', 'ひこねに', 'すんでいます。'], en: 'I live in Hikone.' },
       { chunks: ['とのさまは', 'かぶとを', 'かぶっています。'], en: 'The lord is wearing a helmet.' },
       { chunks: ['みずうみの', 'ちかくを', 'あるいています。'], en: 'I’m walking near the lake.' },
+      { chunks: ['かぶとが', 'ならべて', 'あります。'], en: 'Helmets have been lined up.' },
     ],
   },
   uji: {
@@ -314,6 +327,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'わたしは かんじが すこし よめます。', en: 'I can read a few kanji.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'kata',
+        title: '〜かた — how to do',
+        pattern: 'かんじの よみかた',
+        explain: 'A verb’s ます stem + かた makes a noun meaning “the way of doing”: よみます → よみかた (how to read), のぼります → のぼりかた. する becomes しかた: べんきょうの しかた. The object then takes の instead of を: かんじの よみかた.',
+        examples: [
+          { jp: 'この かんじの よみかたを おしえて ください。', en: 'Please teach me how to read this kanji.' },
+          { jp: 'てんしゅへの のぼりかたが わかりません。', en: 'I don’t know how to get up to the castle keep.' },
+        ],
+      },
+    ],
     words: [
       ['世界', 'せかい', 'world', '🌍'],
       ['田んぼ', 'たんぼ', 'rice paddy', '🌾'],
@@ -339,6 +364,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['ねこは', 'およぐ', 'ことが', 'できますか。'], en: 'Can cats swim?' },
       { chunks: ['かいだんが', 'きゅうで', 'こわいです。'], en: 'The stairs are steep and scary.' },
       { chunks: ['まつもとじょうは', 'こくほう', 'です。'], en: 'Matsumoto Castle is a national treasure.' },
+      { chunks: ['かんじの', 'よみかたを', 'おしえて', 'ください。'], en: 'Please teach me how to read the kanji.' },
     ],
   },
   nagano: {
