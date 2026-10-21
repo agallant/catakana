@@ -168,6 +168,18 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         { jp: 'まいにち ねて ばかりで、ねこらしい ねこです。', en: 'It sleeps all day — a very cat-like cat.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'ppoi',
+        title: '〜っぽい — -ish, seems like (casual)',
+        pattern: 'こどもっぽい / わすれっぽい',
+        explain: 'Casual っぽい attaches to a noun, an い-adjective without い, or a verb’s ます stem. With a noun or adjective it means “-ish / looks like” (こどもっぽい = childish, おとなっぽい = grown-up-like, やすっぽい = cheap-looking). With a verb stem it means “tends to” (わすれっぽい = forgetful). It works like an い-adjective. Compare 〜らしい, which means “typical of the real thing”.',
+        examples: [
+          { jp: 'この いしは きんっぽい いろです。', en: 'This stone is a goldish colour.' },
+          { jp: 'わたしは わすれっぽいので、メモを します。', en: 'I’m forgetful, so I take notes.' },
+        ],
+      },
+    ],
     words: [
       ['金山', 'きんざん', 'gold mine', '⛏️'],
       ['島流し', 'しまながし', 'exile to an island', '🏝️'],
@@ -191,6 +203,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['ときを', 'まもるために', 'ほごしています。'], en: 'They protect the ibis to save it.' },
       { chunks: ['あしたは', 'あめらしいです。'], en: 'Apparently it will rain tomorrow.' },
       { chunks: ['たらいぶねを', 'こいで', 'みました。'], en: 'I tried rowing a tub boat.' },
+      { chunks: ['この', 'いしは', 'きんっぽい', 'いろです。'], en: 'This stone is a goldish colour.' },
     ],
   },
   aizu: {
@@ -337,6 +350,18 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         { jp: 'いくら みても、いみが わかりません。', en: 'No matter how long I look, I don’t get the meaning.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'noni',
+        title: '〜のに — even though (and that’s surprising)',
+        pattern: 'はれて いるのに、さむいです',
+        explain: 'Plain form + のに joins two facts that clash, often with surprise or disappointment: “even though …”. Nouns and な-adjectives take な before のに: じゆうなのに, やすみなのに. Unlike 〜ても (even if), のに is about something that really happened.',
+        examples: [
+          { jp: 'びじゅつかんに いったのに、しまって いました。', en: 'Even though I went to the museum, it was closed.' },
+          { jp: 'ふしぎな さくひんなのに、だれも みて いません。', en: 'Even though it’s a mysterious artwork, nobody is looking at it.' },
+        ],
+      },
+    ],
     words: [
       ['美術館', 'びじゅつかん', 'art museum', '🖼️'],
       ['作品', 'さくひん', 'work (of art)', '🎨'],
@@ -359,6 +384,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['いくら', 'みても', 'わかりません。'], en: 'No matter how much I look, I don’t understand.' },
       { chunks: ['かぼちゃは', 'みずたま', 'もようです。'], en: 'The pumpkin has polka dots.' },
       { chunks: ['ふしぎな', 'さくひんを', 'かんじました。'], en: 'I felt the mysterious artwork.' },
+      { chunks: ['いったのに', 'びじゅつかんは', 'しまって', 'いました。'], en: 'Even though I went, the museum was closed.' },
     ],
   },
   tokushima: {

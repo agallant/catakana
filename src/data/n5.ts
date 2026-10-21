@@ -710,7 +710,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         id: 'naide',
         title: '〜ないでください — please don’t',
         pattern: 'はいらないで ください',
-        explain: 'For “please don’t …”, use the ない form + で ください. Most verbs change the sound before ます to its あ-sound and swap ます for ない: はいります → はいらない, のみます → のまない. る-verbs just swap ます for ない: たべます → たべない, みます → みない.',
+        explain: 'For “please don’t …”, use the ない form + で ください. Most verbs change the sound before ます to its あ-sound and swap ます for ない: はいります → はいらない, のみます → のまない (verbs ending in う use わ: かう, かいます → かわない). る-verbs just swap ます for ない: たべます → たべない, みます → みない.',
         examples: [
           { jp: 'かわの みずを のまないで ください。', en: 'Please don’t drink the river water.' },
           { jp: 'はなを とらないで ください。', en: 'Please don’t pick the flowers.' },
