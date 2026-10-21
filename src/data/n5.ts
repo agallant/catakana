@@ -40,6 +40,18 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'たなかさんは がくせいですか。', en: 'Is Tanaka-san a student?' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'janai',
+        title: 'A は B じゃないです — “A is not B”',
+        pattern: 'わたしは せんせいじゃないです',
+        explain: 'To say “is not”, swap です for じゃないです. じゃありません is a slightly more formal way to say the same thing.',
+        examples: [
+          { jp: 'わたしは せんせいじゃないです。', en: 'I am not a teacher.' },
+          { jp: 'あの ひとは にほんじんじゃありません。', en: 'That person is not Japanese.' },
+        ],
+      },
+    ],
     words: [
       ['私', 'わたし', 'I / me', '🙋'],
       ['あなた', 'あなた', 'you', '👉'],
@@ -80,6 +92,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['せんせいは', 'にほんじん', 'です。'], en: 'The teacher is Japanese.' },
       { chunks: ['なまえは', 'なん', 'ですか。'], en: 'What is your name?' },
       { chunks: ['あの', 'ひとは', 'だれ', 'ですか。'], en: 'Who is that person?' },
+      { chunks: ['わたしは', 'いしゃ', 'じゃないです。'], en: 'I am not a doctor.' },
     ],
   },
   aomori: {
@@ -329,6 +342,18 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'くじに ねます。', en: 'I sleep at nine.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'ni-iku',
+        title: '〜に いきます — go (somewhere) to do',
+        pattern: 'こうえんへ あそびに いきます',
+        explain: 'Take the ます form, drop ます, and add に いきます to say why you go: あそびます → あそびに いきます (go to play). It also works with きます and かえります.',
+        examples: [
+          { jp: 'こうえんへ あそびに いきます。', en: 'I go to the park to play.' },
+          { jp: 'としょかんへ ほんを よみに いきます。', en: 'I go to the library to read books.' },
+        ],
+      },
+    ],
     words: [
       ['家', 'いえ', 'house', '🏠'],
       ['村', 'むら', 'village', '🛖'],
@@ -365,6 +390,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['としょかんに', 'いきます。'], en: 'I go to the library.' },
       { chunks: ['えきの', 'ちかくに', 'ぎんこうが', 'あります。'], en: 'There is a bank near the station.' },
       { chunks: ['でぐちは', 'あそこ', 'です。'], en: 'The exit is over there.' },
+      { chunks: ['こうえんへ', 'あそびに', 'いきます。'], en: 'I go to the park to play.' },
     ],
   },
   takayama: {
