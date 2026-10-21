@@ -93,6 +93,18 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'あれは なんですか。', en: 'What is that over there?' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'question-words',
+        title: 'Question words: なん・だれ・どこ・どれ',
+        pattern: 'これは なんですか',
+        explain: 'Put a question word where the answer goes and end with か: なん (what), だれ (who), どこ (where), どれ (which one). だれの means “whose”: だれの かさですか.',
+        examples: [
+          { jp: 'これは なんですか。', en: 'What is this?' },
+          { jp: 'あの ひとは だれですか。', en: 'Who is that person?' },
+        ],
+      },
+    ],
     words: [
       ['これ', 'これ', 'this (one)', '👇'],
       ['それ', 'それ', 'that (one, near you)', '👉'],
@@ -128,6 +140,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['それは', 'だれの', 'かさ', 'ですか。'], en: 'Whose umbrella is that?' },
       { chunks: ['あれは', 'ねこの', 'いえ', 'です。'], en: 'That over there is the cat’s house.' },
       { chunks: ['トイレは', 'どこ', 'ですか。'], en: 'Where is the toilet?' },
+      { chunks: ['これは', 'なん', 'ですか。'], en: 'What is this?' },
       { chunks: ['ここは', 'えき', 'です。'], en: 'This place is the station.' },
     ],
   },
@@ -639,6 +652,18 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'あの きを みて ください。', en: 'Please look at that tree.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'naide',
+        title: '〜ないでください — please don’t',
+        pattern: 'はいらないで ください',
+        explain: 'For “please don’t …”, use the ない form + で ください. Most verbs change the sound before ます to an あ-sound: はいります → はいらない, のみます → のまない. る-verbs just drop ます: たべます → たべない, みます → みない.',
+        examples: [
+          { jp: 'かわの みずを のまないで ください。', en: 'Please don’t drink the river water.' },
+          { jp: 'はなを とらないで ください。', en: 'Please don’t pick the flowers.' },
+        ],
+      },
+    ],
     words: [
       ['森', 'もり', 'forest', '🌲'],
       ['木', 'き', 'tree', '🌳'],
@@ -671,6 +696,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['あの', 'きを', 'みて', 'ください。'], en: 'Please look at that tree.' },
       { chunks: ['まどを', 'あけて', 'ください。'], en: 'Please open the window.' },
       { chunks: ['みちを', 'おしえて', 'ください。'], en: 'Please tell me the way.' },
+      { chunks: ['かわに', 'はいらないで', 'ください。'], en: 'Please don’t go into the river.' },
       { chunks: ['やくしまは', 'あめが', 'おおい', 'です。'], en: 'Yakushima gets a lot of rain.' },
     ],
   },
