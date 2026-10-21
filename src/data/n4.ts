@@ -50,6 +50,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'おてらの なかで たべては いけません。', en: 'You must not eat inside the temple.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'hougaii',
+        title: '〜たほうがいいです — you’d better',
+        pattern: 'くすりを のんだ ほうが いいです',
+        explain: 'Past plain form (た-form) + ほうがいいです gives advice: “you’d better …”. For “you’d better not”, use the ない form: たべない ほうが いいです.',
+        examples: [
+          { jp: 'はやく ねた ほうが いいですよ。', en: 'You’d better go to bed early.' },
+          { jp: 'あまり たべない ほうが いいです。', en: 'You’d better not eat too much.' },
+        ],
+      },
+    ],
     words: [
       ['撮る', 'とる', 'to take (a photo)', '📷'],
       ['映画', 'えいが', 'movie', '🎬'],
@@ -75,6 +87,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['まっちゃを', 'のんでも', 'いいですか。'], en: 'May I drink matcha?' },
       { chunks: ['おてらでは', 'しずかに', 'してください。'], en: 'Please be quiet at the temple.' },
       { chunks: ['ここで', 'うたっては', 'いけません。'], en: 'You must not sing here.' },
+      { chunks: ['はやく', 'ねた', 'ほうが', 'いいです。'], en: 'You’d better go to bed early.' },
     ],
   },
   koyasan: {
@@ -88,6 +101,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'おてらに とまったことは ありません。', en: 'I have never stayed at a temple.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'te-miru',
+        title: '〜てみます — try doing',
+        pattern: 'しょうじんりょうりを たべて みます',
+        explain: 'て-form + みます means “try doing (and see how it is)”. て-form + みたいです means “want to try doing”: ざぜんを して みたいです.',
+        examples: [
+          { jp: 'しょうじんりょうりを たべて みます。', en: 'I’ll try eating temple food.' },
+          { jp: 'おてらに とまって みたいです。', en: 'I want to try staying at a temple.' },
+        ],
+      },
+    ],
     words: [
       ['夕方', 'ゆうがた', 'evening', '🌇'],
       ['旅館', 'りょかん', 'Japanese inn', '🏨'],
@@ -109,6 +134,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['ふじさんに', 'のぼったことは', 'ありません。'], en: 'I have never climbed Mt. Fuji.' },
       { chunks: ['あさ', 'おぼうさんと', 'おいのりしました。'], en: 'I prayed with the monks in the morning.' },
       { chunks: ['よるの', 'おはかは', 'こわいです。'], en: 'The graveyard at night is scary.' },
+      { chunks: ['おてらに', 'とまって', 'みたいです。'], en: 'I want to try staying at a temple.' },
     ],
   },
   okayama: {
