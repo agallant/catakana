@@ -253,6 +253,18 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         { jp: 'すしを たべながら、はなしましょう。', en: 'Let’s talk while eating sushi.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'tokoro',
+        title: '〜ところ — about to / in the middle of / just did',
+        pattern: 'いま でかける ところです',
+        explain: 'ところ pins a moment in an action. Dictionary form + ところ = about to (たべる ところ). て-form + いる ところ = in the middle of (たべて いる ところ). た-form + ところ = just did (たべた ところ).',
+        examples: [
+          { jp: 'いま うんがを さんぽして いる ところです。', en: 'I’m in the middle of walking along the canal.' },
+          { jp: 'ガラスの みせに ついた ところです。', en: 'I’ve just arrived at the glass shop.' },
+        ],
+      },
+    ],
     words: [
       ['運河', 'うんが', 'canal', '🛶'],
       ['倉庫', 'そうこ', 'warehouse', '🏚️'],
@@ -276,6 +288,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['ガラスを', 'ふきながら', 'かたちを', 'つくります。'], en: 'They shape glass while blowing it.' },
       { chunks: ['オルゴールが', 'なっています。'], en: 'A music box is playing.' },
       { chunks: ['ここは', 'ふんいきが', 'いいです。'], en: 'This place has a nice atmosphere.' },
+      { chunks: ['いま', 'うんがを', 'さんぽして', 'いる', 'ところです。'], en: 'I’m in the middle of walking along the canal.' },
     ],
   },
   shiretoko: {
@@ -394,6 +407,18 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         { jp: 'かみさまは みんなを わらわせました。', en: 'The god made everyone laugh.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'saserareru',
+        title: '〜させられる — be made to (causative-passive)',
+        pattern: 'こどもの とき、やさいを たべさせられました',
+        explain: 'Combine causative and passive to say you were made to do something you didn’t want to. る-verbs: たべる → たべさせられる. う-verbs: change the last sound to its あ-sound and add せられる (またせられる), or the shorter される for most (またされる; not for す-verbs). する → させられる, くる → こさせられる. The person who made you takes に.',
+        examples: [
+          { jp: 'こどもの とき、ははに やさいを たべさせられました。', en: 'As a child, my mother made me eat vegetables.' },
+          { jp: 'えきで いちじかんも またされました。', en: 'I was made to wait a whole hour at the station.' },
+        ],
+      },
+    ],
     words: [
       ['渓谷', 'けいこく', 'ravine', '🏞️'],
       ['神話', 'しんわ', 'myth', '📜'],
@@ -417,6 +442,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['こどもに', 'やさいを', 'たべさせます。'], en: 'I make the children eat vegetables.' },
       { chunks: ['たいようの', 'めがみが', 'どうくつに', 'かくれました。'], en: 'The sun goddess hid in a cave.' },
       { chunks: ['ふねで', 'けいこくを', 'すすみました。'], en: 'We went through the ravine by boat.' },
+      { chunks: ['えきで', 'ながく', 'またされました。'], en: 'I was made to wait a long time at the station.' },
     ],
   },
   iriomote: {
