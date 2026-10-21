@@ -477,6 +477,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'ひまな とき、ほんを よみます。', en: 'When I’m free, I read books.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'you-na',
+        title: '〜のような / 〜のように — like, as if',
+        pattern: 'ゆめのような ところ',
+        explain: 'Noun + のような + noun means “a … like …”: ゆめのような ところ (a place like a dream). Before a verb or adjective, use のように: ひかりのように かがやく (shines like light).',
+        examples: [
+          { jp: 'ひらいずみは ゆめのような ところです。', en: 'Hiraizumi is a place like a dream.' },
+          { jp: 'こんじきどうは ひかりのように かがやいています。', en: 'The Golden Hall shines like light.' },
+        ],
+      },
+    ],
     words: [
       ['銀', 'ぎん', 'silver', '🥈'],
       ['光', 'ひかり', 'light', '✨'],
@@ -505,6 +517,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['むかし', 'ここは', 'きんいろでした。'], en: 'Long ago this was golden.' },
       { chunks: ['にほんへ', 'いった', 'とき', 'はいくを', 'かきました。'], en: 'When I went to Japan, I wrote a haiku.' },
       { chunks: ['へいわが', 'いちばん', 'たいせつです。'], en: 'Peace is the most important.' },
+      { chunks: ['ここは', 'ゆめのような', 'ところです。'], en: 'This is a place like a dream.' },
     ],
   },
   yamagata: {
@@ -568,6 +581,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'N3に ちょうせんしようと おもっています。', en: 'I’m thinking of taking on N3.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'ageru-kureru',
+        title: 'あげる / くれる / もらう — giving and receiving',
+        pattern: 'あにが だがしを くれました',
+        explain: 'あげる = I (or someone) give to someone else. くれる = someone gives to me or my family. もらう = receive; the giver takes に or から: ともだちに ほんを もらいました. Add them to a て-form for favours: かして あげました (lent it to them), かして くれました (lent it to me), かして もらいました (had it lent to me).',
+        examples: [
+          { jp: 'いもうとに だがしを あげました。', en: 'I gave my little sister some cheap sweets.' },
+          { jp: 'あにが かさを かして くれました。', en: 'My big brother lent me an umbrella.' },
+        ],
+      },
+    ],
     words: [
       ['姉', 'あね', 'older sister (my)', '👧'],
       ['兄', 'あに', 'older brother (my)', '👦'],
@@ -597,6 +622,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['いっしょに', 'だがしを', 'たべよう！'], en: 'Let’s eat some old-style sweets together!' },
       { chunks: ['あにから', 'カメラを', 'かりました。'], en: 'I borrowed a camera from my older brother.' },
       { chunks: ['あしたの', 'よていは', 'なんですか。'], en: 'What are your plans for tomorrow?' },
+      { chunks: ['あにが', 'だがしを', 'くれました。'], en: 'My big brother gave me some cheap sweets.' },
     ],
   },
 };
