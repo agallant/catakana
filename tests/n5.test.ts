@@ -65,12 +65,14 @@ describe('N4 content', () => {
 });
 
 describe('extra grammar', () => {
-  it('adds extra points after the main one at eight N5 stops', () => {
+  it('adds extra points after the main one at ten N5 stops', () => {
     expect(grammarsAt('takayama').map((g) => g.id)).toEqual(['ikura', 'kara-made']);
     expect(grammarsAt('beppu').map((g) => g.id)).toEqual(['tai', 'mashou']);
     expect(grammarsAt('akita').map((g) => g.id)).toEqual(['i-adj', 'adj-forms']);
     expect(grammarsAt('aomori').map((g) => g.id)).toEqual(['kore-no', 'question-words']);
     expect(grammarsAt('yakushima').map((g) => g.id)).toEqual(['te-kudasai', 'naide']);
+    expect(grammarsAt('nikko').map((g) => g.id)).toEqual(['masu', 'yo-ne']);
+    expect(grammarsAt('kanazawa').map((g) => g.id)).toEqual(['wo', 'hoshii']);
     expect(grammarsAt('ise').map((g) => g.id)).toEqual(['de', 'to-mo']);
     expect(grammarsAt('kochi').map((g) => g.id)).toEqual(['past-neg', 'mae-ato']);
     expect(grammarsAt('kobe').map((g) => g.id)).toEqual(['aru-iru', 'ga-demo']);
