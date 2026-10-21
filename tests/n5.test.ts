@@ -65,9 +65,11 @@ describe('N4 content', () => {
 });
 
 describe('extra grammar', () => {
-  it('adds から/まで at Takayama and ～ましょう at Beppu after the main point', () => {
+  it('adds extra points after the main one at Akita, Takayama, Kobe and Beppu', () => {
     expect(grammarsAt('takayama').map((g) => g.id)).toEqual(['ikura', 'kara-made']);
     expect(grammarsAt('beppu').map((g) => g.id)).toEqual(['tai', 'mashou']);
+    expect(grammarsAt('akita').map((g) => g.id)).toEqual(['i-adj', 'adj-forms']);
+    expect(grammarsAt('kobe').map((g) => g.id)).toEqual(['aru-iru', 'ga-demo']);
     expect(grammarsAt('hakodate').map((g) => g.id)).toEqual(['wa-desu']);
     expect(grammarsAt('nowhere')).toEqual([]);
   });
