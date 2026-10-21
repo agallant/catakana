@@ -13,6 +13,18 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         { jp: 'まいあさ はしるように なりました。', en: 'I’ve started running every morning.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'you-ni-suru',
+        title: '〜ようにする — make a point of',
+        pattern: 'まいにち あるくように して います',
+        explain: 'Dictionary form + ようにする means making an effort to do something as a habit: “make sure to …”. Use the ない form for “try not to”: あまり たべないように します. Compare ようになる (a change that happens) with ようにする (a change you make).',
+        examples: [
+          { jp: 'まいにち かわぞいを あるくように して います。', en: 'I make a point of walking along the river every day.' },
+          { jp: 'よる おそく たべないように して います。', en: 'I try not to eat late at night.' },
+        ],
+      },
+    ],
     words: [
       ['城下町', 'じょうかまち', 'castle town', '🏘️'],
       ['現存', 'げんそん', 'still existing (original)', '🏯'],
@@ -35,6 +47,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['さいきん', 'かんこうきゃくが', 'ふえました。'], en: 'Tourists have increased recently.' },
       { chunks: ['ねこが', 'ドアを', 'あけられるように', 'なりました。'], en: 'The cat has learned to open the door.' },
       { chunks: ['しだいに', 'さむく', 'なりました。'], en: 'It gradually got colder.' },
+      { chunks: ['まいにち', 'あるくように', 'して', 'います。'], en: 'I make a point of walking every day.' },
     ],
   },
   gujo: {
@@ -392,12 +405,24 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       id: 'passive',
       title: 'Passive: 〜られる',
       pattern: 'ねこに さかなを たべられました',
-      explain: 'Passive verbs: godan u→a + れる (よむ→よまれる), ichidan る→られる (たべる→たべられる). Japanese often uses the passive when something annoying happens to you: あめに ふられた = I got rained on.',
+      explain: 'Passive verbs: godan u→a + れる (よむ→よまれる; a final う becomes わ: かう→かわれる), ichidan る→られる (たべる→たべられる). Japanese often uses the passive when something annoying happens to you: あめに ふられた = I got rained on.',
       examples: [
         { jp: 'ねこに さかなを たべられました。', en: 'My fish got eaten by the cat.' },
         { jp: 'あわおどりは せかいじゅうで しられています。', en: 'Awa Odori is known around the world.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'nara-topic',
+        title: '〜なら — if it’s … (advice on a topic)',
+        pattern: 'おどりなら、あわおどりが いちばんです',
+        explain: 'Noun + なら picks up a topic someone raised and gives advice or an opinion: “if it’s … you want, then …”. Nouns and な-adjectives take なら directly, with no だ (しずかなら). It also follows plain-form verbs and い-adjectives: いくなら、なつが いいです. Unlike 〜たら, the second part can happen before the first.',
+        examples: [
+          { jp: 'おどりなら、あわおどりが いちばんです。', en: 'If it’s dancing you want, Awa Odori is the best.' },
+          { jp: 'とくしまに いくなら、うずしおを みて ください。', en: 'If you’re going to Tokushima, see the whirlpools.' },
+        ],
+      },
+    ],
     words: [
       ['阿波踊り', 'あわおどり', 'Awa Odori dance', '💃'],
       ['渦潮', 'うずしお', 'whirlpool', '🌀'],
@@ -420,6 +445,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['せんせいに', 'ほめられました。'], en: 'I was praised by the teacher.' },
       { chunks: ['でんしゃで', 'あしを', 'ふまれました。'], en: 'Someone stepped on my foot on the train.' },
       { chunks: ['この', 'はしは', 'むかし', 'たてられました。'], en: 'This bridge was built long ago.' },
+      { chunks: ['おどりなら', 'あわおどりが', 'いちばんです。'], en: 'If it’s dancing you want, Awa Odori is the best.' },
     ],
   },
   takachiho: {
