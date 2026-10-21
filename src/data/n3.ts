@@ -173,7 +173,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         id: 'ppoi',
         title: '〜っぽい — -ish, seems like (casual)',
         pattern: 'こどもっぽい / わすれっぽい',
-        explain: 'Casual っぽい attaches to a noun, an い-adjective without い, or a verb’s ます stem. With a noun or adjective it means “-ish / looks like” (こどもっぽい = childish, おとなっぽい = grown-up-like, やすっぽい = cheap-looking). With a verb stem it means “tends to” (わすれっぽい = forgetful). It works like an い-adjective. Compare 〜らしい, which means “typical of the real thing”.',
+        explain: 'Casual っぽい attaches to a noun, and to some い-adjectives (without い) and some verbs’ ます stems; only set combinations sound natural. With a noun or adjective it means “-ish / looks like” (こどもっぽい = childish, おとなっぽい = grown-up-like, やすっぽい = cheap-looking). With a verb stem it means “tends to” (わすれっぽい = forgetful). It works like an い-adjective. Compare 〜らしい, which means “typical of the real thing”.',
         examples: [
           { jp: 'この いしは きんっぽい いろです。', en: 'This stone is a goldish colour.' },
           { jp: 'わたしは わすれっぽいので、メモを します。', en: 'I’m forgetful, so I take notes.' },
@@ -355,7 +355,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         id: 'noni',
         title: '〜のに — even though (and that’s surprising)',
         pattern: 'はれて いるのに、さむいです',
-        explain: 'Plain form + のに joins two facts that clash, often with surprise or disappointment: “even though …”. Nouns and な-adjectives take な before のに: じゆうなのに, やすみなのに. Unlike 〜ても (even if), のに is about something that really happened.',
+        explain: 'Plain form + のに joins two facts that clash, often with surprise or disappointment: “even though …”. Nouns and な-adjectives take な before のに: じゆうなのに, やすみなのに. Unlike 〜ても (even if, a hypothetical), のに contrasts facts that are actually true, past, present or already settled: はれて いるのに、さむいです.',
         examples: [
           { jp: 'びじゅつかんに いったのに、しまって いました。', en: 'Even though I went to the museum, it was closed.' },
           { jp: 'ふしぎな さくひんなのに、だれも みて いません。', en: 'Even though it’s a mysterious artwork, nobody is looking at it.' },
