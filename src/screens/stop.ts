@@ -8,7 +8,7 @@ import { catSvg } from '../ui/cat';
 import { ruby } from '../ui/dom';
 import { speak } from '../core/audio';
 import { focusForStop, lessonBatch } from '../core/items';
-import { grammarAt } from '../core/sentences';
+import { grammarsAt } from '../core/sentences';
 import { grammarId } from './lesson';
 
 export function stopScreen(app: App, params: string[]): Screen {
@@ -18,8 +18,9 @@ export function stopScreen(app: App, params: string[]): Screen {
   const stars = d.stops[stop.id] ?? 0;
   const focus = focusForStop(idx);
   const introduced = new Set(d.introduced);
-  const grammar = grammarAt(stop.id);
-  const needsLesson = (grammar !== undefined && !introduced.has(grammarId(grammar))) || lessonBatch(idx, introduced).items.some((k) => k.kind !== 'word' && !introduced.has(k.id)) || (focus.length > 0 && !focus.some((f) => introduced.has(f.id)));
+  const grammars = grammarsAt(stop.id);
+  const grammar = grammars[0];
+  const needsLesson = grammars.some((g) => !introduced.has(grammarId(g))) || lessonBatch(idx, introduced).items.some((k) => k.kind !== 'word' && !introduced.has(k.id)) || (focus.length > 0 && !focus.some((f) => introduced.has(f.id)));
   const wordsLeft = focus.filter((f) => f.kind === 'word' && !introduced.has(f.id)).length;
   const level = getLevel();
   const levelBtns = ([1, 2, 3] as const).map((l) =>
@@ -64,7 +65,7 @@ export function stopScreen(app: App, params: string[]): Screen {
           wordsLeft
             ? h('button', { class: 'btn primary', onClick: () => app.go(`lesson/${stop.id}`) }, `📖 Learn ${Math.min(wordsLeft, 8)} new words (${wordsLeft} left)`)
             : h('button', { class: 'btn ghost', onClick: () => app.go(`lesson/${stop.id}`) }, '📖 Review lesson'),
-          grammar ? h('button', { class: 'btn ghost', onClick: () => app.go(`lesson/${stop.id}/grammar`) }, `📐 ${grammar.pattern}`) : null,
+          grammar ? h('button', { class: 'btn ghost', onClick: () => app.go(`lesson/${stop.id}/grammar`) }, `📐 ${grammar.pattern}${grammars.length > 1 ? ` +${grammars.length - 1}` : ''}`) : null,
         ),
     h('h3', null, 'Play ', h('span', { class: 'chips' }, levelBtns)),
     games,
