@@ -83,9 +83,11 @@ describe('extra grammar', () => {
   it('gives every N5 stop exactly one extra lesson', () => {
     for (const id of Object.keys(N5_CONTENT)) expect(grammarsAt(id), id).toHaveLength(2);
   });
-  it('adds N4 extra points at Uji and Koya-san', () => {
+  it('adds N4 extra points after the main one', () => {
     expect(grammarsAt('uji').map((g) => g.id)).toEqual(['temoii', 'hougaii']);
     expect(grammarsAt('koyasan').map((g) => g.id)).toEqual(['takoto', 'te-miru']);
+    expect(grammarsAt('okayama').map((g) => g.id)).toEqual(['yori', 'sugiru']);
+    expect(grammarsAt('matsue').map((g) => g.id)).toEqual(['toomou', 'kamoshirenai']);
   });
   it('gives every grammar point a unique id and examples', () => {
     const all = Object.keys(TOUR_CONTENT).flatMap((s) => grammarsAt(s));
