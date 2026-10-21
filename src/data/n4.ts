@@ -403,6 +403,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'つかれたので、はやく ねます。', en: 'I’m tired, so I’ll sleep early.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'shi',
+        title: '〜し、〜し — and also (listing reasons)',
+        pattern: 'おゆも いいし、まちも きれいだし…',
+        explain: 'Plain form + し lists several reasons or points, like “…, and …, and what’s more …”. Nouns and な-adjectives take だし: きれいだし. The last reason often ends with から or the conclusion.',
+        examples: [
+          { jp: 'おんせんは きもちが いいし、たべものも おいしいです。', en: 'The hot spring feels great, and the food is delicious too.' },
+          { jp: 'じかんも ないし、つかれたし、かえります。', en: 'I have no time and I’m tired, so I’m going home.' },
+        ],
+      },
+    ],
     words: [
       ['正しい', 'ただしい', 'correct', '✅'],
       ['急ぐ', 'いそぐ', 'to hurry', '🏃'],
@@ -425,6 +437,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['さむいので', 'おんせんに', 'はいります。'], en: 'It’s cold, so I’ll get in the hot spring.' },
       { chunks: ['びょうきだから', 'びょういんへ', 'いきます。'], en: 'I’m sick, so I’ll go to the hospital.' },
       { chunks: ['じかんが', 'ないから', 'いそぎましょう。'], en: 'There’s no time, so let’s hurry.' },
+      { chunks: ['おゆも', 'いいし、', 'まちも', 'きれいです。'], en: 'The water is good, and the town is pretty too.' },
     ],
   },
   hiraizumi: {
@@ -479,6 +492,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'あめが ふったら、いえで あそびます。', en: 'If it rains, I’ll play at home.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'ba',
+        title: '〜ば — if (conditional)',
+        pattern: 'はやく いけば、まにあいます',
+        explain: 'To make the ば form, change a verb’s last う-sound to its え-sound and add ば: いく → いけば, みる → みれば, する → すれば, くる → くれば. い-adjectives swap い for ければ: さむい → さむければ (but いい → よければ). Nouns and な-adjectives use なら: しずかなら. ば focuses on the condition, while たら also covers “when”.',
+        examples: [
+          { jp: 'はやく いけば、じゅひょうが みられます。', en: 'If you go early, you can see the snow monsters.' },
+          { jp: 'さむければ、いもにを たべましょう。', en: 'If it’s cold, let’s eat imoni stew.' },
+        ],
+      },
+    ],
     words: [
       ['始まる', 'はじまる', 'to begin', '🎬'],
       ['終わる', 'おわる', 'to end', '🏁'],
@@ -503,6 +528,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['しごとが', 'おわったら', 'いもにを', 'たべましょう。'], en: 'When work is over, let’s eat taro stew.' },
       { chunks: ['もし', 'ひまだったら', 'あそびに', 'きてください。'], en: 'If you’re free, please come over.' },
       { chunks: ['ほんを', 'よんだら', 'かえして', 'ください。'], en: 'When you’ve read the book, please give it back.' },
+      { chunks: ['さむければ', 'いもにを', 'たべましょう。'], en: 'If it’s cold, let’s eat imoni stew.' },
     ],
   },
   kawagoe: {
