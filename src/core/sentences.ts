@@ -14,8 +14,10 @@ export function sentencesThrough(index: number): SentenceItem[] {
   );
 }
 
-export function grammarAt(stopId: string): GrammarPoint | undefined {
-  return TOUR_CONTENT[stopId]?.grammar;
+/** Every grammar point taught at a stop: the main one first, then any extras. */
+export function grammarsAt(stopId: string): GrammarPoint[] {
+  const c = TOUR_CONTENT[stopId];
+  return c ? [c.grammar, ...(c.extraGrammar ?? [])] : [];
 }
 
 const PARTICLES = ['は', 'を', 'に', 'へ', 'で', 'が', 'の'];

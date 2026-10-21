@@ -8,7 +8,7 @@ import type { Item } from '../games/types';
 import { WORDS } from '../data/vocab';
 import { toHiragana } from '../data/kana';
 import { romajiHints } from '../core/romaji';
-import { grammarAt } from '../core/sentences';
+import { grammarsAt } from '../core/sentences';
 import type { GrammarPoint } from '../data/n5';
 import { KANJI_BY_CHAR } from '../data/kanji';
 import { ALL_WORDS } from '../data/vocab';
@@ -67,9 +67,11 @@ export function lessonScreen(app: App, params: string[]): Screen {
   const idx = STOPS.indexOf(stop);
   const introduced = new Set(app.store.data.introduced);
   const { items } = lessonBatch(idx, introduced);
-  const g = grammarAt(stop.id);
+  // grammar cards: the stop's points not yet learned, or all of them when reviewing
+  const review = items.length === 0 || params[1] === 'grammar';
+  const grammars = grammarsAt(stop.id).filter((gp) => review || !introduced.has(grammarId(gp)));
   const cards: Card[] = [
-    ...(g && (!introduced.has(grammarId(g)) || items.length === 0 || params[1] === 'grammar') ? [{ kind: 'grammar' as const, g }] : []),
+    ...grammars.map((g) => ({ kind: 'grammar' as const, g })),
     ...items.map((item) => ({ kind: 'item' as const, item })),
   ];
   const hints = romajiHints(app.store.data, idx);

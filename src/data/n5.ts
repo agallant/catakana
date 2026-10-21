@@ -23,6 +23,8 @@ export interface Sentence {
 export interface N5StopContent {
   words: N5Row[];
   grammar: GrammarPoint;
+  /** further grammar taught at the same stop, after the main point */
+  extraGrammar?: GrammarPoint[];
   sentences: Sentence[];
 }
 
@@ -323,6 +325,18 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'いま さんじはんです。', en: 'It’s half past three now.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'kara-made',
+        title: 'から / まで — from … until',
+        pattern: 'くじから ごじまで',
+        explain: 'から marks where or when something starts, and まで where or when it ends. Use them together or alone: とうきょうから (from Tokyo), よるまで (until night).',
+        examples: [
+          { jp: 'あさいちは ろくじから じゅうにじまでです。', en: 'The morning market is from six until twelve.' },
+          { jp: 'とうきょうから たかやままで バスで いきます。', en: 'I go from Tokyo to Takayama by bus.' },
+        ],
+      },
+    ],
     words: [
       ['百', 'ひゃく', 'hundred', '💯'],
       ['千', 'せん', 'thousand', '🔢'],
@@ -350,6 +364,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['袋', 'ふくろ', 'bag', '🛍️'],
     ],
     sentences: [
+      { chunks: ['みせは', 'くじから', 'ごじまで', 'です。'], en: 'The shop is open from nine until five.' },
       { chunks: ['これは', 'いくら', 'ですか。'], en: 'How much is this?' },
       { chunks: ['ごひゃくえん', 'です。'], en: 'It’s 500 yen.' },
       { chunks: ['いま', 'なんじ', 'ですか。'], en: 'What time is it now?' },
@@ -512,6 +527,18 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
         { jp: 'なにを たべたいですか。', en: 'What do you want to eat?' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'mashou',
+        title: '〜ましょう / 〜ませんか — let’s …, shall we?',
+        pattern: 'いっしょに いきましょう',
+        explain: 'Swap 〜ます for 〜ましょう to say “let’s …”. 〜ませんか (“won’t you …?”) is a softer invitation, and 〜ましょうか offers help: もちましょうか (shall I carry it?).',
+        examples: [
+          { jp: 'いっしょに おんせんに はいりましょう。', en: 'Let’s get in the hot spring together.' },
+          { jp: 'あした じごくめぐりに いきませんか。', en: 'Would you like to tour the “hells” tomorrow?' },
+        ],
+      },
+    ],
     words: [
       ['体', 'からだ', 'body', '🧍'],
       ['頭', 'あたま', 'head', '🙆'],
@@ -541,6 +568,7 @@ export const N5_CONTENT: Record<string, N5StopContent> = {
       ['脱ぐ', 'ぬぐ', 'to take off (clothes)', '👕'],
     ],
     sentences: [
+      { chunks: ['いっしょに', 'おんせんに', 'はいりましょう。'], en: 'Let’s get in the hot spring together.' },
       { chunks: ['おんせんに', 'はいりたい', 'です。'], en: 'I want to get in a hot spring.' },
       { chunks: ['なにを', 'たべたい', 'ですか。'], en: 'What do you want to eat?' },
       { chunks: ['あたまが', 'いたい', 'です。'], en: 'My head hurts.' },

@@ -8,7 +8,7 @@ import { N2_CONTENT } from '../src/data/n2';
 import { N1_CONTENT } from '../src/data/n1';
 import { TOUR_CONTENT } from '../src/data/tour';
 import { kanaTokens, wordsThrough, firstStopOfTier, newWordsAt } from '../src/core/curriculum';
-import { decoyChunk, sentencesThrough } from '../src/core/sentences';
+import { decoyChunk, grammarsAt, sentencesThrough } from '../src/core/sentences';
 
 describe('N5 content', () => {
   const n5Stops = STOPS.filter((s) => s.tier === 'N5');
@@ -61,6 +61,20 @@ describe('N4 content', () => {
   });
   it('N4 comes after N5 in the journey', () => {
     expect(STOPS.findIndex((s) => s.tier === 'N4')).toBeGreaterThan(STOPS.findLastIndex((s) => s.tier === 'N5'));
+  });
+});
+
+describe('extra grammar', () => {
+  it('adds から/まで at Takayama and ～ましょう at Beppu after the main point', () => {
+    expect(grammarsAt('takayama').map((g) => g.id)).toEqual(['ikura', 'kara-made']);
+    expect(grammarsAt('beppu').map((g) => g.id)).toEqual(['tai', 'mashou']);
+    expect(grammarsAt('hakodate').map((g) => g.id)).toEqual(['wa-desu']);
+    expect(grammarsAt('nowhere')).toEqual([]);
+  });
+  it('gives every grammar point a unique id and examples', () => {
+    const all = Object.keys(TOUR_CONTENT).flatMap((s) => grammarsAt(s));
+    expect(new Set(all.map((g) => g.id)).size).toBe(all.length);
+    for (const g of all) expect(g.examples.length, g.id).toBeGreaterThanOrEqual(2);
   });
 });
 
