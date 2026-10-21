@@ -203,6 +203,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'さきゅうで はしったり、しゃしんを とったり しました。', en: 'At the dunes I ran around, took photos, and so on.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'yasui-nikui',
+        title: '〜やすい / 〜にくい — easy / hard to do',
+        pattern: 'すなの うえは あるきにくいです',
+        explain: 'Take a verb’s ます stem and add やすい (easy to …) or にくい (hard to …): あるきます → あるきやすい, あるきにくい. The result works like an い-adjective: あるきにくかったです.',
+        examples: [
+          { jp: 'さきゅうは あるきにくいです。', en: 'The sand dunes are hard to walk on.' },
+          { jp: 'この なしは たべやすいです。', en: 'This pear is easy to eat.' },
+        ],
+      },
+    ],
     words: [
       ['砂', 'すな', 'sand', '🏜️'],
       ['砂丘', 'さきゅう', 'sand dune', '🐪'],
@@ -233,6 +245,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['らくだに', 'のったことが', 'ありますか。'], en: 'Have you ever ridden a camel?' },
       { chunks: ['あきの', 'なしは', 'おいしいです。'], en: 'Autumn pears are delicious.' },
       { chunks: ['かぜが', 'つよいです。'], en: 'The wind is strong.' },
+      { chunks: ['さきゅうは', 'あるきにくい', 'です。'], en: 'The sand dunes are hard to walk on.' },
     ],
   },
   matsue: {
@@ -339,6 +352,18 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
         { jp: 'しゅくだいを しなければ なりません。', en: 'I must do my homework.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'te-oku',
+        title: '〜ておきます — do in advance',
+        pattern: 'せきを よやくして おきます',
+        explain: 'て-form + おきます means doing something now to get ready for later: よやくして おきます = (I’ll) book ahead. It can also mean leaving something as it is: まどを あけて おきます.',
+        examples: [
+          { jp: 'せきを よやくして おきました。', en: 'I booked seats in advance.' },
+          { jp: 'しけんの まえに べんきょうして おきます。', en: 'I’ll study before the exam.' },
+        ],
+      },
+    ],
     words: [
       ['勉強', 'べんきょう', 'study', '📚'],
       ['試験', 'しけん', 'exam', '📝'],
@@ -364,6 +389,7 @@ export const N4_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['さるが', 'おんせんに', 'はいっています。'], en: 'The monkeys are in the hot spring.' },
       { chunks: ['しけんの', 'まえに', 'べんきょうしなければ', 'なりません。'], en: 'I have to study before the exam.' },
       { chunks: ['ながのの', 'そばは', 'ゆうめいです。'], en: 'Nagano’s soba is famous.' },
+      { chunks: ['せきを', 'よやくして', 'おきました。'], en: 'I booked seats in advance.' },
     ],
   },
   kusatsu: {
