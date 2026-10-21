@@ -412,7 +412,7 @@ export const N3_CONTENT: Record<string, N5StopContent> = {
         id: 'saserareru',
         title: '〜させられる — be made to (causative-passive)',
         pattern: 'こどもの とき、やさいを たべさせられました',
-        explain: 'Combine causative and passive to say you were made to do something you didn’t want to. る-verbs: たべる → たべさせられる. う-verbs: change the last sound to its あ-sound and add せられる (またせられる), or the shorter される for most (またされる; not for す-verbs). する → させられる, くる → こさせられる. The person who made you takes に.',
+        explain: 'Combine causative and passive to say you were made to do something you didn’t want to. る-verbs: たべる → たべさせられる. う-verbs: change the last sound to its あ-sound (a final う becomes わ) and add せられる (またせられる, かわせられる), or the shorter される for most (またされる, かわされる; not for す-verbs). する → させられる, くる → こさせられる. The person who made you takes に.',
         examples: [
           { jp: 'こどもの とき、ははに やさいを たべさせられました。', en: 'As a child, my mother made me eat vegetables.' },
           { jp: 'えきで いちじかんも またされました。', en: 'I was made to wait a whole hour at the station.' },
