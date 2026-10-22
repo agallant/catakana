@@ -346,6 +346,66 @@ export class Store {
     }
   }
 
+  /** Every player's progress in one backup file. */
+  exportAllJson(): string {
+    this.save();
+    const saves = this.index.ids.map((id) => {
+      if (id === this.index.active) return this.data;
+      try {
+        const raw = this.storage?.getItem(saveKey(id));
+        return raw ? this.load(raw) : defaultSave();
+      } catch {
+        return defaultSave();
+      }
+    });
+    return JSON.stringify({ app: 'catakana', exported: new Date().toISOString(), saves });
+  }
+
+  /** Does this backup hold several players (rather than one save)? */
+  static isAllBackup(text: string): boolean {
+    try {
+      const parsed: unknown = JSON.parse(text);
+      return isRecord(parsed) && parsed.app === 'catakana' && Array.isArray(parsed.saves);
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Add the players from an all-players backup as new players, up to the limit. Nobody already on the device is
+   * changed or replaced. Returns how many were added (0 for an unreadable file or no room).
+   */
+  importAllJson(text: string): number {
+    try {
+      const parsed: unknown = JSON.parse(text);
+      if (!this.storage || !isRecord(parsed) || parsed.app !== 'catakana' || !Array.isArray(parsed.saves)) return 0;
+      this.save();
+      const ids = [...this.index.ids];
+      let added = 0;
+      for (const save of parsed.saves) {
+        if (ids.length >= MAX_PLAYERS) break;
+        if (!isValidSave(save)) continue;
+        let id = `p${Date.now().toString(36)}${added}`;
+        while (ids.includes(id)) id += 'x';
+        const data = this.load(JSON.stringify(save));
+        try {
+          this.storage.setItem(saveKey(id), JSON.stringify(data));
+        } catch {
+          break;
+        }
+        ids.push(id);
+        added++;
+      }
+      if (added === 0) return 0;
+      this.index = { ...this.index, ids };
+      this.saveIndex();
+      this.listeners.forEach((l) => l(this.data));
+      return added;
+    } catch {
+      return 0;
+    }
+  }
+
   reset(): void {
     this.data = defaultSave();
     this.save();

@@ -138,4 +138,49 @@ describe('players on one device', () => {
     expect(t.players()).toHaveLength(2);
     expect(st.m.has(`catakana.save.v1.${other}`)).toBe(true);
   });
+  it('backs up everyone and restores them as new players on another device', () => {
+    const a = new Store(mem());
+    a.update((d) => {
+      d.name = 'Mochi';
+      d.fish = 4;
+    });
+    a.addPlayer();
+    a.update((d) => {
+      d.name = 'Tama';
+      d.fish = 9;
+    });
+    a.switchPlayer(MAIN_PLAYER);
+    const file = a.exportAllJson();
+    expect(Store.isAllBackup(file)).toBe(true);
+    expect(Store.isAllBackup(a.exportJson())).toBe(false);
+    const b = new Store(mem());
+    b.update((d) => {
+      d.name = 'Kuro';
+      d.fish = 1;
+    });
+    expect(b.importAllJson(file)).toBe(2);
+    expect(b.data.name).toBe('Kuro');
+    expect(b.players().map((p) => p.name)).toEqual(['Kuro', 'Mochi', 'Tama']);
+    b.switchPlayer(b.players()[2]!.id);
+    expect(b.data.fish).toBe(9);
+  });
+  it('adds only as many players as fit and never replaces anyone', () => {
+    const a = new Store(mem());
+    for (let i = 1; i < MAX_PLAYERS; i++) a.addPlayer();
+    const file = a.exportAllJson();
+    const b = new Store(mem());
+    b.addPlayer();
+    b.addPlayer();
+    expect(b.importAllJson(file)).toBe(MAX_PLAYERS - 3);
+    expect(b.players()).toHaveLength(MAX_PLAYERS);
+    expect(b.importAllJson(file)).toBe(0);
+  });
+  it('ignores a file that is not an all-players backup', () => {
+    const s = new Store(mem());
+    expect(s.importAllJson('{oops')).toBe(0);
+    expect(s.importAllJson(JSON.stringify({ app: 'other', saves: [] }))).toBe(0);
+    expect(s.importAllJson(s.exportJson())).toBe(0);
+    expect(s.importAllJson(JSON.stringify({ app: 'catakana', saves: [{ nope: 1 }] }))).toBe(0);
+    expect(s.players()).toHaveLength(1);
+  });
 });
