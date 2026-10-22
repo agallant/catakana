@@ -3,7 +3,7 @@ import { MAIN_PLAYER, MAX_PLAYERS, Store } from '../src/core/store';
 
 const mem = (init: Record<string, string> = {}) => {
   const m = new Map(Object.entries(init));
-  return { m, getItem: (k: string) => m.get(k) ?? null, setItem: (k: string, v: string) => void m.set(k, v) };
+  return { m, getItem: (k: string) => m.get(k) ?? null, setItem: (k: string, v: string) => void m.set(k, v), removeItem: (k: string) => void m.delete(k) };
 };
 
 describe('players on one device', () => {
@@ -70,5 +70,37 @@ describe('players on one device', () => {
   it('ignores an unreadable player index', () => {
     const s = new Store(mem({ 'catakana.players.v1': '{oops' }));
     expect(s.players().map((p) => p.id)).toEqual([MAIN_PLAYER]);
+  });
+  it('removes a player and their save, keeping the others', () => {
+    const st = mem();
+    const s = new Store(st);
+    s.update((d) => (d.fish = 4));
+    s.addPlayer();
+    const other = s.players().find((p) => p.active)!.id;
+    s.update((d) => (d.fish = 9));
+    s.switchPlayer(MAIN_PLAYER);
+    expect(s.removePlayer(other)).toBe(true);
+    expect(s.players().map((p) => p.id)).toEqual([MAIN_PLAYER]);
+    expect(st.m.has(`catakana.save.v1.${other}`)).toBe(false);
+    expect(s.data.fish).toBe(4);
+  });
+  it('moves to another player when the active one is removed', () => {
+    const s = new Store(mem());
+    s.update((d) => (d.fish = 4));
+    s.addPlayer();
+    const other = s.players().find((p) => p.active)!.id;
+    expect(s.removePlayer(other)).toBe(true);
+    expect(s.players()).toHaveLength(1);
+    expect(s.data.fish).toBe(4);
+  });
+  it('lets the first player be removed and never removes the last one', () => {
+    const st = mem();
+    const s = new Store(st);
+    expect(s.removePlayer(MAIN_PLAYER)).toBe(false);
+    s.addPlayer();
+    expect(s.removePlayer(MAIN_PLAYER)).toBe(true);
+    expect(st.m.has('catakana.save.v1')).toBe(false);
+    expect(s.removePlayer(s.players()[0]!.id)).toBe(false);
+    expect(JSON.parse(st.m.get('catakana.players.v1')!).ids).toHaveLength(1);
   });
 });

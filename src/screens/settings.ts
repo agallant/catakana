@@ -68,7 +68,8 @@ export function settingsScreen(app: App): Screen {
 /** Each child (or grown-up) gets their own cat and progress on a shared device. */
 function playersSection(app: App): HTMLElement {
   const store = app.store;
-  const rows = store.players().map((p) =>
+  const rows0 = store.players();
+  const rows = rows0.map((p) =>
     h(
       'div',
       { class: 'row' },
@@ -76,6 +77,9 @@ function playersSection(app: App): HTMLElement {
       p.active
         ? null
         : h('button', { class: 'btn ghost small', onClick: () => { store.switchPlayer(p.id); app.go(store.data.started ? 'map' : 'welcome'); } }, 'Play as'),
+      rows0.length > 1
+        ? h('button', { class: 'btn ghost small', onClick: () => removePlayer(app, p.id, p.name, p.active) }, 'Remove')
+        : null,
     ),
   );
   return h(
@@ -86,6 +90,14 @@ function playersSection(app: App): HTMLElement {
     ...rows,
     h('button', { class: 'btn ghost small', onClick: () => { if (!grownUp(app)) return; if (store.addPlayer()) app.go('welcome'); else alert('This device already has the most players it can hold.'); } }, '➕ Add a player'),
   );
+}
+
+function removePlayer(app: App, id: string, name: string, active: boolean): void {
+  if (!grownUp(app)) return;
+  if (!confirm(`Remove ${name} and all of their progress? This cannot be undone.`)) return;
+  if (!app.store.removePlayer(id)) return;
+  if (active) app.go(app.store.data.started ? 'map' : 'welcome');
+  else app.render();
 }
 
 function exportSave(app: App): void {

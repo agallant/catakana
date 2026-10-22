@@ -133,10 +133,10 @@ type Listener = (s: SaveData) => void;
 export class Store {
   data: SaveData;
   private listeners = new Set<Listener>();
-  private storage: Pick<Storage, 'getItem' | 'setItem'> | null;
+  private storage: Pick<Storage, 'getItem' | 'setItem'> & Partial<Pick<Storage, 'removeItem'>> | null;
   private index: PlayerIndex;
 
-  constructor(storage?: Pick<Storage, 'getItem' | 'setItem'> | null) {
+  constructor(storage?: Pick<Storage, 'getItem' | 'setItem'> & Partial<Pick<Storage, 'removeItem'>> | null) {
     this.storage = storage === undefined ? safeLocalStorage() : storage;
     this.index = this.loadIndex();
     this.data = this.load();
@@ -225,6 +225,27 @@ export class Store {
     this.data = this.load();
     this.touchStreak();
     this.listeners.forEach((l) => l(this.data));
+  }
+
+  /** Delete a player and their save. The last player can't be removed; removing the active one switches to the next. */
+  removePlayer(id: string): boolean {
+    if (this.index.ids.length <= 1 || !this.index.ids.includes(id)) return false;
+    const wasActive = id === this.index.active;
+    if (!wasActive) this.save();
+    const ids = this.index.ids.filter((x) => x !== id);
+    this.index = { active: wasActive ? ids[0]! : this.index.active, ids };
+    this.saveIndex();
+    try {
+      this.storage?.removeItem?.(saveKey(id));
+    } catch {
+      /* storage blocked */
+    }
+    if (wasActive) {
+      this.data = this.load();
+      this.touchStreak();
+      this.listeners.forEach((l) => l(this.data));
+    }
+    return true;
   }
 
   save(): void {
