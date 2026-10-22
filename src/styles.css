@@ -337,7 +337,7 @@ button.hud-stat { cursor: pointer; }
 .skill-tabs { flex-wrap: wrap; margin: 4px 0 10px; }
 
 /* Young learner mode and the "Larger text and buttons" setting: the same game, roomier */
-html.kid, html.big-text { font-size: 19px; }
+html.kid, html.big-text, html.kid body, html.big-text body { font-size: 19px; }
 .kid .btn, .big-text .btn { min-height: 56px; border-radius: 20px; }
 .kid .btn.small, .big-text .btn.small { min-height: 46px; }
 .kid .nav-btn, .big-text .nav-btn { min-height: 62px; font-size: 0.85rem; }
