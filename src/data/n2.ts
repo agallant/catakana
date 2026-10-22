@@ -207,6 +207,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'かったものの、まだ いちども つかっていません。', en: 'Although I bought it, I haven’t used it once.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'kikkake',
+        title: '〜をきっかけに — prompted by, taking … as the start',
+        pattern: 'めいじいしんを きっかけに',
+        explain: 'Noun + をきっかけに means an event became the starting point for a change: めいじいしんを きっかけに (with the Meiji Restoration as the turning point). After a verb, add の first: みたのを きっかけに (seeing it got me started). The formal version is をきっかけとして.',
+        examples: [
+          { jp: 'めいじいしんを きっかけに、にほんは おおきく かわりました。', en: 'The Meiji Restoration set off great change in Japan.' },
+          { jp: 'はぎやきを みたのを きっかけに、やきものに きょうみを もちました。', en: 'Seeing Hagi ware got me interested in pottery.' },
+        ],
+      },
+    ],
     words: [
       ['私塾', 'しじゅく', 'private school', '🏫'],
       ['志士', 'しし', 'patriot (of the Meiji era)', '⚔️'],
@@ -227,6 +239,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['ちいさな', 'じゅくだった', 'ものの', 'ゆうめいな', 'じんぶつが', 'そだちました。'], en: 'Although it was a tiny school, famous figures grew up there.' },
       { chunks: ['かった', 'ものの', 'まだ', 'つかっていません。'], en: 'Although I bought it, I haven’t used it yet.' },
       { chunks: ['はぎやきは', 'つかうほど', 'いろが', 'かわります。'], en: 'Hagi ware changes color the more you use it.' },
+      { chunks: ['めいじいしんを', 'きっかけに', 'にほんは', 'かわりました。'], en: 'Japan changed, starting with the Meiji Restoration.' },
       { chunks: ['どべいの', 'うえに', 'なつみかんが', 'みえます。'], en: 'You can see summer oranges above the earthen walls.' },
       { chunks: ['この', 'まちは', 'にほんの', 'れきしに', 'えいきょうを', 'あたえました。'], en: 'This town influenced Japanese history.' },
     ],
@@ -242,6 +255,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'こどもばかりか、おとなも しろへびに むちゅうです。', en: 'Not just children but adults too are crazy about the white snakes.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'tabini',
+        title: '〜たびに — every time',
+        pattern: 'はしを わたる たびに',
+        explain: 'Dictionary form + たびに, or noun + の + たびに, means “every time …”, and the second half says what happens each time: わたる たびに (every time I cross), こうずいの たびに (with every flood). Use it for repeated events, not for one-off ones.',
+        examples: [
+          { jp: 'きんたいきょうを わたる たびに、むかしの ぎじゅつに かんどうします。', en: 'Every time I cross the Kintai Bridge, I’m moved by the old techniques.' },
+          { jp: 'こうずいの たびに、はしは さいけんされました。', en: 'The bridge was rebuilt after every flood.' },
+        ],
+      },
+    ],
     words: [
       ['木造', 'もくぞう', 'wooden (construction)', '🪵'],
       ['丈夫', 'じょうぶ', 'sturdy', '💪'],
@@ -263,6 +288,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['はしは', 'うつくしい', 'ばかりか', 'じょうぶです。'], en: 'The bridge is not only beautiful but sturdy.' },
       { chunks: ['こどもばかりか', 'おとなも', 'むちゅうです。'], en: 'Not just kids but adults are hooked too.' },
       { chunks: ['こうずいで', 'はしが', 'ながされました。'], en: 'The bridge was washed away by a flood.' },
+      { chunks: ['はしを', 'わたる', 'たびに', 'かんどうします。'], en: 'Every time I cross the bridge, I’m moved.' },
       { chunks: ['しろへびは', 'えんぎが', 'いいと', 'いわれています。'], en: 'White snakes are said to bring good luck.' },
       { chunks: ['むかしの', 'ぎじゅつで', 'さいけんされました。'], en: 'It was rebuilt with traditional techniques.' },
     ],
