@@ -131,7 +131,7 @@ async function importSave(app: App, e: Event): Promise<void> {
     if (n > 0) {
       alert(`Added ${n} player${n === 1 ? '' : 's'}.`);
       app.render();
-    } else alert('Nothing was added. This device may already have the most players it can hold, or the file is not a Catakana backup.');
+    } else alert('Nothing was added. The file may not be a Catakana backup, this device may already have the most players it can hold, or it may be out of space.');
     return;
   }
   if (!confirm('Replace the progress on this device with this backup?')) return;
