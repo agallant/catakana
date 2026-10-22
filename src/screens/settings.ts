@@ -22,6 +22,7 @@ export function settingsScreen(app: App): Screen {
     'div',
     { class: 'screen settings' },
     h('h2', null, '⚙️ Settings'),
+    playersSection(app),
     toggle('Sound effects', 'sound'),
     toggle('Japanese voice (text-to-speech)', 'speech'),
     toggle('Show romaji', 'romaji'),
@@ -62,6 +63,29 @@ export function settingsScreen(app: App): Screen {
     h('p', { class: 'hint' }, 'Stroke order data from KanjiVG © Ulrich Apel (CC BY-SA 3.0).'),
   );
   return { el };
+}
+
+/** Each child (or grown-up) gets their own cat and progress on a shared device. */
+function playersSection(app: App): HTMLElement {
+  const store = app.store;
+  const rows = store.players().map((p) =>
+    h(
+      'div',
+      { class: 'row' },
+      h('span', null, `🐱 ${p.name}${p.active ? ' ✔' : ''}`),
+      p.active
+        ? null
+        : h('button', { class: 'btn ghost small', onClick: () => { store.switchPlayer(p.id); app.go(store.data.started ? 'map' : 'welcome'); } }, 'Play as'),
+    ),
+  );
+  return h(
+    'div',
+    { class: 'setting col' },
+    h('strong', null, 'Players'),
+    h('small', null, 'Everyone on this device gets their own cat and progress. Backups and erasing apply to the cat who is playing now.'),
+    ...rows,
+    h('button', { class: 'btn ghost small', onClick: () => { if (!grownUp(app)) return; if (store.addPlayer()) app.go('welcome'); else alert('This device already has the most players it can hold.'); } }, '➕ Add a player'),
+  );
 }
 
 function exportSave(app: App): void {
