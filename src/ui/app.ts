@@ -23,10 +23,15 @@ export class App {
   readonly nav = h('nav', { class: 'nav', 'aria-label': 'Main' });
   readonly toasts = h('div', { class: 'toasts', 'aria-live': 'polite' });
   private current: Screen | null = null;
+  /** ask "Who's playing?" once per visit when the device has more than one player */
+  private askWho = false;
+  /** where the visit began, so a deep link survives the "Who's playing?" question */
+  private resume = '';
   private routes = new Map<string, ScreenFactory>();
   private chrome = new Set<string>(['map', 'dojo', 'cats', 'settings', 'stop', 'explore', 'passport', 'shop']);
 
   constructor(readonly root: HTMLElement) {
+    this.askWho = this.store.players().length > 1;
     this.applySettings();
     this.store.subscribe(() => {
       this.applySettings();
@@ -85,6 +90,13 @@ export class App {
     else location.hash = `#/${path}`;
   }
 
+  /** The page the visit began on, once, for a player who has already started. */
+  takeResume(): string {
+    const path = this.resume;
+    this.resume = '';
+    return path;
+  }
+
   route(): Route {
     const raw = location.hash.replace(/^#\/?/, '');
     const [name = '', ...params] = raw.split('/').map(decodeURIComponent);
@@ -92,6 +104,13 @@ export class App {
   }
 
   render(): void {
+    if (this.askWho) {
+      this.askWho = false;
+      if (this.route().name !== 'who') {
+        this.resume = location.hash.replace(/^#\/?/, '');
+        return this.go('who');
+      }
+    }
     const { name, params } = this.route();
     const f = this.routes.get(name) ?? this.routes.get('map')!;
     this.current?.dispose?.();
