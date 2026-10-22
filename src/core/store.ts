@@ -396,30 +396,33 @@ export class Store {
         try {
           this.storage.setItem(saveKey(id), JSON.stringify(data));
         } catch {
-          break;
+          return this.undoImport(ids);
         }
         ids.push(id);
         added++;
       }
       if (added === 0) return 0;
       const next: PlayerIndex = { ...this.index, ids };
-      if (!this.saveIndex(next)) {
-        // without the index the new saves would be invisible, so don't leave them behind
-        for (const id of ids.slice(this.index.ids.length)) {
-          try {
-            this.storage.removeItem?.(saveKey(id));
-          } catch {
-            /* storage blocked */
-          }
-        }
-        return 0;
-      }
+      // without the index the new saves would be invisible
+      if (!this.saveIndex(next)) return this.undoImport(ids);
       this.index = next;
       this.listeners.forEach((l) => l(this.data));
       return added;
     } catch {
       return 0;
     }
+  }
+
+  /** An all-or-nothing import failed: remove the saves written so far and report that nobody was added. */
+  private undoImport(ids: string[]): number {
+    for (const id of ids.slice(this.index.ids.length)) {
+      try {
+        this.storage?.removeItem?.(saveKey(id));
+      } catch {
+        /* storage blocked */
+      }
+    }
+    return 0;
   }
 
   reset(): void {

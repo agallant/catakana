@@ -205,4 +205,17 @@ describe('players on one device', () => {
     expect(t.players()).toHaveLength(1);
     expect([...st.m.keys()].filter((k) => k.startsWith('catakana.save.v1.'))).toEqual([]);
   });
+  it('adds nobody, and leaves no stray saves, when a save write fails part-way through', () => {
+    const src = new Store(mem());
+    src.addPlayer();
+    src.addPlayer();
+    const file = src.exportAllJson()!;
+    const st = mem();
+    let writes = 0;
+    const failing = { ...st, setItem: (k: string, v: string) => { if (k.startsWith('catakana.save.v1.') && ++writes === 2) throw new Error('full'); st.setItem(k, v); } };
+    const t = new Store(failing);
+    expect(t.importAllJson(file)).toBe(0);
+    expect(t.players()).toHaveLength(1);
+    expect([...st.m.keys()].filter((k) => k.startsWith('catakana.save.v1.'))).toEqual([]);
+  });
 });
