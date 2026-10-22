@@ -110,6 +110,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'てんきに よって、じょうりく できない ひも あります。', en: 'Depending on the weather, some days you can’t land.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'kake',
+        title: '〜かける / 〜かけの — half-done, about to',
+        pattern: 'くずれかけた たてもの',
+        explain: 'ます-stem + かける means something has started but is not finished, or is on the point of happening: くずれます → くずれかける (start to collapse). Before a noun, use かけた or かけの: くずれかけた たてもの (a half-collapsed building), よみかけの ほん (a half-read book).',
+        examples: [
+          { jp: 'しまには くずれかけた たてものが たくさん あります。', en: 'There are many half-collapsed buildings on the island.' },
+          { jp: 'ふねの なかに よみかけの ほんを わすれました。', en: 'I left a half-read book on the boat.' },
+        ],
+      },
+    ],
     words: [
       ['炭鉱', 'たんこう', 'coal mine', '⛏️'],
       ['廃墟', 'はいきょ', 'ruins', '🏚️'],
@@ -132,6 +144,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['てんきに', 'よって', 'じょうりく', 'できない', 'ひも', 'あります。'], en: 'Depending on the weather, some days you can’t land.' },
       { chunks: ['かたちが', 'ぐんかんに', 'にているので', 'そう', 'よばれます。'], en: 'It’s called that because its shape resembles a warship.' },
       { chunks: ['むかしの', 'たてものが', 'くずれかけています。'], en: 'The old buildings are starting to collapse.' },
+      { chunks: ['くずれかけた', 'たてものを', 'けんがくしました。'], en: 'We toured the half-collapsed buildings.' },
       { chunks: ['ひとに', 'よって', 'かんじかたが', 'ことなります。'], en: 'How it feels differs from person to person.' },
     ],
   },
@@ -146,6 +159,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'あの さらが しろいのに たいして、こちらは あおいです。', en: 'Whereas that plate is white, this one is blue.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'niwatatte',
+        title: '〜にわたって — over, throughout (a span)',
+        pattern: 'よんひゃくねんに わたって',
+        explain: 'A noun for a stretch of time, a distance or a number of things + にわたって means “over / throughout the whole of it”: みっかかんに わたって (over three days). Before a noun, use にわたる: ながい じかんに わたる しごと (work that runs over a long time).',
+        examples: [
+          { jp: 'ありたでは よんひゃくねんに わたって やきものが つくられて きました。', en: 'Pottery has been made in Arita for over 400 years.' },
+          { jp: 'かまの ひは みっかかんに わたって もえつづけます。', en: 'The kiln fire burns on over three days.' },
+        ],
+      },
+    ],
     words: [
       ['陶磁器', 'とうじき', 'ceramics / porcelain', '🍶'],
       ['焼き物', 'やきもの', 'pottery', '🏺'],
@@ -167,6 +192,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['あの', 'さらが', 'しろいのに', 'たいして', 'これは', 'あおいです。'], en: 'Whereas that plate is white, this one is blue.' },
       { chunks: ['ありたやきは', 'ヨーロッパへ', 'ゆしゅつされました。'], en: 'Arita ware was exported to Europe.' },
       { chunks: ['かまの', 'ひは', 'みっかかん', 'もえつづけます。'], en: 'The kiln fire keeps burning for three days.' },
+      { chunks: ['よんひゃくねんに', 'わたって', 'やきものが', 'つたわっています。'], en: 'Pottery has been handed down over 400 years.' },
       { chunks: ['ていねいに', 'もようを', 'かいています。'], en: 'They are carefully painting the design.' },
     ],
   },
