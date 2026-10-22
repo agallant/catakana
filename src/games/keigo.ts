@@ -1,7 +1,7 @@
 import { h, ruby, sleep } from '../ui/dom';
 import { speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { levelFirst, recordAnswer, shell } from './common';
+import { levelFirst, recordAnswer, shell, startingLives } from './common';
 import { shuffle } from '../core/srs';
 import { KEIGO, keigoDistractors, keigoRounds, type KeigoRound } from '../data/keigo';
 import { STOPS } from '../data/journey';
@@ -37,7 +37,7 @@ export const keigoGame: GameDef = {
     const mode = ctx.level === 1 ? 'always' : ctx.store.data.settings.furigana;
     let idx = 0;
     let correct = 0;
-    let lives = 3;
+    let lives = startingLives(ctx.store.data.settings);
     sh.setLives(lives);
 
     const next = (): void => {

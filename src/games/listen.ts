@@ -1,7 +1,7 @@
 import { fill, h, sleep } from '../ui/dom';
 import { speak, hasJapaneseVoice, speechSupported } from '../core/audio';
 import type { GameDef, GameContext, Item } from './types';
-import { distractors, recordAnswer, sessionItems, shell } from './common';
+import { distractors, recordAnswer, sessionItems, shell, startingLives } from './common';
 import { shuffle } from '../core/srs';
 
 /** Listening: hear a sound (text-to-speech), pick what was said. */
@@ -21,7 +21,7 @@ export const listenGame: GameDef = {
     const options = ctx.level === 1 ? 3 : 4;
     let idx = 0;
     let correct = 0;
-    let lives = 3;
+    let lives = startingLives(ctx.store.data.settings);
     sh.setLives(lives);
 
     const warn = !hasJapaneseVoice()

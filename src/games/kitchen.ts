@@ -1,7 +1,7 @@
 import { h, ruby, sleep } from '../ui/dom';
 import { speak } from '../core/audio';
 import type { GameDef, GameContext, Item } from './types';
-import { recordAnswer, sessionItems, shell } from './common';
+import { recordAnswer, sessionItems, shell, startingLives } from './common';
 import { sample, shuffle } from '../core/srs';
 import { conjugate, FORM_LABEL, FORM_UNLOCK, formMakesSense, isVerbEntry, wrongForms, type Form } from '../core/conjugate';
 import { STOPS } from '../data/journey';
@@ -76,7 +76,7 @@ export const kitchenGame: GameDef = {
     if (!rounds.length) return ctx.quit();
     let idx = 0;
     let correct = 0;
-    let lives = 3;
+    let lives = startingLives(ctx.store.data.settings);
     sh.setLives(lives);
 
     const next = (): void => {

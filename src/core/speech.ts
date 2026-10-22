@@ -53,8 +53,15 @@ function recognitionCtor(): RecognitionCtor | null {
   return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
 }
 
+let recognitionAllowed = true;
+
+/** Browsers send speech-recognition audio to an online service, so young learner mode turns it off. */
+export function allowRecognition(on: boolean): void {
+  recognitionAllowed = on;
+}
+
 export function recognitionSupported(): boolean {
-  return typeof window !== 'undefined' && recognitionCtor() !== null;
+  return recognitionAllowed && typeof window !== 'undefined' && recognitionCtor() !== null;
 }
 
 /** Listen once for Japanese speech; resolves with candidate transcripts (empty on failure). */

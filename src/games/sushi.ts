@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
 import { sfx, speak } from '../core/audio';
 import type { GameDef, GameContext, Item } from './types';
-import { distractors, displayPrompt, meaning, recordAnswer, sessionItems, shell } from './common';
+import { distractors, displayPrompt, meaning, recordAnswer, sessionItems, shell, startingLives } from './common';
 import { shuffle } from '../core/srs';
 
 /** Kaiten-sushi quiz: pick the right plate off the belt. */
@@ -19,7 +19,7 @@ export const sushiGame: GameDef = {
     const options = ctx.level === 1 ? 3 : ctx.level === 2 ? 4 : 5;
     let idx = 0;
     let correct = 0;
-    let lives = 3;
+    let lives = startingLives(ctx.store.data.settings);
     sh.setLives(lives);
     let timer: number | undefined;
 

@@ -69,6 +69,8 @@ export interface Shell {
 let streak = 0;
 
 /** Common chrome: back button, progress bar, a cat mascot who reacts. */
+export { startingLives } from '../core/kid';
+
 export function shell(ctx: GameContext, title: string): Shell {
   streak = 0;
   const progress = h('div', { class: 'progress-fill' });
@@ -100,6 +102,7 @@ export function shell(ctx: GameContext, title: string): Shell {
       bar.setAttribute('aria-valuetext', `${done} of ${total}`);
     },
     setLives(n) {
+      lives.hidden = ctx.store.data.settings.kid;
       const left = Math.max(0, Math.min(3, n));
       lives.textContent = '❤️'.repeat(left) + '🤍'.repeat(3 - left);
       lives.setAttribute('aria-label', `${left} of 3 lives left`);

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { answerAnnouncement, shell } from '../src/games/common';
-import { DEFAULT_LOOK } from '../src/core/store';
+import { DEFAULT_LOOK, defaultSave } from '../src/core/store';
 import type { GameContext } from '../src/games/types';
 
-const ctx = (): GameContext => ({ root: document.createElement('div'), store: { data: { look: { ...DEFAULT_LOOK } } }, quit: () => undefined }) as unknown as GameContext;
+const ctx = (): GameContext => ({ root: document.createElement('div'), store: { data: { ...defaultSave(), look: { ...DEFAULT_LOOK } } }, quit: () => undefined }) as unknown as GameContext;
 
 describe('game shell accessibility', () => {
   it('announces lives as a count, not as emoji', () => {
@@ -16,6 +16,13 @@ describe('game shell accessibility', () => {
     sh.setLives(-1);
     expect(lives.getAttribute('aria-label')).toBe('0 of 3 lives left');
     expect(lives.textContent).toBe('🤍🤍🤍');
+  });
+  it('hides the hearts for young learners', () => {
+    const c = ctx();
+    c.store.data.settings.kid = true;
+    const sh = shell(c, 'Test');
+    sh.setLives(3);
+    expect(c.root.querySelector<HTMLElement>('.lives')!.hidden).toBe(true);
   });
   it('exposes progress as a progressbar', () => {
     const c = ctx();

@@ -20,6 +20,8 @@ export interface Settings {
   speech: boolean;
   speechRate: number;
   reduceMotion: boolean;
+  /** young learner preset: calmer rules, bigger buttons, grown-up check on settings */
+  kid: boolean;
 }
 
 export interface SaveData {
@@ -83,7 +85,7 @@ export function defaultSave(): SaveData {
     daytrips: [],
     daily: { day: '', progress: {}, claimed: [] },
     achievements: [],
-    settings: { furigana: 'always', romaji: true, sound: true, speech: true, speechRate: 0.85, reduceMotion: false },
+    settings: { furigana: 'always', romaji: true, sound: true, speech: true, speechRate: 0.85, reduceMotion: false, kid: false },
     stats: { rounds: 0, correct: 0, wrong: 0, playMs: 0 },
     started: false,
   };
