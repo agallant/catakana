@@ -405,6 +405,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'しけの ため、ふねは ひきかえしを よぎなく された。', en: 'Because of rough seas, the boat was forced to turn back.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'monotomosezu',
+        title: '〜をものともせず — in spite of, undeterred by',
+        pattern: 'だんあつを ものともせず',
+        explain: 'Noun + をものともせず means “paying no heed to / undeterred by”, and what follows is a determined action. The noun is something hard, dangerous or discouraging: だんあつ (oppression), しけ (rough seas), きけん (danger). It is formal, and it praises the person who carries on regardless, so it is not used for something pleasant.',
+        examples: [
+          { jp: 'だんあつを ものともせず、しんじゃたちは いのりを まもった。', en: 'Undeterred by oppression, the believers kept their prayers alive.' },
+          { jp: 'しけを ものともせず、ふねは しまへ むかった。', en: 'Undeterred by the rough seas, the boat headed for the island.' },
+        ],
+      },
+    ],
     words: [
       ['潜伏', 'せんぷく', 'hiding / going underground', '🫥'],
       ['禁教', 'きんきょう', 'religious ban', '🚫'],
@@ -427,6 +439,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['しけの', 'ため', 'ひきかえしを', 'よぎなく', 'された。'], en: 'Because of rough seas, we were forced to turn back.' },
       { chunks: ['ぎょそんの', 'なかに', 'ちいさな', 'きょうかいが', 'たつ。'], en: 'A small church stands in the middle of the fishing village.' },
       { chunks: ['ひとびとは', 'いのりを', 'ひそかに', 'うけついだ。'], en: 'People secretly passed down their prayers.' },
+      { chunks: ['だんあつを', 'ものともせず', 'しんじゃたちは', 'いのりを', 'まもった。'], en: 'Undeterred by oppression, the believers kept their prayers alive.' },
       { chunks: ['ふねの', 'そばを', 'イルカの', 'むれが', 'およいだ。'], en: 'A pod of dolphins swam beside the boat.' },
     ],
   },
@@ -441,6 +454,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'でんとうを のこす べく、かのじょは つむぎの しょくにんに なった。', en: 'In order to preserve the tradition, she became a tsumugi weaver.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'gayueni',
+        title: '〜がゆえに — precisely because',
+        pattern: 'やこうせいで あるが ゆえに',
+        explain: 'Plain form + がゆえに means “because of / precisely because”: やこうせいで あるが ゆえに、ひるは あまり みられない (being nocturnal, it is rarely seen by day). A noun or a な-adjective takes である before がゆえに (a noun can also take の + ゆえに: しまの ゆえに), and い-adjectives and verbs go in the plain form. It is formal, and the result is often a notable or unfortunate one.',
+        examples: [
+          { jp: 'やこうせいで あるが ゆえに、クロウサギは ひるは あまり みられない。', en: 'Precisely because it is nocturnal, the Amami rabbit is rarely seen by day.' },
+          { jp: 'しまで あるが ゆえに、ここでは どくじの しぜんが まもられて きた。', en: 'Precisely because it is an island, a unique nature has been protected here.' },
+        ],
+      },
+    ],
     words: [
       ['亜熱帯', 'あねったい', 'subtropics', '🌴'],
       ['原生林', 'げんせいりん', 'virgin forest', '🌳'],
@@ -462,6 +487,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['しぜんを', 'まもる', 'べく', 'ちいきが', 'ちからを', 'あわせた。'], en: 'The community joined forces to protect nature.' },
       { chunks: ['でんとうを', 'のこす', 'べく', 'つむぎを', 'おった。'], en: 'She wove tsumugi in order to keep the tradition alive.' },
       { chunks: ['クロウサギは', 'よるに', 'かつどうする', 'やこうせいだ。'], en: 'The Amami rabbit is nocturnal, active at night.' },
+      { chunks: ['やこうせいで', 'あるが', 'ゆえに', 'ひるは', 'あまり', 'みられない。'], en: 'Precisely because it is nocturnal, it is rarely seen by day.' },
       { chunks: ['どろぞめで', 'きぬが', 'ふかい', 'ちゃいろに', 'なる。'], en: 'Mud dyeing turns the silk a deep brown.' },
       { chunks: ['マングローブを', 'みる', 'べく', 'カヌーに', 'のった。'], en: 'I got in a canoe to see the mangroves.' },
     ],
