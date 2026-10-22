@@ -41,6 +41,19 @@ describe('quests & achievements', () => {
     for (let i = 0; i < 2; i++) track(s, { type: 'game', game: 'sushi', skill: 'reading', correct: 5, total: 10, stars: 1 });
     expect(s.data.daily.claimed).toContain('games3');
   });
+  it('pays a quest that a smaller Young learner goal already met', () => {
+    const s = new Store(mem());
+    for (let i = 0; i < 2; i++) track(s, { type: 'game', game: 'sushi', skill: 'reading', correct: 5, total: 10, stars: 1 });
+    expect(s.data.daily.claimed).not.toContain('games3');
+    s.update((d) => (d.settings.kid = true));
+    const fish = s.data.fish;
+    track(s, { type: 'photo' });
+    expect(s.data.daily.claimed).toContain('games3');
+    expect(s.data.fish).toBeGreaterThan(fish);
+    const after = s.data.fish;
+    track(s, { type: 'photo' });
+    expect(s.data.fish).toBe(after);
+  });
   it('completes the play-games quest and unlocks achievements', () => {
     const s = new Store(mem());
     for (let i = 0; i < 3; i++) track(s, { type: 'game', game: 'sushi', skill: 'reading', correct: 5, total: 10, stars: 1 });

@@ -152,11 +152,10 @@ export function track(store: Store, e: GameEvent): Unlock[] {
     if (d.daily.day !== today) d.daily = { day: today, progress: {}, claimed: [] };
     for (const q of questsFor(today, store.data.settings.kid)) {
       const before = d.daily.progress[q.id] ?? 0;
-      const add = q.count(e);
-      if (!add || before >= q.goal) continue;
-      const now = Math.min(q.goal, before + add);
-      d.daily.progress[q.id] = now;
-      if (now >= q.goal && !d.daily.claimed.includes(q.id)) {
+      const now = Math.min(q.goal, before + q.count(e));
+      if (now > before) d.daily.progress[q.id] = now;
+      // progress saved under a bigger goal can already meet a smaller one (Young learner mode switched on mid-day)
+      if (Math.max(now, before) >= q.goal && !d.daily.claimed.includes(q.id)) {
         d.daily.claimed.push(q.id);
         d.fish += q.fish;
         d.xp += q.fish;
