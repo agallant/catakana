@@ -109,6 +109,10 @@ describe('extra grammar', () => {
     expect(grammarsAt('shiretoko').map((g) => g.id)).toEqual(['hazu', 'ba-hodo']);
     expect(grammarsAt('iriomote').map((g) => g.id)).toEqual(['bakari', 'dake-de-naku']);
   });
+  it('adds N2 extra points after the main one', () => {
+    expect(grammarsAt('hirosaki').map((g) => g.id)).toEqual(['wakeda', 'uchini']);
+    expect(grammarsAt('matsushima').map((g) => g.id)).toEqual(['nitotte', 'hodo-nai']);
+  });
   it('gives every grammar point a unique id and examples', () => {
     const all = Object.keys(TOUR_CONTENT).flatMap((s) => grammarsAt(s));
     expect(new Set(all.map((g) => g.id)).size).toBe(all.length);

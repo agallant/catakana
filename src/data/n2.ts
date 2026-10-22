@@ -13,6 +13,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'りんごが きらいな わけでは ありません。', en: 'It’s not that I dislike apples.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'uchini',
+        title: '〜うちに — while (it lasts) / before',
+        pattern: 'さくらが さいている うちに',
+        explain: 'うちに means “while something is still true”, so do it before the chance is gone. It follows a verb in dictionary or ている form, an い-adjective, a な-adjective + な, or a noun + の: わかい うちに, しずかな うちに, あさの うちに. With the ない form it means “before … happens”: あめが ふらない うちに (before it starts raining).',
+        examples: [
+          { jp: 'さくらが さいている うちに、おしろへ いきましょう。', en: 'Let’s go to the castle while the cherry trees are in bloom.' },
+          { jp: 'あめが ふらない うちに、りんごを しゅうかくします。', en: 'We’ll harvest the apples before it starts raining.' },
+        ],
+      },
+    ],
     words: [
       ['天守閣', 'てんしゅかく', 'castle keep', '🏯'],
       ['移動', 'いどう', 'moving / relocation', '🚚'],
@@ -34,6 +46,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['りんごが', 'きらいな', 'わけでは', 'ありません。'], en: 'It’s not that I dislike apples.' },
       { chunks: ['おしろを', 'うごかした', 'りゆうは', 'いしがきの', 'しゅうりです。'], en: 'The reason they moved the castle was to repair the stone wall.' },
       { chunks: ['ほりが', 'はなびらで', 'ピンクに', 'なっています。'], en: 'The moat has turned pink with petals.' },
+      { chunks: ['さくらが', 'さいている', 'うちに', 'ほりを', 'みに', 'いこう。'], en: 'Let’s go see the moat while the cherry trees are in bloom.' },
       { chunks: ['かならずしも', 'あかい', 'りんごが', 'あまい', 'わけではない。'], en: 'Red apples aren’t necessarily sweet.' },
     ],
   },
@@ -48,6 +61,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'しまの ひとに とって、うみは せいかつの いちぶです。', en: 'For island people, the sea is part of life.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'hodo-nai',
+        title: '〜ほど〜はない — nothing is as … as',
+        pattern: 'ここほど きれいな ところは ない',
+        explain: 'Noun + ほど + adjective + noun + は ない means “there is no … as … as (noun)”, a strong way to say something is the best: まつしまほど きれいな ところは ない. Use an い-adjective as is and add な to a な-adjective: ここほど しずかな ところは ない. Without the second noun, Aは Bほど + an adjective in the negative means “A is not as … as B”: きょうは きのうほど さむくない.',
+        examples: [
+          { jp: 'まつしまほど うつくしい けしきは ありません。', en: 'There’s no view as beautiful as Matsushima.' },
+          { jp: 'わたしに とって、この おもいでほど たいせつな ものは ない。', en: 'For me, nothing is as precious as this memory.' },
+        ],
+      },
+    ],
     words: [
       ['絶景', 'ぜっけい', 'superb view', '🏞️'],
       ['湾内', 'わんない', 'within the bay', '🌊'],
@@ -69,6 +94,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['わたしに', 'とって', 'この', 'けしきは', 'たからものです。'], en: 'For me, this view is a treasure.' },
       { chunks: ['ねこに', 'とって', 'かきは', 'ちょっと', 'むずかしい。'], en: 'For a cat, oysters are a bit tricky.' },
       { chunks: ['ゆうらんせんから', 'しまを', 'ながめました。'], en: 'I gazed at the islands from the sightseeing boat.' },
+      { chunks: ['ここほど', 'きれいな', 'うみは', 'ありません。'], en: 'There’s no sea as lovely as this.' },
       { chunks: ['ばしょうも', 'この', 'ぜっけいに', 'かんどうしたそうです。'], en: 'I hear Basho too was moved by this view.' },
       { chunks: ['まちの', 'ふっこうは', 'みんなに', 'とって', 'じゅうようです。'], en: 'Rebuilding the town is important for everyone.' },
     ],
