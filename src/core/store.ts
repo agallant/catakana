@@ -346,6 +346,82 @@ export class Store {
     }
   }
 
+  /** Every player's progress in one backup file, or null if any player's save can't be read (nothing is guessed). */
+  exportAllJson(): string | null {
+    this.save();
+    const saves: SaveData[] = [];
+    for (const id of this.index.ids) {
+      if (id === this.index.active) {
+        saves.push(this.data);
+        continue;
+      }
+      try {
+        const raw = this.storage?.getItem(saveKey(id));
+        if (!raw || !isRecord(JSON.parse(raw))) return null;
+        saves.push(this.load(raw));
+      } catch {
+        return null;
+      }
+    }
+    return JSON.stringify({ app: 'catakana', exported: new Date().toISOString(), saves });
+  }
+
+  /** Does this backup hold several players (rather than one save)? */
+  static isAllBackup(text: string): boolean {
+    try {
+      const parsed: unknown = JSON.parse(text);
+      return isRecord(parsed) && parsed.app === 'catakana' && Array.isArray(parsed.saves);
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Add the players from an all-players backup as new players, up to the limit. Nobody already on the device is
+   * changed or replaced. Returns how many were added (0 for an unreadable file or no room).
+   */
+  importAllJson(text: string): number {
+    try {
+      const parsed: unknown = JSON.parse(text);
+      if (!this.storage || !isRecord(parsed) || parsed.app !== 'catakana' || !Array.isArray(parsed.saves)) return 0;
+      this.save();
+      const ids = [...this.index.ids];
+      let added = 0;
+      for (const save of parsed.saves) {
+        if (ids.length >= MAX_PLAYERS) break;
+        if (!isValidSave(save)) continue;
+        let id = `p${Date.now().toString(36)}${added}`;
+        while (ids.includes(id)) id += 'x';
+        const data = this.load(JSON.stringify(save));
+        try {
+          this.storage.setItem(saveKey(id), JSON.stringify(data));
+        } catch {
+          break;
+        }
+        ids.push(id);
+        added++;
+      }
+      if (added === 0) return 0;
+      const next: PlayerIndex = { ...this.index, ids };
+      if (!this.saveIndex(next)) {
+        // without the index the new saves would be invisible, so don't leave them behind
+        for (const id of ids.slice(this.index.ids.length)) {
+          try {
+            this.storage.removeItem?.(saveKey(id));
+          } catch {
+            /* storage blocked */
+          }
+        }
+        return 0;
+      }
+      this.index = next;
+      this.listeners.forEach((l) => l(this.data));
+      return added;
+    } catch {
+      return 0;
+    }
+  }
+
   reset(): void {
     this.data = defaultSave();
     this.save();

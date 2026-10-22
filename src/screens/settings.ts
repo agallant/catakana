@@ -1,7 +1,7 @@
 import type { App, Screen } from '../ui/app';
 import { h } from '../ui/dom';
 import { hasJapaneseVoice, speak, sfx } from '../core/audio';
-import type { FuriganaMode } from '../core/store';
+import { Store, type FuriganaMode } from '../core/store';
 import { applyKidPreset, checkGate, makeGate } from '../core/kid';
 
 /** Ask a quick sum before anything a child should not do alone. */
@@ -55,7 +55,10 @@ export function settingsScreen(app: App): Screen {
       h(
         'div',
         { class: 'row' },
-        h('button', { class: 'btn ghost', onClick: () => { if (grownUp(app)) exportSave(app); } }, '💾 Export progress'),
+        h('button', { class: 'btn ghost', onClick: () => { if (grownUp(app)) exportSave(app, false); } }, '💾 Export progress'),
+        app.store.players().length > 1
+          ? h('button', { class: 'btn ghost', onClick: () => { if (grownUp(app)) exportSave(app, true); } }, '💾 Export everyone')
+          : null,
         importButton(app),
       ),
     ),
@@ -101,12 +104,14 @@ function removePlayer(app: App, id: string, name: string, active: boolean): void
   else app.render();
 }
 
-function exportSave(app: App): void {
-  const blob = new Blob([app.store.exportJson()], { type: 'application/json' });
+function exportSave(app: App, everyone: boolean): void {
+  const json = everyone ? app.store.exportAllJson() : app.store.exportJson();
+  if (json === null) return alert('Some progress on this device could not be read, so no backup was made.');
+  const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `catakana-${new Date().toISOString().slice(0, 10)}.json`;
+  a.download = `catakana-${everyone ? 'everyone-' : ''}${new Date().toISOString().slice(0, 10)}.json`;
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -120,6 +125,15 @@ async function importSave(app: App, e: Event): Promise<void> {
   input.value = '';
   if (!file || !grownUp(app)) return;
   const text = await file.text();
+  if (Store.isAllBackup(text)) {
+    if (!confirm('Add the players in this backup to this device? Nobody already here is changed.')) return;
+    const n = app.store.importAllJson(text);
+    if (n > 0) {
+      alert(`Added ${n} player${n === 1 ? '' : 's'}.`);
+      app.render();
+    } else alert('Nothing was added. This device may already have the most players it can hold, or the file is not a Catakana backup.');
+    return;
+  }
   if (!confirm('Replace the progress on this device with this backup?')) return;
   if (app.store.importJson(text)) app.go('map');
   else alert('That file is not a Catakana backup.');
