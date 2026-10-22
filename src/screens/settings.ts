@@ -13,7 +13,7 @@ function grownUp(app: App): boolean {
 
 export function settingsScreen(app: App): Screen {
   const d = app.store.data;
-  const toggle = (label: string, key: 'sound' | 'speech' | 'romaji' | 'reduceMotion') =>
+  const toggle = (label: string, key: 'sound' | 'speech' | 'romaji' | 'reduceMotion' | 'bigText') =>
     h('label', { class: 'setting' }, h('span', null, label), h('input', { type: 'checkbox', checked: d.settings[key], onChange: (e: Event) => app.store.update((s) => { s.settings[key] = (e.target as HTMLInputElement).checked; }) }));
   const furi = (['always', 'tap', 'off'] as FuriganaMode[]).map((m) =>
     h('button', { class: `chip ${d.settings.furigana === m ? 'on' : ''}`, onClick: () => { app.store.update((s) => { s.settings.furigana = m; }); app.render(); } }, { always: 'Always', tap: 'Tap to show', off: 'Off' }[m]),
@@ -26,6 +26,7 @@ export function settingsScreen(app: App): Screen {
     toggle('Sound effects', 'sound'),
     toggle('Japanese voice (text-to-speech)', 'speech'),
     toggle('Show romaji', 'romaji'),
+    toggle('Larger text and buttons', 'bigText'),
     toggle('Reduce motion', 'reduceMotion'),
     h(
       'label',

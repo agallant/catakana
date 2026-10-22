@@ -43,6 +43,7 @@ export class App {
     configureAudio({ sound: s.sound, speech: s.speech, rate: s.speechRate });
     document.documentElement.classList.toggle('reduce-motion', s.reduceMotion);
     document.documentElement.classList.toggle('kid', s.kid);
+    document.documentElement.classList.toggle('big-text', s.bigText);
     allowRecognition(!s.kid);
     this.watchBreaks(s.kid);
   }
