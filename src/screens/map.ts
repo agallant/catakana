@@ -92,7 +92,7 @@ export function mapScreen(app: App): Screen {
     'section',
     { class: 'quests' },
     h('h3', null, '📜 Today’s quests'),
-    questsFor(today).map((q) => {
+    questsFor(today, d.settings.kid).map((q) => {
       const p = Math.min(q.goal, progress[q.id] ?? 0);
       return h(
         'div',

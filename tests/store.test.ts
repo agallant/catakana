@@ -29,6 +29,18 @@ describe('quests & achievements', () => {
     expect(new Set(a.map((q) => q.id)).size).toBe(3);
     expect(questsFor('2026-10-19').map((q) => q.id)).toEqual(a.map((q) => q.id));
   });
+  it('asks for less in Young learner mode', () => {
+    const grown = questsFor('2026-10-19');
+    const kid = questsFor('2026-10-19', true);
+    expect(kid.map((q) => q.id)).toEqual(grown.map((q) => q.id));
+    expect(kid[0]!.goal).toBe(2);
+    expect(kid[0]!.label).toBe('Play 2 games');
+    for (const q of kid) expect(q.goal).toBeLessThanOrEqual(grown.find((g) => g.id === q.id)!.goal);
+    const s = new Store(mem());
+    s.update((d) => (d.settings.kid = true));
+    for (let i = 0; i < 2; i++) track(s, { type: 'game', game: 'sushi', skill: 'reading', correct: 5, total: 10, stars: 1 });
+    expect(s.data.daily.claimed).toContain('games3');
+  });
   it('completes the play-games quest and unlocks achievements', () => {
     const s = new Store(mem());
     for (let i = 0; i < 3; i++) track(s, { type: 'game', game: 'sushi', skill: 'reading', correct: 5, total: 10, stars: 1 });
