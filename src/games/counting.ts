@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
 import { speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { recordAnswer, shell } from './common';
+import { recordAnswer, shell, startingLives } from './common';
 import { pickItems, sample, shuffle } from '../core/srs';
 import { COUNTERS, counterDistractors, written, type Counter } from '../data/counters';
 import { STOPS } from '../data/journey';
@@ -47,7 +47,7 @@ export const countingGame: GameDef = {
     while (rounds.length < ROUNDS && all.length) rounds.push(sample(all));
     let idx = 0;
     let correct = 0;
-    let lives = 3;
+    let lives = startingLives(ctx.store.data.settings);
     sh.setLives(lives);
 
     const next = (): void => {

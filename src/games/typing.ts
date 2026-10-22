@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
 import { speak } from '../core/audio';
 import type { GameDef, GameContext, Item } from './types';
-import { recordAnswer, sessionItems, shell } from './common';
+import { recordAnswer, sessionItems, shell, startingLives } from './common';
 import { romajiToHiragana, toKatakana } from '../data/kana';
 
 /** Type the romaji for the kana you see (and the kana for the picture) — keyboard fluency. */
@@ -19,7 +19,7 @@ export const typingGame: GameDef = {
     const items = sessionItems(ctx, undefined, ctx.level === 3 ? ['kana', 'word'] : undefined);
     let idx = 0;
     let correct = 0;
-    let lives = 3;
+    let lives = startingLives(ctx.store.data.settings);
     sh.setLives(lives);
 
     const matches = (input: string, reading: string, romaji: string): boolean => {

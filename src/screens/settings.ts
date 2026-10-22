@@ -2,6 +2,14 @@ import type { App, Screen } from '../ui/app';
 import { h } from '../ui/dom';
 import { hasJapaneseVoice, speak, sfx } from '../core/audio';
 import type { FuriganaMode } from '../core/store';
+import { applyKidPreset, checkGate, makeGate } from '../core/kid';
+
+/** Ask a quick sum before anything a child should not do alone. */
+function grownUp(app: App): boolean {
+  if (!app.store.data.settings.kid) return true;
+  const g = makeGate();
+  return checkGate(g, prompt(g.question));
+}
 
 export function settingsScreen(app: App): Screen {
   const d = app.store.data;
@@ -18,10 +26,25 @@ export function settingsScreen(app: App): Screen {
     toggle('Japanese voice (text-to-speech)', 'speech'),
     toggle('Show romaji', 'romaji'),
     toggle('Reduce motion', 'reduceMotion'),
+    h(
+      'label',
+      { class: 'setting' },
+      h('span', null, '🧒 Young learner mode', h('br'), h('small', null, 'Bigger buttons, no game-over, kana help always on, a grown-up check for backups and erasing, no online speech recognition, and a break reminder every 20 minutes.')),
+      h('input', {
+        type: 'checkbox',
+        checked: d.settings.kid,
+        onChange: (e: Event) => {
+          const on = (e.target as HTMLInputElement).checked;
+          if (!on && !grownUp(app)) return void app.render();
+          app.store.update((s) => { if (on) applyKidPreset(s.settings); else s.settings.kid = false; });
+          app.render();
+        },
+      }),
+    ),
     h('label', { class: 'setting' }, h('span', null, 'Voice speed'), h('input', { type: 'range', min: '0.5', max: '1.2', step: '0.05', value: d.settings.speechRate, onChange: (e: Event) => app.store.update((s) => { s.settings.speechRate = Number((e.target as HTMLInputElement).value); }) })),
     h('div', { class: 'setting col' }, h('span', null, 'Furigana (reading aids over kanji)'), h('div', { class: 'chips' }, furi)),
     h('div', { class: 'setting col' }, h('button', { class: 'btn ghost', onClick: () => { sfx.meow(); void speak('こんにちは'); } }, '🔊 Test voice'), h('small', null, hasJapaneseVoice() ? 'Japanese voice found ✔' : 'No Japanese voice found. Add one in your device’s text-to-speech settings.')),
-    h('div', { class: 'setting col' }, h('strong', null, 'Your progress'), h('small', null, `${d.stats.correct} right · ${d.stats.wrong} wrong · ${d.stats.rounds} rounds played`), h('small', null, 'Saved only on this device.')),
+    h('div', { class: 'setting col' }, h('strong', null, 'Your progress'), h('small', null, d.settings.kid ? `⭐ ${d.stats.correct} right answers` : `${d.stats.correct} right · ${d.stats.wrong} wrong · ${d.stats.rounds} rounds played`), h('small', null, 'Saved only on this device.')),
     h(
       'div',
       { class: 'setting col' },
@@ -30,11 +53,11 @@ export function settingsScreen(app: App): Screen {
       h(
         'div',
         { class: 'row' },
-        h('button', { class: 'btn ghost', onClick: () => exportSave(app) }, '💾 Export progress'),
+        h('button', { class: 'btn ghost', onClick: () => { if (grownUp(app)) exportSave(app); } }, '💾 Export progress'),
         importButton(app),
       ),
     ),
-    h('button', { class: 'btn danger', onClick: () => { if (confirm('Erase all progress on this device?')) { app.store.reset(); app.go('welcome'); } } }, 'Erase progress'),
+    h('button', { class: 'btn danger', onClick: () => { if (grownUp(app) && confirm('Erase all progress on this device?')) { app.store.reset(); app.go('welcome'); } } }, 'Erase progress'),
     h('p', { class: 'hint' }, 'Catakana · works offline · made with 🐾'),
     h('p', { class: 'hint' }, 'Stroke order data from KanjiVG © Ulrich Apel (CC BY-SA 3.0).'),
   );
@@ -54,8 +77,11 @@ function exportSave(app: App): void {
 }
 
 async function importSave(app: App, e: Event): Promise<void> {
-  const file = (e.target as HTMLInputElement).files?.[0];
-  if (!file) return;
+  const input = e.target as HTMLInputElement;
+  const file = input.files?.[0];
+  // clear the picker so choosing the same file again (after a failed check or a cancel) still fires `change`
+  input.value = '';
+  if (!file || !grownUp(app)) return;
   const text = await file.text();
   if (!confirm('Replace the progress on this device with this backup?')) return;
   if (app.store.importJson(text)) app.go('map');

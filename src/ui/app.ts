@@ -1,3 +1,5 @@
+import { allowRecognition } from '../core/speech';
+import { breakDue } from '../core/kid';
 import { Store, level } from '../core/store';
 import { configureAudio, sfx } from '../core/audio';
 import { h } from './dom';
@@ -40,6 +42,28 @@ export class App {
     const s = this.store.data.settings;
     configureAudio({ sound: s.sound, speech: s.speech, rate: s.speechRate });
     document.documentElement.classList.toggle('reduce-motion', s.reduceMotion);
+    document.documentElement.classList.toggle('kid', s.kid);
+    allowRecognition(!s.kid);
+    this.watchBreaks(s.kid);
+  }
+
+  private breakTimer: number | undefined;
+  private breakSince = Date.now();
+
+  /** Young learners get a gentle "time for a break?" nudge after every 20 minutes of play. */
+  private watchBreaks(on: boolean): void {
+    if (!on) {
+      window.clearInterval(this.breakTimer);
+      this.breakTimer = undefined;
+      return;
+    }
+    if (this.breakTimer !== undefined) return;
+    this.breakSince = Date.now();
+    this.breakTimer = window.setInterval(() => {
+      if (!breakDue(this.breakSince, Date.now())) return;
+      this.breakSince = Date.now();
+      this.toast({ kind: 'quest', emoji: '😴', label: `${this.store.data.name} is sleepy. Time for a stretch and a drink of water?` });
+    }, 30_000);
   }
 
   /** Slide-in notification for quest completions and achievements. */

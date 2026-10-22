@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
 import { hasJapaneseVoice, speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { chime, levelFirst, shell } from './common';
+import { chime, levelFirst, shell, startingLives } from './common';
 import { shuffle } from '../core/srs';
 import { recognitionSupported, recognizeOnce, speechScore } from '../core/speech';
 import { SCENES, type Reply, type Scene } from '../data/roleplay';
@@ -56,7 +56,7 @@ export const roleplayGame: GameDef = {
     const npcLook = ctx.stop.npc.look;
     let idx = 0;
     let correct = 0;
-    let lives = 3;
+    let lives = startingLives(ctx.store.data.settings);
     sh.setLives(lives);
     const log = h('div', { class: 'convo' });
     const header = h('div', { class: 'rp-head' }, `${scene.emoji} ${scene.title}`, h('small', null, ` · talking to: ${scene.role}`));

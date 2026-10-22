@@ -1,7 +1,7 @@
 import { h, sleep } from '../ui/dom';
 import { speak } from '../core/audio';
 import type { GameDef, GameContext, Item } from './types';
-import { recordAnswer, shell } from './common';
+import { recordAnswer, shell, startingLives } from './common';
 import { shuffle } from '../core/srs';
 import { STOPS } from '../data/journey';
 import { kanaToRomaji } from '../data/kana';
@@ -42,7 +42,7 @@ export const stationGame: GameDef = {
     const rounds = shuffle(stations.concat(shuffle(stations))).slice(0, 8);
     let idx = 0;
     let correct = 0;
-    let lives = 3;
+    let lives = startingLives(ctx.store.data.settings);
     sh.setLives(lives);
     const next = async (): Promise<void> => {
       if (idx >= rounds.length || lives <= 0) {

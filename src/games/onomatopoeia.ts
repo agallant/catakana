@@ -1,7 +1,7 @@
 import { h, ruby, sleep } from '../ui/dom';
 import { hasJapaneseVoice, speak } from '../core/audio';
 import type { GameDef, GameContext } from './types';
-import { levelFirst, recordAnswer, shell } from './common';
+import { levelFirst, recordAnswer, shell, startingLives } from './common';
 import { shuffle } from '../core/srs';
 import { ONO_BLANK, ONOMATOPOEIA, type Ono } from '../data/onomatopoeia';
 import { STOPS } from '../data/journey';
@@ -51,7 +51,7 @@ export const onomatopoeiaGame: GameDef = {
     const earOnly = ctx.level === 2 && ctx.store.data.settings.speech && hasJapaneseVoice();
     let idx = 0;
     let correct = 0;
-    let lives = 3;
+    let lives = startingLives(ctx.store.data.settings);
     sh.setLives(lives);
 
     const next = (): void => {

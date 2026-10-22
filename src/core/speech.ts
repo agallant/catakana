@@ -53,8 +53,19 @@ function recognitionCtor(): RecognitionCtor | null {
   return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
 }
 
+let recognitionAllowed = true;
+
+/** Browsers send speech-recognition audio to an online service, so young learner mode turns it off. */
+export function allowRecognition(on: boolean): void {
+  recognitionAllowed = on;
+  if (!on) stopActiveRecognition?.();
+}
+
+/** Stops the listening session in progress (if any), so no audio goes on being sent. */
+let stopActiveRecognition: (() => void) | null = null;
+
 export function recognitionSupported(): boolean {
-  return typeof window !== 'undefined' && recognitionCtor() !== null;
+  return recognitionAllowed && typeof window !== 'undefined' && recognitionCtor() !== null;
 }
 
 /** Listen once for Japanese speech; resolves with candidate transcripts (empty on failure). */
@@ -66,10 +77,20 @@ export function recognizeOnce(timeoutMs = 7000): Promise<string[]> {
     const finish = (r: string[]): void => {
       if (done) return;
       done = true;
+      stopActiveRecognition = null;
       resolve(r);
     };
     try {
       const rec = new Ctor();
+      const stop = (): void => {
+        try {
+          rec.stop();
+        } catch {
+          /* already stopped */
+        }
+        finish([]);
+      };
+      stopActiveRecognition = stop;
       rec.lang = 'ja-JP';
       rec.interimResults = false;
       rec.maxAlternatives = 5;
@@ -82,14 +103,7 @@ export function recognizeOnce(timeoutMs = 7000): Promise<string[]> {
       rec.onerror = () => finish([]);
       rec.onend = () => finish([]);
       rec.start();
-      setTimeout(() => {
-        try {
-          rec.stop();
-        } catch {
-          /* already stopped */
-        }
-        finish([]);
-      }, timeoutMs);
+      setTimeout(stop, timeoutMs);
     } catch {
       finish([]);
     }
