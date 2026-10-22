@@ -304,6 +304,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'あの いぬは こんぴらまいりを している いぬに ちがいない。', en: 'That dog must be on a Konpira pilgrimage.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'wakeniwaikanai',
+        title: '〜わけにはいかない — can’t very well',
+        pattern: 'ここで やめる わけには いかない',
+        explain: 'Dictionary form + わけにはいかない means you can’t do something because of duty, common sense or how it would look, not because it is impossible: ここで やめる わけには いかない (I can’t very well give up here). With the ない form it means you have to: さんぱいしない わけには いかない (I can’t not pay my respects).',
+        examples: [
+          { jp: 'いしだんが ながくても、ここで やめる わけには いかない。', en: 'Even if the steps are long, I can’t very well quit here.' },
+          { jp: 'ここまで きたら、さんぱいしない わけには いきません。', en: 'Having come this far, I really have to pay my respects.' },
+        ],
+      },
+    ],
     words: [
       ['石段', 'いしだん', 'stone steps', '🪜'],
       ['参拝', 'さんぱい', 'visiting a shrine to pray', '🙏'],
@@ -325,6 +337,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['あの', 'いぬは', 'だいさんの', 'いぬに', 'ちがいない。'], en: 'That dog must be a proxy pilgrim.' },
       { chunks: ['ふなのりは', 'こうかいの', 'あんぜんを', 'いのりました。'], en: 'Sailors prayed for safe voyages.' },
       { chunks: ['ちょうじょうまで', 'いしだんが', 'つづいています。'], en: 'Stone steps continue to the summit.' },
+      { chunks: ['ここで', 'やめる', 'わけには', 'いかない。'], en: 'I can’t very well quit here.' },
       { chunks: ['ふるい', 'しばいごやで', 'かぶきを', 'みました。'], en: 'I watched kabuki in an old playhouse.' },
     ],
   },
@@ -339,6 +352,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'まいにち ジーンズを はく ことに しました。', en: 'I’ve decided to wear jeans every day.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'kotonishiteiru',
+        title: '〜ことにしている / 〜ことになっている — rules',
+        pattern: 'まいあさ あるく ことに して います',
+        explain: 'Dictionary or ない form + ことにしている means a rule you made for yourself and keep: “I make it a rule to …”. ことになっている means a rule set by others, such as a schedule, a custom or a regulation: “it’s been arranged / the rule is …”. Compare ことにした (one decision) with ことにしている (a habit that comes from it).',
+        examples: [
+          { jp: 'まいあさ やなぎの したを あるく ことに して います。', en: 'I make it a rule to walk under the willows every morning.' },
+          { jp: 'びかんちくでは しらかべを こわさない ことに なって います。', en: 'In the scenic district, the rule is that white walls aren’t torn down.' },
+        ],
+      },
+    ],
     words: [
       ['美観地区', 'びかんちく', 'scenic preservation district', '🏘️'],
       ['白壁', 'しらかべ', 'white wall', '⬜'],
@@ -360,6 +385,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['まいにち', 'ジーンズを', 'はく', 'ことに', 'しました。'], en: 'I’ve decided to wear jeans every day.' },
       { chunks: ['ふるい', 'こうじょうが', 'ホテルに', 'かいそうされました。'], en: 'An old factory was renovated into a hotel.' },
       { chunks: ['やなぎの', 'したを', 'ふねが', 'とおります。'], en: 'Boats pass under the willows.' },
+      { chunks: ['まいあさ', 'やなぎの', 'したを', 'あるく', 'ことに', 'しています。'], en: 'I make it a rule to walk under the willows every morning.' },
       { chunks: ['あした', 'ひっこす', 'ことに', 'きまりました。'], en: 'It’s been settled that I’ll move tomorrow.' },
     ],
   },
