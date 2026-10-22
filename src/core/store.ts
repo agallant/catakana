@@ -346,18 +346,23 @@ export class Store {
     }
   }
 
-  /** Every player's progress in one backup file. */
-  exportAllJson(): string {
+  /** Every player's progress in one backup file, or null if any player's save can't be read (nothing is guessed). */
+  exportAllJson(): string | null {
     this.save();
-    const saves = this.index.ids.map((id) => {
-      if (id === this.index.active) return this.data;
+    const saves: SaveData[] = [];
+    for (const id of this.index.ids) {
+      if (id === this.index.active) {
+        saves.push(this.data);
+        continue;
+      }
       try {
         const raw = this.storage?.getItem(saveKey(id));
-        return raw ? this.load(raw) : defaultSave();
+        if (!raw || !isRecord(JSON.parse(raw))) return null;
+        saves.push(this.load(raw));
       } catch {
-        return defaultSave();
+        return null;
       }
-    });
+    }
     return JSON.stringify({ app: 'catakana', exported: new Date().toISOString(), saves });
   }
 
@@ -397,8 +402,19 @@ export class Store {
         added++;
       }
       if (added === 0) return 0;
-      this.index = { ...this.index, ids };
-      this.saveIndex();
+      const next: PlayerIndex = { ...this.index, ids };
+      if (!this.saveIndex(next)) {
+        // without the index the new saves would be invisible, so don't leave them behind
+        for (const id of ids.slice(this.index.ids.length)) {
+          try {
+            this.storage.removeItem?.(saveKey(id));
+          } catch {
+            /* storage blocked */
+          }
+        }
+        return 0;
+      }
+      this.index = next;
       this.listeners.forEach((l) => l(this.data));
       return added;
     } catch {

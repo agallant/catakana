@@ -150,7 +150,7 @@ describe('players on one device', () => {
       d.fish = 9;
     });
     a.switchPlayer(MAIN_PLAYER);
-    const file = a.exportAllJson();
+    const file = a.exportAllJson()!;
     expect(Store.isAllBackup(file)).toBe(true);
     expect(Store.isAllBackup(a.exportJson())).toBe(false);
     const b = new Store(mem());
@@ -167,7 +167,7 @@ describe('players on one device', () => {
   it('adds only as many players as fit and never replaces anyone', () => {
     const a = new Store(mem());
     for (let i = 1; i < MAX_PLAYERS; i++) a.addPlayer();
-    const file = a.exportAllJson();
+    const file = a.exportAllJson()!;
     const b = new Store(mem());
     b.addPlayer();
     b.addPlayer();
@@ -182,5 +182,27 @@ describe('players on one device', () => {
     expect(s.importAllJson(s.exportJson())).toBe(0);
     expect(s.importAllJson(JSON.stringify({ app: 'catakana', saves: [{ nope: 1 }] }))).toBe(0);
     expect(s.players()).toHaveLength(1);
+  });
+  it('refuses to back up everyone when a player’s save is missing or unreadable', () => {
+    const st = mem();
+    const s = new Store(st);
+    s.addPlayer();
+    const key = 'catakana.save.v1'; // the first player keeps the original key
+    expect(s.exportAllJson()).not.toBeNull();
+    st.m.delete(key);
+    expect(s.exportAllJson()).toBeNull();
+    st.m.set(key, '{oops');
+    expect(s.exportAllJson()).toBeNull();
+  });
+  it('adds nobody, and leaves no stray saves, when the player list cannot be written', () => {
+    const src = new Store(mem());
+    src.addPlayer();
+    const file = src.exportAllJson()!;
+    const st = mem();
+    const failing = { ...st, setItem: (k: string, v: string) => { if (k === 'catakana.players.v1') throw new Error('full'); st.setItem(k, v); } };
+    const t = new Store(failing);
+    expect(t.importAllJson(file)).toBe(0);
+    expect(t.players()).toHaveLength(1);
+    expect([...st.m.keys()].filter((k) => k.startsWith('catakana.save.v1.'))).toEqual([]);
   });
 });

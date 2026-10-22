@@ -105,7 +105,9 @@ function removePlayer(app: App, id: string, name: string, active: boolean): void
 }
 
 function exportSave(app: App, everyone: boolean): void {
-  const blob = new Blob([everyone ? app.store.exportAllJson() : app.store.exportJson()], { type: 'application/json' });
+  const json = everyone ? app.store.exportAllJson() : app.store.exportJson();
+  if (json === null) return alert('Some progress on this device could not be read, so no backup was made.');
+  const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
