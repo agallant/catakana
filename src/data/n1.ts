@@ -307,6 +307,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'しがなおやの さくひんを よむと、ここを おとずれずには いられない。', en: 'Reading Shiga Naoya’s work, one can’t help visiting here.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'tekara-toiumono',
+        title: '〜てからというもの — ever since',
+        pattern: 'ここに きてからというもの',
+        explain: 'て-form of a verb + からというもの means “ever since X happened”, and the rest of the sentence describes a change that has kept going ever since: ここに きてからと いうもの、まいにち ゆめぐりを している (ever since I came here, I take a bath tour every day). It is for a continuing change, not a one-off event, and the sentence is usually in the present or the present perfect.',
+        examples: [
+          { jp: 'ここに きてからと いうもの、まいにち ゆめぐりを している。', en: 'Ever since I came here, I have done the bath tour every day.' },
+          { jp: 'とうじを してからと いうもの、よく ねられる。', en: 'Ever since I tried the hot-spring cure, I sleep well.' },
+        ],
+      },
+    ],
     words: [
       ['温泉街', 'おんせんがい', 'hot-spring town', '♨️'],
       ['外湯', 'そとゆ', 'public bath (outside the inn)', '♨️'],
@@ -328,6 +340,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['ゆかたで', 'まちを', 'あるかずには', 'いられない。'], en: 'I can’t help strolling the town in a yukata.' },
       { chunks: ['この', 'ふぜいに', 'こころを', 'うごかされずには', 'いられない。'], en: 'One can’t help being moved by this charm.' },
       { chunks: ['ななつの', 'そとゆを', 'じゅんばんに', 'めぐった。'], en: 'I went around the seven public baths in turn.' },
+      { chunks: ['ここに', 'きてから', 'というもの、', 'まいにち', 'ゆめぐりを', 'している。'], en: 'Ever since I came here, I do the bath tour every day.' },
       { chunks: ['しがなおやは', 'けがの', 'りょうようで', 'ここに', 'きた。'], en: 'Shiga Naoya came here to recover from an injury.' },
       { chunks: ['かにの', 'においに', 'ふりむかずには', 'いられない。'], en: 'A cat can’t help turning at the smell of crab.' },
     ],
@@ -343,6 +356,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'いしを もちかえるのは さんぱいしゃに あるまじき ことだ。', en: 'Taking a stone home is unbecoming of a pilgrim.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'naraizashirazu',
+        title: '〜ならいざ知らず — that may be fine for …, but',
+        pattern: 'ふつうの しまなら いざしらず',
+        explain: 'Noun / plain form + ならいざ知らず (also written ならいざしらず, or はいざ知らず after a noun) means “I might accept it in case X, but in this case it is different”. The speaker sets a milder case aside and then states the stricter one that really applies: ふつうの しまなら いざしらず、ここでは くさ いっぽんも もちだせない (on an ordinary island maybe, but here you cannot even take a blade of grass). It is formal.',
+        examples: [
+          { jp: 'ふつうの しまなら いざしらず、ここでは くさは もちだせない。', en: 'It might be fine on an ordinary island, but here you cannot take even a blade of grass.' },
+          { jp: 'むかしなら いざしらず、いまは とおくの しまから ようはいする ことしか できない。', en: 'It may have been different in the past, but now all one can do is worship from afar.' },
+        ],
+      },
+    ],
     words: [
       ['神宿る島', 'かみやどるしま', 'island where gods dwell', '⛩️'],
       ['禁足地', 'きんそくち', 'forbidden ground', '🚷'],
@@ -363,6 +388,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
     sentences: [
       { chunks: ['しまで', 'みた', 'ことを', 'かたる', 'べからず。'], en: 'One must not speak of what one saw on the island.' },
       { chunks: ['くさ', 'いっぽんも', 'もちだす', 'べからず。'], en: 'Not a single blade of grass may be taken away.' },
+      { chunks: ['ふつうの', 'しまなら', 'いざしらず、', 'ここでは', 'くさは', 'もちだせない。'], en: 'It might be fine on an ordinary island, but not here.' },
       { chunks: ['それは', 'さんぱいしゃに', 'あるまじき', 'こういだ。'], en: 'That is behavior unbecoming of a pilgrim.' },
       { chunks: ['むかしは', 'うみで', 'みそぎを', 'してから', 'じょうりくした。'], en: 'In the past, people purified themselves in the sea before landing.' },
       { chunks: ['いまは', 'とおくの', 'しまから', 'ようはいする。'], en: 'Now people worship from a distant island.' },
