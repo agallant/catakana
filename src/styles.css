@@ -336,11 +336,11 @@ button.hud-stat { cursor: pointer; }
 .rp-why { min-height: 2.6em; margin-top: 10px; text-align: center; }
 .skill-tabs { flex-wrap: wrap; margin: 4px 0 10px; }
 
-/* Young learner mode: the same game, roomier */
-.kid body, .kid html, html.kid { font-size: 19px; }
-.kid .btn { min-height: 56px; border-radius: 20px; }
-.kid .btn.small { min-height: 46px; }
-.kid .nav-btn { min-height: 62px; font-size: 0.85rem; }
-.kid .nav-ico { font-size: 1.6rem; }
-.kid .chip { min-height: 44px; padding: 8px 16px; }
+/* Young learner mode and the "Larger text and buttons" setting: the same game, roomier */
+html.kid, html.big-text { font-size: 19px; }
+.kid .btn, .big-text .btn { min-height: 56px; border-radius: 20px; }
+.kid .btn.small, .big-text .btn.small { min-height: 46px; }
+.kid .nav-btn, .big-text .nav-btn { min-height: 62px; font-size: 0.85rem; }
+.kid .nav-ico, .big-text .nav-ico { font-size: 1.6rem; }
+.kid .chip, .big-text .chip { min-height: 44px; padding: 8px 16px; }
 .setting input[type=checkbox] { flex: none; }

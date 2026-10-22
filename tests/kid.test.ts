@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { applyKidPreset, breakDue, checkGate, makeGate, startingLives, BREAK_EVERY_MS } from '../src/core/kid';
-import { defaultSave } from '../src/core/store';
+import { Store, defaultSave } from '../src/core/store';
 import { allowRecognition, recognitionSupported } from '../src/core/speech';
 
 describe('young learner mode', () => {
@@ -42,6 +42,11 @@ describe('young learner mode', () => {
   });
   it('keeps old saves working: the setting is merged in with a default', () => {
     expect(defaultSave().settings.kid).toBe(false);
+    expect(defaultSave().settings.bigText).toBe(false);
+    const old = JSON.stringify({ v: 1, name: 'Mochi', settings: { furigana: 'tap', sound: false } });
+    const st = new Map([['catakana.save.v1', old]]);
+    const s = new Store({ getItem: (k) => st.get(k) ?? null, setItem: (k, v) => void st.set(k, v) });
+    expect(s.data.settings).toMatchObject({ furigana: 'tap', sound: false, bigText: false, kid: false });
   });
 });
 
