@@ -111,6 +111,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'どぐうは いのりの かたちに ほかならない。', en: 'Dogū figurines are nothing other than the shape of prayer.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'ha-orokka',
+        title: '〜はおろか — let alone',
+        pattern: 'どぐうは おろか、どきさえ みつからなかった',
+        explain: 'Noun + はおろか + B + さえ / すら / も + a negative means “let alone A, not even B”. In a negative sentence A is the bigger or harder thing and B the smaller thing that fails too: どぐうは おろか、どきさえ みつからなかった (not even pottery was found, let alone figurines). It is formal, and the sentence normally ends in a negative.',
+        examples: [
+          { jp: 'この いせきからは、どぐうは おろか、どきさえ みつからなかった。', en: 'At this site, not even pottery was found, let alone figurines.' },
+          { jp: 'きびしい ばしょで、ていじゅうは おろか、しゅりょうさえ できなかった。', en: 'In that harsh place, they could not even hunt, let alone settle.' },
+        ],
+      },
+    ],
     words: [
       ['貝塚', 'かいづか', 'shell mound', '🐚'],
       ['縄文', 'じょうもん', 'Jōmon (period)', '🌀'],
@@ -131,6 +143,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
     sentences: [
       { chunks: ['この', 'いせきは', 'じょうもんの', 'ちえに', 'ほかならない。'], en: 'This site is nothing other than Jōmon wisdom.' },
       { chunks: ['どぐうは', 'いのりの', 'かたちに', 'ほかならない。'], en: 'Dogū are nothing other than the shape of prayer.' },
+      { chunks: ['どぐうは', 'おろか、', 'どきさえ', 'みつからなかった。'], en: 'Not even pottery was found, let alone figurines.' },
       { chunks: ['おおきな', 'はしらあなが', 'むっつ', 'みつかった。'], en: 'Six huge post holes were found.' },
       { chunks: ['ひとびとは', 'ここで', 'ながく', 'ていじゅうして', 'いた。'], en: 'People lived settled here for a long time.' },
       { chunks: ['せいこうの', 'りゆうは', 'ゆたかな', 'もりに', 'ほかならない。'], en: 'The reason for their success is none other than the rich forest.' },
@@ -147,6 +160,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'この しずけさには かんどうせざるを えない。', en: 'One cannot help but be moved by this stillness.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'to-iedomo',
+        title: '〜といえども — even (a special case)',
+        pattern: 'そうりょと いえども',
+        explain: 'Noun / plain form + といえども means “even X (who or which you might expect to be an exception) …”, and the rest says the exception does not apply: そうりょと いえども、さとりは かんたんでは ない (even a monk finds enlightenment hard). It is formal and written. Put the person or thing you expect to be exempt before といえども.',
+        examples: [
+          { jp: 'そうりょと いえども、さとりは かんたんでは ない。', en: 'Even a monk does not find enlightenment easy.' },
+          { jp: 'ほんざんの そうりょと いえども、きりつに したがわなければ ならない。', en: 'Even a monk at the head temple has to follow the rules.' },
+        ],
+      },
+    ],
     words: [
       ['禅', 'ぜん', 'Zen', '🧘'],
       ['座禅', 'ざぜん', 'seated meditation', '🧘'],
@@ -168,6 +193,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['しゅぎょうちゅうは', 'はやく', 'おきざるを', 'えない。'], en: 'During training, one has no choice but to rise early.' },
       { chunks: ['この', 'せいじゃくには', 'かんどうせざるを', 'えない。'], en: 'One cannot help but be moved by this stillness.' },
       { chunks: ['そうりょは', 'まいあさ', 'ざぜんを', 'くむ。'], en: 'The monks sit in zazen every morning.' },
+      { chunks: ['そうりょと', 'いえども', 'さとりは', 'かんたんでは', 'ない。'], en: 'Even a monk does not find enlightenment easy.' },
       { chunks: ['しょうじんりょうりには', 'にくも', 'さかなも', 'つかわない。'], en: 'Shōjin cuisine uses neither meat nor fish.' },
       { chunks: ['きりつが', 'きびしいので', 'したがわざるを', 'えない。'], en: 'The rules are strict, so one has no choice but to follow them.' },
     ],
