@@ -23,14 +23,16 @@ export interface QuestDef {
   label: string;
   emoji: string;
   goal: number;
+  /** a smaller target for Young learner mode */
+  kid?: { label: string; goal: number };
   fish: number;
   /** how much an event advances this quest */
   count(e: GameEvent): number;
 }
 
 export const QUESTS: QuestDef[] = [
-  { id: 'games3', label: 'Play 3 games', emoji: '🎮', goal: 3, fish: 15, count: (e) => (e.type === 'game' ? 1 : 0) },
-  { id: 'correct25', label: 'Answer 25 questions correctly', emoji: '✅', goal: 25, fish: 15, count: (e) => (e.type === 'answers' ? e.correct : 0) },
+  { id: 'games3', label: 'Play 3 games', emoji: '🎮', goal: 3, kid: { label: 'Play 2 games', goal: 2 }, fish: 15, count: (e) => (e.type === 'game' ? 1 : 0) },
+  { id: 'correct25', label: 'Answer 25 questions correctly', emoji: '✅', goal: 25, kid: { label: 'Answer 10 questions correctly', goal: 10 }, fish: 15, count: (e) => (e.type === 'answers' ? e.correct : 0) },
   { id: 'stars3', label: 'Earn a 3-star result', emoji: '⭐', goal: 1, fish: 20, count: (e) => (e.type === 'game' && e.stars === 3 ? 1 : 0) },
   { id: 'write', label: 'Play a writing game', emoji: '✍️', goal: 1, fish: 10, count: (e) => (e.type === 'game' && e.skill === 'writing' ? 1 : 0) },
   { id: 'listen', label: 'Play a listening game', emoji: '👂', goal: 1, fish: 10, count: (e) => (e.type === 'game' && e.skill === 'listening' ? 1 : 0) },
@@ -48,13 +50,13 @@ function seed(s: string): number {
 }
 
 /** Three quests for the day: always one "play games" style quest plus two rotating ones. */
-export function questsFor(day: string): QuestDef[] {
+export function questsFor(day: string, kid = false): QuestDef[] {
   const rotating = QUESTS.filter((q) => q.id !== 'games3');
   const r = seed(day);
   const a = rotating[r % rotating.length]!;
   const rest = rotating.filter((q) => q !== a);
   const b = rest[(r >>> 8) % rest.length]!;
-  return [QUESTS[0]!, a, b];
+  return [QUESTS[0]!, a, b].map((q) => (kid && q.kid ? { ...q, ...q.kid } : q));
 }
 
 export interface AchievementDef {
@@ -148,13 +150,12 @@ export function track(store: Store, e: GameEvent): Unlock[] {
   const out: Unlock[] = [];
   store.update((d) => {
     if (d.daily.day !== today) d.daily = { day: today, progress: {}, claimed: [] };
-    for (const q of questsFor(today)) {
+    for (const q of questsFor(today, store.data.settings.kid)) {
       const before = d.daily.progress[q.id] ?? 0;
-      const add = q.count(e);
-      if (!add || before >= q.goal) continue;
-      const now = Math.min(q.goal, before + add);
-      d.daily.progress[q.id] = now;
-      if (now >= q.goal && !d.daily.claimed.includes(q.id)) {
+      const now = Math.min(q.goal, before + q.count(e));
+      if (now > before) d.daily.progress[q.id] = now;
+      // progress saved under a bigger goal can already meet a smaller one (Young learner mode switched on mid-day)
+      if (Math.max(now, before) >= q.goal && !d.daily.claimed.includes(q.id)) {
         d.daily.claimed.push(q.id);
         d.fish += q.fish;
         d.xp += q.fish;
