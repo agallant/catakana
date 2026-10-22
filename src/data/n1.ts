@@ -557,7 +557,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         id: 'noitari',
         title: '〜の至り — the height of (a feeling)',
         pattern: 'かんげきの いたり',
-        explain: 'A noun for a strong feeling + の至り (のいたり) means “the height of / utterly …”: かんげきの いたり (overwhelmed with emotion), こうえいの いたり (a great honour). It is formal, used in speeches and letters, and is about the speaker’s own feelings. The sentence usually ends です or だ: かんげきの いたりです.',
+        explain: 'の至り (のいたり) is a formal set expression used with a limited number of feeling or evaluation nouns, such as かんげき and こうえい, to say the speaker’s feeling is at its height: かんげきの いたり (overwhelmed with emotion), こうえいの いたり (a great honour). It is used in speeches and letters. Learn each combination as a whole rather than adding の至り to any noun. The sentence often ends です or だ: かんげきの いたりです.',
         examples: [
           { jp: 'ながい みちのりを へて ここに かえれて、かんげきの いたりです。', en: 'Having come home here after the long journey, I am utterly moved.' },
           { jp: 'おんじんに あえて、かんげきの いたりだ。', en: 'Meeting my benefactor, I am overcome with emotion.' },
