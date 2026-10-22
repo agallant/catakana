@@ -133,10 +133,10 @@ type Listener = (s: SaveData) => void;
 export class Store {
   data: SaveData;
   private listeners = new Set<Listener>();
-  private storage: Pick<Storage, 'getItem' | 'setItem'> | null;
+  private storage: Pick<Storage, 'getItem' | 'setItem'> & Partial<Pick<Storage, 'removeItem'>> | null;
   private index: PlayerIndex;
 
-  constructor(storage?: Pick<Storage, 'getItem' | 'setItem'> | null) {
+  constructor(storage?: Pick<Storage, 'getItem' | 'setItem'> & Partial<Pick<Storage, 'removeItem'>> | null) {
     this.storage = storage === undefined ? safeLocalStorage() : storage;
     this.index = this.loadIndex();
     this.data = this.load();
@@ -178,11 +178,13 @@ export class Store {
     return { active: MAIN_PLAYER, ids: [MAIN_PLAYER] };
   }
 
-  private saveIndex(): void {
+  private saveIndex(index: PlayerIndex = this.index): boolean {
     try {
-      this.storage?.setItem(PLAYERS_KEY, JSON.stringify(this.index));
+      this.storage?.setItem(PLAYERS_KEY, JSON.stringify(index));
+      return true;
     } catch {
       /* storage full/blocked */
+      return false;
     }
   }
 
@@ -225,6 +227,34 @@ export class Store {
     this.data = this.load();
     this.touchStreak();
     this.listeners.forEach((l) => l(this.data));
+  }
+
+  /**
+   * Delete a player and their save. The last player can't be removed; removing the active one moves to the player
+   * who took their place in the list. Returns false, leaving everything as it was, if the device can't forget them.
+   */
+  removePlayer(id: string): boolean {
+    const at = this.index.ids.indexOf(id);
+    if (this.index.ids.length <= 1 || at < 0 || !this.storage?.removeItem) return false;
+    const wasActive = id === this.index.active;
+    if (!wasActive) this.save();
+    const ids = this.index.ids.filter((x) => x !== id);
+    const next: PlayerIndex = { active: wasActive ? (ids[at] ?? ids[0]!) : this.index.active, ids };
+    if (!this.saveIndex(next)) return false;
+    try {
+      this.storage.removeItem(saveKey(id));
+    } catch {
+      // the save is still there, so keep the player listed too
+      this.saveIndex();
+      return false;
+    }
+    this.index = next;
+    if (wasActive) {
+      this.data = this.load();
+      this.touchStreak();
+      this.listeners.forEach((l) => l(this.data));
+    }
+    return true;
   }
 
   save(): void {
