@@ -65,6 +65,12 @@ export const ONOMATOPOEIA: Ono[] = [
   { id: 'hetoheto', word: 'へとへと', en: 'worn out, exhausted', emoji: '🥵', ex: '{石段|いしだん}を {全部|ぜんぶ} {登|のぼ}って、＿に なった。', exEn: 'After climbing all the stone steps, I was worn out.', wrong: ['キラキラ', 'ふわふわ', 'ニャー'], from: 'kotohira' },
   { id: 'tekuteku', word: 'てくてく', en: 'trudging along on foot', emoji: '🥾', ex: '{古道|こどう}を ＿ {歩|ある}いた。', exEn: 'I trudged along the old pilgrim trail.', wrong: ['ザーザー', 'ねばねば', 'ガチャン'], from: 'kumano' },
   { id: 'waiwai', word: 'わいわい', en: 'noisily, merrily', emoji: '🎉', ex: '{仲見世|なかみせ}で {観光客|かんこうきゃく}が ＿ {楽|たの}しんで いる。', exEn: 'Tourists are having a lively time on Nakamise Street.', wrong: ['しとしと', 'ねばねば', 'ぐっすり'], from: 'asakusa' },
+  // more everyday feelings and scenes (N2 route)
+  { id: 'guruguru', word: 'ぐるぐる', en: 'round and round', emoji: '🌀', ex: '{錦帯橋|きんたいきょう}の {周|まわ}りを ＿ {回|まわ}って {写真|しゃしん}を {撮|と}った。', exEn: 'I went round and round Kintai Bridge taking photos.', wrong: ['ニャー', 'ザーザー', 'ねばねば'], from: 'iwakuni' },
+  { id: 'gisshiri', word: 'ぎっしり', en: 'packed tight', emoji: '📚', ex: '{城下町|じょうかまち}の {本屋|ほんや}に {本|ほん}が ＿ {詰|つ}まって いる。', exEn: 'Books are packed tight in the castle-town bookshop.', wrong: ['ひらひら', 'ぐっすり', 'イライラ'], from: 'hagi' },
+  { id: 'batabata', word: 'ばたばた', en: 'hectic, in a flurry', emoji: '🏃', ex: '{今日|きょう}は ＿ して いて、ゆっくり {見|み}られなかった。', exEn: 'Today was hectic and I could not look around at leisure.', wrong: ['ニャー', 'ガチャン', 'つるつる'], from: 'kurashiki' },
+  { id: 'bonyari', word: 'ぼんやり', en: 'faintly, vaguely', emoji: '🌫️', ex: '{霧|きり}の {中|なか}に {松|まつ}の {林|はやし}が ＿ {見|み}えた。', exEn: 'The pine grove looked faint in the mist.', wrong: ['ガチャン', 'ニャー', 'ぺこぺこ'], from: 'amanohashidate' },
+  { id: 'sukkiri', word: 'すっきり', en: 'refreshed, clear-headed', emoji: '😌', ex: '{山道|やまみち}を {歩|ある}いたら、{気分|きぶん}が ＿ した。', exEn: 'After walking the mountain path, I felt refreshed.', wrong: ['ワンワン', 'ねばねば', 'ガチャン'], from: 'yoshino' },
   // subtler moods (N1 route)
   { id: 'uttori', word: 'うっとり', en: 'entranced, spellbound', emoji: '😍', ex: '{夕日|ゆうひ}に {染|そ}まる {海|うみ}を ＿ {見|み}つめた。', exEn: 'I gazed, spellbound, at the sea glowing in the sunset.', wrong: ['イライラ', 'ねばねば', 'ガチャン'], from: 'ogasawara' },
   { id: 'zotto', word: 'ぞっと', en: 'a shiver of fear', emoji: '😨', ex: '{河童|かっぱ}の {話|はなし}を {聞|き}いて、{背筋|せすじ}が ＿した。', exEn: 'Hearing the kappa story sent a shiver down my spine.', wrong: ['ぽかぽか', 'さくさく', 'ペラペラ'], from: 'tono' },
@@ -72,4 +78,10 @@ export const ONOMATOPOEIA: Ono[] = [
   { id: 'harahara', word: 'はらはら', en: 'on edge, in suspense', emoji: '😬', ex: '{合戦|かっせん}の {再現|さいげん}を ＿しながら {見|み}た。', exEn: 'I watched the battle re-enactment on the edge of my seat.', wrong: ['ぽかぽか', 'さくさく', 'ねばねば'], from: 'sekigahara' },
   { id: 'jikkuri', word: 'じっくり', en: 'taking one’s time, thoroughly', emoji: '⏳', ex: '{温泉|おんせん}に ＿ {浸|つ}かって {疲|つか}れを とった。', exEn: 'I soaked unhurriedly in the hot spring and shook off my tiredness.', wrong: ['ガチャン', 'イライラ', 'ペラペラ'], from: 'kinosaki' },
   { id: 'honobono', word: 'ほのぼの', en: 'heartwarming', emoji: '🐈', ex: '{招|まね}き{猫|ねこ}が {並|なら}ぶ、＿と した {光景|こうけい}だ。', exEn: 'Rows of beckoning cats make a heartwarming sight.', wrong: ['ねばねば', 'イライラ', 'ザーザー'], from: 'gotokuji' },
+  // quiet, literary feelings and scenes (N1 route)
+  { id: 'hishihishi', word: 'ひしひし', en: 'keenly (felt)', emoji: '💭', ex: '{縄文人|じょうもんじん}の {暮|く}らしの {知恵|ちえ}を ＿と {感|かん}じた。', exEn: 'I felt the wisdom of Jōmon life keenly.', wrong: ['ワンワン', 'ガチャン', 'さくさく'], from: 'sannai' },
+  { id: 'jiwajiwa', word: 'じわじわ', en: 'little by little, gradually sinking in', emoji: '🌊', ex: '{古墳|こふん}の {大|おお}きさが ＿と {伝|つた}わって きた。', exEn: 'The enormity of the tomb mound slowly sank in.', wrong: ['ニャー', 'ガチャン', 'ぴかぴか'], from: 'sakai' },
+  { id: 'zusshiri', word: 'ずっしり', en: 'heavy, weighty', emoji: '🎁', ex: 'おみやげの {箱|はこ}は ＿ {重|おも}かった。', exEn: 'The box of souvenirs was heavy.', wrong: ['ケロケロ', 'ワクワク', 'ぐっすり'], from: 'munakata' },
+  { id: 'sukkari', word: 'すっかり', en: 'completely, thoroughly', emoji: '🌴', ex: '{島|しま}の {暮|く}らしが ＿ {気|き}に {入|い}った。', exEn: 'I have taken to island life completely.', wrong: ['ニャー', 'ザーザー', 'ガチャン'], from: 'amami' },
+  { id: 'potsun', word: 'ぽつん', en: 'all alone, a lone dot', emoji: '🏝️', ex: '{海|うみ}の {上|うえ}に {小|ちい}さな {島|しま}が ＿と {浮|う}かんで いた。', exEn: 'A small island floated all alone on the sea.', wrong: ['ワンワン', 'ぺこぺこ', 'ねばねば'], from: 'izu' },
 ];
