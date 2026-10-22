@@ -116,7 +116,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         id: 'ha-orokka',
         title: '〜はおろか — let alone',
         pattern: 'どぐうは おろか、どきさえ みつからなかった',
-        explain: 'Noun + はおろか + B + さえ / すら / も + a negative means “let alone A, not even B”. In a negative sentence A is the bigger or harder thing and B the smaller thing that fails too: どぐうは おろか、どきさえ みつからなかった (not even pottery was found, let alone figurines). It is formal, and the sentence normally ends in a negative.',
+        explain: 'Noun + はおろか + B + さえ / すら / も means “let alone A, not even B”. Negative predicates are common, but affirmative predicates are also possible. In negative sentences A is the bigger or harder thing and B the smaller thing that fails too: どぐうは おろか、どきさえ みつからなかった (not even pottery was found, let alone figurines). It is formal.',
         examples: [
           { jp: 'この いせきからは、どぐうは おろか、どきさえ みつからなかった。', en: 'At this site, not even pottery was found, let alone figurines.' },
           { jp: 'きびしい ばしょで、ていじゅうは おろか、しゅりょうさえ できなかった。', en: 'In that harsh place, they could not even hunt, let alone settle.' },
