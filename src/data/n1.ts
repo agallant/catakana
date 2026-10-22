@@ -13,6 +13,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'クジラの きせつと あって、ちょうさだんが ぞくぞくと やってきた。', en: 'It being whale season, research teams arrived one after another.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'wo-oite',
+        title: '〜をおいてほかにない — none but',
+        pattern: 'ここを おいて ほかに ない',
+        explain: 'Noun + をおいて ほかに ない means “there is nothing / no one other than X”: X is the only fitting choice. It is a strong, formal way to single something out, usually as praise: ひきょうと いえば、この しまを おいて ほかに ない. ほかに can be left out: Xを おいて ない.',
+        examples: [
+          { jp: 'ほんとうの ひきょうと いえば、この しまを おいて ほかに ない。', en: 'If you mean a true unexplored land, there is none but this island.' },
+          { jp: 'こゆうしゅを まもれるのは、しまの ひとびとを おいて ほかに いない。', en: 'No one but the islanders can protect the endemic species.' },
+        ],
+      },
+    ],
     words: [
       ['絶海', 'ぜっかい', 'remote sea', '🌊'],
       ['孤島', 'ことう', 'isolated island', '🏝️'],
@@ -34,6 +46,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['せかいいさんの', 'しまと', 'あって、', 'かんこうきゃくが', 'たえない。'], en: 'Being a World Heritage island, it never lacks for tourists.' },
       { chunks: ['むいかに', 'いちどの', 'ふねと', 'あって、', 'まんいんだった。'], en: 'Being the only ship in six days, it was full.' },
       { chunks: ['ぜっかいの', 'ことうでは', 'どくじの', 'しんかが', 'みられる。'], en: 'On remote islands, unique evolution can be seen.' },
+      { chunks: ['ひきょうと', 'いえば', 'ここを', 'おいて', 'ほかに', 'ない。'], en: 'For an unexplored land, there is none but this.' },
       { chunks: ['クジラの', 'きせつと', 'あって、', 'ふなたびは', 'にぎわった。'], en: 'It being whale season, the boat trips were bustling.' },
       { chunks: ['がいらいしゅの', 'くじょが', 'すすめられて', 'いる。'], en: 'The removal of invasive species is being carried out.' },
     ],
@@ -49,6 +62,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'かたりべ ならではの はなしかたに ひきこまれた。', en: 'I was drawn in by a way of telling only a storyteller has.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'tomonaruto',
+        title: '〜ともなると / 〜ともなれば — once it comes to',
+        pattern: 'ふゆ ともなると',
+        explain: 'Noun + ともなると (or ともなれば) means “once it gets to be X / when it comes to X”, and the rest of the sentence gives what naturally follows at that level, season or role: ふゆ ともなると、やまざとは ゆきに うもれる (come winter, the village is buried in snow). Use it for a stage that is clearly higher or special.',
+        examples: [
+          { jp: 'ふゆ ともなると、ひとびとは いろりの まわりで みんわを かたりあった。', en: 'Come winter, people would gather round the hearth and tell folk tales.' },
+          { jp: 'かたりべ ともなれば、なんびゃくもの はなしを おぼえている。', en: 'Once you are a true storyteller, you know hundreds of tales by heart.' },
+        ],
+      },
+    ],
     words: [
       ['民話', 'みんわ', 'folk tale', '📖'],
       ['伝承', 'でんしょう', 'oral tradition', '🗣️'],
@@ -70,6 +95,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['これは', 'とおの', 'ならではの', 'ふうけいだ。'], en: 'This is a landscape unique to Tōno.' },
       { chunks: ['かたりべ', 'ならではの', 'はなしかたに', 'ひきこまれた。'], en: 'I was drawn in by a telling only a storyteller could give.' },
       { chunks: ['まがりやでは', 'うまと', 'ひとが', 'ともに', 'くらした。'], en: 'In L-shaped farmhouses, horses and people lived together.' },
+      { chunks: ['ふゆ', 'ともなると', 'いろりの', 'まわりに', 'あつまる。'], en: 'Come winter, people gather round the hearth.' },
       { chunks: ['かっぱが', 'すむと', 'いわれる', 'ふちを', 'たずねた。'], en: 'I visited the pool where kappa are said to live.' },
       { chunks: ['ざしきわらしが', 'いる', 'いえは', 'さかえると', 'いう。'], en: 'They say a house with a zashiki-warashi prospers.' },
     ],

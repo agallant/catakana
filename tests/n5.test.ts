@@ -123,6 +123,10 @@ describe('extra grammar', () => {
     expect(grammarsAt('kumano').map((g) => g.id)).toEqual(['youtosuru', 'nuku']);
     expect(grammarsAt('asakusa').map((g) => g.id)).toEqual(['nagara-mo', 'kotoni-feeling']);
   });
+  it('adds N1 extra points after the main one', () => {
+    expect(grammarsAt('ogasawara').map((g) => g.id)).toEqual(['toatte', 'wo-oite']);
+    expect(grammarsAt('tono').map((g) => g.id)).toEqual(['naradewa', 'tomonaruto']);
+  });
   it('gives every grammar point a unique id and examples', () => {
     const all = Object.keys(TOUR_CONTENT).flatMap((s) => grammarsAt(s));
     expect(new Set(all.map((g) => g.id)).size).toBe(all.length);
