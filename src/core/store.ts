@@ -178,11 +178,13 @@ export class Store {
     return { active: MAIN_PLAYER, ids: [MAIN_PLAYER] };
   }
 
-  private saveIndex(): void {
+  private saveIndex(index: PlayerIndex = this.index): boolean {
     try {
-      this.storage?.setItem(PLAYERS_KEY, JSON.stringify(this.index));
+      this.storage?.setItem(PLAYERS_KEY, JSON.stringify(index));
+      return true;
     } catch {
       /* storage full/blocked */
+      return false;
     }
   }
 
@@ -227,19 +229,26 @@ export class Store {
     this.listeners.forEach((l) => l(this.data));
   }
 
-  /** Delete a player and their save. The last player can't be removed; removing the active one switches to the next. */
+  /**
+   * Delete a player and their save. The last player can't be removed; removing the active one moves to the player
+   * who took their place in the list. Returns false, leaving everything as it was, if the device can't forget them.
+   */
   removePlayer(id: string): boolean {
-    if (this.index.ids.length <= 1 || !this.index.ids.includes(id)) return false;
+    const at = this.index.ids.indexOf(id);
+    if (this.index.ids.length <= 1 || at < 0 || !this.storage?.removeItem) return false;
     const wasActive = id === this.index.active;
     if (!wasActive) this.save();
     const ids = this.index.ids.filter((x) => x !== id);
-    this.index = { active: wasActive ? ids[0]! : this.index.active, ids };
-    this.saveIndex();
+    const next: PlayerIndex = { active: wasActive ? (ids[at] ?? ids[0]!) : this.index.active, ids };
+    if (!this.saveIndex(next)) return false;
     try {
-      this.storage?.removeItem?.(saveKey(id));
+      this.storage.removeItem(saveKey(id));
     } catch {
-      /* storage blocked */
+      // the save is still there, so keep the player listed too
+      this.saveIndex();
+      return false;
     }
+    this.index = next;
     if (wasActive) {
       this.data = this.load();
       this.touchStreak();

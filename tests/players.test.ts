@@ -103,4 +103,39 @@ describe('players on one device', () => {
     expect(s.removePlayer(s.players()[0]!.id)).toBe(false);
     expect(JSON.parse(st.m.get('catakana.players.v1')!).ids).toHaveLength(1);
   });
+  it('moves to the player who took the removed one’s place', () => {
+    const s = new Store(mem());
+    s.addPlayer();
+    s.addPlayer();
+    const [a, b, c] = s.players().map((p) => p.id) as [string, string, string];
+    s.switchPlayer(b);
+    s.removePlayer(b);
+    expect(s.players().find((p) => p.active)?.id).toBe(c);
+    s.removePlayer(c);
+    expect(s.players().find((p) => p.active)?.id).toBe(a);
+  });
+  it('removes nobody when the device cannot forget their save', () => {
+    const st = mem();
+    const noDelete = { getItem: st.getItem, setItem: st.setItem };
+    const s = new Store(noDelete);
+    s.addPlayer();
+    expect(s.removePlayer(MAIN_PLAYER)).toBe(false);
+    expect(s.players()).toHaveLength(2);
+    const throwing = { ...st, removeItem: () => { throw new Error('blocked'); } };
+    const t = new Store(throwing);
+    expect(t.removePlayer(MAIN_PLAYER)).toBe(false);
+    expect(t.players()).toHaveLength(2);
+    expect(JSON.parse(st.m.get('catakana.players.v1')!).ids).toHaveLength(2);
+  });
+  it('keeps the save when the index cannot be written', () => {
+    const st = mem();
+    const s = new Store(st);
+    s.addPlayer();
+    const other = s.players().find((p) => p.active)!.id;
+    const failing = { ...st, setItem: (k: string, v: string) => { if (k === 'catakana.players.v1') throw new Error('full'); st.setItem(k, v); } };
+    const t = new Store(failing);
+    expect(t.removePlayer(other === t.players()[0]!.id ? MAIN_PLAYER : other)).toBe(false);
+    expect(t.players()).toHaveLength(2);
+    expect(st.m.has(`catakana.save.v1.${other}`)).toBe(true);
+  });
 });
