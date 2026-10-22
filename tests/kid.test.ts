@@ -44,3 +44,29 @@ describe('young learner mode', () => {
     expect(defaultSave().settings.kid).toBe(false);
   });
 });
+
+describe('young learner mode: speech recognition in progress', () => {
+  it('is stopped the moment recognition is switched off', async () => {
+    let stopped = 0;
+    class FakeRecognizer {
+      lang = '';
+      interimResults = false;
+      maxAlternatives = 1;
+      onresult = null;
+      onerror = null;
+      onend = null;
+      start(): void {}
+      stop(): void {
+        stopped++;
+      }
+    }
+    (window as unknown as { SpeechRecognition: unknown }).SpeechRecognition = FakeRecognizer;
+    const { recognizeOnce } = await import('../src/core/speech');
+    const pending = recognizeOnce(60_000);
+    allowRecognition(false);
+    expect(await pending).toEqual([]);
+    expect(stopped).toBe(1);
+    allowRecognition(true);
+    delete (window as unknown as { SpeechRecognition?: unknown }).SpeechRecognition;
+  });
+});

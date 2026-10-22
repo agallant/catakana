@@ -65,6 +65,7 @@ export function welcomeScreen(app: App): Screen {
         class: 'btn ghost',
         onClick: () => {
           app.store.update((d) => {
+            if (kid) applyKidPreset(d.settings);
             d.name = (name.trim() || 'Mochi').slice(0, 14);
             d.look = look;
           });
