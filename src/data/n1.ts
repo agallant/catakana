@@ -209,6 +209,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'ほんじつを もって、とくべつてんじは しゅうりょう いたします。', en: 'As of today, the special exhibition will close.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'ga-saigo',
+        title: '〜が最後 — once …, that is the end',
+        pattern: 'ねがえったが さいご',
+        explain: 'た-form of a verb + が最後 (が さいご) means “once X happens, there is no going back”: the rest of the sentence gives the result you cannot undo, usually a bad one. Put いちど or ひとたび in front for extra force: いちど ねたが さいご、あさまで おきない (once I fall asleep, I won’t wake until morning). It is a set expression, so keep the verb in the た-form.',
+        examples: [
+          { jp: 'ぶしょうが ねがえったが さいご、しょうはいは きまって しまう。', en: 'Once a commander switches sides, the outcome is settled.' },
+          { jp: 'いちど ねたが さいご、あさまで おきない。', en: 'Once I fall asleep, I will not wake until morning.' },
+        ],
+      },
+    ],
     words: [
       ['合戦', 'かっせん', 'battle', '⚔️'],
       ['天下分け目', 'てんかわけめ', 'decisive (for the realm)', '⚖️'],
@@ -230,6 +242,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['この', 'たたかいを', 'さかいに', 'じだいが', 'かわった。'], en: 'With this battle as the turning point, the era changed.' },
       { chunks: ['ほんじつを', 'もって', 'てんじは', 'しゅうりょうします。'], en: 'As of today, the exhibition will close.' },
       { chunks: ['ねがえりに', 'よって', 'しょうはいが', 'きまった。'], en: 'The outcome was decided by a betrayal.' },
+      { chunks: ['ぶしょうが', 'ねがえったが', 'さいご、', 'しょうはいは', 'きまる。'], en: 'Once a commander switches sides, the outcome is settled.' },
       { chunks: ['かっせんは', 'わずか', 'いちにちで', 'おわった。'], en: 'The battle ended in just one day.' },
       { chunks: ['あの', 'ひを', 'さかいに', 'へいわな', 'よが', 'つづいた。'], en: 'From that day on, a peaceful age continued.' },
     ],
@@ -245,6 +258,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'かれは はものを つくる かたわら、わかてを そだてて いる。', en: 'While making knives, he also trains young craftsmen.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'karashite',
+        title: '〜からして — judging from the very …',
+        pattern: 'かたちからして',
+        explain: 'Noun + からして picks out one small, first-noticed detail: “judging from X alone …” or “even the very X is …”, so the whole must be so too: かたちからして ふつうでは ない (the shape alone shows it is unusual). It follows the noun directly with no particle, and the sentence draws a conclusion or a judgement about the whole.',
+        examples: [
+          { jp: 'この はものは かたちからして ふつうの ものとは ちがう。', en: 'Judging from its shape alone, this blade is unlike ordinary ones.' },
+          { jp: 'この こふんは かたちからして りょうぼに ちがいない。', en: 'Judging from its shape, this kofun must be an imperial tomb.' },
+        ],
+      },
+    ],
     words: [
       ['古墳', 'こふん', 'ancient burial mound', '⛰️'],
       ['前方後円墳', 'ぜんぽうこうえんふん', 'keyhole-shaped tomb', '🔑'],
@@ -266,6 +291,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['しょうばいの', 'かたわら', 'ちゃのゆを', 'きわめた。'], en: 'Alongside his trade, he mastered the tea ceremony.' },
       { chunks: ['かじの', 'しごとの', 'かたわら', 'わかてを', 'そだてる。'], en: 'Alongside his smithing, he trains the young.' },
       { chunks: ['だいせんこふんは', 'うえから', 'みると', 'かぎあなの', 'かたちだ。'], en: 'Seen from above, the Daisen kofun is keyhole-shaped.' },
+      { chunks: ['この', 'こふんは', 'かたちからして', 'りょうぼに', 'ちがいない。'], en: 'Judging from its shape, this kofun must be an imperial tomb.' },
       { chunks: ['しょくにんが', 'ひとつずつ', 'はものを', 'といで', 'いる。'], en: 'Artisans sharpen the blades one by one.' },
       { chunks: ['かのじょは', 'つとめる', 'かたわら', 'はにわを', 'けんきゅうした。'], en: 'While working a job, she also researched haniwa.' },
     ],
