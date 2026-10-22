@@ -23,10 +23,13 @@ export class App {
   readonly nav = h('nav', { class: 'nav', 'aria-label': 'Main' });
   readonly toasts = h('div', { class: 'toasts', 'aria-live': 'polite' });
   private current: Screen | null = null;
+  /** ask "Who's playing?" once per visit when the device has more than one player */
+  private askWho = false;
   private routes = new Map<string, ScreenFactory>();
   private chrome = new Set<string>(['map', 'dojo', 'cats', 'settings', 'stop', 'explore', 'passport', 'shop']);
 
   constructor(readonly root: HTMLElement) {
+    this.askWho = this.store.players().length > 1;
     this.applySettings();
     this.store.subscribe(() => {
       this.applySettings();
@@ -92,6 +95,10 @@ export class App {
   }
 
   render(): void {
+    if (this.askWho) {
+      this.askWho = false;
+      if (this.route().name !== 'who') return this.go('who');
+    }
     const { name, params } = this.route();
     const f = this.routes.get(name) ?? this.routes.get('map')!;
     this.current?.dispose?.();

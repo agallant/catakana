@@ -81,6 +81,8 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* Welcome */
 .welcome { text-align: center; }
+.who { text-align: center; }
+.who-list { display: grid; gap: 10px; margin-top: 12px; }
 .logo { font-size: 3rem; margin: 0.3em 0 0; letter-spacing: 1px; color: var(--pink-d); }
 .logo span { color: var(--teal); }
 .tag { margin: 0; color: var(--muted); font-weight: 700; }
