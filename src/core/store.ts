@@ -92,6 +92,25 @@ export function defaultSave(): SaveData {
 }
 
 const KEY = 'catakana.save.v1';
+const PLAYERS_KEY = 'catakana.players.v1';
+/** The first player keeps the original save key, so saves from before players existed carry on. */
+export const MAIN_PLAYER = 'main';
+export const MAX_PLAYERS = 6;
+
+export interface PlayerIndex {
+  active: string;
+  ids: string[];
+}
+
+export interface PlayerInfo {
+  id: string;
+  name: string;
+  active: boolean;
+}
+
+export function saveKey(id: string): string {
+  return id === MAIN_PLAYER ? KEY : `${KEY}.${id}`;
+}
 
 export function level(xp: number): { level: number; into: number; need: number } {
   let lvl = 1;
@@ -115,16 +134,18 @@ export class Store {
   data: SaveData;
   private listeners = new Set<Listener>();
   private storage: Pick<Storage, 'getItem' | 'setItem'> | null;
+  private index: PlayerIndex;
 
   constructor(storage?: Pick<Storage, 'getItem' | 'setItem'> | null) {
     this.storage = storage === undefined ? safeLocalStorage() : storage;
+    this.index = this.loadIndex();
     this.data = this.load();
     this.touchStreak();
   }
 
   private load(rawOverride?: string): SaveData {
     try {
-      const raw = rawOverride ?? this.storage?.getItem(KEY);
+      const raw = rawOverride ?? this.storage?.getItem(saveKey(this.index.active));
       if (raw) {
         const parsed: unknown = JSON.parse(raw);
         if (!isRecord(parsed)) return defaultSave();
@@ -139,9 +160,76 @@ export class Store {
     return defaultSave();
   }
 
+  private loadIndex(): PlayerIndex {
+    try {
+      const raw = this.storage?.getItem(PLAYERS_KEY);
+      if (raw) {
+        const p: unknown = JSON.parse(raw);
+        if (isRecord(p) && typeof p.active === 'string' && isStringArray(p.ids) && p.ids.includes(p.active)) {
+          const ids = [...new Set(p.ids)].slice(0, MAX_PLAYERS);
+          // an over-long index must never lose the active player
+          if (!ids.includes(p.active)) ids[MAX_PLAYERS - 1] = p.active;
+          return { active: p.active, ids };
+        }
+      }
+    } catch {
+      /* unreadable index: fall back to the first player */
+    }
+    return { active: MAIN_PLAYER, ids: [MAIN_PLAYER] };
+  }
+
+  private saveIndex(): void {
+    try {
+      this.storage?.setItem(PLAYERS_KEY, JSON.stringify(this.index));
+    } catch {
+      /* storage full/blocked */
+    }
+  }
+
+  /** Everyone who plays on this device, with the cat name from their save. */
+  players(): PlayerInfo[] {
+    return this.index.ids.map((id) => {
+      let name = 'New player';
+      try {
+        const raw = id === this.index.active ? null : this.storage?.getItem(saveKey(id));
+        const parsed: unknown = raw ? JSON.parse(raw) : null;
+        const n = id === this.index.active ? this.data.name : isRecord(parsed) && typeof parsed.name === 'string' ? parsed.name : '';
+        if (n.trim()) name = n.trim().slice(0, 14);
+      } catch {
+        /* unreadable save: keep the placeholder name */
+      }
+      return { id, name, active: id === this.index.active };
+    });
+  }
+
+  /** Start a fresh save for another player and make it the active one. Returns false at the player limit. */
+  addPlayer(): boolean {
+    if (this.index.ids.length >= MAX_PLAYERS) return false;
+    this.save();
+    let id = `p${Date.now().toString(36)}`;
+    while (this.index.ids.includes(id)) id += 'x';
+    this.index = { active: id, ids: [...this.index.ids, id] };
+    this.saveIndex();
+    this.data = defaultSave();
+    this.save();
+    this.listeners.forEach((l) => l(this.data));
+    return true;
+  }
+
+  /** Switch to another player's save. */
+  switchPlayer(id: string): void {
+    if (id === this.index.active || !this.index.ids.includes(id)) return;
+    this.save();
+    this.index = { ...this.index, active: id };
+    this.saveIndex();
+    this.data = this.load();
+    this.touchStreak();
+    this.listeners.forEach((l) => l(this.data));
+  }
+
   save(): void {
     try {
-      this.storage?.setItem(KEY, JSON.stringify(this.data));
+      this.storage?.setItem(saveKey(this.index.active), JSON.stringify(this.data));
     } catch {
       /* storage full/blocked */
     }
