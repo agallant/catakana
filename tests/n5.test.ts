@@ -80,8 +80,8 @@ describe('extra grammar', () => {
     expect(grammarsAt('shirakawa').map((g) => g.id)).toEqual(['ni-he', 'ni-iku']);
     expect(grammarsAt('nowhere')).toEqual([]);
   });
-  it('gives every N5 to N2 stop exactly one extra lesson', () => {
-    for (const id of [...Object.keys(N5_CONTENT), ...Object.keys(N4_CONTENT), ...Object.keys(N3_CONTENT), ...Object.keys(N2_CONTENT)]) expect(grammarsAt(id), id).toHaveLength(2);
+  it('gives every N5 to N1 stop exactly one extra lesson', () => {
+    for (const id of [...Object.keys(N5_CONTENT), ...Object.keys(N4_CONTENT), ...Object.keys(N3_CONTENT), ...Object.keys(N2_CONTENT), ...Object.keys(N1_CONTENT)]) expect(grammarsAt(id), id).toHaveLength(2);
   });
   it('adds N4 extra points after the main one', () => {
     expect(grammarsAt('uji').map((g) => g.id)).toEqual(['temoii', 'hougaii']);
@@ -134,6 +134,8 @@ describe('extra grammar', () => {
     expect(grammarsAt('munakata').map((g) => g.id)).toEqual(['majiki', 'naraizashirazu']);
     expect(grammarsAt('amakusa').map((g) => g.id)).toEqual(['woyoginakusareru', 'monotomosezu']);
     expect(grammarsAt('amami').map((g) => g.id)).toEqual(['beku', 'gayueni']);
+    expect(grammarsAt('izu').map((g) => g.id)).toEqual(['deare', 'nakushite']);
+    expect(grammarsAt('gotokuji').map((g) => g.id)).toEqual(['teyamanai', 'noitari']);
   });
   it('gives every grammar point a unique id and examples', () => {
     const all = Object.keys(TOUR_CONTENT).flatMap((s) => grammarsAt(s));

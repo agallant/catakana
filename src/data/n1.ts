@@ -503,6 +503,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'たびびとであれ じもとの ひとであれ、この みちを あいして いる。', en: 'Travelers and locals alike love this road.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'nakushite',
+        title: '〜なくして — without',
+        pattern: 'せいりゅう なくして',
+        explain: 'Noun + なくして (or なくしては) means “without X”, and the main clause says that something is then impossible, usually with a negative or an impossible form: せいりゅう なくして わさびは そだたない (without clear streams, wasabi does not grow). It is formal and written. A similar form is なしには, and なしに also exists.',
+        examples: [
+          { jp: 'せいりゅう なくして、わさびは そだたない。', en: 'Without clear streams, wasabi cannot grow.' },
+          { jp: 'ようがん なくして、この かいがんせんは うまれなかった。', en: 'Without lava, this coastline would not have been born.' },
+        ],
+      },
+    ],
     words: [
       ['天城越え', 'あまぎごえ', 'crossing the Amagi Pass', '🗺️'],
       ['踊子', 'おどりこ', 'dancing girl', '💃'],
@@ -525,6 +537,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['うみであれ', 'やまであれ', 'みどころが', 'おおい。'], en: 'Whether sea or mountains, there’s lots to see.' },
       { chunks: ['だれであれ', 'この', 'つりばしでは', 'あしが', 'すくむ。'], en: 'Whoever you are, your legs freeze on this suspension bridge.' },
       { chunks: ['わさびは', 'せいりゅうの', 'なかで', 'そだつ。'], en: 'Wasabi grows in clear streams.' },
+      { chunks: ['せいりゅう', 'なくして', 'わさびは', 'そだたない。'], en: 'Without clear streams, wasabi cannot grow.' },
       { chunks: ['しょうねんは', 'とうげで', 'おどりこに', 'であった。'], en: 'The young man met the dancing girl at the mountain pass.' },
     ],
   },
@@ -539,6 +552,18 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
         { jp: 'わたしは この まちを あいして やまない。', en: 'I will never stop loving this town.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'noitari',
+        title: '〜の至り — the height of (a feeling)',
+        pattern: 'かんげきの いたり',
+        explain: 'A noun for a strong feeling + の至り (のいたり) means “the height of / utterly …”: かんげきの いたり (overwhelmed with emotion), こうえいの いたり (a great honour). It is formal, used in speeches and letters, and is about the speaker’s own feelings. The sentence usually ends です or だ: かんげきの いたりです.',
+        examples: [
+          { jp: 'ながい みちのりを へて ここに かえれて、かんげきの いたりです。', en: 'Having come home here after the long journey, I am utterly moved.' },
+          { jp: 'おんじんに あえて、かんげきの いたりだ。', en: 'Meeting my benefactor, I am overcome with emotion.' },
+        ],
+      },
+    ],
     words: [
       ['招き猫', 'まねきねこ', 'beckoning cat', '🐱'],
       ['招福', 'しょうふく', 'inviting good fortune', '🍀'],
@@ -561,6 +586,7 @@ export const N1_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['わたしは', 'この', 'くにを', 'あいして', 'やまない。'], en: 'I will never stop loving this country.' },
       { chunks: ['まねきねこが', 'なんぜんたいも', 'ならんで', 'いる。'], en: 'Thousands of beckoning cats are lined up.' },
       { chunks: ['ながい', 'みちのりを', 'へて', 'ようやく', 'かえってきた。'], en: 'After a long journey, I finally came home.' },
+      { chunks: ['おんじんに', 'あえて', 'かんげきの', 'いたりだ。'], en: 'Meeting my benefactor, I am overcome with emotion.' },
       { chunks: ['マネキさんの', 'しあわせを', 'いのって', 'やまない。'], en: 'I never cease to pray for Maneki’s happiness.' },
     ],
   },
