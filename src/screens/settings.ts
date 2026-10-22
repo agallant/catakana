@@ -58,7 +58,7 @@ export function settingsScreen(app: App): Screen {
         importButton(app),
       ),
     ),
-    h('button', { class: 'btn danger', onClick: () => { if (grownUp(app) && confirm('Erase all progress on this device?')) { app.store.reset(); app.go('welcome'); } } }, 'Erase progress'),
+    h('button', { class: 'btn danger', onClick: () => { if (grownUp(app) && confirm(`Erase ${app.store.data.name}’s progress? Other players on this device are not affected.`)) { app.store.reset(); app.go('welcome'); } } }, 'Erase progress'),
     h('p', { class: 'hint' }, 'Catakana · works offline · made with 🐾'),
     h('p', { class: 'hint' }, 'Stroke order data from KanjiVG © Ulrich Apel (CC BY-SA 3.0).'),
   );

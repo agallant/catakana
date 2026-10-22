@@ -165,7 +165,12 @@ export class Store {
       const raw = this.storage?.getItem(PLAYERS_KEY);
       if (raw) {
         const p: unknown = JSON.parse(raw);
-        if (isRecord(p) && typeof p.active === 'string' && isStringArray(p.ids) && p.ids.includes(p.active)) return { active: p.active, ids: p.ids.slice(0, MAX_PLAYERS) };
+        if (isRecord(p) && typeof p.active === 'string' && isStringArray(p.ids) && p.ids.includes(p.active)) {
+          const ids = [...new Set(p.ids)].slice(0, MAX_PLAYERS);
+          // an over-long index must never lose the active player
+          if (!ids.includes(p.active)) ids[MAX_PLAYERS - 1] = p.active;
+          return { active: p.active, ids };
+        }
       }
     } catch {
       /* unreadable index: fall back to the first player */

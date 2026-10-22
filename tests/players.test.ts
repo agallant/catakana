@@ -59,6 +59,14 @@ describe('players on one device', () => {
     expect(s.addPlayer()).toBe(false);
     expect(s.players()).toHaveLength(MAX_PLAYERS);
   });
+  it('keeps the active player when an index lists too many players', () => {
+    const ids = ['main', 'a', 'b', 'c', 'd', 'e', 'f', 'g'];
+    const s = new Store(mem({ 'catakana.players.v1': JSON.stringify({ active: 'g', ids }) }));
+    const players = s.players();
+    expect(players).toHaveLength(MAX_PLAYERS);
+    expect(players.find((p) => p.active)?.id).toBe('g');
+    expect(new Set(players.map((p) => p.id)).size).toBe(players.length);
+  });
   it('ignores an unreadable player index', () => {
     const s = new Store(mem({ 'catakana.players.v1': '{oops' }));
     expect(s.players().map((p) => p.id)).toEqual([MAIN_PLAYER]);
