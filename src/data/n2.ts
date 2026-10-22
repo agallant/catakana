@@ -496,6 +496,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'たきの しゃしんを とろうと したら、あめが ふってきた。', en: 'Just as I tried to photograph the waterfall, it started to rain.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'nuku',
+        title: '〜ぬく — see it through to the end',
+        pattern: 'さいごまで あるきぬく',
+        explain: 'ます-stem + ぬく means doing something all the way to the end, usually through difficulty: あるきます → あるきぬく (walk the whole way), がんばりぬく (hold out to the end). With thinking verbs it means “thoroughly”: かんがえぬく (think something through).',
+        examples: [
+          { jp: 'あめでも、こどうを さいごまで あるきぬきました。', en: 'Even in the rain, I walked the old trail all the way to the end.' },
+          { jp: 'よく かんがえぬいてから、じゅんれいに いどみました。', en: 'After thinking it through, I took on the pilgrimage.' },
+        ],
+      },
+    ],
     words: [
       ['古道', 'こどう', 'old road / trail', '🥾'],
       ['巡礼', 'じゅんれい', 'pilgrimage', '🚶'],
@@ -518,6 +530,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['しゃしんを', 'とろうと', 'したら', 'あめが', 'ふってきた。'], en: 'Just as I tried to take a photo, it started raining.' },
       { chunks: ['とちゅうで', 'あきらめずに', 'さいごまで', 'あるいた。'], en: 'I walked to the end without giving up halfway.' },
       { chunks: ['こけの', 'いしだんを', 'のぼります。'], en: 'We climb mossy stone steps.' },
+      { chunks: ['こどうを', 'さいごまで', 'あるきぬきました。'], en: 'I walked the old trail all the way to the end.' },
       { chunks: ['やたがらすが', 'みちを', 'あんないした', 'そうです。'], en: 'They say a three-legged crow showed the way.' },
     ],
   },
@@ -532,6 +545,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'ふるい まちながらも、あたらしい ものが たくさん あります。', en: 'Although it’s an old town, there are many new things.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'kotoni-feeling',
+        title: '〜ことに — to my (joy / surprise)…',
+        pattern: 'うれしい ことに',
+        explain: 'A word of feeling + ことに opens a sentence with how the speaker feels about the fact that follows: うれしい ことに (happily / to my joy), ざんねんな ことに (sadly), おどろいた ことに (to my surprise). Use an い-adjective as is, add な to a な-adjective, and use the た form of a verb. It is a little formal and is for the speaker’s own feelings.',
+        examples: [
+          { jp: 'うれしい ことに、あさくさで マネキさんと さいかいしました。', en: 'To my joy, I was reunited with Maneki in Asakusa.' },
+          { jp: 'おどろいた ことに、なかみせは あさから こんざつしていました。', en: 'To my surprise, Nakamise was crowded from the morning.' },
+        ],
+      },
+    ],
     words: [
       ['下町', 'したまち', 'old downtown', '🏮'],
       ['人力車', 'じんりきしゃ', 'rickshaw', '🛺'],
@@ -555,6 +580,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['じんりきしゃで', 'したまちを', 'まわりました。'], en: 'I toured the old downtown by rickshaw.' },
       { chunks: ['たびを', 'ふりかえると', 'ずいぶん', 'せいちょうしました。'], en: 'Looking back on the trip, I’ve grown a lot.' },
       { chunks: ['マネキさんと', 'さいかいしました。'], en: 'I was reunited with Maneki.' },
+      { chunks: ['うれしい', 'ことに', 'マネキさんと', 'さいかいしました。'], en: 'To my joy, I was reunited with Maneki.' },
     ],
   },
 };
