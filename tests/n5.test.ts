@@ -126,6 +126,8 @@ describe('extra grammar', () => {
   it('adds N1 extra points after the main one', () => {
     expect(grammarsAt('ogasawara').map((g) => g.id)).toEqual(['toatte', 'wo-oite']);
     expect(grammarsAt('tono').map((g) => g.id)).toEqual(['naradewa', 'tomonaruto']);
+    expect(grammarsAt('sannai').map((g) => g.id)).toEqual(['nihokanaranai', 'ha-orokka']);
+    expect(grammarsAt('eiheiji').map((g) => g.id)).toEqual(['zaruwoenai', 'to-iedomo']);
   });
   it('gives every grammar point a unique id and examples', () => {
     const all = Object.keys(TOUR_CONTENT).flatMap((s) => grammarsAt(s));
