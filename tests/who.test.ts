@@ -18,7 +18,7 @@ describe('who is playing', () => {
     store.addPlayer();
     store.update((d) => (d.name = 'Tama'));
     const go = vi.fn();
-    const { el } = whoScreen({ store, go } as unknown as App);
+    const { el } = whoScreen({ store, go, takeResume: () => '' } as unknown as App);
     const buttons = [...el.querySelectorAll('button')];
     expect(buttons.map((b) => b.textContent)).toEqual(['🐱 Mochi', '🐱 Tama']);
     buttons[0]!.click();
@@ -29,9 +29,18 @@ describe('who is playing', () => {
     const store = new Store(mem());
     store.addPlayer();
     const go = vi.fn();
-    const { el } = whoScreen({ store, go } as unknown as App);
+    const { el } = whoScreen({ store, go, takeResume: () => 'stop/hirosaki' } as unknown as App);
     const [first] = [...el.querySelectorAll('button')];
     first!.click();
     expect(go).toHaveBeenCalledWith('welcome');
+  });
+  it('resumes the page the visit began on for a player who has started', () => {
+    const store = new Store(mem());
+    store.update((d) => (d.started = true));
+    store.addPlayer();
+    const go = vi.fn();
+    const { el } = whoScreen({ store, go, takeResume: () => 'stop/hirosaki' } as unknown as App);
+    [...el.querySelectorAll('button')][0]!.click();
+    expect(go).toHaveBeenCalledWith('stop/hirosaki');
   });
 });

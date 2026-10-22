@@ -20,7 +20,8 @@ export function whoScreen(app: App): Screen {
             onClick: () => {
               sfx.meow();
               store.switchPlayer(p.id);
-              app.go(store.data.started ? 'map' : 'welcome');
+              const back = app.takeResume();
+              app.go(store.data.started ? back || 'map' : 'welcome');
             },
           },
           `🐱 ${p.name}`,
