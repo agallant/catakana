@@ -400,6 +400,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'きりの せいで、なにも みえませんでした。', en: 'Because of the fog, we couldn’t see anything.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'to-iwareru',
+        title: '〜といわれている — is said to be',
+        pattern: 'にほんさんけいの ひとつと いわれています',
+        explain: 'Plain form + と いわれている reports what people generally say or believe, not what one person told you: にほんさんけいの ひとつと いわれています (it’s said to be one of Japan’s Three Views). A noun or な-adjective takes だ before と, though it is often dropped: かけはしだと いわれている. Compare そうだ, which passes on something you heard from a particular source.',
+        examples: [
+          { jp: 'あまのはしだては にほんさんけいの ひとつと いわれています。', en: 'Amanohashidate is said to be one of Japan’s Three Views.' },
+          { jp: 'でんせつでは、かみさまの かけはしだったと いわれています。', en: 'In legend, it is said to have been a bridge for the gods.' },
+        ],
+      },
+    ],
     words: [
       ['砂州', 'さす', 'sandbar', '🏖️'],
       ['股のぞき', 'またのぞき', 'looking between your legs', '🙃'],
@@ -420,6 +432,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['きりの', 'せいで', 'なにも', 'みえませんでした。'], en: 'Because of the fog, we couldn’t see anything.' },
       { chunks: ['またのぞきを', 'すると', 'はしが', 'てんに', 'うかんで', 'みえます。'], en: 'Look between your legs and the bridge seems to float in the sky.' },
       { chunks: ['じてんしゃで', 'さすを', 'わたりました。'], en: 'I crossed the sandbar by bicycle.' },
+      { chunks: ['てんへの', 'かけはしだったと', 'いわれています。'], en: 'It is said to have been a bridge to heaven.' },
       { chunks: ['ともだちの', 'おかげで', 'たのしい', 'たびに', 'なりました。'], en: 'Thanks to my friend, it became a fun trip.' },
     ],
   },
@@ -434,6 +447,18 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
         { jp: 'みちを おしえる かわりに、ねこは さかなを もらいました。', en: 'In return for showing the way, the cat got a fish.' },
       ],
     },
+    extraGrammar: [
+      {
+        id: 'nikakete',
+        title: '〜から〜にかけて — from … through …',
+        pattern: 'ふもとから ちょうじょうに かけて',
+        explain: 'Aから Bにかけて gives a rough span of time or area: “from about A through B”. It is looser than から…まで, which marks exact start and end points: しがつの はじめから なかばに かけて (from early to mid-April). Bにかけて can also stand alone: よるに かけて (on into the night).',
+        examples: [
+          { jp: 'さくらは やまの ふもとから ちょうじょうに かけて さきます。', en: 'The cherries bloom from the foot of the mountain up to the summit.' },
+          { jp: 'しがつの はじめから なかばに かけてが みごろです。', en: 'The best time to see them is from early to mid-April.' },
+        ],
+      },
+    ],
     words: [
       ['千本桜', 'せんぼんざくら', 'a thousand cherry trees', '🌸'],
       ['山桜', 'やまざくら', 'mountain cherry', '🌸'],
@@ -455,6 +480,7 @@ export const N2_CONTENT: Record<string, N5StopContent> = {
       { chunks: ['くるまの', 'かわりに', 'あるいて', 'のぼりました。'], en: 'Instead of a car, I walked up.' },
       { chunks: ['みちを', 'おしえる', 'かわりに', 'さかなを', 'もらいました。'], en: 'In exchange for showing the way, I got a fish.' },
       { chunks: ['やまの', 'ふもとから', 'じゅんばんに', 'さきます。'], en: 'They bloom in order from the foot of the mountain.' },
+      { chunks: ['ふもとから', 'ちょうじょうに', 'かけて', 'さくらが', 'さきます。'], en: 'Cherries bloom from the foot to the summit.' },
       { chunks: ['やまぶしが', 'しゅぎょうを', 'しています。'], en: 'Mountain monks are doing ascetic training.' },
       { chunks: ['いまが', 'いちばんの', 'みごろです。'], en: 'Now is the very best time to see them.' },
     ],
