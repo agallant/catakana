@@ -1,13 +1,31 @@
+import { execSync } from 'node:child_process';
 import { defineConfig } from 'vitest/config';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// GitHub Pages serves the site from /catakana/. Override with BASE_PATH if hosted elsewhere.
-const base = process.env.BASE_PATH ?? '/catakana/';
+// CI sets BASE_PATH to the path the site is served from (/catakana/ on main,
+// /catakana/pr-preview/pr-<N>/ for PR previews). Local dev serves from /.
+const trimmed = (process.env.BASE_PATH ?? '').trim().replace(/^\/+|\/+$/g, '');
+const base = trimmed ? `/${trimmed}/` : '/';
+
+// Shown in Settings so it's clear which build a device is running.
+function localSha(): string {
+  try {
+    return execSync('git rev-parse --short HEAD', { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  } catch {
+    return 'unknown';
+  }
+}
+const buildSha = (process.env.BUILD_SHA?.trim() || localSha()).slice(0, 7);
+const buildLabel = process.env.BUILD_LABEL?.trim() || 'dev';
 
 export default defineConfig(() => {
   const b = base;
   return {
     base: b,
+    define: {
+      __BUILD_SHA__: JSON.stringify(buildSha),
+      __BUILD_LABEL__: JSON.stringify(buildLabel),
+    },
     plugins: [
       VitePWA({
         registerType: 'autoUpdate',
@@ -33,6 +51,8 @@ export default defineConfig(() => {
         workbox: {
           globPatterns: ['**/*.{js,css,html,svg,png,ico,webmanifest,json,woff2}'],
           navigateFallback: `${b}index.html`,
+          // PR previews live under the live site's scope; never answer them with the live app.
+          navigateFallbackDenylist: [/\/pr-preview\//],
           cleanupOutdatedCaches: true,
         },
       }),

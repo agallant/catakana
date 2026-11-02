@@ -1,7 +1,7 @@
 // Local smoke test: walks the main flow in headless Chromium and saves screenshots.
 // Usage: CHROMIUM_PATH=... node scripts/smoke.mjs [baseUrl] [outDir]
 import { chromium, devices } from 'playwright';
-const base = process.argv[2] ?? 'http://localhost:4173/catakana/';
+const base = process.argv[2] ?? 'http://localhost:4173/';
 const out = process.argv[3] ?? '/tmp/shots';
 import { mkdirSync } from 'node:fs';
 mkdirSync(out, { recursive: true });

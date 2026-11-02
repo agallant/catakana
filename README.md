@@ -26,12 +26,15 @@ more, from complete beginner up to JLPT N1 — through repeatable cat-themed min
 
 ```sh
 npm install
-npm run dev        # http://localhost:5173/catakana/
+npm run dev        # http://localhost:5173/
 npm run check      # typecheck + lint + tests
 npm run build      # production build into dist/
 ```
 
-Pushes to `main` build and deploy to the `gh-pages` branch (GitHub Pages).
+Every change lands as a pull request into `main`, reviewed by [CodeRabbit](https://coderabbit.ai) and gated on
+CI, CodeQL, zizmor, Dependency review and a Lighthouse mobile audit of the PR preview
+(`https://agallant.github.io/catakana/pr-preview/pr-<N>/`). Merging to `main` deploys to the `gh-pages` branch
+(GitHub Pages). See [CLAUDE.md](CLAUDE.md) for the workflow.
 
 ## Credits
 
