@@ -137,6 +137,7 @@ export function mapScreen(app: App): Screen {
     ),
     seasonCard,
     quests,
+    h('button', { class: 'btn ghost small', onClick: () => app.go('placement') }, '🧭 Already know some Japanese? Take the placement test'),
     info,
     h('div', { class: 'map-wrap' }, svg),
     h('h3', null, 'All stops'),

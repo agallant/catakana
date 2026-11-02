@@ -46,6 +46,13 @@ export function settingsScreen(app: App): Screen {
     h('label', { class: 'setting' }, h('span', null, 'Voice speed'), h('input', { type: 'range', min: '0.5', max: '1.2', step: '0.05', value: d.settings.speechRate, onChange: (e: Event) => app.store.update((s) => { s.settings.speechRate = Number((e.target as HTMLInputElement).value); }) })),
     h('div', { class: 'setting col' }, h('span', null, 'Furigana (reading aids over kanji)'), h('div', { class: 'chips' }, furi)),
     h('div', { class: 'setting col' }, h('button', { class: 'btn ghost', onClick: () => { sfx.meow(); void speak('こんにちは'); } }, '🔊 Test voice'), h('small', null, hasJapaneseVoice() ? 'Japanese voice found ✔' : 'No Japanese voice found. Add one in your device’s text-to-speech settings.')),
+    h(
+      'div',
+      { class: 'setting col' },
+      h('strong', null, '🧭 Placement test'),
+      h('small', null, 'Already know some Japanese? Check where you stand and skip ahead. It can only move you forward, never take progress away.'),
+      h('button', { class: 'btn ghost', onClick: () => app.go('placement') }, 'Take the placement test'),
+    ),
     h('div', { class: 'setting col' }, h('strong', null, 'Your progress'), h('small', null, d.settings.kid ? `⭐ ${d.stats.correct} right answers` : `${d.stats.correct} right · ${d.stats.wrong} wrong · ${d.stats.rounds} rounds played`), h('small', null, 'Saved only on this device.')),
     h(
       'div',
