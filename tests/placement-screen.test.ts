@@ -69,10 +69,13 @@ describe('placement screen', () => {
     for (const area of ['Hiragana', 'Katakana', 'N5', 'N4', 'N3', 'N2', 'N1']) expect(text).toContain(area);
     expect(text).toContain('every level we check');
     expect(store.data.started).toBe(false);
-    [...el.querySelectorAll('button')].find((b) => b.textContent?.startsWith('Skip ahead'))!.click();
+    [...el.querySelectorAll('button')].find((b) => b.textContent === 'Study at N1')!.click();
     expect(store.data.started).toBe(true);
+    expect(store.data.level).toBe('N1');
     expect(store.data.stops.tokyo).toBeGreaterThanOrEqual(1);
-    expect(go).toHaveBeenCalledWith(expect.stringMatching(/^travel\//));
+    // every place is still there to visit: nothing was stamped, and the lesson's own place is where you arrive
+    expect(store.data.stamps).toEqual([]);
+    expect(go).toHaveBeenCalledWith(expect.stringMatching(/^travel\/ogasawara$/));
   });
 
   it('stops at the first level that is too hard and reports the one before', async () => {
@@ -81,6 +84,7 @@ describe('placement screen', () => {
     const text = el.querySelector('.results')!.textContent!;
     expect(text).toContain('N4');
     expect(text).toContain('Next up is N3');
+    expect(text).toContain('Your level becomes N3');
     expect(text).not.toContain('N2 ·');
     expect(asked.some((q) => q.area === 'N2')).toBe(false);
   });

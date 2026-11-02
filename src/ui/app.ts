@@ -22,6 +22,8 @@ export class App {
   readonly hud = h('header', { class: 'hud' });
   readonly nav = h('nav', { class: 'nav', 'aria-label': 'Main' });
   readonly toasts = h('div', { class: 'toasts', 'aria-live': 'polite' });
+  /** the place you are visiting (a stop id); lessons and games happen there, whatever your level */
+  place = '';
   private current: Screen | null = null;
   /** ask "Who's playing?" once per visit when the device has more than one player */
   private askWho = false;

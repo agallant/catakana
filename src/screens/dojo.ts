@@ -2,7 +2,7 @@ import type { App, Screen } from '../ui/app';
 import { getLevel, getPref, setPref } from '../core/prefs';
 import { h } from '../ui/dom';
 import { ALL_KANA, KANA_GROUPS, type Script } from '../data/kana';
-import { currentStopIndex, learnedKanaThrough, wordsThrough } from '../core/curriculum';
+import { learnedKanaThrough, unitIndexFor, wordsThrough } from '../core/curriculum';
 import { kanjiThrough } from '../core/items';
 import { phrasesThrough } from '../games/shadow';
 import { GAMES } from '../games';
@@ -14,7 +14,8 @@ import { STOPS } from '../data/journey';
 /** Free practice hub + kana chart with mastery heat. */
 export function dojoScreen(app: App): Screen {
   const d = app.store.data;
-  const idx = currentStopIndex(d);
+  // practice covers everything up to the lesson you are on at your level
+  const idx = unitIndexFor(d.level, d);
   const learned = learnedKanaThrough(idx);
   // include stops visited but whose group is ahead of unlocked? Only learned kana are practicable.
   type Tab = Script | 'words' | 'kanji' | 'phrases';

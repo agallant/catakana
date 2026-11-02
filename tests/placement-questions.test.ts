@@ -8,7 +8,8 @@ import {
   blockVerdict,
   kanaQuestions,
   placedLevel,
-  startIndexFor,
+  placementPlan,
+  planMovesForward,
   tierQuestions,
   type Question,
 } from '../src/core/placement';
@@ -110,18 +111,25 @@ describe('placement result', () => {
     expect(blockVerdict(TIER_PASS, 1, TIER_QUESTIONS, TIER_PASS)).toBe('pass');
     expect(blockVerdict(1, 3, TIER_QUESTIONS, TIER_PASS)).toBe('fail');
   });
-  it('names the highest level shown, and starts later the more you know', () => {
+  it('names the highest level shown, and studies the next level up', () => {
     const none = placedLevel({ hiragana: false, katakana: false, tiers: [] });
     const hira = placedLevel({ hiragana: true, katakana: false, tiers: [] });
     const kana = placedLevel({ hiragana: true, katakana: true, tiers: [] });
     expect([none, hira, kana]).toEqual(['none', 'hiragana', 'kana']);
-    const starts = [none, hira, kana, 'N5', 'N4', 'N3', 'N2', 'N1'].map((l) => startIndexFor(l as never));
-    expect(starts[0]).toBe(0);
-    for (let i = 1; i < 7; i++) expect(starts[i]!, `step ${i}`).toBeGreaterThan(starts[i - 1]!);
-    expect(STOPS[starts[3]!]!.tier).toBe('N4');
-    // N1 is the last level, so passing it keeps you at the start of the N1 stops
-    expect(STOPS[starts[6]!]!.tier).toBe('N1');
-    expect(starts[7]).toBe(starts[6]);
     expect(placedLevel({ hiragana: true, katakana: true, tiers: ['N5', 'N4', 'N3'] })).toBe('N3');
+    const targets = [none, hira, kana, 'N5', 'N4', 'N3', 'N2', 'N1'].map((l) => placementPlan(l as never).target);
+    expect(targets).toEqual(['Kana', 'Kana', 'N5', 'N4', 'N3', 'N2', 'N1', 'N1']);
+    // the more you know, the more lessons count as done
+    const cleared = [none, hira, kana, 'N5', 'N4', 'N3', 'N2', 'N1'].map((l) => placementPlan(l as never).clear.length);
+    for (let i = 1; i < cleared.length; i++) expect(cleared[i]!, `step ${i}`).toBeGreaterThanOrEqual(cleared[i - 1]!);
+    expect(cleared[6]!).toBeGreaterThan(cleared[5]!);
+  });
+  it('only reports a plan as moving forward when it would change something', () => {
+    const plan = placementPlan('kana');
+    expect(planMovesForward(plan, { level: 'Kana', stops: {} })).toBe(true);
+    const done = Object.fromEntries(STOPS.filter((s) => s.tier === 'Kana').map((s) => [s.id, 1]));
+    expect(planMovesForward(plan, { level: 'N5', stops: done })).toBe(false);
+    expect(planMovesForward(plan, { level: 'N3', stops: done })).toBe(false);
+    expect(planMovesForward(placementPlan('none'), { level: 'Kana', stops: {} })).toBe(false);
   });
 });

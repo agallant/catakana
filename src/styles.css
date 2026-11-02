@@ -106,6 +106,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .route { fill: none; stroke: var(--pink-d); stroke-width: 2; stroke-dasharray: 4 5; opacity: 0.7; }
 .stop { cursor: pointer; } .stop circle { fill: #fff; stroke: var(--pink-d); stroke-width: 2; }
 .stop.locked circle { stroke: #aaa; fill: #eee; } .stop.locked { opacity: 0.7; }
+.stop.visited circle { stroke: var(--teal); fill: #f1fbf9; }
 .stop.current circle { fill: var(--gold); animation: pulse 1.4s infinite; transform-origin: center; transform-box: fill-box; }
 .map-emoji { font-size: 12px; pointer-events: none; } .map-stars { font-size: 9px; fill: #e0a800; }
 @keyframes pulse { 50% { transform: scale(1.25); } }
@@ -305,6 +306,13 @@ button.hud-stat { cursor: pointer; }
 @keyframes drop { from { transform: translateY(-20px); opacity: 0; } }
 .quests { background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 10px 12px; margin: 12px 0; }
 .quests h3 { margin: 0 0 6px; font-size: 1rem; }
+.level-card, .unit-card { background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 10px 12px; margin: 12px 0; }
+.level-card h3, .unit-card h3 { margin: 0 0 6px; font-size: 1rem; }
+.level-card h3 .chips { display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 6px; }
+.level-card p { margin: 6px 0; }
+.unit-card h3.jp { font-size: 1.3rem; margin: 2px 0 4px; }
+.lesson-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.lesson-chips .chip:disabled { opacity: 0.5; cursor: not-allowed; }
 .season-card { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border: 2px solid var(--line); border-radius: var(--radius); padding: 10px 12px; margin: 12px 0; }
 .season-card h3 { margin: 0 0 4px; font-size: 1rem; }
 .season-card p { margin: 0 0 8px; font-size: .9rem; }

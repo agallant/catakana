@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { kanaTokens, learnedKanaThrough, wordsThrough, isStopUnlocked } from '../src/core/curriculum';
+import { kanaTokens, learnedKanaThrough, wordsThrough, isUnitOpen, levelDone, levelFromProgress, nextLevel, unitIndexFor, unitTitle, unitsOf } from '../src/core/curriculum';
+import { LEVELS } from '../src/data/journey';
 import { STOPS } from '../src/data/journey';
 import { ALL_KANA, romajiToHiragana, toKatakana } from '../src/data/kana';
 import { WORDS } from '../src/data/vocab';
@@ -31,11 +32,45 @@ describe('curriculum', () => {
     expect(kanaTokens('きょう')).toEqual(['h:きょ', 'h:う']);
     expect(kanaTokens('コーヒー')).toEqual(['k:コ', 'mark:ー', 'k:ヒ', 'mark:ー']);
   });
-  it('unlocks progressively', () => {
-    expect(isStopUnlocked(0, { stops: {} })).toBe(true);
-    expect(isStopUnlocked(1, { stops: {} })).toBe(false);
-    expect(isStopUnlocked(1, { stops: { tokyo: 1 } })).toBe(true);
+  it('learns kana progressively', () => {
     expect(learnedKanaThrough(0).size).toBe(5);
+  });
+  it('gives every level its own track of lessons, and the first lesson of each is open', () => {
+    expect(unitsOf('Kana')[0]).toBe(0);
+    for (const level of LEVELS) {
+      const units = unitsOf(level);
+      expect(units.length, level).toBeGreaterThan(0);
+      expect(units.every((i) => STOPS[i]!.tier === level), level).toBe(true);
+      expect(isUnitOpen(units[0]!, { stops: {} }), level).toBe(true);
+      expect(isUnitOpen(units[1]!, { stops: {} }), level).toBe(false);
+      expect(isUnitOpen(units[1]!, { stops: { [STOPS[units[0]!]!.id]: 1 } }), level).toBe(true);
+      expect(unitIndexFor(level, { stops: {} }), level).toBe(units[0]);
+    }
+  });
+  it('follows your own progress within a level, whatever your other levels look like', () => {
+    const n4 = unitsOf('N4');
+    const save = { stops: { [STOPS[n4[0]!]!.id]: 2, [STOPS[n4[1]!]!.id]: 1 } };
+    expect(unitIndexFor('N4', save)).toBe(n4[2]);
+    expect(unitIndexFor('N5', save)).toBe(unitsOf('N5')[0]);
+    expect(levelDone('N4', save)).toBe(false);
+    const all = { stops: Object.fromEntries(n4.map((i) => [STOPS[i]!.id, 1])) };
+    expect(levelDone('N4', all)).toBe(true);
+    expect(unitIndexFor('N4', all)).toBe(n4[n4.length - 1]);
+    expect(nextLevel('N4')).toBe('N3');
+    expect(nextLevel('N1')).toBeUndefined();
+  });
+  it('titles a lesson by its grammar or its kana', () => {
+    expect(unitTitle(0)).toBe('あ い う え お');
+    expect(unitTitle(STOPS.findIndex((s) => s.tier === 'N5'))).toBe('A は B です');
+  });
+  it('puts a save from before levels existed at the tier of its first lesson not yet cleared', () => {
+    expect(levelFromProgress({ stops: {} })).toBe('Kana');
+    expect(levelFromProgress({ stops: { tokyo: 1 } })).toBe('Kana');
+    const lastKana = STOPS.findLastIndex((s) => s.tier === 'Kana');
+    expect(levelFromProgress({ stops: { [STOPS[lastKana]!.id]: 1 } })).toBe('N5');
+    const lastN5 = STOPS.findLastIndex((s) => s.tier === 'N5');
+    expect(levelFromProgress({ stops: { [STOPS[lastN5]!.id]: 3 } })).toBe('N4');
+    expect(levelFromProgress({ stops: { gotokuji: 1 } })).toBe('N1');
   });
   it('every stop teaches valid groups', () => {
     const groups = new Set(ALL_KANA.map((k) => k.group));

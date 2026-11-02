@@ -1,12 +1,12 @@
 import type { App, Screen } from '../ui/app';
 import { h, ruby, sleep } from '../ui/dom';
 import { ALL_KANA } from '../data/kana';
-import { STOPS } from '../data/journey';
+import { LEVELS, LEVEL_BLURB, STOPS } from '../data/journey';
 import { sfx } from '../core/audio';
 import { catSvg } from '../ui/cat';
 import { review } from '../core/srs';
 import { checkAchievements } from '../core/progress';
-import { currentStopIndex } from '../core/curriculum';
+import { unitIndexFor } from '../core/curriculum';
 import type { Store } from '../core/store';
 import {
   KANA_PASS,
@@ -17,26 +17,26 @@ import {
   blockVerdict,
   kanaQuestions,
   placedLevel,
-  startIndexFor,
+  placementPlan,
+  planMovesForward,
   tierQuestions,
   type Area,
   type PlacedLevel,
+  type PlacementPlan,
   type Question,
   type Showing,
 } from '../core/placement';
 
 /**
- * Mark every stop before `start` as done and its kana as known. It only ever moves forward: stars,
- * stamps and introduced items you already have are kept, so taking the test again later can't cost progress.
+ * Count the lessons you showed you know as done and move your level up. Places are never touched: every
+ * place stays open. It only ever moves forward: stars, your level and practice history you already have are
+ * kept, so taking the test again later can't cost progress.
  */
-export function applyPlacement(store: Store, start: number): void {
-  const skipped = STOPS.slice(0, start);
-  const known = ALL_KANA.filter((k) => skipped.some((s) => s.teaches.includes(k.group)));
+export function applyPlacement(store: Store, plan: PlacementPlan): void {
+  const done = plan.clear.map((i) => STOPS[i]!);
+  const known = ALL_KANA.filter((k) => done.some((s) => s.teaches.includes(k.group)));
   store.update((d) => {
-    for (const s of skipped) {
-      d.stops[s.id] = Math.max(d.stops[s.id] ?? 0, 1);
-      if (!d.stamps.includes(s.id)) d.stamps.push(s.id);
-    }
+    for (const s of done) d.stops[s.id] = Math.max(d.stops[s.id] ?? 0, 1);
     const intro = new Set(d.introduced);
     for (const k of known) {
       // count them as reviewed once so they show up as known, not new; leave anything already practised alone
@@ -44,6 +44,7 @@ export function applyPlacement(store: Store, start: number): void {
       intro.add(k.id);
     }
     d.introduced = [...intro];
+    if (LEVELS.indexOf(plan.target) > LEVELS.indexOf(d.level)) d.level = plan.target;
     d.started = true;
   });
 }
@@ -108,9 +109,9 @@ export function placementScreen(app: App): Screen {
   const finish = (): void => {
     const started = app.store.data.started;
     const level = placedLevel(show);
-    const start = startIndexFor(level);
+    const plan = placementPlan(level);
     // taking the test again later never moves you back
-    const ahead = start > currentStopIndex(app.store.data);
+    const ahead = planMovesForward(plan, app.store.data);
     root.replaceChildren(
       h(
         'div',
@@ -123,10 +124,10 @@ export function placementScreen(app: App): Screen {
           'p',
           null,
           ahead
-            ? `You can start at ${STOPS[start]!.name} ${STOPS[start]!.emoji}. Earlier stops stay open for review.`
+            ? `Your level becomes ${plan.target} (${LEVEL_BLURB[plan.target]}). Every place stays open, and lessons you skip stay available to review.`
             : !started
               ? 'Tokyo is the place to begin.'
-              : start === 0
+              : plan.clear.length === 0
                 ? 'Nothing to skip yet. Your progress stays as it is.'
                 : 'You are already past what this test checks. Your progress stays exactly as it is.',
         ),
@@ -139,12 +140,14 @@ export function placementScreen(app: App): Screen {
                 {
                   class: 'btn primary big',
                   onClick: () => {
-                    applyPlacement(app.store, start);
+                    applyPlacement(app.store, plan);
                     checkAchievements(app.store);
-                    app.go(`travel/${STOPS[start]!.id}`);
+                    // start where your level's lessons are: arrive there, or go straight on once visited
+                    const lesson = STOPS[unitIndexFor(app.store.data.level, app.store.data)]!;
+                    app.go(app.store.data.stamps.includes(lesson.id) ? `stop/${lesson.id}` : `travel/${lesson.id}`);
                   },
                 },
-                `Skip ahead to ${STOPS[start]!.name}`,
+                `Study at ${plan.target}`,
               )
             : null,
           started

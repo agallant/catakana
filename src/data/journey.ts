@@ -851,6 +851,18 @@ export const STOPS: Stop[] = [
 
 export const STOP_BY_ID = new Map(STOPS.map((s) => [s.id, s]));
 
+/** The levels a learner can study at, easiest first. Every place offers lessons and games at every one of them. */
+export type StudyLevel = Stop['tier'];
+export const LEVELS: StudyLevel[] = ['Kana', 'N5', 'N4', 'N3', 'N2', 'N1'];
+export const LEVEL_BLURB: Record<StudyLevel, string> = {
+  Kana: 'hiragana and katakana',
+  N5: 'first words and grammar',
+  N4: 'everyday Japanese',
+  N3: 'intermediate',
+  N2: 'upper intermediate',
+  N1: 'advanced',
+};
+
 export const TRANSPORT_EMOJI: Record<Transport, string> = {
   plane: '✈️',
   train: '🚃',

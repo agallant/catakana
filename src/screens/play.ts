@@ -9,6 +9,7 @@ import { sfx } from '../core/audio';
 import { collectCat } from '../core/cats';
 import { romajiHints } from '../core/romaji';
 import { track } from '../core/progress';
+import { unitsOf } from '../core/curriculum';
 
 export function rewards(summary: Summary, level: Level): { stars: 0 | 1 | 2 | 3; fish: number; xp: number } {
   const pct = summary.total ? summary.correct / summary.total : 0;
@@ -21,16 +22,20 @@ export function rewards(summary: Summary, level: Level): { stars: 0 | 1 | 2 | 3;
   };
 }
 
-/** Runs a minigame then shows rewards. params: stopId, gameId, level; stop may be "any" for free practice. */
+/**
+ * Runs a minigame then shows rewards. params: lesson (the stop whose lesson it is), game id, difficulty, 'review'.
+ * The game happens at the place you are visiting; the content and the stars belong to the lesson.
+ */
 export function playScreen(app: App, params: string[]): Screen {
-  const stopId = params[0] ?? 'tokyo';
+  const unitId = params[0] ?? 'tokyo';
   const gameId = params[1] ?? 'sushi';
   const level = (Math.min(3, Math.max(1, Number(params[2] ?? 1))) || 1) as Level;
   const game = GAME_BY_ID.get(gameId) ?? GAME_BY_ID.get('sushi')!;
-  const stop = STOP_BY_ID.get(stopId) ?? STOPS[0]!;
-  const stopIndex = STOPS.indexOf(stop);
+  const unit = STOP_BY_ID.get(unitId) ?? STOPS[0]!;
+  const stopIndex = STOPS.indexOf(unit);
+  const stop = STOP_BY_ID.get(app.place) ?? unit;
   const review = params[3] === 'review';
-  const home = review ? 'dojo' : `stop/${stop.id}`;
+  const home = review ? 'dojo' : `stop/${stop.id}/${unit.id}`;
   const root = h('div', { class: 'screen play' });
   // Practice what has been introduced in lessons; fall back to everything if that's too little.
   const known = new Set(app.store.data.introduced);
@@ -63,14 +68,18 @@ export function playScreen(app: App, params: string[]): Screen {
         d.stats.rounds++;
         d.stats.playMs += Date.now() - started;
       });
-      const before = app.store.data.stops[stop.id] ?? 0;
-      if (r.stars > 0) app.store.setStars(stop.id, r.stars);
+      const before = app.store.data.stops[unit.id] ?? 0;
+      if (r.stars > 0) app.store.setStars(unit.id, r.stars);
       app.store.addRewards(r.fish, r.xp);
       const newCat = r.stars >= 1 ? collectCat(app.store, stop.id, r.stars === 3) : null;
       track(app.store, { type: 'answers', correct: summary.correct });
       track(app.store, { type: 'game', game: game.id, skill: game.skill, correct: summary.correct, total: summary.total, stars: r.stars });
       (r.stars ? sfx.win : sfx.wrong)();
-      const unlocked = before < 1 && r.stars >= 1 && stopIndex < STOPS.length - 1;
+      const lessons = unitsOf(unit.tier);
+      const at = lessons.indexOf(stopIndex);
+      const cleared = before < 1 && r.stars >= 1;
+      const unlocked = cleared && at < lessons.length - 1;
+      const levelDone = cleared && at === lessons.length - 1;
       root.replaceChildren(
         h(
           'div',
@@ -81,14 +90,15 @@ export function playScreen(app: App, params: string[]): Screen {
           h('p', null, `${summary.correct} / ${summary.total} correct`),
           h('div', { class: 'reward-row' }, h('span', null, `🐟 +${r.fish}`), h('span', null, `⭐ +${r.xp} XP`)),
           newCat ? h('div', { class: 'callout' }, h('div', { class: 'result-cat' }, catSvg(newCat.look, 'happy', 90)), h('p', null, `${newCat.name} the cat joined your collection!`)) : null,
-          unlocked ? h('div', { class: 'callout' }, `🔓 ${STOPS[stopIndex + 1]!.name} unlocked!`) : null,
+          unlocked ? h('div', { class: 'callout' }, `🔓 Lesson ${at + 2} of ${unit.tier} unlocked!`) : null,
+          levelDone ? h('div', { class: 'callout' }, `🎉 You finished every ${unit.tier} lesson!`) : null,
           h(
             'div',
             { class: 'row' },
-            h('button', { class: 'btn primary', onClick: () => app.go(`play/${stop.id}/${game.id}/${level}${review ? '/review' : ''}`) }, '↻ Again'),
-            h('button', { class: 'btn ghost', onClick: () => app.go(home) }, review ? 'Back to practice' : 'Back to stop'),
+            h('button', { class: 'btn primary', onClick: () => app.go(`play/${unit.id}/${game.id}/${level}${review ? '/review' : ''}`) }, '↻ Again'),
+            h('button', { class: 'btn ghost', onClick: () => app.go(home) }, review ? 'Back to practice' : `Back to ${stop.name}`),
           ),
-          level < 3 && r.stars >= 2 ? h('button', { class: 'btn ghost', onClick: () => app.go(`play/${stop.id}/${game.id}/${level + 1}${review ? '/review' : ''}`) }, `Try harder level ${level + 1} →`) : null,
+          level < 3 && r.stars >= 2 ? h('button', { class: 'btn ghost', onClick: () => app.go(`play/${unit.id}/${game.id}/${level + 1}${review ? '/review' : ''}`) }, `Try harder level ${level + 1} →`) : null,
         ),
       );
     },

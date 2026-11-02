@@ -1,4 +1,6 @@
 import { review, type SrsRecord } from './srs';
+import { LEVELS, type StudyLevel } from '../data/journey';
+import { levelFromProgress } from './curriculum';
 
 export type FuriganaMode = 'always' | 'tap' | 'off';
 
@@ -37,6 +39,8 @@ export interface SaveData {
   srs: Record<string, SrsRecord>;
   /** stop id -> stars 0..3 */
   stops: Record<string, number>;
+  /** the level you study at: every place is open, but its lessons and games come from this level */
+  level: StudyLevel;
   /** ids of collected cats */
   cats: string[];
   /** items the learner has been introduced to */
@@ -76,6 +80,7 @@ export function defaultSave(): SaveData {
     lastPlayDay: '',
     srs: {},
     stops: {},
+    level: 'Kana',
     cats: [],
     introduced: [],
     unlockedHats: ['none'],
@@ -488,6 +493,7 @@ function sanitize(p: Record<string, unknown>): SaveData {
   assign('srs', isRecord);
   assign('stops', (v) => isRecord(v) && Object.values(v).every((n) => typeof n === 'number'));
   assign('trivia', isRecord);
+  out.level = (LEVELS as string[]).includes(p.level as string) ? (p.level as StudyLevel) : levelFromProgress(out);
   for (const k of ['cats', 'introduced', 'unlockedHats', 'stamps', 'souvenirs', 'owned', 'photos', 'daytrips', 'achievements'] as const) assign(k, isStringArray);
   if (isRecord(p.daily) && str(p.daily.day) && isRecord(p.daily.progress) && isStringArray(p.daily.claimed)) out.daily = p.daily as SaveData['daily'];
   if (isRecord(p.look)) out.look = sanitizeLook(p.look);

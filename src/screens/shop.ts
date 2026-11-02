@@ -55,7 +55,7 @@ export function shopScreen(app: App): Screen {
     const region = it.from ? STOP_BY_ID.get(it.from) : undefined;
     const event = eventOfTreat(it.id);
     const outOfSeason = event !== undefined && event !== now && !have;
-    const locked = (region !== undefined && d.stops[region.id] === undefined) || outOfSeason;
+    const locked = (region !== undefined && !d.stamps.includes(region.id)) || outOfSeason;
     return h(
       'article',
       { class: `shop-card ${have ? 'owned' : ''} ${locked ? 'locked' : ''}` },

@@ -63,7 +63,9 @@ function exampleFor(item: Item): { jp: string; romaji: string; en: string; emoji
 
 /** Flash-card style intro lesson: grammar first (N5 stops), then new kana / words. */
 export function lessonScreen(app: App, params: string[]): Screen {
+  // params[0] is the lesson (the stop whose lesson it is); you do it at the place you are visiting
   const stop = STOP_BY_ID.get(params[0] ?? '') ?? STOPS[0]!;
+  const home = `stop/${STOP_BY_ID.get(app.place)?.id ?? stop.id}/${stop.id}`;
   const idx = STOPS.indexOf(stop);
   const introduced = new Set(app.store.data.introduced);
   const { items } = lessonBatch(idx, introduced);
@@ -132,13 +134,13 @@ export function lessonScreen(app: App, params: string[]): Screen {
     } else {
       app.store.introduce(cards.map(idOf));
       track(app.store, { type: 'lesson' });
-      app.go(`stop/${stop.id}`);
+      app.go(home);
     }
   };
   const el = h(
     'div',
     { class: 'screen lesson' },
-    h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onClick: () => app.go(`stop/${stop.id}`) }, '← Back'), h('strong', null, `${stop.emoji} ${stop.name} lesson`)),
+    h('div', { class: 'row' }, h('button', { class: 'btn ghost small', onClick: () => app.go(home) }, '← Back'), h('strong', null, `${stop.emoji} ${stop.name} lesson`)),
     dots,
     card,
     h(
@@ -149,6 +151,6 @@ export function lessonScreen(app: App, params: string[]): Screen {
     ),
   );
   if (cards.length) show();
-  else queueMicrotask(() => app.go(`stop/${stop.id}`));
+  else queueMicrotask(() => app.go(home));
   return { el };
 }
