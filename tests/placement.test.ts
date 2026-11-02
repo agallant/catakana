@@ -22,6 +22,9 @@ describe('placement', () => {
     expect(s.data.stops[STOPS[start]!.id]).toBeUndefined();
     expect(s.data.introduced).toContain('h:あ');
     expect(s.data.introduced).toContain('k:ア');
+    // known kana count as reviewed twice, so they show up as known rather than new
+    expect(s.data.srs['h:あ']).toMatchObject({ seen: 2, correct: 2 });
+    expect(s.data.srs['k:ア']).toMatchObject({ seen: 2, correct: 2 });
   });
   it('never takes progress away when taken again later', () => {
     const s = new Store(mem());
