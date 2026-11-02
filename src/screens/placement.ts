@@ -1,26 +1,29 @@
 import type { App, Screen } from '../ui/app';
-import { h, sleep } from '../ui/dom';
-import { ALL_KANA, type KanaChar } from '../data/kana';
+import { h, ruby, sleep } from '../ui/dom';
+import { ALL_KANA } from '../data/kana';
 import { STOPS } from '../data/journey';
-import { shuffle } from '../core/srs';
 import { sfx } from '../core/audio';
 import { catSvg } from '../ui/cat';
 import { review } from '../core/srs';
 import { checkAchievements } from '../core/progress';
 import { currentStopIndex } from '../core/curriculum';
 import type { Store } from '../core/store';
-
-const PER_SCRIPT = 8;
-const PASS = 7;
-
-/** Where a placement result lets you start: 0 = beginning, else the first stop after what you already know. */
-export function placementStart(hiraCorrect: number, kataCorrect: number): number {
-  const hira = hiraCorrect >= PASS;
-  const kata = kataCorrect >= PASS;
-  if (hira && kata) return STOPS.findIndex((s) => s.tier === 'N5');
-  if (hira) return STOPS.findIndex((s) => s.teaches.some((g) => g.startsWith('k-')));
-  return 0;
-}
+import {
+  KANA_PASS,
+  KANA_QUESTIONS,
+  TIERS,
+  TIER_PASS,
+  TIER_QUESTIONS,
+  blockVerdict,
+  kanaQuestions,
+  placedLevel,
+  startIndexFor,
+  tierQuestions,
+  type Area,
+  type PlacedLevel,
+  type Question,
+  type Showing,
+} from '../core/placement';
 
 /**
  * Mark every stop before `start` as done and its kana as known. It only ever moves forward: stars,
@@ -45,17 +48,67 @@ export function applyPlacement(store: Store, start: number): void {
   });
 }
 
-/** Quick kana check for learners who already read some Japanese. */
+interface Block {
+  area: Area;
+  questions: Question[];
+  pass: number;
+}
+
+interface Score {
+  area: Area;
+  right: number;
+  /** how many were asked: a level ends as soon as it is decided */
+  asked: number;
+  passed: boolean;
+}
+
+const SUMMARY: Record<PlacedLevel, string> = {
+  none: 'Let’s start from the very beginning — hiragana first.',
+  hiragana: 'You read hiragana. Katakana comes next.',
+  kana: 'You read hiragana and katakana. Time for your first words and grammar (N5).',
+  N5: 'You handle N5 words and grammar. Next up is N4.',
+  N4: 'You handle N4 words and grammar. Next up is N3.',
+  N3: 'You handle N3 words and grammar. Next up is N2.',
+  N2: 'You handle N2 words and grammar. Next up is N1.',
+  N1: 'You handled every level we check, including N1. Start at the N1 stops and test yourself.',
+};
+
+/**
+ * Placement test: reading kana first, then vocabulary, grammar and kanji at each level from N5 up.
+ * It stops at the first level that turns out too hard.
+ */
 export function placementScreen(app: App): Screen {
-  const pick = (script: 'hiragana' | 'katakana'): KanaChar[] => shuffle(ALL_KANA.filter((k) => k.script === script)).slice(0, PER_SCRIPT);
-  const qs = shuffle([...pick('hiragana'), ...pick('katakana')]);
   const root = h('div', { class: 'screen placement' });
-  let i = 0;
-  const right = { hiragana: 0, katakana: 0 };
+  const furi = app.store.data.settings.furigana;
+  const show: Showing = { hiragana: false, katakana: false, tiers: [] };
+  const scores: Score[] = [];
+  let stopped = false;
+
+  const leave = (): void => app.go(app.store.data.started ? 'map' : 'welcome');
+  const closeBtn = h('button', { class: 'btn ghost small', 'aria-label': 'Leave the placement test', onClick: leave }, '✕');
+
+  const nextBlock = (): Block | null => {
+    if (stopped) return null;
+    if (!scores.some((s) => s.area === 'Hiragana')) return { area: 'Hiragana', questions: kanaQuestions('hiragana'), pass: KANA_PASS };
+    if (!show.hiragana) return null;
+    if (!scores.some((s) => s.area === 'Katakana')) return { area: 'Katakana', questions: kanaQuestions('katakana'), pass: KANA_PASS };
+    if (!show.katakana) return null;
+    const tier = TIERS[show.tiers.length];
+    return tier ? { area: tier, questions: tierQuestions(tier), pass: TIER_PASS } : null;
+  };
+
+  const record = (block: Block, right: number, asked: number, passed: boolean): void => {
+    scores.push({ area: block.area, right, asked, passed });
+    if (block.area === 'Hiragana') show.hiragana = passed;
+    else if (block.area === 'Katakana') show.katakana = passed;
+    else if (passed) show.tiers.push(block.area);
+    if (!passed) stopped = true;
+  };
 
   const finish = (): void => {
     const started = app.store.data.started;
-    const start = placementStart(right.hiragana, right.katakana);
+    const level = placedLevel(show);
+    const start = startIndexFor(level);
     // taking the test again later never moves you back
     const ahead = start > currentStopIndex(app.store.data);
     root.replaceChildren(
@@ -64,16 +117,17 @@ export function placementScreen(app: App): Screen {
         { class: 'results' },
         h('h2', null, 'Placement result'),
         h('div', { class: 'result-cat' }, catSvg(app.store.data.look, ahead ? 'wow' : 'happy', 120)),
-        h('p', null, `Hiragana ${right.hiragana}/${PER_SCRIPT} · Katakana ${right.katakana}/${PER_SCRIPT}`),
+        h('ul', { class: 'placement-scores' }, scores.map((s) => h('li', null, `${s.passed ? '✅' : '▫️'} ${s.area} · ${s.right} of ${s.asked} right`))),
+        h('p', null, SUMMARY[level]),
         h(
           'p',
           null,
           ahead
-            ? `Great! You can start at ${STOPS[start]!.name} ${STOPS[start]!.emoji}. Earlier stops stay open for review.`
+            ? `You can start at ${STOPS[start]!.name} ${STOPS[start]!.emoji}. Earlier stops stay open for review.`
             : !started
-              ? 'Let’s start from the very beginning in Tokyo — you’ll fly through it!'
+              ? 'Tokyo is the place to begin.'
               : start === 0
-                ? 'Nothing to skip yet — the journey from Tokyo is the right place for you. Your progress stays as it is.'
+                ? 'Nothing to skip yet. Your progress stays as it is.'
                 : 'You are already past what this test checks. Your progress stays exactly as it is.',
         ),
         h(
@@ -101,33 +155,60 @@ export function placementScreen(app: App): Screen {
     );
   };
 
-  const show = (): void => {
-    if (i >= qs.length) return finish();
-    const q = qs[i]!;
-    const opts = shuffle([q, ...shuffle(ALL_KANA.filter((k) => k.script === q.script && k.romaji !== q.romaji)).slice(0, 3)]);
-    let locked = false;
-    const buttons = opts.map((o) => {
-      const b = h('button', { class: 'choice text' }, o.romaji);
-      b.addEventListener('click', async () => {
+  const runBlock = (block: Block): void => {
+    let i = 0;
+    let right = 0;
+    let wrong = 0;
+    const ask = (): void => {
+      const q = block.questions[i]!;
+      let locked = false;
+      const answered = async (picked: number | null): Promise<void> => {
         if (locked) return;
         locked = true;
-        const ok = o.romaji === q.romaji;
-        if (ok) right[q.script]++;
-        b.classList.add(ok ? 'right' : 'wrong');
+        const ok = picked === q.answer;
+        if (ok) right++;
+        else wrong++;
+        buttons.forEach((b, n) => {
+          if (n === q.answer) b.classList.add('right');
+          else if (n === picked) b.classList.add('wrong');
+        });
         (ok ? sfx.correct : sfx.wrong)();
-        await sleep(400);
+        if (q.note && !ok) note.textContent = q.note;
+        await sleep(ok ? 450 : q.note ? 1300 : 700);
+        if (!root.isConnected) return;
         i++;
-        show();
+        const verdict = blockVerdict(right, wrong, block.questions.length, block.pass);
+        if (verdict || i >= block.questions.length) {
+          record(block, right, right + wrong, verdict === 'pass' || right >= block.pass);
+          const next = nextBlock();
+          return next ? runBlock(next) : finish();
+        }
+        ask();
+      };
+      const buttons = q.choices.map((c, n) => {
+        const b = h('button', { class: 'choice text' }, c);
+        b.addEventListener('click', () => void answered(n));
+        return b;
       });
-      return b;
-    });
-    root.replaceChildren(
-      h('div', { class: 'row' }, h('button', { class: 'btn ghost small', 'aria-label': 'Leave the placement test', onClick: () => app.go(app.store.data.started ? 'map' : 'welcome') }, '✕'), h('strong', null, `Placement ${i + 1}/${qs.length}`)),
-      h('div', { class: 'prompt' }, h('div', { class: 'prompt-jp jp' }, q.char)),
-      h('p', { class: 'hint' }, 'Not sure? Just guess — this only decides where you start.'),
-      h('div', { class: 'choices' }, buttons),
-    );
+      const note = h('p', { class: 'hint', 'aria-live': 'polite' });
+      root.replaceChildren(
+        h('div', { class: 'row' }, closeBtn, h('strong', null, `${block.area} · ${i + 1}/${block.questions.length}`)),
+        h('p', { class: 'hint' }, q.ask),
+        h('div', { class: 'prompt' }, h('div', { class: `prompt-jp jp ${q.kind === 'grammar' || q.kind === 'particle' ? 'prompt-sentence' : ''}` }, q.markup ? ruby(q.prompt, furi) : q.prompt)),
+        h('div', { class: 'choices' }, buttons),
+        h('button', { class: 'btn ghost small', onClick: () => void answered(null) }, 'I’m not sure'),
+        note,
+      );
+    };
+    ask();
   };
-  show();
+
+  root.replaceChildren(
+    h('div', { class: 'row' }, closeBtn, h('strong', null, 'Placement test')),
+    h('div', { class: 'result-cat' }, catSvg(app.store.data.look, 'smile', 110)),
+    h('p', null, `This starts easy and gets harder. First you read hiragana and katakana. Then, level by level from N5, you answer a few questions on vocabulary, grammar and kanji. It stops when a level gets too hard. About ${KANA_QUESTIONS * 2 + TIER_QUESTIONS} to ${KANA_QUESTIONS * 2 + TIER_QUESTIONS * TIERS.length} questions.`),
+    h('p', { class: 'hint' }, 'Not sure? Tap “I’m not sure” instead of guessing — it only decides where you start.'),
+    h('button', { class: 'btn primary big', onClick: () => runBlock(nextBlock()!) }, 'Start'),
+  );
   return { el: root };
 }
