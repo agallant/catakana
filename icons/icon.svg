@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="110" fill="#ff8fa3"/>
+  <g transform="translate(56 70) scale(2)">
+    <path d="M52 62 L58 18 L92 46 Z" fill="#fff3e0"/><path d="M148 62 L142 18 L108 46 Z" fill="#fff3e0"/>
+    <path d="M60 52 L63 30 L80 46 Z" fill="#ffb3c1"/><path d="M140 52 L137 30 L120 46 Z" fill="#ffb3c1"/>
+    <ellipse cx="100" cy="88" rx="56" ry="48" fill="#fff3e0"/>
+    <path d="M100 42 v16 M88 44 l3 13 M112 44 l-3 13" stroke="#f4b183" stroke-width="5" stroke-linecap="round"/>
+    <path d="M66 88 Q76 76 86 88 M114 88 Q124 76 134 88" fill="none" stroke="#2b2b2b" stroke-width="5" stroke-linecap="round"/>
+    <path d="M94 102 h12 l-6 7 Z" fill="#ff8fa3"/>
+    <path d="M88 110 Q100 124 100 109 Q100 124 112 110" fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round"/>
+    <path d="M52 104 h-26 M52 112 l-24 8 M148 104 h26 M148 112 l24 8" stroke="#5b5b5b" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+  </g>
+  <text x="256" y="470" font-family="sans-serif" font-weight="800" font-size="70" text-anchor="middle" fill="#fff">カタカナ</text>
+</svg>
