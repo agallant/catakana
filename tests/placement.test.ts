@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { applyPlacement, placementStart } from '../src/screens/placement';
+import { applyPlacement } from '../src/screens/placement';
+import { startIndexFor } from '../src/core/placement';
 import { Store } from '../src/core/store';
 import { STOPS } from '../src/data/journey';
 import { KANA_BY_ID } from '../src/data/kana';
@@ -12,7 +13,7 @@ const mem = () => {
 describe('placement', () => {
   it('marks earlier stops done and their kana as known', () => {
     const s = new Store(mem());
-    const start = placementStart(8, 8);
+    const start = startIndexFor('kana');
     applyPlacement(s, start);
     expect(s.data.started).toBe(true);
     for (const st of STOPS.slice(0, start)) {
@@ -35,12 +36,12 @@ describe('placement', () => {
       d.srs['h:あ'] = { box: 4, due: 123, seen: 9, correct: 9, wrong: 0, last: 100 };
     });
     const before = JSON.stringify(s.data.srs['h:あ']);
-    applyPlacement(s, placementStart(8, 2));
+    applyPlacement(s, startIndexFor('hiragana'));
     expect(s.data.stops.tokyo).toBe(3);
     expect(s.data.stops.yokohama).toBe(2);
     expect(JSON.stringify(s.data.srs['h:あ'])).toBe(before);
     const snapshot = JSON.stringify(s.data);
-    applyPlacement(s, placementStart(8, 2));
+    applyPlacement(s, startIndexFor('hiragana'));
     expect(JSON.stringify(s.data)).toBe(snapshot);
   });
   it('knows the kana ids it introduces', () => {

@@ -19,7 +19,7 @@ describe('store', () => {
 });
 
 import { questsFor, track, ACHIEVEMENTS } from '../src/core/progress';
-import { placementStart } from '../src/screens/placement';
+import { placedLevel, startIndexFor } from '../src/core/placement';
 import { STOPS } from '../src/data/journey';
 
 describe('quests & achievements', () => {
@@ -64,9 +64,9 @@ describe('quests & achievements', () => {
     expect(new Set(ACHIEVEMENTS.map((a) => a.id)).size).toBe(ACHIEVEMENTS.length);
   });
   it('placement skips what you already know', () => {
-    expect(placementStart(3, 2)).toBe(0);
-    expect(STOPS[placementStart(8, 2)]!.id).toBe('fukuoka');
-    expect(STOPS[placementStart(8, 8)]!.tier).toBe('N5');
+    expect(startIndexFor(placedLevel({ hiragana: false, katakana: false, tiers: [] }))).toBe(0);
+    expect(STOPS[startIndexFor(placedLevel({ hiragana: true, katakana: false, tiers: [] }))]!.id).toBe('fukuoka');
+    expect(STOPS[startIndexFor(placedLevel({ hiragana: true, katakana: true, tiers: [] }))]!.tier).toBe('N5');
   });
 });
 
