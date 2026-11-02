@@ -1,5 +1,6 @@
 import { ALL_KANA, KANA_BY_ID, type KanaChar } from '../data/kana';
-import { STOPS, type Stop } from '../data/journey';
+import { STOPS, type Stop, type StudyLevel, LEVELS } from '../data/journey';
+import { grammarsAt } from './sentences';
 import { TOUR_WORDS, WORDS, type Word } from '../data/vocab';
 import type { SaveData } from './store';
 
@@ -63,17 +64,51 @@ export function newWordsAt(index: number): Word[] {
   return wordsThrough(index).filter((w) => !prev.has(w.id));
 }
 
-export function isStopUnlocked(index: number, save: Pick<SaveData, 'stops'>): boolean {
-  if (index <= 0) return true;
-  return (save.stops[STOPS[index - 1]!.id] ?? 0) >= 1;
+/**
+ * Lessons are the stops of one level, in order. Each level has its own track, so choosing a harder level
+ * never skips a place: places are always open, and the lessons you do there come from your level's track.
+ */
+export function unitsOf(level: StudyLevel): number[] {
+  return STOPS.flatMap((s, i) => (s.tier === level ? [i] : []));
 }
 
-export function currentStopIndex(save: Pick<SaveData, 'stops'>): number {
-  let idx = 0;
-  for (let i = 0; i < STOPS.length; i++) {
-    if (isStopUnlocked(i, save)) idx = i;
-  }
-  return idx;
+/** The first lesson of every level is open; each next one needs a star on the one before it in the same level. */
+export function isUnitOpen(index: number, save: Pick<SaveData, 'stops'>): boolean {
+  const units = unitsOf(STOPS[index]!.tier);
+  const pos = units.indexOf(index);
+  return pos <= 0 || (save.stops[STOPS[units[pos - 1]!]!.id] ?? 0) >= 1;
+}
+
+/** The lesson you are on in a level: the first one without a star, or the last one once all have. */
+export function unitIndexFor(level: StudyLevel, save: Pick<SaveData, 'stops'>): number {
+  const units = unitsOf(level);
+  return units.find((i) => (save.stops[STOPS[i]!.id] ?? 0) < 1) ?? units[units.length - 1]!;
+}
+
+export function levelDone(level: StudyLevel, save: Pick<SaveData, 'stops'>): boolean {
+  return unitsOf(level).every((i) => (save.stops[STOPS[i]!.id] ?? 0) >= 1);
+}
+
+export function nextLevel(level: StudyLevel): StudyLevel | undefined {
+  return LEVELS[LEVELS.indexOf(level) + 1];
+}
+
+/** What a lesson is about, in a few words: its first grammar point, or the kana it teaches, or the place's name. */
+export function unitTitle(index: number): string {
+  const stop = STOPS[index]!;
+  const grammar = grammarsAt(stop.id)[0];
+  if (grammar) return grammar.pattern;
+  const kana = stopKana(stop);
+  return kana.length ? kana.map((k) => k.char).join(' ') : stop.name;
+}
+
+/** The level a saved game was at before levels existed: the tier of the first lesson not yet cleared. */
+export function levelFromProgress(save: Pick<SaveData, 'stops'>): StudyLevel {
+  let last = -1;
+  STOPS.forEach((s, i) => {
+    if ((save.stops[s.id] ?? 0) >= 1) last = i;
+  });
+  return STOPS[Math.min(last + 1, STOPS.length - 1)]!.tier;
 }
 
 /** Index of the first stop of a tier (e.g. where the N5 Grand Tour begins). */

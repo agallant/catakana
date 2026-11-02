@@ -2,9 +2,9 @@ import { ALL_KANA, toHiragana } from '../data/kana';
 import { ALL_WORDS, type Tier, type Word } from '../data/vocab';
 import { BLANK, PARTICLES } from '../data/particles';
 import { KANJI, primaryReading, type Kanji } from '../data/kanji';
-import { STOPS, STOP_BY_ID } from '../data/journey';
+import { LEVELS, STOPS, STOP_BY_ID, type StudyLevel } from '../data/journey';
+import type { SaveData } from './store';
 import { grammarsAt } from './sentences';
-import { firstStopOfTier } from './curriculum';
 import { shuffle } from './srs';
 
 export const TIERS: Tier[] = ['N5', 'N4', 'N3', 'N2', 'N1'];
@@ -176,18 +176,30 @@ export function placedLevel(show: Showing): PlacedLevel {
   return show.tiers[show.tiers.length - 1] ?? 'kana';
 }
 
-/** Where on the journey a result lets you start: the first stop that teaches something you did not show you know. */
-export function startIndexFor(level: PlacedLevel): number {
-  switch (level) {
-    case 'none':
-      return 0;
-    case 'hiragana':
-      return STOPS.findIndex((s) => s.teaches.some((g) => g.startsWith('k-')));
-    case 'kana':
-      return firstStopOfTier('N5');
-    case 'N1':
-      return firstStopOfTier('N1');
-    default:
-      return firstStopOfTier(TIERS[TIERS.indexOf(level) + 1]!);
+/** What a result changes: the level to study at, and the lessons below it that count as already done. */
+export interface PlacementPlan {
+  target: StudyLevel;
+  /** indices of the stops whose lessons you showed you know */
+  clear: number[];
+}
+
+/**
+ * Turn a result into a plan. Passing a level means its lessons are behind you and you study the next level up,
+ * so N1 (the last) stays N1. Places are never skipped: only lessons are counted as done.
+ */
+export function placementPlan(level: PlacedLevel): PlacementPlan {
+  const target: StudyLevel = level === 'none' || level === 'hiragana' ? 'Kana' : level === 'kana' ? 'N5' : level === 'N1' ? 'N1' : TIERS[TIERS.indexOf(level) + 1]!;
+  const below = LEVELS.indexOf(target);
+  const clear = STOPS.flatMap((s, i) => (LEVELS.indexOf(s.tier) < below ? [i] : []));
+  // knowing only hiragana clears the kana lessons that teach only hiragana
+  if (level === 'hiragana') {
+    const firstKatakana = STOPS.findIndex((s) => s.teaches.some((g) => g.startsWith('k-')));
+    for (let i = 0; i < firstKatakana; i++) clear.push(i);
   }
+  return { target, clear };
+}
+
+/** Would applying this plan change anything? Taking the test later can only move you forward. */
+export function planMovesForward(plan: PlacementPlan, save: Pick<SaveData, 'stops' | 'level'>): boolean {
+  return LEVELS.indexOf(plan.target) > LEVELS.indexOf(save.level) || plan.clear.some((i) => (save.stops[STOPS[i]!.id] ?? 0) < 1);
 }

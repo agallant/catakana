@@ -1,7 +1,7 @@
 import type { App, Screen } from '../ui/app';
 import { h, ruby, s } from '../ui/dom';
-import { STOPS, TRANSPORT_EMOJI } from '../data/journey';
-import { currentStopIndex, isStopUnlocked } from '../core/curriculum';
+import { LEVELS, LEVEL_BLURB, STOPS, TRANSPORT_EMOJI } from '../data/journey';
+import { levelDone, nextLevel, unitIndexFor, unitTitle, unitsOf } from '../core/curriculum';
 import { sfx } from '../core/audio';
 import { catSvg } from '../ui/cat';
 import { questsFor } from '../core/progress';
@@ -37,28 +37,33 @@ const ISLANDS: [number, number][][] = [
 
 export function mapScreen(app: App): Screen {
   const d = app.store.data;
-  const cur = currentStopIndex(d);
+  const level = d.level;
+  const units = unitsOf(level);
+  // the lesson you are on at your level; every place is open whatever your level
+  const cur = unitIndexFor(level, d);
   const route = STOPS.map((st) => proj(st.lonlat));
+  const visited = (id: string): boolean => d.stamps.includes(id);
+  const goTo = (id: string): void => app.go(visited(id) ? `stop/${id}` : `travel/${id}`);
 
   const islands = ISLANDS.map((poly) =>
     s('polygon', { points: poly.map((p) => proj(p).join(',')).join(' '), class: 'island' }),
   );
-  // only the part of the route travelled so far, plus the leg to the next stop
-  const path = s('polyline', { points: route.slice(0, cur + 2).map((p) => p.join(',')).join(' '), class: 'route' });
+  // the route of your level's lessons: the part done so far, plus the leg to the next one
+  const lessonPos = units.indexOf(cur);
+  const path = s('polyline', { points: units.slice(0, lessonPos + 2).map((i) => route[i]!.join(',')).join(' '), class: 'route' });
   const dots = STOPS.map((st, i) => {
     const [x, y] = route[i]!;
-    const unlocked = isStopUnlocked(i, d);
-    const stars = d.stops[st.id] ?? 0;
+    // stars show only on the places that host a lesson of your level
+    const stars = st.tier === level ? d.stops[st.id] ?? 0 : 0;
     const g = s(
       'g',
-      { class: `stop ${unlocked ? 'open' : 'locked'} ${i === cur ? 'current' : ''}`, tabindex: 0, role: 'button', 'aria-label': `${st.name}${unlocked ? '' : ' (locked)'}` },
+      { class: `stop open ${visited(st.id) ? 'visited' : ''} ${i === cur ? 'current' : ''}`, tabindex: 0, role: 'button', 'aria-label': `${st.name}${visited(st.id) ? '' : ' (not visited yet)'}` },
       s('circle', { cx: x, cy: y, r: 11 }),
-      s('text', { x, y: y + 4, 'text-anchor': 'middle', class: 'map-emoji' }, unlocked ? st.emoji : '🔒'),
+      s('text', { x, y: y + 4, 'text-anchor': 'middle', class: 'map-emoji' }, st.emoji),
     );
     const act = (): void => {
       sfx.tap();
-      if (unlocked) app.go(`stop/${st.id}`);
-      else info.textContent = `Finish ${STOPS[i - 1]!.name} first to unlock ${st.name}.`;
+      goTo(st.id);
     };
     g.addEventListener('click', act);
     g.addEventListener('keydown', (e) => {
@@ -71,17 +76,18 @@ export function mapScreen(app: App): Screen {
 
   const info = h('div', { class: 'map-info', 'aria-live': 'polite' });
   const next = STOPS[cur]!;
-  const done = STOPS.every((st) => (d.stops[st.id] ?? 0) >= 1);
+  const done = levelDone(level, d);
+  const up = nextLevel(level);
 
   const list = STOPS.map((st, i) => {
-    const unlocked = isStopUnlocked(i, d);
-    const stars = d.stops[st.id] ?? 0;
+    const lesson = st.tier === level;
+    const stars = lesson ? d.stops[st.id] ?? 0 : 0;
     const b = h(
       'button',
-      { class: `stop-row ${unlocked ? '' : 'locked'} ${i === cur ? 'current' : ''}`, disabled: !unlocked, onClick: () => app.go(`stop/${st.id}`) },
-      h('span', { class: 'stop-row-emoji' }, unlocked ? st.emoji : '🔒'),
-      h('span', { class: 'stop-row-main' }, h('strong', null, st.name), h('span', { class: 'jp small' }, ` ${st.jp}`), h('small', null, `${TRANSPORT_EMOJI[st.transport]} ${st.region}`, h('span', { class: 'tier-chip' }, st.tier))),
-      h('span', { class: 'stars' }, '★'.repeat(stars) + '☆'.repeat(3 - stars)),
+      { class: `stop-row ${i === cur ? 'current' : ''}`, onClick: () => goTo(st.id) },
+      h('span', { class: 'stop-row-emoji' }, st.emoji),
+      h('span', { class: 'stop-row-main' }, h('strong', null, st.name), h('span', { class: 'jp small' }, ` ${st.jp}`), h('small', null, `${TRANSPORT_EMOJI[st.transport]} ${st.region}`, visited(st.id) ? h('span', { class: 'tier-chip' }, '✓ visited') : null)),
+      lesson ? h('span', { class: 'stars' }, '★'.repeat(stars) + '☆'.repeat(3 - stars)) : null,
     );
     return b;
   });
@@ -130,17 +136,25 @@ export function mapScreen(app: App): Screen {
       h(
         'div',
         { class: 'next-text' },
-        h('div', { class: 'small' }, done ? 'Journey complete — keep practicing!' : 'Next destination'),
-        h('h2', null, `${next.emoji} ${next.name}`, h('span', { class: 'jp small' }, ` ${next.jp}`)),
-        h('button', { class: 'btn primary', onClick: () => app.go((d.stops[next.id] ?? -1) < 0 ? `travel/${next.id}` : `stop/${next.id}`) }, d.stops[next.id] === undefined ? `${TRANSPORT_EMOJI[next.transport]} Travel there` : '▶ Continue'),
+        h('div', { class: 'small' }, done ? `All ${level} lessons done — keep practicing!` : `${level} · lesson ${units.indexOf(cur) + 1} of ${units.length}`),
+        h('h2', { class: 'jp' }, unitTitle(cur)),
+        h('div', { class: 'small' }, `${next.emoji} ${next.name}`),
+        h('button', { class: 'btn primary', onClick: () => goTo(next.id) }, visited(next.id) ? '▶ Continue' : `${TRANSPORT_EMOJI[next.transport]} Travel there`),
+        done && up ? h('button', { class: 'btn ghost small', onClick: () => { app.store.update((st) => { st.level = up; }); app.go('map'); } }, `Move up to ${up}`) : null,
       ),
+    ),
+    h(
+      'section',
+      { class: 'level-card' },
+      h('h3', null, 'Your level ', h('span', { class: 'chips' }, LEVELS.map((l) => h('button', { class: `chip ${l === level ? 'on' : ''}`, 'aria-pressed': String(l === level), onClick: () => { app.store.update((st) => { st.level = l; }); app.go('map'); } }, l)))),
+      h('p', { class: 'small' }, `${level}: ${LEVEL_BLURB[level]}. Every place on the map is open, and every place has lessons and games at every level.`),
     ),
     seasonCard,
     quests,
     h('button', { class: 'btn ghost small', onClick: () => app.go('placement') }, '🧭 Already know some Japanese? Take the placement test'),
     info,
     h('div', { class: 'map-wrap' }, svg),
-    h('h3', null, 'All stops'),
+    h('h3', null, 'All places'),
     h('div', { class: 'stop-list' }, list),
   );
   return { el };

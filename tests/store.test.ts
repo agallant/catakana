@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Store } from '../src/core/store';
+import { Store, defaultSave } from '../src/core/store';
 
 const mem = (init: Record<string, string> = {}) => {
   const m = new Map(Object.entries(init));
@@ -19,7 +19,7 @@ describe('store', () => {
 });
 
 import { questsFor, track, ACHIEVEMENTS } from '../src/core/progress';
-import { placedLevel, startIndexFor } from '../src/core/placement';
+import { placedLevel, placementPlan } from '../src/core/placement';
 import { STOPS } from '../src/data/journey';
 
 describe('quests & achievements', () => {
@@ -63,10 +63,37 @@ describe('quests & achievements', () => {
     expect(unlocks.some((u) => u.label.includes('First Paw-step'))).toBe(true);
     expect(new Set(ACHIEVEMENTS.map((a) => a.id)).size).toBe(ACHIEVEMENTS.length);
   });
-  it('placement skips what you already know', () => {
-    expect(startIndexFor(placedLevel({ hiragana: false, katakana: false, tiers: [] }))).toBe(0);
-    expect(STOPS[startIndexFor(placedLevel({ hiragana: true, katakana: false, tiers: [] }))]!.id).toBe('fukuoka');
-    expect(STOPS[startIndexFor(placedLevel({ hiragana: true, katakana: true, tiers: [] }))]!.tier).toBe('N5');
+  it('placement counts what you already know as done without skipping any place', () => {
+    const none = placementPlan(placedLevel({ hiragana: false, katakana: false, tiers: [] }));
+    expect(none).toEqual({ target: 'Kana', clear: [] });
+    const hira = placementPlan(placedLevel({ hiragana: true, katakana: false, tiers: [] }));
+    expect(hira.target).toBe('Kana');
+    expect(hira.clear).toEqual(Array.from({ length: STOPS.findIndex((x) => x.id === 'fukuoka') }, (_, i) => i));
+    const kana = placementPlan(placedLevel({ hiragana: true, katakana: true, tiers: [] }));
+    expect(kana.target).toBe('N5');
+    expect(kana.clear.every((i) => STOPS[i]!.tier === 'Kana')).toBe(true);
+    const n3 = placementPlan('N3');
+    expect(n3.target).toBe('N2');
+    expect(new Set(n3.clear.map((i) => STOPS[i]!.tier))).toEqual(new Set(['Kana', 'N5', 'N4', 'N3']));
+    const n1 = placementPlan('N1');
+    expect(n1.target).toBe('N1');
+    expect(n1.clear.some((i) => STOPS[i]!.tier === 'N1')).toBe(false);
+  });
+  it('knows its level, and works one out for a save from before levels', () => {
+    expect(defaultSave().level).toBe('Kana');
+    const st = new Map([['catakana.save.v1', JSON.stringify({ v: 1, name: 'Mochi', stops: { tokyo: 3, yokohama: 1 } })]]);
+    const old = new Store({ getItem: (k) => st.get(k) ?? null, setItem: (k, v) => void st.set(k, v) });
+    expect(old.data.level).toBe('Kana');
+    const n5 = STOPS.filter((x) => x.tier === 'N5');
+    const done = Object.fromEntries(STOPS.filter((x) => x.tier === 'Kana' || x.tier === 'N5').map((x) => [x.id, 1]));
+    const st2 = new Map([['catakana.save.v1', JSON.stringify({ v: 1, name: 'Tama', stops: done })]]);
+    const later = new Store({ getItem: (k) => st2.get(k) ?? null, setItem: (k, v) => void st2.set(k, v) });
+    expect(later.data.level).toBe('N4');
+    expect(n5.length).toBeGreaterThan(0);
+    const st3 = new Map([['catakana.save.v1', JSON.stringify({ v: 1, name: 'Kuro', level: 'N2', stops: {} })]]);
+    expect(new Store({ getItem: (k) => st3.get(k) ?? null, setItem: (k, v) => void st3.set(k, v) }).data.level).toBe('N2');
+    const st4 = new Map([['catakana.save.v1', JSON.stringify({ v: 1, name: 'Nori', level: 'N9', stops: {} })]]);
+    expect(new Store({ getItem: (k) => st4.get(k) ?? null, setItem: (k, v) => void st4.set(k, v) }).data.level).toBe('Kana');
   });
 });
 

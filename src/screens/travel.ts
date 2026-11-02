@@ -9,15 +9,14 @@ const VERB: Record<string, string> = { plane: 'Flying', train: 'Riding the train
 /** Animated journey between stops, with a fun fact about the destination. */
 export function travelScreen(app: App, params: string[]): Screen {
   const stop = STOP_BY_ID.get(params[0] ?? '') ?? STOPS[0]!;
-  const idx = STOPS.indexOf(stop);
-  const from = idx > 0 ? STOPS[idx - 1]!.name : 'Home';
+  const from = STOP_BY_ID.get(app.place)?.name ?? 'Home';
   const fact = stop.facts[Math.floor(Math.random() * stop.facts.length)]!;
 
   const arrive = (): void => {
     app.store.update((d) => {
-      if (d.stops[stop.id] === undefined) d.stops[stop.id] = 0;
       if (!d.stamps.includes(stop.id)) d.stamps.push(stop.id);
     });
+    app.place = stop.id;
     sfx.stamp();
     window.setTimeout(() => sfx.meow(), 180);
     app.go(`stop/${stop.id}`);

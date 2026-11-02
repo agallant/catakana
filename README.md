@@ -12,6 +12,7 @@ more, from complete beginner up to JLPT N1 — through repeatable cat-themed min
 - **Young learner mode** (welcome screen or Settings) is the same game with calmer rules: no game-over, bigger
   buttons and text, kana help always on, smaller daily quests, a break reminder every 20 minutes, and a grown-up
   sum before backups, restoring, erasing, adding or removing players, or switching the mode off.
+- **Levels**: every place is open from the start. Pick a study level (Kana, N5, N4, N3, N2 or N1) on the map or at any place, and the lessons and games there come from that level's own track. A harder level never skips a place; the placement test (any time, from Settings or the map) just suggests where to start.
 - **Players**: up to six players per device, each with their own cat, progress and settings. The app asks who is
   playing when it opens. Add, switch and remove players in Settings.
 - **Larger text and buttons** is a separate setting for anyone who wants the roomier layout.

@@ -1,3 +1,4 @@
+import { levelDone } from './curriculum';
 import { dayKey, HAT_IDS, type SaveData, type Store } from './store';
 import { STOPS } from '../data/journey';
 import { CULTURE } from '../data/culture';
@@ -78,21 +79,21 @@ function solved(d: SaveData, prefix: string): number {
 
 export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'first-star', name: 'First Paw-step', emoji: '🐾', desc: 'Earn your first star', test: (d) => Object.values(d.stops).some((s) => s >= 1) },
-  { id: 'tokyo-done', name: 'Hello Tokyo', emoji: '🗼', desc: 'Finish Tokyo', test: (d) => (d.stops.tokyo ?? 0) >= 1 },
+  { id: 'tokyo-done', name: 'Hello Tokyo', emoji: '🗼', desc: 'Finish the first kana lesson', test: (d) => (d.stops.tokyo ?? 0) >= 1 },
   { id: 'stamps5', name: 'Rail Fan', emoji: '🚃', desc: 'Collect 5 eki stamps', test: (d) => d.stamps.length >= 5 },
   { id: 'stamps20', name: 'Grand Traveler', emoji: '🗾', desc: 'Collect 20 eki stamps', test: (d) => d.stamps.length >= 20 },
   { id: 'hira', name: 'Hiragana Hero', emoji: 'あ', desc: 'Master 40 hiragana', test: (d) => masteredKana(d, 'hiragana') >= 40 },
   { id: 'kata', name: 'Katakana Knight', emoji: 'ア', desc: 'Master 40 katakana', test: (d) => masteredKana(d, 'katakana') >= 40 },
-  { id: 'kana-grad', name: 'Kana Graduate', emoji: '🎓', desc: 'Reach Sapporo and finish the kana journey', test: (d) => (d.stops.sapporo ?? 0) >= 1 },
+  { id: 'kana-grad', name: 'Kana Graduate', emoji: '🎓', desc: 'Finish every kana lesson', test: (d) => levelDone('Kana', d) },
   { id: 'kanji10', name: 'Kanji Kitten', emoji: '🈁', desc: 'Learn 10 kanji', test: (d) => d.introduced.filter((i) => i.startsWith('kj:')).length >= 10 },
   { id: 'kanji50', name: 'Kanji Cat', emoji: '🏯', desc: 'Learn 50 kanji', test: (d) => d.introduced.filter((i) => i.startsWith('kj:')).length >= 50 },
-  { id: 'n5', name: 'N5 Explorer', emoji: '🌲', desc: 'Finish the N5 Grand Tour', test: (d) => (d.stops.yakushima ?? 0) >= 1 },
-  { id: 'n4', name: 'N4 Adventurer', emoji: '🔔', desc: 'Finish the N4 season in Kawagoe', test: (d) => (d.stops.kawagoe ?? 0) >= 1 },
+  { id: 'n5', name: 'N5 Explorer', emoji: '🌲', desc: 'Finish every N5 lesson', test: (d) => levelDone('N5', d) },
+  { id: 'n4', name: 'N4 Adventurer', emoji: '🔔', desc: 'Finish every N4 lesson', test: (d) => levelDone('N4', d) },
   { id: 'treasure-castles', name: 'Five Treasures', emoji: '🏯', desc: 'Photograph all five National Treasure castles (Himeji, Hikone, Matsue, Matsumoto, Inuyama)', test: (d) => ['himeji:Himeji Castle', 'hikone:Hikone Castle', 'matsue:Matsue Castle', 'matsumoto:Matsumoto Castle', 'inuyama:Inuyama Castle'].every((p) => d.photos.includes(p)) },
-  { id: 'n3', name: 'N3 Voyager', emoji: '🐆', desc: 'Reach Iriomote and finish the N3 season', test: (d) => (d.stops.iriomote ?? 0) >= 1 },
-  { id: 'n2', name: 'N2 Pilgrim', emoji: '🥾', desc: 'Complete the N2 season by reaching Asakusa', test: (d) => (d.stops.asakusa ?? 0) >= 1 },
-  { id: 'n1', name: 'Grand Master Cat', emoji: '🐾', desc: 'Finish the N1 season and come home to Gōtoku-ji', test: (d) => (d.stops.gotokuji ?? 0) >= 1 },
-  { id: 'islands', name: 'Island Hopper', emoji: '🏝️', desc: 'Visit Ogasawara, Amami, Yakushima and Iriomote', test: (d) => ['ogasawara', 'amami', 'yakushima', 'iriomote'].every((s) => (d.stops[s] ?? 0) >= 1) },
+  { id: 'n3', name: 'N3 Voyager', emoji: '🐆', desc: 'Finish every N3 lesson', test: (d) => levelDone('N3', d) },
+  { id: 'n2', name: 'N2 Pilgrim', emoji: '🥾', desc: 'Finish every N2 lesson', test: (d) => levelDone('N2', d) },
+  { id: 'n1', name: 'Grand Master Cat', emoji: '🐾', desc: 'Finish every N1 lesson', test: (d) => levelDone('N1', d) },
+  { id: 'islands', name: 'Island Hopper', emoji: '🏝️', desc: 'Visit Ogasawara, Amami, Yakushima and Iriomote', test: (d) => ['ogasawara', 'amami', 'yakushima', 'iriomote'].every((s) => d.stamps.includes(s)) },
   { id: 'kii', name: 'Sacred Mountains', emoji: '⛰️', desc: 'Photograph every Kii Mountains World Heritage spot in Yoshino and Kumano', test: (d) => ['yoshino:Hitome Senbon', 'yoshino:Kinpusen-ji', 'yoshino:Yoshimizu Shrine', 'kumano:Kumano Kodō trail', 'kumano:Nachi Falls', 'kumano:Kumano Hongū Taisha'].every((p) => d.photos.includes(p)) },
   { id: 'streak3', name: 'Three-day Purr', emoji: '🔥', desc: 'Play 3 days in a row', test: (d) => d.streak >= 3 },
   { id: 'streak7', name: 'Week of Whiskers', emoji: '📅', desc: 'Play 7 days in a row', test: (d) => d.streak >= 7 },
