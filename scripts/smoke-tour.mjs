@@ -1,7 +1,7 @@
 // Smoke test for late-tour stops: seeds a save through the stops in $STOP_IDS and visits N2/N1 screens.
 import { chromium, devices } from 'playwright';
 import { mkdirSync } from 'node:fs';
-const base = process.argv[2] ?? 'http://localhost:4173/catakana/';
+const base = process.argv[2] ?? 'http://localhost:4173/';
 const out = process.argv[3] ?? '/tmp/shots-n2';
 mkdirSync(out, { recursive: true });
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH });

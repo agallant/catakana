@@ -3,6 +3,7 @@ import { h } from '../ui/dom';
 import { hasJapaneseVoice, speak, sfx } from '../core/audio';
 import { Store, type FuriganaMode } from '../core/store';
 import { applyKidPreset, checkGate, makeGate } from '../core/kid';
+import { BUILD_LABEL, BUILD_SHA } from '../core/build';
 
 /** Ask a quick sum before anything a child should not do alone. */
 function grownUp(app: App): boolean {
@@ -71,6 +72,7 @@ export function settingsScreen(app: App): Screen {
     ),
     h('button', { class: 'btn danger', onClick: () => { if (grownUp(app) && confirm(`Erase ${app.store.data.name}’s progress? Other players on this device are not affected.`)) { app.store.reset(); app.go('welcome'); } } }, 'Erase progress'),
     h('p', { class: 'hint' }, 'Catakana · works offline · made with 🐾'),
+    h('p', { class: 'hint' }, `Build ${BUILD_LABEL} · ${BUILD_SHA}`),
     h('p', { class: 'hint' }, 'Stroke order data from KanjiVG © Ulrich Apel (CC BY-SA 3.0).'),
   );
   return { el };
