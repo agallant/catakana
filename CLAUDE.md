@@ -168,6 +168,16 @@ The build receives these environment variables:
 
 Run the same scripts locally before pushing; a red CI run costs a review round.
 
+## CodeQL
+
+Code scanning runs from `.github/workflows/codeql.yaml` (advanced setup), not GitHub's "default
+setup". Keep it that way: the `main` ruleset requires the checks `Analyze (actions)` and
+`Analyze (javascript-typescript)` on every PR, and the workflow reports both even for PRs that
+change no code. Default setup skips such PRs (docs-only, or deleting a file), so those checks never
+appear and the PR can't merge. The workflow also uploads under the categories
+`/language:actions` and `/language:javascript-typescript`; an old upload with a different category
+left on `main` makes every PR's CodeQL check say "1 configuration not found" until it's deleted.
+
 ## PWA and mobile requirements
 
 - **Installable**: manifest with `name`, `short_name`, `start_url` and `scope` (both from
