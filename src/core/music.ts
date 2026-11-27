@@ -231,6 +231,11 @@ class Voice {
     this.timer = window.setInterval(() => this.tick(), 250);
   }
 
+  /** False once the browser has suspended or interrupted the audio (a phone call, Siri, switching apps). */
+  get running(): boolean {
+    return this.ctx.state === 'running';
+  }
+
   setLevel(target: number, seconds = 0.4): void {
     const g = this.master.gain;
     g.cancelScheduledValues(this.ctx.currentTime);
@@ -338,15 +343,18 @@ class Conductor {
   /** Re-check what should be playing: after a setting, a route, a tap or the tab being hidden or shown. */
   sync(): void {
     const wanted = this.on && this.volume > 0 && !(typeof document !== 'undefined' && document.hidden) ? this.want : null;
-    if (this.voice && this.voice.theme.id === wanted?.id) {
+    if (this.voice && this.voice.theme.id === wanted?.id && this.voice.running) {
       this.voice.setLevel(this.level());
       return;
     }
+    // a different tune, silence, or the browser has paused the audio under us: let go of the voice and start fresh
     this.voice?.stop();
     this.voice = null;
     if (!wanted) return;
     const ctx = audioContext();
     if (!ctx) return;
+    // when the audio is interrupted (a call, Siri) or resumes, check again without waiting for a tap
+    ctx.onstatechange = () => this.sync();
     if (ctx.state !== 'running') {
       // not allowed to make sound until the first tap or key press
       this.arm();
