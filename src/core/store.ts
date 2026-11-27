@@ -19,6 +19,10 @@ export interface Settings {
   furigana: FuriganaMode;
   romaji: boolean;
   sound: boolean;
+  /** theme music on the menus and at each place (lessons and games are silent) */
+  music: boolean;
+  /** 0..1 */
+  musicVolume: number;
   speech: boolean;
   speechRate: number;
   reduceMotion: boolean;
@@ -92,7 +96,7 @@ export function defaultSave(): SaveData {
     daytrips: [],
     daily: { day: '', progress: {}, claimed: [] },
     achievements: [],
-    settings: { furigana: 'always', romaji: true, sound: true, speech: true, speechRate: 0.85, reduceMotion: false, bigText: false, kid: false },
+    settings: { furigana: 'always', romaji: true, sound: true, music: true, musicVolume: 0.5, speech: true, speechRate: 0.85, reduceMotion: false, bigText: false, kid: false },
     stats: { rounds: 0, correct: 0, wrong: 0, playMs: 0 },
     started: false,
   };

@@ -10,8 +10,8 @@ export function configureAudio(opts: { sound: boolean; speech: boolean; rate: nu
   rate = opts.rate;
 }
 
-function ac(): AudioContext | null {
-  if (!enabled) return null;
+/** The shared AudioContext, created on first use. Music uses it too, whether or not sound effects are on. */
+export function audioContext(): AudioContext | null {
   try {
     if (!ctx) {
       const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
@@ -23,6 +23,26 @@ function ac(): AudioContext | null {
   } catch {
     return null;
   }
+}
+
+function ac(): AudioContext | null {
+  return enabled ? audioContext() : null;
+}
+
+const speakingListeners = new Set<(on: boolean) => void>();
+
+/** Called with true when the Japanese voice starts talking and false when it stops (the music ducks under it). */
+export function onSpeaking(cb: (on: boolean) => void): void {
+  speakingListeners.add(cb);
+}
+
+let talking = 0;
+
+/** Counts overlapping utterances, so a cancelled one ending late doesn't end the next one's ducking. */
+function speaking(on: boolean): void {
+  const was = talking > 0;
+  talking = Math.max(0, talking + (on ? 1 : -1));
+  if (was !== talking > 0) for (const cb of speakingListeners) cb(talking > 0);
 }
 
 function tone(freq: number, start: number, dur: number, type: OscillatorType = 'sine', gain = 0.15, endFreq?: number): void {
@@ -144,6 +164,13 @@ export function hasJapaneseVoice(): boolean {
 export function speak(text: string, opts: { rate?: number; pitch?: number } = {}): Promise<boolean> {
   return new Promise((resolve) => {
     if (!speechOn || !speechSupported()) return resolve(false);
+    let done = false;
+    const finish = (ok: boolean): void => {
+      if (done) return;
+      done = true;
+      speaking(false);
+      resolve(ok);
+    };
     try {
       const synth = window.speechSynthesis;
       synth.cancel();
@@ -153,13 +180,14 @@ export function speak(text: string, opts: { rate?: number; pitch?: number } = {}
       if (opts.pitch !== undefined) u.pitch = opts.pitch;
       const v = pickVoice();
       if (v) u.voice = v;
-      u.onend = () => resolve(true);
-      u.onerror = () => resolve(false);
+      u.onend = () => finish(true);
+      u.onerror = () => finish(false);
+      speaking(true);
       synth.speak(u);
       // Some browsers never fire end; don't hang the UI (allow ~0.25s per character).
-      setTimeout(() => resolve(true), Math.max(4000, text.length * 250));
+      setTimeout(() => finish(true), Math.max(4000, text.length * 250));
     } catch {
-      resolve(false);
+      finish(false);
     }
   });
 }

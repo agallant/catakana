@@ -152,10 +152,23 @@ export function mapScreen(app: App): Screen {
     seasonCard,
     quests,
     h('button', { class: 'btn ghost small', onClick: () => app.go('placement') }, '🧭 Already know some Japanese? Take the placement test'),
+    musicButton(app),
     info,
     h('div', { class: 'map-wrap' }, svg),
     h('h3', null, 'All places'),
     h('div', { class: 'stop-list' }, list),
   );
   return { el };
+}
+
+/** A quick way to turn the theme music off (and on) without opening Settings. */
+function musicButton(app: App): HTMLElement {
+  const label = (on: boolean): string => (on ? '🎵 Music on' : '🔇 Music off');
+  const btn = h('button', { class: 'btn ghost small', 'aria-pressed': String(app.store.data.settings.music), onClick: () => {
+    const on = !app.store.data.settings.music;
+    app.store.update((s) => { s.settings.music = on; });
+    btn.textContent = label(on);
+    btn.setAttribute('aria-pressed', String(on));
+  } }, label(app.store.data.settings.music));
+  return btn;
 }
