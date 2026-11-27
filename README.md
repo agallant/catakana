@@ -3,6 +3,7 @@
 Learn Japanese with cats! Play a travelling cat exploring Japan — learn hiragana, katakana, then words, kanji and
 more, from complete beginner up to JLPT N1 — through repeatable cat-themed minigames.
 
+- **Play it now: <https://agallant.github.io/catakana/>** (on a phone, use “Add to Home Screen” to install it).
 - Runs entirely in the browser (TypeScript + Vite), installable as a PWA and fully offline.
 - Mobile-first: works on phones, tablets and desktop.
 - Roadmap: [docs/ROADMAP.md](docs/ROADMAP.md)
@@ -16,6 +17,7 @@ more, from complete beginner up to JLPT N1 — through repeatable cat-themed min
 - **Players**: up to six players per device, each with their own cat, progress and settings. The app asks who is
   playing when it opens. Add, switch and remove players in Settings.
 - **Larger text and buttons** is a separate setting for anyone who wants the roomier layout.
+- **Music**: a soft, koto-like tune on the menus and at each place, different for every region and every place on the map. Lessons and games are silent so listening practice stays clear. Turn it off (or down) in Settings or from the Journey screen. It is made on the device, so there is nothing to download.
 - **Privacy**: no accounts and no tracking. Progress is stored only in the browser on the device. “Export” saves a
   backup file (“Export everyone” saves all players). Importing a single backup replaces the current player's
   progress; importing an “everyone” file adds those players as new ones without changing anyone already there.

@@ -2,6 +2,7 @@ import { allowRecognition } from '../core/speech';
 import { breakDue } from '../core/kid';
 import { Store, level } from '../core/store';
 import { configureAudio, sfx } from '../core/audio';
+import { music, themeFor } from '../core/music';
 import { h } from './dom';
 import { catSvg } from './cat';
 import { checkAchievements, onUnlock, type Unlock } from '../core/progress';
@@ -48,6 +49,7 @@ export class App {
   private applySettings(): void {
     const s = this.store.data.settings;
     configureAudio({ sound: s.sound, speech: s.speech, rate: s.speechRate });
+    music.configure({ on: s.music, volume: s.musicVolume });
     document.documentElement.classList.toggle('reduce-motion', s.reduceMotion);
     document.documentElement.classList.toggle('kid', s.kid);
     document.documentElement.classList.toggle('big-text', s.bigText);
@@ -119,6 +121,7 @@ export class App {
     window.speechSynthesis?.cancel?.();
     this.current = f(this, params);
     this.main.replaceChildren(this.current.el);
+    music.play(themeFor(name, params));
     const chrome = this.chrome.has(name);
     this.hud.hidden = !chrome;
     this.nav.hidden = !chrome;
